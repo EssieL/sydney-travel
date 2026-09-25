@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#0f766e">
+<title>Bondi 海滩 + 海德公园 + 圣玛丽教堂 · 9/26 周六</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+<style>
+  :root{
+    --teal:#0f766e; --teal-d:#115e59; --teal-l:#14b8a6;
+    --amber:#f59e0b; --amber-bg:#fff7ed; --amber-bd:#fcd34d;
+    --ink:#1f2937; --sub:#64748b; --line:#e2e8f0;
+    --bg:#f5f7f7; --card:#ffffff; --soft:#eef4f4;
+  }
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+  html,body{margin:0; padding:0;}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    background:var(--bg); color:var(--ink); line-height:1.65;
+    font-size:16px; -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:480px; margin:0 auto; background:var(--bg); min-height:100vh; padding-bottom:40px;}
+
+  .hero{background:linear-gradient(135deg,var(--teal-d),var(--teal-l)); color:#fff; padding:22px 20px 18px;}
+  .hero h1{margin:0 0 6px; font-size:23px; font-weight:800; letter-spacing:.5px;}
+  .hero .sub{font-size:13.5px; opacity:.92; margin:0;}
+  .hero .badge{display:inline-block; margin-top:12px; background:rgba(255,255,255,.16);
+    border:1px solid rgba(255,255,255,.35); padding:5px 12px; border-radius:999px; font-size:13px; font-weight:600;}
+
+  .weather{display:flex; align-items:center; gap:10px; background:var(--amber-bg); border:1px solid var(--amber-bd);
+    border-radius:14px; padding:11px 13px; margin:12px 16px 0; font-size:13.5px; color:#7c2d12; line-height:1.5;}
+  .weather .big{font-size:22px; font-weight:800; color:var(--amber); flex:0 0 auto;}
+
+  .nav{position:sticky; top:0; z-index:20; background:rgba(245,247,247,.96); backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line); padding:8px 10px; display:flex; gap:8px; overflow-x:auto; -webkit-overflow-scrolling:touch;}
+  .nav a{flex:0 0 auto; text-decoration:none; color:var(--teal-d); background:#fff; border:1px solid var(--line);
+    padding:6px 12px; border-radius:999px; font-size:13px; font-weight:600; white-space:nowrap;}
+  .nav a:active{background:var(--teal); color:#fff;}
+
+  #map{height:360px; width:100%; border-radius:16px; border:1px solid var(--line); overflow:hidden; margin:12px 0;}
+  .map-pin{background:transparent; border:none;}
+  .pin-num{display:flex; align-items:center; justify-content:center; width:26px; height:26px; border-radius:50%;
+    background:var(--teal); color:#fff; font-weight:800; font-size:13px; border:2px solid #fff; box-shadow:0 1px 4px rgba(0,0,0,.3);}
+  .pin-num.hotel{background:#e11d48;}
+  .pin-num.star{background:var(--amber);}
+  .pin-num.bondi{background:#2563eb;}
+  .pin-ref{width:12px; height:12px; border-radius:50%; background:#cbd5e1; border:2px solid #fff;
+    box-shadow:0 0 0 1px rgba(100,116,139,.5);}
+
+  section{padding:16px 16px 4px;}
+  .sec-title{display:flex; align-items:center; gap:8px; font-size:18px; font-weight:800; color:var(--teal-d); margin:6px 0 12px;}
+  .sec-title .ic{width:26px; height:26px; border-radius:8px; background:var(--soft); color:var(--teal); display:flex; align-items:center; justify-content:center; font-size:15px;}
+  .card{background:var(--card); border:1px solid var(--line); border-radius:16px; padding:14px 14px; margin-bottom:12px; box-shadow:0 1px 3px rgba(15,118,110,.05);}
+  .card h3{margin:0 0 8px; font-size:15.5px; color:var(--ink); font-weight:700;}
+  .kv{display:flex; gap:10px; padding:7px 0; border-bottom:1px dashed var(--line); font-size:14.5px;}
+  .kv:last-child{border-bottom:none;}
+  .kv .k{flex:0 0 78px; color:var(--sub); font-weight:600;}
+  .kv .v{flex:1; color:var(--ink);}
+  .hl{background:var(--amber-bg); border:1px solid var(--amber-bd); border-radius:12px; padding:10px 12px; font-size:14px; color:var(--teal-d); font-weight:600; margin-bottom:10px;}
+  .warn{background:#fef2f2; border:1px solid #fecaca; border-radius:12px; padding:10px 12px; font-size:14px; color:#991b1b; font-weight:600; margin-bottom:10px;}
+
+  .bus-card{background:linear-gradient(135deg,#ecfdf5,#f0fdfa); border:1px solid #99f6e4; border-radius:14px; padding:13px 14px; margin-bottom:10px;}
+  .bus-card .t{font-weight:800; color:var(--teal-d); font-size:15px; margin-bottom:4px;}
+  .bus-card .d{font-size:13.5px; color:#334155; line-height:1.6;}
+  .tag{display:inline-block; background:var(--teal); color:#fff; font-size:11.5px; font-weight:700; padding:2px 8px; border-radius:6px; margin-right:4px;}
+
+  .spot{border-left:4px solid var(--teal-l); background:var(--soft); border-radius:0 12px 12px 0; padding:9px 12px; margin-bottom:8px;}
+  .spot .sp{font-weight:800; color:var(--teal-d); font-size:14px;}
+  .spot .sd{font-size:13px; color:#475569; margin-top:2px;}
+
+  ul.clean{margin:0; padding-left:0; list-style:none;}
+  ul.clean li{padding:6px 0; border-bottom:1px dashed var(--line); font-size:14.5px;}
+  ul.clean li:last-child{border-bottom:none;}
+  ul.clean li b{color:var(--teal-d);}
+
+  .zone{border-left:4px solid var(--amber); background:#fff; border-radius:0 12px 12px 0; padding:10px 12px; margin-bottom:8px; box-shadow:0 1px 3px rgba(0,0,0,.04);}
+  .zone .zn{font-weight:800; color:var(--ink); font-size:14.5px; display:flex; align-items:center; gap:6px;}
+  .zone .zd{font-size:13.5px; color:#475569; margin-top:3px;}
+
+  table{width:100%; border-collapse:collapse; font-size:13px; margin:6px 0;}
+  th,td{padding:7px 6px; text-align:left; border-bottom:1px solid var(--line); vertical-align:top;}
+  th{color:var(--teal-d); font-size:12.5px; background:var(--soft);}
+  td b{color:var(--teal-d);}
+
+  .tl{position:relative; padding-left:20px;}
+  .tl:before{content:""; position:absolute; left:6px; top:4px; bottom:4px; width:2px; background:var(--teal-l);}
+  .tl .it{position:relative; margin-bottom:12px;}
+  .tl .it:before{content:""; position:absolute; left:-17px; top:5px; width:9px; height:9px; border-radius:50%; background:var(--teal); border:2px solid #fff; box-shadow:0 0 0 1px var(--teal-l);}
+  .tl .tm{font-weight:800; color:var(--teal-d); font-size:14px;}
+  .tl .tx{font-size:14px; color:#334155;}
+
+  .note{font-size:13px; color:var(--sub); margin:6px 2px 0;}
+  .foot{text-align:center; font-size:12px; color:var(--sub); padding:18px 16px 0;}
+  .top{display:block; text-align:center; color:var(--teal); font-size:13px; font-weight:600; padding:10px; text-decoration:none;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- HERO -->
+  <div class="hero">
+    <h1>Bondi 海滩 + 海德公园 · 圣玛丽教堂</h1>
+    <p class="sub">9/26 周六 · 悉尼一日游 · 海滩 + 公园 + 购物</p>
+    <span class="badge">免费景点为主 · 公共交通</span>
+  </div>
+
+  <!-- 天气 -->
+  <div class="weather"><span class="big">☀️</span><span><b>9/26 周六（BOM 官方）</b>：晴转多云，17–29°C，降雨概率 20–30%（基本不下）。UV 指数 7（高），午后风转大（南风 20–30 km/h）。防晒是重点，海边风大带防风外套。</span></div>
+
+  <!-- 导航 -->
+  <nav class="nav">
+    <a href="#map">地图</a>
+    <a href="#go">出发</a>
+    <a href="#park">海德公园</a>
+    <a href="#church">圣玛丽教堂</a>
+    <a href="#mall">Bondi 商场</a>
+    <a href="#bondi">Bondi 海滩</a>
+    <a href="#plan">时间轴</a>
+    <a href="#tips">贴士</a>
+  </nav>
+
+  <!-- 地图 -->
+  <section id="map">
+    <div class="sec-title"><span class="ic">🗺</span>路线总览（可缩放）</div>
+    <div id="map"></div>
+    <div class="note">粉色🏨=酒店｜蓝色数字=游览顺序：①海德公园 ②圣玛丽教堂 ③Bondi Junction 商场 ④Bondi 海滩｜灰色小点=周边地标参考。点击标记看名称。</div>
+  </section>
+
+  <!-- 出发 -->
+  <section id="go">
+    <div class="sec-title"><span class="ic">🚶</span>出发 & 交通</div>
+    <div class="spot"><div class="sp">Metro Hotel Marlow（431–439 Pitt St）出发</div><div class="sd">酒店近 Central / Museum 站，步行到海德公园仅 8–10 分钟。</div></div>
+    <div class="bus-card">
+      <div class="t">🚇 第一程：酒店 → 海德公园/圣玛丽教堂</div>
+      <div class="d">步行即达（约 8–10 分钟）。海德公园就在酒店东北方向，教堂紧邻公园东侧，都不用坐车。</div>
+    </div>
+    <div class="bus-card">
+      <div class="t">🚆 第二程：市中心 → Bondi</div>
+      <div class="d"><b>推荐路线（最稳、最快）</b>：从 <b>Museum 站</b>或 <b>Central 站</b> 坐 <b>T4 东部线</b> 火车到 <b>Bondi Junction</b>（约 12–15 分钟），出站换乘 <b>333 / 380 公交</b> 到 Bondi 海滩（约 10 分钟）。<br><br><b>备选</b>：直接坐 <b>333 快线</b> 从 Circular Quay / Museum 站一路到 Bondi（约 35–40 分钟，一站到底不换乘，但市区段红绿灯多）。</div>
+    </div>
+    <div class="card">
+      <h3>💰 票价 & 支付</h3>
+      <ul class="clean">
+        <li>全程用 <b>Opal / 银行卡 / Apple Pay</b>，<b>3 人各自单独 tap</b>。</li>
+        <li>火车、公交<b>上车 tap on、下车 tap off</b>（火车在站台闸机刷）。</li>
+        <li>周六有<b>每日封顶价</b>（成人约 A$9.35），整天多坐几次也不超上限。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 海德公园 -->
+  <section id="park">
+    <div class="sec-title"><span class="ic">🌳</span>海德公园 Hyde Park</div>
+    <div class="spot"><div class="sp">免费 · 全天开放 · 悉尼最古老的城市公园</div><div class="sd">16 公顷，紧邻圣玛丽大教堂，中间隔 College St。</div></div>
+    <div class="card">
+      <ul class="clean">
+        <li><b>阿奇博尔德喷泉（Archibald Fountain）</b>：公园中心地标，纪念一战法澳同盟，希腊神话雕塑，必拍。</li>
+        <li><b>ANZAC 战争纪念馆（ANZAC Memorial）</b>：公园南端，免费入内，庄严肃穆。</li>
+        <li><b>无花果树大道</b>：成排百年无花果树，晨间光影很好。</li>
+        <li>公园有<b>长椅、草坪、公共厕所</b>，适合带父母慢慢散步。</li>
+      </ul>
+      <div class="hl">📸 建议上午来：光线柔、人少，喷泉+教堂同框角度最好。</div>
+    </div>
+  </section>
+
+  <!-- 圣玛丽教堂 -->
+  <section id="church">
+    <div class="sec-title"><span class="ic">⛪</span>圣玛丽大教堂 St Mary's Cathedral</div>
+    <div class="spot"><div class="sp">免费 · 一般 6:30–18:30 开放（周六可能有弥撒，入内避开礼拜时段）</div><div class="sd">澳洲最大、最古老的天主教堂，哥特复兴式双尖塔，就在海德公园东侧。</div></div>
+    <div class="card">
+      <ul class="clean">
+        <li><b>外观</b>：砂岩双尖塔，悉尼天际线的经典背景。</li>
+        <li><b>内部</b>：彩色玻璃窗、高拱顶、木雕圣像，庄严华丽。</li>
+        <li>可拍照，但<b>勿开闪光灯</b>、手机静音。</li>
+      </ul>
+      <div class="warn">⚠️ 礼仪：进堂<b>脱帽</b>、轻声细语；周六若遇弥撒/婚礼，先观察再进入，或改逛外观。</div>
+    </div>
+  </section>
+
+  <!-- Bondi 商场 -->
+  <section id="mall">
+    <div class="sec-title"><span class="ic">🛍</span>Westfield Bondi Junction 商场</div>
+    <div class="spot"><div class="sp">500 Oxford St, Bondi Junction · 周六 9:30–18:00</div><div class="sd">悉尼东区最大购物中心（年客流约 1700 万），300+ 店，与 Bondi Junction 火车站无缝连接。</div></div>
+    <div class="card">
+      <ul class="clean">
+        <li><b>奢侈品（Level 4）</b>：LV、Chanel、Gucci、Prada、Celine、Dior、Saint Laurent、BOSS 等，退税友好。</li>
+        <li><b>澳洲品牌</b>：本地设计师 + 高街品牌（Bailey Nelson 眼镜、Georg Jensen 等）。</li>
+        <li><b>百货/超市</b>：David Jones、Myer、Woolworths、Coles、Target、Harris Farm。</li>
+        <li><b>餐饮</b>：Food Court + 各国餐厅（Hokka Hokka 日式、Banana Blossom 泰式等）。</li>
+        <li><b>位置优势</b>：就在 Bondi Junction 火车站旁，逛完直接坐 T4 回酒店，顺路。</li>
+      </ul>
+      <div class="hl">📌 商场在 Bondi Junction（海滩内陆 3km），不是海滩边。上午先逛商场避开正午暴晒，下午再去海滩，动线更顺。</div>
+    </div>
+
+    <div class="card">
+      <h3>🍽 午餐（商场内，Level 5 Food Court）</h3>
+      <ul class="clean">
+        <li><b>Food Court（L5 中央）</b>：韩式 <b>Seoul K-Food</b>（炸鸡/拌饭/年糕）、日式 <b>Hokka Hokka</b>、泰式 <b>Banana Blossom</b>、<b>Sushi Hub</b> 寿司、<b>Boost Juice</b> 果汁——快餐集中、带父母点餐快。</li>
+        <li><b>R1 Aqua Rooftop / Hollywood</b>：商场里偏正式的餐厅，想吃顿好的可选。</li>
+        <li><b>超市轻食</b>：Woolworths / Harris Farm 买熟食、沙拉、寿司卷，省钱又清淡。</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>🇨🇳 国人爱买的店（价差大、送人有面子）</h3>
+      <table>
+        <tr><th>类别</th><th>品牌/店</th><th>楼层/位置</th><th>为什么值得买</th></tr>
+        <tr><td>🧴 本土护肤</td><td><b>Aesop 伊索</b>、<b>Jurlique 茱莉蔻</b></td><td>商场内 / David Jones</td><td>Aesop 澳洲价≈国内 8 折再退 GST；Jurlique 玫瑰系列便宜 20–30%</td></tr>
+        <tr><td>👟 运动服饰</td><td><b>Lululemon</b>、<b>Arc'teryx 始祖鸟</b>、On、Salomon</td><td>L2–L5</td><td>Lululemon≈国内 6 折；始祖鸟冲锋衣折后 A$450 vs 国内 ¥5000+</td></tr>
+        <tr><td>🍪 零食伴手礼</td><td><b>Tim Tam</b> 国民饼干</td><td>Woolworths / Coles</td><td>澳洲国民饼干，本地价国内 3–4 折，轻巧好带</td></tr>
+        <tr><td>✒️ 手帐文具</td><td><b>kikki.K</b></td><td>商场内</td><td>北欧风文具/手帐，契合手帐爱好</td></tr>
+        <tr><td>🍷 酒</td><td>奔富 Penfolds</td><td>David Jones / 超市</td><td>产地价≈国内一半，海关限 2 瓶/人</td></tr>
+        <tr><td>💎 轻奢首饰</td><td>Pandora、APM Monaco、Georg Jensen</td><td>L3–L4</td><td>澳洲买 Pandora 有价差</td></tr>
+      </table>
+      <div class="note">Aesop/Jurlique 在商场买款式全、可退 10% GST；Tim Tam 详见下方介绍。</div>
+    </div>
+
+    <div class="card">
+      <h3>🍪 Tim Tam 国民饼干</h3>
+      <ul class="clean">
+        <li><b>出身</b>：澳洲百年品牌 Arnott's 于 1964 年推出，国民程度≈「澳洲版乖乖」，年销 4500 万包。</li>
+        <li><b>结构</b>：两片麦芽可可饼干 + 巧克力奶油夹心 + 外层巧克力涂层，三层口感「先脆后绵」。</li>
+        <li><b>价格</b>：澳洲本地 200g 约 A$3–4.5，国内天猫同款 ¥66–93，<b>价差 3–4 倍</b>，多买划算。</li>
+        <li><b>口味</b>：经典原味（Original）最正统；Double Coat 巧克力加厚、Dark 配黑咖啡、Chewy Caramel 焦糖拉丝、Salted Caramel Brownie 咸甜人气款。</li>
+        <li><b>吃法彩蛋</b>：<b>「Tim Tam Slam」</b>——对角咬开两角当吸管，泡热咖啡/热牛奶喝，澳洲国民吃法，值得一试。</li>
+        <li><b>在哪买</b>：商场内 <b>Woolworths / Coles 超市</b>都有，顺手拿几包即可。</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>🧴 Aesop 伊索（墨尔本品牌）</h3>
+      <ul class="clean">
+        <li><b>定位</b>：极简包装 + 草本木质调香，澳洲「文青护肤」代表，门店本身就像美术馆。</li>
+        <li><b>主打</b>：赋活芳香洗手露、赋活芳香护手霜、香芹籽（Parsley Seed）系列精华。</li>
+        <li><b>价差</b>：澳洲价约国内 8 折，满 A$300 再退 10% GST，合计能省 3 成左右。</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>🌹 Jurlique 茱莉蔻（南澳品牌）</h3>
+      <ul class="clean">
+        <li><b>定位</b>：南澳阿德莱德起家，主打<b>有机/活机耕作</b>、植物天然，玫瑰系列最出名。</li>
+        <li><b>明星款</b>：玫瑰护手霜（Rose Hand Cream，A$38 起）、玫瑰保湿花卉水（Rosewater Balancing Mist，A$62）、活机草本精华油。</li>
+        <li><b>价差</b>：澳洲价约比国内便宜 20–30%，常有礼盒装更划算。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Bondi 海滩 -->
+  <section id="bondi">
+    <div class="sec-title"><span class="ic">🏖</span>Bondi 海滩</div>
+    <div class="spot"><div class="sp">免费 · 悉尼最著名海滩 · 全天开放</div><div class="sd">金色沙滩 + 碧蓝海水，冲浪圣地，也是悉尼海岸生活的代表。</div></div>
+    <div class="card">
+      <h3>🌊 必看 / 必做</h3>
+      <ul class="clean">
+        <li><b>Bondi Icebergs 泳池</b>：海滩南端的海边露天泳池，波浪拍打泳池壁，澳洲最上镜泳池，拍照必去（游泳 A$10，仅拍照免费）。</li>
+        <li><b>Campbell Parade 海滨大道</b>：沿海餐厅、咖啡馆一条街，看冲浪、看人潮。</li>
+        <li><b>Bondi to Bronte 海岸步道</b>（可选）：2.5km 悬崖步道，约 45–60 分钟，经 Tamarama 到 Bronte，风景绝佳。带父母可视体力走一小段体验即可。</li>
+        <li><b>游泳</b>：只在<b>红黄旗之间</b>游（有救生员巡逻），远离离岸流。</li>
+      </ul>
+      <div class="hl">🕐 明天 17–29°C 适合踏浪、晒太阳；不下水也值得到沙滩走走、拍 Icebergs 泳池。</div>
+    </div>
+    <div class="card">
+      <h3>🍦 下午茶 / 轻食（海滩区）</h3>
+      <ul class="clean">
+        <li><b>Campbell Parade 海滨咖啡馆</b>：沿海一条街，点杯咖啡/冰淇淋，看冲浪看人潮。</li>
+        <li><b>Bondi Icebergs Dining Room</b>：海景餐厅，若想补一顿仪式感下午茶可选（较贵）。</li>
+        <li><b>Woolworths 超市轻食</b>：买水果/饮料/零食带去沙滩野餐，氛围好。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 时间轴 -->
+  <section id="plan">
+    <div class="sec-title"><span class="ic">🕐</span>建议时间轴</div>
+    <div class="card">
+      <div class="tl">
+        <div class="it"><div class="tm">09:00–09:15</div><div class="tx">酒店出发，步行到海德公园</div></div>
+        <div class="it"><div class="tm">09:15–10:15</div><div class="tx">海德公园：喷泉、无花果大道、ANZAC 纪念馆</div></div>
+        <div class="it"><div class="tm">10:15–11:00</div><div class="tx">圣玛丽大教堂：外观 + 内部（避开弥撒时段）</div></div>
+        <div class="it"><div class="tm">11:00–11:30</div><div class="tx">Museum/Central 站坐 T4 → Bondi Junction</div></div>
+        <div class="it"><div class="tm">11:30–13:00</div><div class="tx">Westfield Bondi Junction 商场逛（L4 奢侈品 + 澳洲品牌）+ 午餐</div></div>
+        <div class="it"><div class="tm">13:00–13:15</div><div class="tx">333/380 公交 → Bondi 海滩</div></div>
+        <div class="it"><div class="tm">13:15–14:30</div><div class="tx">Bondi 海滩：Icebergs 泳池拍照 + 踏浪晒太阳</div></div>
+        <div class="it"><div class="tm">14:30–15:30</div><div class="tx">走一小段 Bondi-Bronte 步道（或继续海滩休闲）</div></div>
+        <div class="it"><div class="tm">15:30–16:00</div><div class="tx">333/380 公交返回 Bondi Junction 站</div></div>
+        <div class="it"><div class="tm">16:00–16:30</div><div class="tx">T4 火车回市中心，步行回酒店休息</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 贴士 -->
+  <section id="tips">
+    <div class="sec-title"><span class="ic">💡</span>贴士</div>
+    <div class="card">
+      <ul class="clean">
+        <li>☀️ <b>防晒三件套</b>：防晒霜 + 帽子 + 墨镜，UV 7 高，海边暴晒。</li>
+        <li>🌬 <b>午后防风</b>：海边风大，带薄外套，帽子防吹跑。</li>
+        <li>👟 <b>穿舒服的鞋</b>：海滩 + 步道 + 商场，走得多。</li>
+        <li>🩴 想踏浪可带<b>拖鞋/凉鞋</b>，下水务必只在红黄旗之间。</li>
+        <li>💳 3 人公交各自 tap，周六有每日封顶价，别担心坐多。</li>
+        <li>🎒 带<b>水</b>：海滩步道暴晒易渴。</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="foot">悉尼 · 9/26 周六一日游规划<br>信息以现场 / 官网为准</div>
+  <a class="top" href="#map">↑ 回到顶部</a>
+
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script>
+  // 坐标
+  var hotel = [-33.8793, 151.2074];        // Metro Hotel Marlow
+  var park  = [-33.8735, 151.2115];        // 海德公园
+  var church= [-33.8711, 151.2133];        // 圣玛丽大教堂
+  var museum= [-33.8763, 151.2094];        // Museum 站
+  var bondiJ= [-33.8914, 151.2468];        // Bondi Junction 站/商场
+  var bondi = [-33.8908, 151.2768];        // Bondi Beach
+  var iceberg=[-33.8932, 151.2748];        // Bondi Icebergs
+
+  var map = L.map('map').setView([-33.8793, 151.2300], 12);
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; OpenStreetMap contributors'
+  }).addTo(map);
+
+  function numIcon(n, cls){
+    return L.divIcon({className:'map-pin', html:'<div class="pin-num '+cls+'">'+n+'</div>', iconSize:[26,26], iconAnchor:[13,13]});
+  }
+  function dotIcon(){
+    return L.divIcon({className:'map-pin', html:'<div class="pin-ref"></div>', iconSize:[12,12], iconAnchor:[6,6]});
+  }
+
+  // 主线标记
+  L.marker(hotel, {icon:numIcon('🏨','hotel')}).addTo(map).bindPopup('<b>Metro Hotel Marlow</b><br>431-439 Pitt St（起点）');
+  L.marker(park, {icon:numIcon('①','')}).addTo(map).bindPopup('<b>① 海德公园 Hyde Park</b><br>阿奇博尔德喷泉 · ANZAC 纪念馆');
+  L.marker(church, {icon:numIcon('②','')}).addTo(map).bindPopup('<b>② 圣玛丽大教堂</b><br>哥特式双尖塔 · 彩色玻璃');
+  L.marker(bondiJ, {icon:numIcon('③','star')}).addTo(map).bindPopup('<b>③ Westfield Bondi Junction</b><br>500 Oxford St · T4 火车站旁');
+  L.marker(bondi, {icon:numIcon('④','bondi')}).addTo(map).bindPopup('<b>④ Bondi 海滩</b><br>Icebergs 泳池 · Campbell Parade');
+
+  // 周边参考点
+  var refs = [
+    [-33.8568,151.2153,'悉尼歌剧院'],[-33.8610,151.2108,'环形码头'],
+    [-33.8612,151.2075,'岩石区'],[-33.8667,151.2115,'悉尼塔'],
+    [-33.8683,151.2100,'马丁广场'],[-33.8704,151.2108,'州立图书馆'],
+    [-33.8728,151.2116,'悉尼博物馆'],[-33.8790,151.2071,'唐人街'],
+    [-33.8830,151.2070,'中央车站'],[-33.8708,151.2195,'州立美术馆'],
+    [-33.9053,151.2653,'Bronte 海滩'],[-33.8975,151.2440,'Centennial Park'],
+  ];
+  refs.forEach(function(r){
+    L.marker([r[0],r[1]], {icon:dotIcon()}).addTo(map).bindPopup(r[2]);
+  });
+
+  // 路线虚线
+  L.polyline([hotel, park, church], {color:'#0f766e', weight:3, dashArray:'6,6', opacity:.7}).addTo(map);
+  L.polyline([church, bondiJ, bondi], {color:'#2563eb', weight:3, dashArray:'6,6', opacity:.7}).addTo(map);
+  L.polyline([bondi, bondiJ], {color:'#f59e0b', weight:3, dashArray:'6,6', opacity:.7}).addTo(map);
+</script>
+
+<a class="back-home" href="index.html" style="display:block;text-align:center;margin:0 auto 0;padding:14px 16px;background:#0f766e;color:#fff;font-size:15px;font-weight:700;text-decoration:none;border-radius:14px;margin-left:16px;margin-right:16px;">🏠 返回行程目录</a>

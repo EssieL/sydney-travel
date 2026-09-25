@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#0f766e">
+<title>悉尼市中心一日游 · 9/24 周四</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+<style>
+  :root{
+    --teal:#0f766e; --teal-d:#115e59; --teal-l:#14b8a6;
+    --amber:#f59e0b; --amber-bg:#fff7ed; --amber-bd:#fcd34d;
+    --ink:#1f2937; --sub:#64748b; --line:#e2e8f0;
+    --bg:#f5f7f7; --card:#ffffff; --soft:#eef4f4;
+  }
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+  html,body{margin:0; padding:0;}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    background:var(--bg); color:var(--ink); line-height:1.65;
+    font-size:16px; -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:480px; margin:0 auto; background:var(--bg); min-height:100vh; padding-bottom:40px;}
+
+  /* HERO */
+  .hero{background:linear-gradient(135deg,var(--teal-d),var(--teal-l)); color:#fff; padding:22px 20px 18px;}
+  .hero h1{margin:0 0 6px; font-size:23px; font-weight:800; letter-spacing:.5px;}
+  .hero .sub{font-size:13.5px; opacity:.92; margin:0;}
+  .hero .badge{display:inline-block; margin-top:12px; background:rgba(255,255,255,.16);
+    border:1px solid rgba(255,255,255,.35); padding:5px 12px; border-radius:999px; font-size:13px; font-weight:600;}
+
+  /* 天气条 */
+  .weather{display:flex; align-items:center; gap:10px; background:var(--amber-bg); border:1px solid var(--amber-bd);
+    border-radius:14px; padding:11px 13px; margin:12px 16px 0; font-size:13.5px; color:#7c2d12; line-height:1.5;}
+  .weather .big{font-size:22px; font-weight:800; color:var(--amber); flex:0 0 auto;}
+
+  /* NAV */
+  .nav{position:sticky; top:0; z-index:20; background:rgba(245,247,247,.96); backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line); padding:8px 10px; display:flex; gap:8px; overflow-x:auto; -webkit-overflow-scrolling:touch;}
+  .nav a{flex:0 0 auto; text-decoration:none; color:var(--teal-d); background:#fff; border:1px solid var(--line);
+    padding:6px 12px; border-radius:999px; font-size:13px; font-weight:600; white-space:nowrap;}
+  .nav a:active{background:var(--teal); color:#fff;}
+
+  /* MAP */
+  #map{height:340px; width:100%; border-radius:16px; border:1px solid var(--line); overflow:hidden; margin:12px 0;}
+  .map-pin{background:transparent; border:none;}
+  .pin-num{display:flex; align-items:center; justify-content:center; width:26px; height:26px; border-radius:50%;
+    background:var(--teal); color:#fff; font-weight:800; font-size:13px; border:2px solid #fff; box-shadow:0 1px 4px rgba(0,0,0,.3);}
+  .pin-num.hotel{background:#e11d48;}
+  .pin-num.star{background:var(--amber);}
+  .pin-ref{width:12px; height:12px; border-radius:50%; background:#cbd5e1; border:2px solid #fff;
+    box-shadow:0 0 0 1px rgba(100,116,139,.5);}
+
+  /* SECTION */
+  section{padding:16px 16px 4px;}
+  .sec-title{display:flex; align-items:center; gap:8px; font-size:18px; font-weight:800; color:var(--teal-d); margin:6px 0 12px;}
+  .sec-title .ic{width:26px; height:26px; border-radius:8px; background:var(--soft); color:var(--teal); display:flex; align-items:center; justify-content:center; font-size:15px;}
+  .card{background:var(--card); border:1px solid var(--line); border-radius:16px; padding:14px 14px; margin-bottom:12px; box-shadow:0 1px 3px rgba(15,118,110,.05);}
+  .card h3{margin:0 0 8px; font-size:15.5px; color:var(--ink); font-weight:700;}
+  .kv{display:flex; gap:10px; padding:7px 0; border-bottom:1px dashed var(--line); font-size:14.5px;}
+  .kv:last-child{border-bottom:none;}
+  .kv .k{flex:0 0 78px; color:var(--sub); font-weight:600;}
+  .kv .v{flex:1; color:var(--ink);}
+  .hl{background:var(--amber-bg); border:1px solid var(--amber-bd); border-radius:12px; padding:10px 12px; font-size:14px; color:var(--teal-d); font-weight:600; margin-bottom:10px;}
+
+  .bus-card{background:linear-gradient(135deg,#ecfdf5,#f0fdfa); border:1px solid #99f6e4; border-radius:14px; padding:13px 14px; margin-bottom:10px;}
+  .bus-card .t{font-weight:800; color:var(--teal-d); font-size:15px; margin-bottom:4px;}
+  .bus-card .d{font-size:13.5px; color:#334155; line-height:1.6;}
+  .tag{display:inline-block; background:var(--teal); color:#fff; font-size:11.5px; font-weight:700; padding:2px 8px; border-radius:6px; margin-right:4px;}
+
+  .spot{border-left:4px solid var(--teal-l); background:var(--soft); border-radius:0 12px 12px 0; padding:9px 12px; margin-bottom:8px;}
+  .spot .sp{font-weight:800; color:var(--teal-d); font-size:14px;}
+  .spot .sd{font-size:13px; color:#475569; margin-top:2px;}
+
+  ul.clean{margin:0; padding-left:0; list-style:none;}
+  ul.clean li{padding:6px 0; border-bottom:1px dashed var(--line); font-size:14.5px;}
+  ul.clean li:last-child{border-bottom:none;}
+  ul.clean li b{color:var(--teal-d);}
+  .grid2{display:grid; grid-template-columns:1fr 1fr; gap:8px;}
+  .pill{background:var(--soft); border-radius:10px; padding:8px 10px; font-size:13.5px;}
+
+  /* ferry table */
+  table{width:100%; border-collapse:collapse; font-size:13px; margin:6px 0;}
+  th,td{padding:7px 6px; text-align:left; border-bottom:1px solid var(--line); vertical-align:top;}
+  th{color:var(--teal-d); font-size:12.5px; background:var(--soft);}
+  td b{color:var(--teal-d);}
+
+  .tl{position:relative; padding-left:20px;}
+  .tl:before{content:""; position:absolute; left:6px; top:4px; bottom:4px; width:2px; background:var(--teal-l);}
+  .tl .it{position:relative; margin-bottom:12px;}
+  .tl .it:before{content:""; position:absolute; left:-17px; top:5px; width:9px; height:9px; border-radius:50%; background:var(--teal); border:2px solid #fff; box-shadow:0 0 0 1px var(--teal-l);}
+  .tl .tm{font-weight:800; color:var(--teal-d); font-size:14px;}
+  .tl .tx{font-size:14px; color:#334155;}
+
+  .note{font-size:13px; color:var(--sub); margin:6px 2px 0;}
+  .foot{text-align:center; font-size:12px; color:var(--sub); padding:18px 16px 0;}
+  .top{display:block; text-align:center; color:var(--teal); font-size:13px; font-weight:600; padding:10px; text-decoration:none;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <h1>悉尼市中心一日游</h1>
+    <p class="sub">歌剧院 · 皇家植物园 · 岩石区｜带父母环形步行路线</p>
+    <span class="badge">2026-09-24（周四）· 住 Metro Hotel Marlow</span>
+  </div>
+
+  <div class="weather">
+    <span class="big">🌤</span>
+    <span><b>9/24 天气</b>：多云间晴 17–24°C · 降雨概率 20% · <b>东北风较大（25–35 km/h）</b> · UV 6（高）<br>→ 带防风外套 + 帽子防晒 + 折伞备用；海港边风更猛</span>
+  </div>
+
+  <nav class="nav">
+    <a href="#map">地图</a>
+    <a href="#go">出发</a>
+    <a href="#opera">歌剧院</a>
+    <a href="#garden">植物园</a>
+    <a href="#rocks">岩石区</a>
+    <a href="#ferry">渡轮</a>
+    <a href="#plan">时间轴</a>
+    <a href="#tips">贴士</a>
+  </nav>
+
+  <!-- 地图 -->
+  <section id="map">
+    <div class="sec-title"><span class="ic">🗺</span>路线地图（可缩放拖动）</div>
+    <div id="map"></div>
+    <div class="note">粉色 = 酒店（起点）｜青色数字 = 游览顺序：①歌剧院 ②植物园 ③岩石区｜金色⛴ = 环形码头｜灰色小点 = 周边地标参考（海港大桥、海德公园、唐人街等，点击看名）。</div>
+  </section>
+
+  <!-- 出发 -->
+  <section id="go">
+    <div class="sec-title"><span class="ic">🚊</span>出发：酒店 → Circular Quay</div>
+    <div class="bus-card">
+      <div class="t"><span class="tag">推荐</span>轻轨 L2 / L3 直达</div>
+      <div class="d">从酒店步行 5–8 分钟到 <b>Chinatown 或 Central 轻轨站</b>，乘 L2/L3 往 <b>Circular Quay</b> 方向，终点下车（约 15–20 分钟，~A$3–5）。</div>
+    </div>
+    <div class="card">
+      <div class="kv"><span class="k">备选</span><span class="v">沿 Pitt St → George St 一路向北步行，约 25 分钟（免费）</span></div>
+    </div>
+    <div class="hl">👥 3 人各自单独 tap；同一张卡不能连刷 3 次。用 Google Maps / TripView 看实时到站。</div>
+  </section>
+
+  <!-- 歌剧院 -->
+  <section id="opera">
+    <div class="sec-title"><span class="ic">🎭</span>① 悉尼歌剧院（外观，免费）</div>
+    <div class="spot"><div class="sp">Bennelong Point · 轻轨站出来步行约 6 分钟</div><div class="sd">外区全天免费；不上内部 Tour。</div></div>
+    <div class="card">
+      <ul class="clean">
+        <li><b>走上 86 米宽前台阶</b> + 沿海滨木板道走，拍"白帆"与海港大桥同框（经典机位，约 45–60 分钟）</li>
+        <li><b>Opera Bar</b>（海滨酒吧）可喝咖啡看港景歇脚（非必须）</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 植物园 -->
+  <section id="garden">
+    <div class="sec-title"><span class="ic">🌿</span>② 皇家植物园（免费）</div>
+    <div class="spot"><div class="sp">紧邻歌剧院东南 · 步行约 5 分钟</div><div class="sd">9 月 7:00–18:00 免费；The Calyx 温室 10:00–16:00。</div></div>
+    <div class="card">
+      <ul class="clean">
+        <li><b>Mrs Macquarie's Chair</b> — 歌剧院 + 大桥同框的"标准明信片机位"，必去（沿海滨步道东行约 15 分钟）</li>
+        <li><b>The Calyx</b> 绿墙温室（免费）· 玫瑰园 · 澳洲原生植物区</li>
+        <li>每日 10:30 有志愿者免费导览步道</li>
+      </ul>
+      <div class="note">⚠️ 海岬处风比市区大，护好帽子。</div>
+    </div>
+  </section>
+
+  <!-- 岩石区 -->
+  <section id="rocks">
+    <div class="sec-title"><span class="ic">🏛</span>③ 岩石区 The Rocks</div>
+    <div class="spot"><div class="sp">Circular Quay 西侧 · 步行约 10 分钟</div><div class="sd">公共街区免费、24h 可逛。</div></div>
+    <div class="hl">⚠️ 周四没有集市（仅周六日 + 周五白天开放），以历史街区 + 老酒吧 + 博物馆为主。</div>
+    <div class="card">
+      <ul class="clean">
+        <li><b>鹅卵石老街</b>（George St / Playfair St / Argyle）· 砂岩老屋、拱廊</li>
+        <li><b>The Rocks Discovery Museum</b>（免费，10:00–17:00，适合歇脚）</li>
+        <li><b>老酒吧</b>：Fortune of War（1828 悉尼最老）、Glenmore Hotel（顶层屋顶看海港日落）</li>
+        <li>卡德曼小屋 · 海港大桥桥头步道</li>
+      </ul>
+      <div class="note">午餐：Glenmore（屋顶/正餐）、Fortune of War（简餐）；想便宜回唐人街。</div>
+    </div>
+  </section>
+
+  <!-- 渡轮 -->
+  <section id="ferry">
+    <div class="sec-title"><span class="ic">⛴</span>渡轮攻略（尾端海港观光）</div>
+    <div class="bus-card">
+      <div class="t">枢纽就在 Circular Quay（歌剧院正前方）</div>
+      <div class="d">岩石区逛完走回码头即可上船。Opal/银行卡/Apple Pay 各自 tap，<b>上船前 tap on、下船 tap off</b>；不用提前订，看码头大屏幕。离港坐<b>船尾甲板</b>拍歌剧院+大桥。</div>
+    </div>
+    <div class="card">
+      <table>
+        <tr><th>路线</th><th>码头</th><th>时长</th><th>票价</th><th>说明</th></tr>
+        <tr><td><b>F1 Manly</b></td><td>Wharf 3</td><td>30min</td><td>外港 A$9.20</td><td>最经典，离港全景，可往返</td></tr>
+        <tr><td><b>F2 Taronga Zoo</b></td><td>Wharf 4</td><td>12min</td><td>内港 A$7.35</td><td>最短跨港</td></tr>
+        <tr><td><b>F9 Watsons Bay</b></td><td>Wharf 4</td><td>40min</td><td>内港 A$7.35</td><td>海边渔村、炸鱼薯条</td></tr>
+        <tr><td><b>F3 Parramatta R.</b></td><td>Wharf 6</td><td>20–90min</td><td>—</td><td>最长风景线，经 Cockatoo Island</td></tr>
+      </table>
+      <div class="note">票价计入 Opal 每日封顶（约 A$19.30/人·天），当天都刷同一张卡基本被包住。周四非周末人少；风大天渡轮更晃、护好帽子。</div>
+    </div>
+  </section>
+
+  <!-- 时间轴 -->
+  <section id="plan">
+    <div class="sec-title"><span class="ic">🗓</span>建议时间轴</div>
+    <div class="card">
+      <div class="tl">
+        <div class="it"><div class="tm">09:00</div><div class="tx">酒店出发，轻轨 L2/L3 到 Circular Quay</div></div>
+        <div class="it"><div class="tm">09:30–10:30</div><div class="tx">歌剧院外观拍照 + 海滨木板道（免费）</div></div>
+        <div class="it"><div class="tm">10:45–12:30</div><div class="tx">植物园：The Calyx → 玫瑰园 → Mrs Macquaries Chair</div></div>
+        <div class="it"><div class="tm">12:45–14:00</div><div class="tx">岩石区午餐（Glenmore / Fortune of War）</div></div>
+        <div class="it"><div class="tm">14:00–16:30</div><div class="tx">岩石区老街、Discovery Museum、老酒吧、大桥桥头</div></div>
+        <div class="it"><div class="tm">16:30</div><div class="tx">回 Circular Quay 坐渡轮海港观光（F1 Manly 往返约 1h）</div></div>
+        <div class="it"><div class="tm">17:30–18:00</div><div class="tx">轻轨/步行回酒店</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 贴士 -->
+  <section id="tips">
+    <div class="sec-title"><span class="ic">💡</span>实用贴士</div>
+    <div class="card">
+      <ul class="clean">
+        <li>3 人各自 tap；公交/轻轨/渡轮上下都需 tap；同一张卡别换来换去（吃每日封顶）</li>
+        <li>防风外套 + 帽子防晒 + 折伞；穿舒服的鞋（植物园草坪 + 岩石区鹅卵石巷）</li>
+        <li>带水；园里和街区有直饮水</li>
+        <li>费用（3 人，含午餐、不含购物/渡轮）约 A$180–300</li>
+      </ul>
+    </div>
+    <div class="foot">攻略生成于 2026-09-23 · 景点开放/渡轮班次以官方当日为准</div>
+  </section>
+
+  <a class="top" href="#">↑ 回到顶部</a>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script>
+  // 坐标点
+  var hotel = [-33.8793, 151.2074];        // Metro Hotel Marlow, 431-439 Pitt St
+  var cq    = [-33.8610, 151.2108];        // Circular Quay
+  var opera = [-33.8568, 151.2153];        // Sydney Opera House
+  var mrs   = [-33.8594, 151.2226];        // Mrs Macquaries Chair
+  var rocks = [-33.8592, 151.2075];        // The Rocks
+
+  var map = L.map('map').setView([-33.8670, 151.2110], 13);
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; OpenStreetMap contributors'
+  }).addTo(map);
+
+  function numIcon(n, cls){
+    return L.divIcon({className:'map-pin', html:'<div class="pin-num '+cls+'">'+n+'</div>', iconSize:[26,26], iconAnchor:[13,13]});
+  }
+
+  // 背景参考点（浅灰小标记，不抢主线，帮助定位方位）
+  var refs = [
+    ['海港大桥 Sydney Harbour Bridge', -33.8523, 151.2108],
+    ['环形码头火车站 Circular Quay Station', -33.8614, 151.2107],
+    ['悉尼塔 Sydney Tower Eye', -33.8704, 151.2089],
+    ['马丁广场 Martin Place', -33.8679, 151.2112],
+    ['圣玛丽大教堂 St Mary\'s Cathedral', -33.8711, 151.2133],
+    ['海德公园 Hyde Park', -33.8735, 151.2115],
+    ['州立美术馆 AGNSW', -33.8689, 151.2172],
+    ['达令港 Darling Harbour', -33.8747, 151.1993],
+    ['唐人街 Chinatown', -33.8776, 151.2040],
+    ['中央车站 Central Station', -33.8829, 151.2066],
+    ['市政厅 Town Hall', -33.8736, 151.2066],
+    ['米勒角 Millers Point', -33.8579, 151.2033],
+  ];
+  function refIcon(label){
+    return L.divIcon({className:'map-pin', html:'<div class="pin-ref">'+label+'</div>', iconSize:[12,12], iconAnchor:[6,6]});
+  }
+  refs.forEach(function(r){
+    L.marker([r[1], r[2]], {icon: refIcon('•')}).addTo(map)
+      .bindPopup('<b>'+r[0]+'</b>', {offset: L.point(0,-4)});
+  });
+
+  L.marker(hotel, {icon:numIcon('🏨','hotel')}).addTo(map).bindPopup('<b>Metro Hotel Marlow</b><br>431–439 Pitt St（起点）');
+  L.marker(opera, {icon:numIcon('①','')}).addTo(map).bindPopup('<b>① 悉尼歌剧院</b><br>外观免费，轻轨站出来步行 6 分钟');
+  L.marker(mrs, {icon:numIcon('②','')}).addTo(map).bindPopup('<b>② Mrs Macquaries Chair</b><br>歌剧院+大桥同框机位（植物园内）');
+  L.marker(rocks, {icon:numIcon('③','')}).addTo(map).bindPopup('<b>③ 岩石区 The Rocks</b><br>历史街区 · 老酒吧 · Discovery Museum');
+  L.marker(cq, {icon:numIcon('⛴','star')}).addTo(map).bindPopup('<b>Circular Quay</b><br>轻轨站 + 渡轮码头枢纽');
+
+  // 示意路线（酒店→CQ→歌剧院→植物园→岩石区→回CQ）
+  var route = [hotel, cq, opera, mrs, rocks, cq];
+  L.polyline(route, {color:'#0f766e', weight:3, dashArray:'6,6', opacity:.7}).addTo(map);
+</script>
+
+<a class="back-home" href="index.html" style="display:block;text-align:center;margin:0 auto 0;padding:14px 16px;background:#0f766e;color:#fff;font-size:15px;font-weight:700;text-decoration:none;border-radius:14px;margin-left:16px;margin-right:16px;">🏠 返回行程目录</a>
+
+</body>
+</html>

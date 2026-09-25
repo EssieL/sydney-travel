@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#0f766e">
+<meta name="robots" content="noindex, nofollow">
+<title>Essie 的旅行手册 · 悉尼</title>
+<style>
+  :root{
+    --teal:#0f766e; --teal-d:#115e59; --teal-l:#14b8a6;
+    --amber:#f59e0b; --amber-bg:#fff7ed; --amber-bd:#fcd34d;
+    --ink:#1f2937; --sub:#64748b; --line:#e2e8f0;
+    --bg:#f5f7f7; --card:#ffffff; --soft:#eef4f4;
+  }
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+  html,body{margin:0; padding:0;}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    background:var(--bg); color:var(--ink); line-height:1.65; font-size:16px;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:480px; margin:0 auto; background:var(--bg); min-height:100vh; padding-bottom:40px;}
+
+  .hero{background:linear-gradient(135deg,var(--teal-d),var(--teal-l)); color:#fff; padding:30px 20px 26px;}
+  .hero .kicker{font-size:12.5px; letter-spacing:2px; opacity:.85; text-transform:uppercase; margin:0 0 6px;}
+  .hero h1{margin:0 0 8px; font-size:26px; font-weight:800; letter-spacing:.5px;}
+  .hero .sub{font-size:14px; opacity:.94; margin:0;}
+  .hero .badge{display:inline-block; margin-top:14px; background:rgba(255,255,255,.16);
+    border:1px solid rgba(255,255,255,.35); padding:6px 13px; border-radius:999px; font-size:13px; font-weight:600;}
+
+  /* 密码门 */
+  .gate{display:none;}
+  .gate.show{display:block;}
+  .gate-inner{background:var(--card); border:1px solid var(--line); border-radius:18px;
+    padding:28px 22px; margin:18px 16px; box-shadow:0 2px 8px rgba(15,118,110,.06); text-align:center;}
+  .gate-inner .lock{font-size:40px; margin-bottom:8px;}
+  .gate-inner h2{margin:0 0 6px; font-size:18px; color:var(--teal-d);}
+  .gate-inner p{margin:0 0 18px; font-size:13.5px; color:var(--sub);}
+  .gate-inner input{width:100%; padding:12px 14px; border:1.5px solid var(--line); border-radius:12px;
+    font-size:16px; text-align:center; letter-spacing:3px; outline:none; color:var(--ink);}
+  .gate-inner input:focus{border-color:var(--teal-l);}
+  .gate-inner button{margin-top:12px; width:100%; padding:12px; border:none; border-radius:12px;
+    background:var(--teal); color:#fff; font-size:16px; font-weight:700; cursor:pointer; letter-spacing:1px;}
+  .gate-inner button:active{background:var(--teal-d);}
+  .gate-err{display:none; color:#dc2626; font-size:13px; margin-top:10px;}
+  .gate-err.show{display:block;}
+
+  /* 内容区 */
+  .content{display:none;}
+  .content.show{display:block;}
+
+  .sec-title{display:flex; align-items:center; gap:8px; font-size:18px; font-weight:800; color:var(--teal-d);
+    margin:20px 16px 12px;}
+  .sec-title .ic{width:26px; height:26px; border-radius:8px; background:var(--soft); color:var(--teal);
+    display:flex; align-items:center; justify-content:center; font-size:15px;}
+
+  .day-link{display:block; text-decoration:none; color:inherit;}
+  .day-card{display:flex; align-items:center; gap:14px; background:var(--card); border:1px solid var(--line);
+    border-radius:16px; padding:14px 16px; margin:0 16px 12px; box-shadow:0 1px 3px rgba(15,118,110,.05);
+    transition:transform .12s;}
+  .day-card:active{transform:scale(.985);}
+  .day-card .num{flex:0 0 46px; height:46px; border-radius:12px; background:linear-gradient(135deg,var(--teal-d),var(--teal-l));
+    color:#fff; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:15px;}
+  .day-card .num.rest{background:linear-gradient(135deg,#b45309,#f59e0b);}
+  .day-card .info{flex:1; min-width:0;}
+  .day-card .t{font-weight:700; font-size:15.5px; color:var(--ink);}
+  .day-card .d{font-size:13px; color:var(--sub); margin-top:2px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+  .day-card .arrow{color:var(--teal-l); font-size:18px; flex:0 0 auto;}
+
+  .note{font-size:13px; color:var(--sub); margin:6px 18px 0; line-height:1.6;}
+  .foot{text-align:center; font-size:12px; color:var(--sub); padding:22px 16px 0;}
+
+  /* 退出按钮 */
+  .logout{display:block; text-align:center; margin:8px auto 0; background:none; border:none; color:var(--sub);
+    font-size:13px; text-decoration:underline; cursor:pointer;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <p class="kicker">Essie's Travel Guide</p>
+    <h1>悉尼旅行手册</h1>
+    <p class="sub">给爸妈的每日行程 · 攻略 · 地图</p>
+    <span class="badge">2026-09 · 悉尼 + 周边</span>
+  </div>
+
+  <!-- 密码门 -->
+  <div class="gate" id="gate">
+    <div class="gate-inner">
+      <div class="lock">🔒</div>
+      <h2>输入密码查看</h2>
+      <p>这是家人私享的旅行手册</p>
+      <input type="password" id="pwd" placeholder="请输入密码" inputmode="text" autocomplete="off">
+      <button onclick="tryUnlock()">进入</button>
+      <div class="gate-err" id="err">密码不对，再试试</div>
+    </div>
+  </div>
+
+  <!-- 内容 -->
+  <div class="content" id="content">
+    <div class="sec-title"><span class="ic">🗓</span>每日行程</div>
+
+    <a class="day-link" href="day1-birkenhead.html">
+      <div class="day-card">
+        <div class="num">9.23</div>
+        <div class="info"><div class="t">Birkenhead Point 奥特莱斯</div><div class="d">海港奥莱 · 购物 + 退税攻略</div></div>
+        <span class="arrow">›</span>
+      </div>
+    </a>
+
+    <a class="day-link" href="day2-city.html">
+      <div class="day-card">
+        <div class="num">9.24</div>
+        <div class="info"><div class="t">悉尼市中心一日游</div><div class="d">歌剧院 · 植物园 · 岩石区</div></div>
+        <span class="arrow">›</span>
+      </div>
+    </a>
+
+    <a class="day-link" href="day3-taronga.html">
+      <div class="day-card">
+        <div class="num">9.25</div>
+        <div class="info"><div class="t">塔龙加动物园</div><div class="d">动物园 + 海德公园 · 圣玛丽教堂</div></div>
+        <span class="arrow">›</span>
+      </div>
+    </a>
+
+    <a class="day-link" href="day4-bondi.html">
+      <div class="day-card">
+        <div class="num">9.26</div>
+        <div class="info"><div class="t">Bondi 海滩</div><div class="d">海滩 + Bondi Junction 商场</div></div>
+        <span class="arrow">›</span>
+      </div>
+    </a>
+
+    <div class="sec-title"><span class="ic">📌</span>其他</div>
+    <a class="day-link" href="day3-taronga.html">
+      <div class="day-card">
+        <div class="num rest">💊</div>
+        <div class="info"><div class="t">药妆采购备忘卡</div><div class="d">保健品 · 绵羊油 · 退税策略</div></div>
+        <span class="arrow">›</span>
+      </div>
+    </a>
+
+    <div class="note">💡 每个攻略页都有可缩放的地图，点右上角「地图」可直接查看。票价、开放时间以当日官方为准。</div>
+
+    <button class="logout" onclick="lock()">退出（重新上锁）</button>
+    <div class="foot">Essie 的旅行手册 · 仅供家人查看</div>
+  </div>
+
+</div>
+
+<script>
+  var PASSWORD = "lxjh2026";
+
+  function tryUnlock(){
+    var v = document.getElementById('pwd').value.trim();
+    if(v === PASSWORD){
+      sessionStorage.setItem('essie_unlocked', '1');
+      document.getElementById('gate').classList.remove('show');
+      document.getElementById('content').classList.add('show');
+      document.getElementById('err').classList.remove('show');
+    } else {
+      document.getElementById('err').classList.add('show');
+      document.getElementById('pwd').value = '';
+    }
+  }
+
+  function lock(){
+    sessionStorage.removeItem('essie_unlocked');
+    document.getElementById('content').classList.remove('show');
+    document.getElementById('gate').classList.add('show');
+  }
+
+  document.getElementById('pwd').addEventListener('keydown', function(e){
+    if(e.key === 'Enter') tryUnlock();
+  });
+
+  // 初始状态：已解锁则直接进，否则显示密码门
+  if(sessionStorage.getItem('essie_unlocked') === '1'){
+    document.getElementById('content').classList.add('show');
+  } else {
+    document.getElementById('gate').classList.add('show');
+  }
+</script>
+</body>
+</html>
