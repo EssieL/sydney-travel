@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#0f766e">
+<title>曼利海滩休闲一日游 · 9/27 周六</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+<style>
+  :root{
+    --teal:#0f766e; --teal-d:#115e59; --teal-l:#14b8a6;
+    --amber:#f59e0b; --amber-bg:#fff7ed; --amber-bd:#fcd34d;
+    --ink:#1f2937; --sub:#64748b; --line:#e2e8f0;
+    --bg:#f5f7f7; --card:#ffffff; --soft:#eef4f4;
+  }
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+  html,body{margin:0; padding:0;}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    background:var(--bg); color:var(--ink); line-height:1.65;
+    font-size:16px; -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:480px; margin:0 auto; background:var(--bg); min-height:100vh; padding-bottom:40px;}
+
+  .hero{background:linear-gradient(135deg,var(--teal-d),var(--teal-l)); color:#fff; padding:22px 20px 18px;}
+  .hero h1{margin:0 0 6px; font-size:23px; font-weight:800; letter-spacing:.5px;}
+  .hero .sub{font-size:13.5px; opacity:.92; margin:0;}
+  .hero .badge{display:inline-block; margin-top:12px; background:rgba(255,255,255,.16);
+    border:1px solid rgba(255,255,255,.35); padding:5px 12px; border-radius:999px; font-size:13px; font-weight:600;}
+
+  .weather{display:flex; align-items:center; gap:10px; background:var(--amber-bg); border:1px solid var(--amber-bd);
+    border-radius:14px; padding:11px 13px; margin:12px 16px 0; font-size:13.5px; color:#7c2d12; line-height:1.5;}
+  .weather .big{font-size:22px; font-weight:800; color:var(--amber); flex:0 0 auto;}
+
+  .nav{position:sticky; top:0; z-index:20; background:rgba(245,247,247,.96); backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line); padding:8px 10px; display:flex; gap:8px; overflow-x:auto; -webkit-overflow-scrolling:touch;}
+  .nav a{flex:0 0 auto; text-decoration:none; color:var(--teal-d); background:#fff; border:1px solid var(--line);
+    padding:6px 12px; border-radius:999px; font-size:13px; font-weight:600; white-space:nowrap;}
+  .nav a:active{background:var(--teal); color:#fff;}
+
+  #map{height:340px; width:100%; border-radius:16px; border:1px solid var(--line); overflow:hidden; margin:12px 0;}
+  .map-pin{background:transparent; border:none;}
+  .pin-num{display:flex; align-items:center; justify-content:center; width:26px; height:26px; border-radius:50%;
+    background:var(--teal); color:#fff; font-weight:800; font-size:13px; border:2px solid #fff; box-shadow:0 1px 4px rgba(0,0,0,.3);}
+  .pin-num.hotel{background:#e11d48;}
+  .pin-num.star{background:var(--amber);}
+  .pin-ref{width:12px; height:12px; border-radius:50%; background:#cbd5e1; border:2px solid #fff;
+    box-shadow:0 0 0 1px rgba(100,116,139,.5);}
+
+  section{padding:16px 16px 4px;}
+  .sec-title{display:flex; align-items:center; gap:8px; font-size:18px; font-weight:800; color:var(--teal-d); margin:6px 0 12px;}
+  .sec-title .ic{width:26px; height:26px; border-radius:8px; background:var(--soft); color:var(--teal); display:flex; align-items:center; justify-content:center; font-size:15px;}
+  .card{background:var(--card); border:1px solid var(--line); border-radius:16px; padding:14px 14px; margin-bottom:12px; box-shadow:0 1px 3px rgba(15,118,110,.05);}
+  .card h3{margin:0 0 8px; font-size:15.5px; color:var(--ink); font-weight:700;}
+  .kv{display:flex; gap:10px; padding:7px 0; border-bottom:1px dashed var(--line); font-size:14.5px;}
+  .kv:last-child{border-bottom:none;}
+  .kv .k{flex:0 0 78px; color:var(--sub); font-weight:600;}
+  .kv .v{flex:1; color:var(--ink);}
+  .hl{background:var(--amber-bg); border:1px solid var(--amber-bd); border-radius:12px; padding:10px 12px; font-size:14px; color:var(--teal-d); font-weight:600; margin-bottom:10px;}
+
+  .bus-card{background:linear-gradient(135deg,#ecfdf5,#f0fdfa); border:1px solid #99f6e4; border-radius:14px; padding:13px 14px; margin-bottom:10px;}
+  .bus-card .t{font-weight:800; color:var(--teal-d); font-size:15px; margin-bottom:4px;}
+  .bus-card .d{font-size:13.5px; color:#334155; line-height:1.6;}
+  .tag{display:inline-block; background:var(--teal); color:#fff; font-size:11.5px; font-weight:700; padding:2px 8px; border-radius:6px; margin-right:4px;}
+
+  .spot{border-left:4px solid var(--teal-l); background:var(--soft); border-radius:0 12px 12px 0; padding:9px 12px; margin-bottom:8px;}
+  .spot .sp{font-weight:800; color:var(--teal-d); font-size:14px;}
+  .spot .sd{font-size:13px; color:#475569; margin-top:2px;}
+
+  ul.clean{margin:0; padding-left:0; list-style:none;}
+  ul.clean li{padding:6px 0; border-bottom:1px dashed var(--line); font-size:14.5px;}
+  ul.clean li:last-child{border-bottom:none;}
+  ul.clean li b{color:var(--teal-d);}
+
+  table{width:100%; border-collapse:collapse; font-size:13px; margin:6px 0;}
+  th,td{padding:7px 6px; text-align:left; border-bottom:1px solid var(--line); vertical-align:top;}
+  th{color:var(--teal-d); font-size:12.5px; background:var(--soft);}
+  td b{color:var(--teal-d);}
+
+  .tl{position:relative; padding-left:20px;}
+  .tl:before{content:""; position:absolute; left:6px; top:4px; bottom:4px; width:2px; background:var(--teal-l);}
+  .tl .it{position:relative; margin-bottom:12px;}
+  .tl .it:before{content:""; position:absolute; left:-17px; top:5px; width:9px; height:9px; border-radius:50%; background:var(--teal); border:2px solid #fff; box-shadow:0 0 0 1px var(--teal-l);}
+  .tl .tm{font-weight:800; color:var(--teal-d); font-size:14px;}
+  .tl .tx{font-size:14px; color:#334155;}
+
+  .note{font-size:13px; color:var(--sub); margin:6px 2px 0;}
+  .foot{text-align:center; font-size:12px; color:var(--sub); padding:18px 16px 0;}
+  .top{display:block; text-align:center; color:var(--teal); font-size:13px; font-weight:600; padding:10px; text-decoration:none;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <h1>曼利海滩休闲一日游</h1>
+    <p class="sub">坐轮渡 · 吹海风 · 海边散步｜轻松的一天</p>
+    <span class="badge">2026-09-27（周六）· 休闲日 · 下午回酒店收拾休息</span>
+  </div>
+
+  <div class="weather">
+    <span class="big">🌤</span>
+    <span><b>9/27 天气</b>：晴 · 最高 29°C（春末很舒服）<br>⚠️ 午后「南风转变」过境，可能转凉起风、傍晚零星阵雨<br>→ 上午去最舒服，带件薄外套 + 防晒霜 + 帽子</span>
+  </div>
+
+  <nav class="nav">
+    <a href="#map">地图</a>
+    <a href="#ferry">轮渡</a>
+    <a href="#beach">海滩</a>
+    <a href="#walk">散步</a>
+    <a href="#eat">吃饭</a>
+    <a href="#plan">时间轴</a>
+    <a href="#tips">贴士</a>
+  </nav>
+
+  <!-- 地图 -->
+  <section id="map">
+    <div class="sec-title"><span class="ic">🗺</span>路线地图（可缩放拖动）</div>
+    <div id="map"></div>
+    <div class="note">粉色 = 酒店（起点）｜青色 = 环形码头（上船点）｜金色 = 曼利码头 / 海滩｜虚线 = 轮渡海上路线。看歌剧院+大桥同框，坐轮渡上层甲板。</div>
+  </section>
+
+  <!-- 轮渡 -->
+  <section id="ferry">
+    <div class="sec-title"><span class="ic">⛴</span>轮渡（本身就算玩）</div>
+    <div class="bus-card">
+      <div class="t"><span class="tag">推荐</span>F1 轮渡：Circular Quay → Manly</div>
+      <div class="d">从酒店轻轨到 <b>Circular Quay</b>，在 <b>Wharf 3</b> 乘 F1 轮渡，30 分钟跨过整个悉尼港，本身就是最经典的海上观光。票价约 A$8.39（Opal/卡/Apple Pay，3 人各自 tap）。每 20 分钟一班，不用订，看码头大屏。</div>
+    </div>
+    <div class="card">
+      <div class="kv"><span class="k">更快选择</span><span class="v">Manly Fast Ferry（Wharf 2，约 18–20 分钟，同价）</span></div>
+      <div class="kv"><span class="k">坐哪儿</span><span class="v">上层甲板，看歌剧院 + 海港大桥最佳视角</span></div>
+      <div class="kv"><span class="k">小提醒</span><span class="v">Manly Wharf 3 近期码头维修，F1 可能临时改停靠位，到码头看电子屏确认即可</span></div>
+    </div>
+  </section>
+
+  <!-- 海滩 -->
+  <section id="beach">
+    <div class="sec-title"><span class="ic">🏖</span>曼利海滩（免费）</div>
+    <div class="spot"><div class="sp">1500 米金色沙滩 · 诺福克松树大道</div><div class="sd">悉尼最经典海滩之一，免费进入，有救生旗巡逻区。</div></div>
+    <div class="card">
+      <ul class="clean">
+        <li><b>晒太阳、散步、拍照</b>——沙滩又长又宽，春日午后很惬意</li>
+        <li><b>The Corso 步行街</b>：码头到海滩的主街，冲浪店、冰淇淋、咖啡馆，慢慢逛</li>
+        <li>想下水只在<b>红黄旗之间</b>游（有救生员）；也可租冲浪板/报冲浪课</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 散步 -->
+  <section id="walk">
+    <div class="sec-title"><span class="ic">🚶</span>海边散步（轻松版，可选）</div>
+    <div class="spot"><div class="sp">曼利海滩 → Shelly Beach</div><div class="sd">沿海岸步道 1.4 km，约 30 分钟，风平浪静、适合拍照。</div></div>
+    <div class="card">
+      <ul class="clean">
+        <li>途经 <b>Cabbage Tree Bay 海洋保护区</b>，运气好能看到鱼、章鱼</li>
+        <li>走到 <b>Shelly Beach</b> 喝杯咖啡、歇个脚再折返</li>
+        <li>累了就原地晒太阳，不勉强走完</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 吃饭 -->
+  <section id="eat">
+    <div class="sec-title"><span class="ic">🍽</span>吃什么（海边，随意）</div>
+    <div class="card">
+      <ul class="clean">
+        <li><b>The Pantry</b>：正对海滩，海景早午餐/正餐，招牌麦片+水果早餐</li>
+        <li><b>Donny's Bar</b>：海滩边简餐、酒吧氛围</li>
+        <li><b>Hugos Manly</b>：码头边现代意餐</li>
+        <li><b>Belle Café</b>：周末早午餐热门，班尼迪克蛋 + 咖啡</li>
+        <li><b>省钱简单</b>：Corso 街边咖啡馆/面包店，或超市买点海边野餐</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 时间轴 -->
+  <section id="plan">
+    <div class="sec-title"><span class="ic">🗓</span>建议时间轴（宽松版）</div>
+    <div class="card">
+      <div class="tl">
+        <div class="it"><div class="tm">09:00</div><div class="tx">酒店出发，轻轨到 Circular Quay</div></div>
+        <div class="it"><div class="tm">09:30</div><div class="tx">Wharf 3 上 F1 轮渡，海上观光</div></div>
+        <div class="it"><div class="tm">10:00</div><div class="tx">抵 Manly，码头前喝杯咖啡</div></div>
+        <div class="it"><div class="tm">10:30</div><div class="tx">逛 The Corso 步行街</div></div>
+        <div class="it"><div class="tm">11:00</div><div class="tx">曼利海滩散步、晒太阳、拍照</div></div>
+        <div class="it"><div class="tm">12:00</div><div class="tx">海边午餐（The Pantry / Donny's）</div></div>
+        <div class="it"><div class="tm">13:30</div><div class="tx">可选：沿海步道走到 Shelly Beach</div></div>
+        <div class="it"><div class="tm">14:30</div><div class="tx">往回走，买点小食/纪念品</div></div>
+        <div class="it"><div class="tm">15:30</div><div class="tx">坐轮渡回 Circular Quay</div></div>
+        <div class="it"><div class="tm">16:00</div><div class="tx">回酒店，收拾行李、休息</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 贴士 -->
+  <section id="tips">
+    <div class="sec-title"><span class="ic">💡</span>实用贴士</div>
+    <div class="card">
+      <ul class="clean">
+        <li>☀️ 防晒是重点（春末 UV 已升高），涂防晒霜、戴帽子</li>
+        <li>🌬 午后可能转凉起风，带薄外套</li>
+        <li>💳 3 人轮渡各自 tap；当天刷到 Opal 封顶的话轮渡基本免费</li>
+        <li>🎒 带水；沙滩边有直饮水</li>
+        <li>📸 轮渡上层甲板拍歌剧院+大桥同框是经典机位</li>
+        <li>😴 今晚早点休息，行李今晚开始收拾（明天返程）</li>
+      </ul>
+    </div>
+    <div class="foot">攻略生成于 2026-09-26 · 轮渡班次/天气以当日官方为准</div>
+  </section>
+
+  <a class="top" href="#">↑ 回到顶部</a>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script>
+  var hotel = [-33.8793, 151.2074];     // Metro Hotel Marlow
+  var cq    = [-33.8610, 151.2108];     // Circular Quay
+  var manlyWharf = [-33.7986, 151.2837];// Manly Wharf
+  var manlyBeach = [-33.7996, 151.2885];// Manly Beach
+  var shelly = [-33.8014, 151.2983];    // Shelly Beach
+
+  var map = L.map('map').setView([-33.8400, 151.2450], 12);
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; OpenStreetMap contributors'
+  }).addTo(map);
+
+  function numIcon(n, cls){
+    return L.divIcon({className:'map-pin', html:'<div class="pin-num '+cls+'">'+n+'</div>', iconSize:[26,26], iconAnchor:[13,13]});
+  }
+
+  L.marker(hotel, {icon:numIcon('🏨','hotel')}).addTo(map).bindPopup('<b>Metro Hotel Marlow</b><br>431–439 Pitt St（起点）');
+  L.marker(cq, {icon:numIcon('⛴','star')}).addTo(map).bindPopup('<b>Circular Quay</b><br>Wharf 3 上 F1 轮渡');
+  L.marker(manlyWharf, {icon:numIcon('🚢','star')}).addTo(map).bindPopup('<b>Manly Wharf</b><br>码头 + The Corso 起点');
+  L.marker(manlyBeach, {icon:numIcon('🏖','')}).addTo(map).bindPopup('<b>曼利海滩 Manly Beach</b><br>1500m 金色沙滩 · 免费');
+  L.marker(shelly, {icon:numIcon('🌊','')}).addTo(map).bindPopup('<b>Shelly Beach</b><br>沿海步道 1.4km · 风平浪静');
+
+  // 轮渡海上路线示意（直线示意，实际沿港航道）
+  L.polyline([cq, manlyWharf], {color:'#0f766e', weight:3, dashArray:'6,6', opacity:.7}).addTo(map);
+</script>
+
+<a class="back-home" href="index.html" style="display:block;text-align:center;margin:0 auto 0;padding:14px 16px;background:#0f766e;color:#fff;font-size:15px;font-weight:700;text-decoration:none;border-radius:14px;margin-left:16px;margin-right:16px;">🏠 返回行程目录</a>
+
+</body>
+</html>
