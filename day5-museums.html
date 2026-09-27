@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="theme-color" content="#0f766e">
-<title>达令港一日游 · 9/27 周日</title>
+<title>悉尼下午行程 · 博物馆 + 美术馆 · 9/27 周日</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
 <style>
   :root{
@@ -23,7 +23,7 @@
   .wrap{max-width:480px; margin:0 auto; background:var(--bg); min-height:100vh; padding-bottom:40px;}
 
   .hero{background:linear-gradient(135deg,var(--teal-d),var(--teal-l)); color:#fff; padding:22px 20px 18px;}
-  .hero h1{margin:0 0 6px; font-size:23px; font-weight:800; letter-spacing:.5px;}
+  .hero h1{margin:0 0 6px; font-size:22px; font-weight:800; letter-spacing:.5px;}
   .hero .sub{font-size:13.5px; opacity:.92; margin:0;}
   .hero .badge{display:inline-block; margin-top:12px; background:rgba(255,255,255,.16);
     border:1px solid rgba(255,255,255,.35); padding:5px 12px; border-radius:999px; font-size:13px; font-weight:600;}
@@ -56,11 +56,6 @@
   .kv .v{flex:1; color:var(--ink);}
   .hl{background:var(--amber-bg); border:1px solid var(--amber-bd); border-radius:12px; padding:10px 12px; font-size:14px; color:var(--teal-d); font-weight:600; margin-bottom:10px;}
 
-  .bus-card{background:linear-gradient(135deg,#ecfdf5,#f0fdfa); border:1px solid #99f6e4; border-radius:14px; padding:13px 14px; margin-bottom:10px;}
-  .bus-card .t{font-weight:800; color:var(--teal-d); font-size:15px; margin-bottom:4px;}
-  .bus-card .d{font-size:13.5px; color:#334155; line-height:1.6;}
-  .tag{display:inline-block; background:var(--teal); color:#fff; font-size:11.5px; font-weight:700; padding:2px 8px; border-radius:6px; margin-right:4px;}
-
   .spot{border-left:4px solid var(--teal-l); background:var(--soft); border-radius:0 12px 12px 0; padding:9px 12px; margin-bottom:8px;}
   .spot .sp{font-weight:800; color:var(--teal-d); font-size:14px;}
   .spot .sd{font-size:13px; color:#475569; margin-top:2px;}
@@ -91,21 +86,21 @@
 <div class="wrap">
 
   <div class="hero">
-    <h1>达令港悠闲一日游</h1>
-    <p class="sub">港湾散步 · 看海 · 等一场日落｜免费休闲</p>
-    <span class="badge">2026-09-27（周日）· 休闲日 · 下午早点回酒店休息</span>
+    <h1>下午雨天版 · 博物馆 + 美术馆</h1>
+    <p class="sub">室内避雨为主 · 达令港日落看天气可选</p>
+    <span class="badge">2026-09-27（周日）· 下午出发</span>
   </div>
 
   <div class="weather">
     <span class="big">🌧</span>
-    <span><b>9/27 天气</b>：阴天 · 最高约 19°C（偏凉）<br>⚠️ 高概率阵雨（80%），多集中在下午到傍晚，可能有雷阵雨<br>→ 带伞 + 薄外套；达令港室内场馆多，下雨可转室内</span>
+    <span><b>9/27 下午天气</b>：阴天 · 最高约 19°C（偏凉）<br>⚠️ 高概率阵雨（80%），集中在下午到傍晚，可能雷阵雨<br>→ 带伞 + 薄外套；主打室内，达令港日落只在雨停时顺路看</span>
   </div>
 
   <nav class="nav">
     <a href="#map">地图</a>
-    <a href="#free">免费必逛</a>
-    <a href="#paid">付费可选</a>
-    <a href="#eat">吃饭</a>
+    <a href="#museum">澳大利亚博物馆</a>
+    <a href="#agnsw">AGNSW 美术馆</a>
+    <a href="#sunset">达令港日落</a>
     <a href="#plan">时间轴</a>
     <a href="#tips">贴士</a>
   </nav>
@@ -114,62 +109,64 @@
   <section id="map">
     <div class="sec-title"><span class="ic">🗺</span>路线地图（可缩放拖动）</div>
     <div id="map"></div>
-    <div class="note">粉色 = 酒店（起点）｜金色 = 达令港核心区｜青色 = Pyrmont 桥 / 海事博物馆｜蓝色 = 中国友谊花园。从酒店步行 15–20 分钟即到。</div>
+    <div class="note">粉色 = 酒店（起点）｜青色 = 澳大利亚博物馆｜金色 = AGNSW 美术馆｜蓝色 = 达令港（Pyrmont 桥）。三站都在市中心，步行可达。</div>
   </section>
 
-  <!-- 免费必逛 -->
-  <section id="free">
-    <div class="sec-title"><span class="ic">🎁</span>免费必逛（今天的重点）</div>
-    <div class="hl">达令港整个区域免费、24 小时开放，不用买票就能逛一天。</div>
-
-    <div class="spot"><div class="sp">① 港湾栈道散步（核心）</div><div class="sd">从 Cockle Bay 走到 King Street Wharf，沿海栈道约 1.5 km，是悉尼最经典的日落步道。</div></div>
-    <div class="spot"><div class="sp">② Pyrmont 桥（看日落最佳）</div><div class="sd">1902 年老式开启桥，现已改纯步行桥。走到桥中央看夕阳染红海港 + 天际线倒影。⚠️ 留意骑行的人（靠左行）。</div></div>
-    <div class="spot"><div class="sp">③ Tumbalong 公园 + Darling Quarter 游乐场</div><div class="sd">悉尼最棒的免费城市游乐场（攀爬 + 喷泉），草坪大可野餐，大人可歇脚。</div></div>
-    <div class="spot"><div class="sp">④ 海事博物馆（免费户外区）</div><div class="sd">博物馆免费；室外码头有灯塔、库克船长纪念物、奋进号复刻船（可远观）。登真船（吸血鬼号驱逐舰/翁斯洛号潜艇）需另买票约 A$30。</div></div>
-  </section>
-
-  <!-- 付费可选 -->
-  <section id="paid">
-    <div class="sec-title"><span class="ic">🎫</span>可选付费景点（看兴趣）</div>
+  <!-- 澳大利亚博物馆 -->
+  <section id="museum">
+    <div class="sec-title"><span class="ic">🦖</span>① 澳大利亚博物馆</div>
     <div class="card">
-      <table>
-        <tr><th>景点</th><th>成人票价</th><th>特点</th></tr>
-        <tr><td><b>SEA LIFE 水族馆</b></td><td>A$39 起</td><td>儒艮（海牛）+ 鲨鱼隧道 + 帝企鹅，1.5–2h</td></tr>
-        <tr><td><b>WILD LIFE 动物园</b></td><td>A$26 起</td><td>室内，考拉/袋鼠/鳄鱼，90 分钟</td></tr>
-        <tr><td><b>中国友谊花园</b></td><td>A$12</td><td>亭台 + 锦鲤池 + 茶馆，安静，30–45 分钟</td></tr>
-      </table>
-      <div class="note">若下雨，水族馆是极好的室内备选，一进去就不受天气影响。</div>
+      <div class="kv"><div class="k">地址</div><div class="v">1 William St, Darlinghurst（海德公园东侧）</div></div>
+      <div class="kv"><div class="k">距离</div><div class="v">酒店步行约 15 分钟</div></div>
+      <div class="kv"><div class="k">门票</div><div class="v"><b>常设展免费</b>（特展另收费）</div></div>
+      <div class="kv"><div class="k">时间</div><div class="v">每天 10:00–17:00</div></div>
     </div>
+    <div class="hl">澳洲最古老、最大的自然史 + 文化博物馆，室内大、能逛 2 小时。</div>
+    <div class="spot"><div class="sp">恐龙化石 &amp; 矿石</div><div class="sd">澳洲本地恐龙骨架 + 矿物，直观震撼</div></div>
+    <div class="spot"><div class="sp">澳洲特有动物标本</div><div class="sd">袋鼠、考拉、袋熊、鸭嘴兽，父母看动物很直观</div></div>
+    <div class="spot"><div class="sp">原住民文化区</div><div class="sd">器物、艺术、图腾，补上「悉尼博物馆」没讲全的部分</div></div>
+    <div class="spot"><div class="sp">近期特展</div><div class="sd">「澳洲地理年度自然摄影师」免费展；RELICS 乐高微型世界（可能收费）</div></div>
   </section>
 
-  <!-- 吃饭 -->
-  <section id="eat">
-    <div class="sec-title"><span class="ic">🍽</span>吃什么</div>
+  <!-- AGNSW -->
+  <section id="agnsw">
+    <div class="sec-title"><span class="ic">🖼</span>② AGNSW 悉尼现代馆</div>
     <div class="card">
-      <ul class="clean">
-        <li><b>Cockle Bay Wharf / King Street Wharf</b>：沿岸海景餐厅（Nick's Bar & Grill 牛排、Adria 现代澳餐、Cafe del Mar 日落）</li>
-        <li><b>唐人街</b>：步行 10 分钟，性价比高、选择多</li>
-        <li><b>Darling Quarter 一带</b>：咖啡馆、快餐，随走随吃</li>
-      </ul>
+      <div class="kv"><div class="k">地址</div><div class="v">Art Gallery Rd, The Domain</div></div>
+      <div class="kv"><div class="k">距离</div><div class="v">从澳大利亚博物馆步行约 10–12 分钟</div></div>
+      <div class="kv"><div class="k">门票</div><div class="v"><b>常设展免费</b>（特展另收费）</div></div>
+      <div class="kv"><div class="k">时间</div><div class="v">每天 10:00–17:00</div></div>
+    </div>
+    <div class="hl">澳洲头号美术馆，2022 年新增 SANAA 设计的「悉尼现代馆」。</div>
+    <div class="spot"><div class="sp">必看「水窗」（悉尼现代馆 4 楼）</div><div class="sd">整面落地玻璃框住悉尼港 + 歌剧院，室内拍也美</div></div>
+    <div class="spot"><div class="sp">欧洲大师 &amp; 澳洲殖民艺术</div><div class="sd">莫奈、毕加索等原作</div></div>
+    <div class="spot"><div class="sp">原住民艺术（Yiribana 厅）</div><div class="sd">澳洲最大的原住民艺术收藏</div></div>
+    <div class="note">⚠️ 美术馆 17:00 关门，建议 16:00 前进馆。</div>
+  </section>
+
+  <!-- 达令港日落 -->
+  <section id="sunset">
+    <div class="sec-title"><span class="ic">🌇</span>③ 达令港日落（可选 · 看天气）</div>
+    <div class="card">
+      <div class="hl">只在傍晚雨停/雨小时去，主看 Pyrmont 桥；雨大就跳过，直接回酒店。</div>
+      <div class="spot"><div class="sp">Pyrmont 桥（1902 老桥）</div><div class="sd">看夕阳染海港 + 天际线倒影；雨后地面反光，夜景倒影更出片</div></div>
+      <div class="spot"><div class="sp">交通</div><div class="sd">从 AGNSW 过去约 25–30 分钟（步行或坐车）</div></div>
     </div>
   </section>
 
   <!-- 时间轴 -->
   <section id="plan">
-    <div class="sec-title"><span class="ic">🗓</span>建议时间轴（宽松版）</div>
+    <div class="sec-title"><span class="ic">🗓</span>建议时间轴（下午版）</div>
     <div class="card">
       <div class="tl">
-        <div class="it"><div class="tm">10:00</div><div class="tx">酒店出发，步行/轻轨到达令港</div></div>
-        <div class="it"><div class="tm">10:30</div><div class="tx">港湾栈道散步，逛 Cockle Bay</div></div>
-        <div class="it"><div class="tm">11:30</div><div class="tx">中国友谊花园（可选，A$12，安静）</div></div>
-        <div class="it"><div class="tm">12:00</div><div class="tx">海景午餐（沿岸餐厅 / 唐人街）</div></div>
-        <div class="it"><div class="tm">13:30</div><div class="tx">走 Pyrmont 桥 + 逛海事博物馆免费区</div></div>
-        <div class="it"><div class="tm">14:30</div><div class="tx">Tumbalong 公园 / Darling Quarter 歇脚</div></div>
-        <div class="it"><div class="tm">15:30</div><div class="tx">回酒店，收拾行李、休息</div></div>
-        <div class="it"><div class="tm">（可选）17:30</div><div class="tx">若想看日落，留在 Pyrmont 桥看夕阳再回</div></div>
+        <div class="it"><div class="tm">13:30</div><div class="tx">酒店出发，步行到澳大利亚博物馆</div></div>
+        <div class="it"><div class="tm">14:00–16:00</div><div class="tx">澳大利亚博物馆（室内避雨，慢慢逛）</div></div>
+        <div class="it"><div class="tm">16:00–16:15</div><div class="tx">步行/坐车到 AGNSW 悉尼现代馆</div></div>
+        <div class="it"><div class="tm">16:15–17:00</div><div class="tx">看「水窗」+ 原住民艺术（17:00 关门）</div></div>
+        <div class="it"><div class="tm">17:00 后</div><div class="tx">视天气：达令港桥看日落/夜景，或直接回酒店</div></div>
       </div>
     </div>
-    <div class="note">今天下午到傍晚有阵雨，建议户外散步放上午到中午，下午早点回或转室内。</div>
+    <div class="note">今天下午主打室内避雨，两个馆都免费，省钱又舒服。</div>
   </section>
 
   <!-- 贴士 -->
@@ -177,11 +174,10 @@
     <div class="sec-title"><span class="ic">💡</span>实用贴士</div>
     <div class="card">
       <ul class="clean">
-        <li>🌧 下午到傍晚高概率阵雨，带伞 + 薄外套；室内场馆多，下雨可转室内</li>
-        <li>🌇 想拍日落就在 Pyrmont 桥，阴天也别有一番味道</li>
-        <li>💳 交通各自 tap Opal；以步行为主基本不花钱</li>
-        <li>🎒 带水；港湾边有直饮水</li>
-        <li>📸 傍晚海港灯光亮起后又是另一番夜景（若留到晚上）</li>
+        <li>🎫 两个馆都免费，雨天省钱又舒服</li>
+        <li>⏰ 美术馆 17:00 关门，建议 16:00 前进馆</li>
+        <li>🌧 带伞 + 薄外套；馆内可寄存雨伞</li>
+        <li>🚶 三站都在市中心，步行可达，基本不花钱</li>
       </ul>
     </div>
     <div class="foot">攻略生成于 2026-09-27 · 开放时间/票价以当日官方为准</div>
@@ -192,12 +188,12 @@
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 <script>
-  var hotel  = [-33.8793, 151.2074];  // Metro Hotel Marlow
-  var darling = [-33.8720, 151.1990]; // 达令港核心区 Cockle Bay
-  var bridge = [-33.8700, 151.1990];  // Pyrmont 桥 / 海事博物馆
-  var garden = [-33.8765, 151.2020];  // 中国友谊花园
+  var hotel   = [-33.8793, 151.2074];  // Metro Hotel Marlow
+  var museum  = [-33.8740, 151.2125];  // 澳大利亚博物馆 1 William St
+  var agnsw   = [-33.8688, 151.2174];  // AGNSW Art Gallery Rd
+  var darling = [-33.8720, 151.1990];  // 达令港 Pyrmont 桥
 
-  var map = L.map('map').setView([-33.8745, 151.2010], 15);
+  var map = L.map('map').setView([-33.8735, 151.2090], 14);
 
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
@@ -208,10 +204,10 @@
     return L.divIcon({className:'map-pin', html:'<div class="pin-num '+cls+'">'+n+'</div>', iconSize:[26,26], iconAnchor:[13,13]});
   }
 
-  L.marker(hotel, {icon:numIcon('🏨','hotel')}).addTo(map).bindPopup('<b>Metro Hotel Marlow</b><br>431–439 Pitt St（起点，步行 15–20 分钟）');
-  L.marker(darling, {icon:numIcon('⚓','star')}).addTo(map).bindPopup('<b>达令港核心区</b><br>Cockle Bay / 港湾栈道<br>免费 · 24h 开放');
-  L.marker(bridge, {icon:numIcon('🌉','')}).addTo(map).bindPopup('<b>Pyrmont 桥 / 海事博物馆</b><br>1902 年老桥，看日落最佳');
-  L.marker(garden, {icon:numIcon('⛩','')}).addTo(map).bindPopup('<b>中国友谊花园</b><br>A$12 · 亭台 + 锦鲤池');
+  L.marker(hotel, {icon:numIcon('🏨','hotel')}).addTo(map).bindPopup('<b>Metro Hotel Marlow</b><br>431–439 Pitt St（起点）');
+  L.marker(museum, {icon:numIcon('🦖','')}).addTo(map).bindPopup('<b>澳大利亚博物馆</b><br>1 William St<br>免费 · 10:00–17:00');
+  L.marker(agnsw, {icon:numIcon('🖼','star')}).addTo(map).bindPopup('<b>AGNSW 美术馆</b><br>Art Gallery Rd<br>免费 · 悉尼现代馆「水窗」');
+  L.marker(darling, {icon:numIcon('🌉','')}).addTo(map).bindPopup('<b>达令港 Pyrmont 桥</b><br>1902 老桥 · 看日落/夜景');
 </script>
 
 <a class="back-home" href="index.html" style="display:block;text-align:center;margin:0 auto 0;padding:14px 16px;background:#0f766e;color:#fff;font-size:15px;font-weight:700;text-decoration:none;border-radius:14px;margin-left:16px;margin-right:16px;">🏠 返回行程目录</a>
