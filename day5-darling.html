@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="theme-color" content="#0f766e">
-<title>曼利海滩休闲一日游 · 9/27 周日</title>
+<title>达令港一日游 · 9/27 周日</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
 <style>
   :root{
@@ -44,8 +44,6 @@
     background:var(--teal); color:#fff; font-weight:800; font-size:13px; border:2px solid #fff; box-shadow:0 1px 4px rgba(0,0,0,.3);}
   .pin-num.hotel{background:#e11d48;}
   .pin-num.star{background:var(--amber);}
-  .pin-ref{width:12px; height:12px; border-radius:50%; background:#cbd5e1; border:2px solid #fff;
-    box-shadow:0 0 0 1px rgba(100,116,139,.5);}
 
   section{padding:16px 16px 4px;}
   .sec-title{display:flex; align-items:center; gap:8px; font-size:18px; font-weight:800; color:var(--teal-d); margin:6px 0 12px;}
@@ -93,21 +91,20 @@
 <div class="wrap">
 
   <div class="hero">
-    <h1>曼利海滩休闲一日游</h1>
-    <p class="sub">坐轮渡 · 吹海风 · 海边散步｜轻松的一天</p>
-    <span class="badge">2026-09-27（周日）· 休闲日 · 下午回酒店收拾休息</span>
+    <h1>达令港悠闲一日游</h1>
+    <p class="sub">港湾散步 · 看海 · 等一场日落｜免费休闲</p>
+    <span class="badge">2026-09-27（周日）· 休闲日 · 下午早点回酒店休息</span>
   </div>
 
   <div class="weather">
     <span class="big">🌧</span>
-    <span><b>9/27 天气</b>：阴天 · 最高 19°C（偏凉）<br>⚠️ 高概率阵雨（80%），多集中在下午到傍晚，可能有雷阵雨<br>→ 海边活动放上午到中午，带伞 + 防水/防风外套，下午尽早返程</span>
+    <span><b>9/27 天气</b>：阴天 · 最高约 19°C（偏凉）<br>⚠️ 高概率阵雨（80%），多集中在下午到傍晚，可能有雷阵雨<br>→ 带伞 + 薄外套；达令港室内场馆多，下雨可转室内</span>
   </div>
 
   <nav class="nav">
     <a href="#map">地图</a>
-    <a href="#ferry">轮渡</a>
-    <a href="#beach">海滩</a>
-    <a href="#walk">散步</a>
+    <a href="#free">免费必逛</a>
+    <a href="#paid">付费可选</a>
     <a href="#eat">吃饭</a>
     <a href="#plan">时间轴</a>
     <a href="#tips">贴士</a>
@@ -117,59 +114,42 @@
   <section id="map">
     <div class="sec-title"><span class="ic">🗺</span>路线地图（可缩放拖动）</div>
     <div id="map"></div>
-    <div class="note">粉色 = 酒店（起点）｜青色 = 环形码头（上船点）｜金色 = 曼利码头 / 海滩｜虚线 = 轮渡海上路线。看歌剧院+大桥同框，坐轮渡上层甲板。</div>
+    <div class="note">粉色 = 酒店（起点）｜金色 = 达令港核心区｜青色 = Pyrmont 桥 / 海事博物馆｜蓝色 = 中国友谊花园。从酒店步行 15–20 分钟即到。</div>
   </section>
 
-  <!-- 轮渡 -->
-  <section id="ferry">
-    <div class="sec-title"><span class="ic">⛴</span>轮渡（本身就算玩）</div>
-    <div class="bus-card">
-      <div class="t"><span class="tag">推荐</span>F1 轮渡：Circular Quay → Manly</div>
-      <div class="d">从酒店轻轨到 <b>Circular Quay</b>，在 <b>Wharf 3</b> 乘 F1 轮渡，30 分钟跨过整个悉尼港，本身就是最经典的海上观光。票价约 A$8.39（Opal/卡/Apple Pay，3 人各自 tap）。每 20 分钟一班，不用订，看码头大屏。</div>
-    </div>
-    <div class="card">
-      <div class="kv"><span class="k">更快选择</span><span class="v">Manly Fast Ferry（Wharf 2，约 18–20 分钟，同价）</span></div>
-      <div class="kv"><span class="k">坐哪儿</span><span class="v">上层甲板，看歌剧院 + 海港大桥最佳视角</span></div>
-      <div class="kv"><span class="k">小提醒</span><span class="v">Manly Wharf 3 近期码头维修，F1 可能临时改停靠位，到码头看电子屏确认即可</span></div>
-    </div>
+  <!-- 免费必逛 -->
+  <section id="free">
+    <div class="sec-title"><span class="ic">🎁</span>免费必逛（今天的重点）</div>
+    <div class="hl">达令港整个区域免费、24 小时开放，不用买票就能逛一天。</div>
+
+    <div class="spot"><div class="sp">① 港湾栈道散步（核心）</div><div class="sd">从 Cockle Bay 走到 King Street Wharf，沿海栈道约 1.5 km，是悉尼最经典的日落步道。</div></div>
+    <div class="spot"><div class="sp">② Pyrmont 桥（看日落最佳）</div><div class="sd">1902 年老式开启桥，现已改纯步行桥。走到桥中央看夕阳染红海港 + 天际线倒影。⚠️ 留意骑行的人（靠左行）。</div></div>
+    <div class="spot"><div class="sp">③ Tumbalong 公园 + Darling Quarter 游乐场</div><div class="sd">悉尼最棒的免费城市游乐场（攀爬 + 喷泉），草坪大可野餐，大人可歇脚。</div></div>
+    <div class="spot"><div class="sp">④ 海事博物馆（免费户外区）</div><div class="sd">博物馆免费；室外码头有灯塔、库克船长纪念物、奋进号复刻船（可远观）。登真船（吸血鬼号驱逐舰/翁斯洛号潜艇）需另买票约 A$30。</div></div>
   </section>
 
-  <!-- 海滩 -->
-  <section id="beach">
-    <div class="sec-title"><span class="ic">🏖</span>曼利海滩（免费）</div>
-    <div class="spot"><div class="sp">1500 米金色沙滩 · 诺福克松树大道</div><div class="sd">悉尼最经典海滩之一，免费进入，有救生旗巡逻区。</div></div>
+  <!-- 付费可选 -->
+  <section id="paid">
+    <div class="sec-title"><span class="ic">🎫</span>可选付费景点（看兴趣）</div>
     <div class="card">
-      <ul class="clean">
-        <li><b>看海、散步、拍照</b>——阴天的海别有一番感觉，沙滩又长又宽</li>
-        <li><b>The Corso 步行街</b>：码头到海滩的主街，冲浪店、冰淇淋、咖啡馆，慢慢逛（有顶棚，下雨也能躲）</li>
-        <li>今天阴凉，<b>建议不下水</b>；想下水只在红黄旗之间游（有救生员）</li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- 散步 -->
-  <section id="walk">
-    <div class="sec-title"><span class="ic">🚶</span>海边散步（轻松版，可选）</div>
-    <div class="spot"><div class="sp">曼利海滩 → Shelly Beach</div><div class="sd">沿海岸步道 1.4 km，约 30 分钟，风平浪静、适合拍照。</div></div>
-    <div class="card">
-      <ul class="clean">
-        <li>途经 <b>Cabbage Tree Bay 海洋保护区</b>，运气好能看到鱼、章鱼</li>
-        <li>走到 <b>Shelly Beach</b> 喝杯咖啡、歇个脚再折返</li>
-        <li>⚠️ 如果开始下雨就跳过散步，别勉强走</li>
-      </ul>
+      <table>
+        <tr><th>景点</th><th>成人票价</th><th>特点</th></tr>
+        <tr><td><b>SEA LIFE 水族馆</b></td><td>A$39 起</td><td>儒艮（海牛）+ 鲨鱼隧道 + 帝企鹅，1.5–2h</td></tr>
+        <tr><td><b>WILD LIFE 动物园</b></td><td>A$26 起</td><td>室内，考拉/袋鼠/鳄鱼，90 分钟</td></tr>
+        <tr><td><b>中国友谊花园</b></td><td>A$12</td><td>亭台 + 锦鲤池 + 茶馆，安静，30–45 分钟</td></tr>
+      </table>
+      <div class="note">若下雨，水族馆是极好的室内备选，一进去就不受天气影响。</div>
     </div>
   </section>
 
   <!-- 吃饭 -->
   <section id="eat">
-    <div class="sec-title"><span class="ic">🍽</span>吃什么（海边，随意）</div>
+    <div class="sec-title"><span class="ic">🍽</span>吃什么</div>
     <div class="card">
       <ul class="clean">
-        <li><b>The Pantry</b>：正对海滩，海景早午餐/正餐，招牌麦片+水果早餐</li>
-        <li><b>Donny's Bar</b>：海滩边简餐、酒吧氛围</li>
-        <li><b>Hugos Manly</b>：码头边现代意餐</li>
-        <li><b>Belle Café</b>：周末早午餐热门，班尼迪克蛋 + 咖啡</li>
-        <li><b>省钱简单</b>：Corso 街边咖啡馆/面包店，或超市买点海边野餐</li>
+        <li><b>Cockle Bay Wharf / King Street Wharf</b>：沿岸海景餐厅（Nick's Bar & Grill 牛排、Adria 现代澳餐、Cafe del Mar 日落）</li>
+        <li><b>唐人街</b>：步行 10 分钟，性价比高、选择多</li>
+        <li><b>Darling Quarter 一带</b>：咖啡馆、快餐，随走随吃</li>
       </ul>
     </div>
   </section>
@@ -179,18 +159,17 @@
     <div class="sec-title"><span class="ic">🗓</span>建议时间轴（宽松版）</div>
     <div class="card">
       <div class="tl">
-        <div class="it"><div class="tm">09:00</div><div class="tx">酒店出发，轻轨到 Circular Quay</div></div>
-        <div class="it"><div class="tm">09:30</div><div class="tx">Wharf 3 上 F1 轮渡，海上观光</div></div>
-        <div class="it"><div class="tm">10:00</div><div class="tx">抵 Manly，码头前喝杯咖啡</div></div>
-        <div class="it"><div class="tm">10:30</div><div class="tx">逛 The Corso 步行街</div></div>
-        <div class="it"><div class="tm">11:00</div><div class="tx">曼利海滩散步、看海、拍照</div></div>
-        <div class="it"><div class="tm">12:00</div><div class="tx">海边午餐（The Pantry / Donny's，尽量坐室内）</div></div>
-        <div class="it"><div class="tm">13:00</div><div class="tx">可选：天气好就沿海步道走一小段</div></div>
-        <div class="it"><div class="tm">14:00</div><div class="tx">往回走，买点小食/纪念品</div></div>
-        <div class="it"><div class="tm">14:30</div><div class="tx">坐轮渡回 Circular Quay（赶在雨大之前）</div></div>
+        <div class="it"><div class="tm">10:00</div><div class="tx">酒店出发，步行/轻轨到达令港</div></div>
+        <div class="it"><div class="tm">10:30</div><div class="tx">港湾栈道散步，逛 Cockle Bay</div></div>
+        <div class="it"><div class="tm">11:30</div><div class="tx">中国友谊花园（可选，A$12，安静）</div></div>
+        <div class="it"><div class="tm">12:00</div><div class="tx">海景午餐（沿岸餐厅 / 唐人街）</div></div>
+        <div class="it"><div class="tm">13:30</div><div class="tx">走 Pyrmont 桥 + 逛海事博物馆免费区</div></div>
+        <div class="it"><div class="tm">14:30</div><div class="tx">Tumbalong 公园 / Darling Quarter 歇脚</div></div>
         <div class="it"><div class="tm">15:30</div><div class="tx">回酒店，收拾行李、休息</div></div>
+        <div class="it"><div class="tm">（可选）17:30</div><div class="tx">若想看日落，留在 Pyrmont 桥看夕阳再回</div></div>
       </div>
     </div>
+    <div class="note">今天下午到傍晚有阵雨，建议户外散步放上午到中午，下午早点回或转室内。</div>
   </section>
 
   <!-- 贴士 -->
@@ -198,15 +177,14 @@
     <div class="sec-title"><span class="ic">💡</span>实用贴士</div>
     <div class="card">
       <ul class="clean">
-        <li>🌧 今天下午大概率下雨，带伞 + 防水/防风外套，行程往前赶</li>
-        <li>🌡 最高才 19°C，海边风大，穿暖和点，别感冒（明天要赶路）</li>
-        <li>💳 3 人轮渡各自 tap；当天刷到 Opal 封顶的话轮渡基本免费</li>
-        <li>🎒 带水；沙滩边有直饮水</li>
-        <li>📸 轮渡上层甲板拍歌剧院+大桥同框是经典机位</li>
-        <li>😴 今晚早点休息，行李今晚开始收拾（明天返程）</li>
+        <li>🌧 下午到傍晚高概率阵雨，带伞 + 薄外套；室内场馆多，下雨可转室内</li>
+        <li>🌇 想拍日落就在 Pyrmont 桥，阴天也别有一番味道</li>
+        <li>💳 交通各自 tap Opal；以步行为主基本不花钱</li>
+        <li>🎒 带水；港湾边有直饮水</li>
+        <li>📸 傍晚海港灯光亮起后又是另一番夜景（若留到晚上）</li>
       </ul>
     </div>
-    <div class="foot">攻略生成于 2026-09-26 · 轮渡班次/天气以当日官方为准</div>
+    <div class="foot">攻略生成于 2026-09-27 · 开放时间/票价以当日官方为准</div>
   </section>
 
   <a class="top" href="#">↑ 回到顶部</a>
@@ -214,13 +192,12 @@
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 <script>
-  var hotel = [-33.8793, 151.2074];     // Metro Hotel Marlow
-  var cq    = [-33.8610, 151.2108];     // Circular Quay
-  var manlyWharf = [-33.7986, 151.2837];// Manly Wharf
-  var manlyBeach = [-33.7996, 151.2885];// Manly Beach
-  var shelly = [-33.8014, 151.2983];    // Shelly Beach
+  var hotel  = [-33.8793, 151.2074];  // Metro Hotel Marlow
+  var darling = [-33.8720, 151.1990]; // 达令港核心区 Cockle Bay
+  var bridge = [-33.8700, 151.1990];  // Pyrmont 桥 / 海事博物馆
+  var garden = [-33.8765, 151.2020];  // 中国友谊花园
 
-  var map = L.map('map').setView([-33.8400, 151.2450], 12);
+  var map = L.map('map').setView([-33.8745, 151.2010], 15);
 
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
@@ -231,14 +208,13 @@
     return L.divIcon({className:'map-pin', html:'<div class="pin-num '+cls+'">'+n+'</div>', iconSize:[26,26], iconAnchor:[13,13]});
   }
 
-  L.marker(hotel, {icon:numIcon('🏨','hotel')}).addTo(map).bindPopup('<b>Metro Hotel Marlow</b><br>431–439 Pitt St（起点）');
-  L.marker(cq, {icon:numIcon('⛴','star')}).addTo(map).bindPopup('<b>Circular Quay</b><br>Wharf 3 上 F1 轮渡');
-  L.marker(manlyWharf, {icon:numIcon('🚢','star')}).addTo(map).bindPopup('<b>Manly Wharf</b><br>码头 + The Corso 起点');
-  L.marker(manlyBeach, {icon:numIcon('🏖','')}).addTo(map).bindPopup('<b>曼利海滩 Manly Beach</b><br>1500m 金色沙滩 · 免费');
-  L.marker(shelly, {icon:numIcon('🌊','')}).addTo(map).bindPopup('<b>Shelly Beach</b><br>沿海步道 1.4km · 风平浪静');
-
-  // 轮渡海上路线示意（直线示意，实际沿港航道）
-  L.polyline([cq, manlyWharf], {color:'#0f766e', weight:3, dashArray:'6,6', opacity:.7}).addTo(map);
+  L.marker(hotel, {icon:numIcon('🏨','hotel')}).addTo(map).bindPopup('<b>Metro Hotel Marlow</b><br>431–439 Pitt St（起点，步行 15–20 分钟）');
+  L.marker(darling, {icon:numIcon('⚓','star')}).addTo(map).bindPopup('<b>达令港核心区</b><br>Cockle Bay / 港湾栈道<br>免费 · 24h 开放');
+  L.marker(bridge, {icon:numIcon('🌉','')}).addTo(map).bindPopup('<b>Pyrmont 桥 / 海事博物馆</b><br>1902 年老桥，看日落最佳');
+  L.marker(garden, {icon:numIcon('⛩','')}).addTo(map).bindPopup('<b>中国友谊花园</b><br>A$12 · 亭台 + 锦鲤池');
 </script>
+
+<a class="back-home" href="index.html" style="display:block;text-align:center;margin:0 auto 0;padding:14px 16px;background:#0f766e;color:#fff;font-size:15px;font-weight:700;text-decoration:none;border-radius:14px;margin-left:16px;margin-right:16px;">🏠 返回行程目录</a>
+
 </body>
 </html>
