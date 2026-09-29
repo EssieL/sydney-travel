@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0f3d3a">
+<title>9/25 塔龙加动物园</title>
+<style>
+
+  :root{
+    --paper:#f7f6f1; --card:#ffffff; --ink:#1c1c1e; --ink2:#4a4a4e; --mut:#8a8a8e;
+    --line:#e3e1d8; --star:#c2410c; --site:#0f766e; --food:#b45309; --hotel:#1d4ed8;
+    --ok:#15803d; --warn:#a16207; --no:#b91c1c; --water:#cfe3ee;
+  }
+  *{ box-sizing:border-box; }
+  body{ margin:0; padding:0; background:var(--paper); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    font-size:16.5px; line-height:1.8; -webkit-text-size-adjust:100%; }
+  .wrap{ max-width:880px; margin:0 auto; padding:0 0 46px; background:transparent; }
+
+  /* 头部 */
+  .hero{ background:linear-gradient(150deg,#0f3d3a 0%,#14494a 55%,#1b3f63 100%); color:#fff;
+    padding:32px 26px 26px; border-radius:0 0 22px 22px; }
+  .hero .kick{ display:inline-block; font-size:13px; letter-spacing:2px; background:rgba(255,255,255,.16);
+    padding:5px 13px; border-radius:20px; margin-bottom:12px; }
+  .hero h1{ margin:0; font-size:31px; line-height:1.3; letter-spacing:.5px; }
+  .hero .sub{ margin:10px 0 0; font-size:15.5px; color:#dfe9e6; }
+  .hero .facts{ margin-top:18px; display:grid; grid-template-columns:repeat(4,1fr); gap:9px; }
+  .hero .facts div{ background:rgba(255,255,255,.11); border-radius:11px; padding:9px 10px; }
+  .hero .facts b{ display:block; font-size:12.5px; color:#b9d5cf; font-weight:600; }
+  .hero .facts span{ font-size:14.5px; }
+
+  /* 导航 */
+  nav{ display:flex; gap:7px; flex-wrap:wrap; padding:14px 16px 0; }
+  nav a{ font-size:13.5px; color:var(--site); text-decoration:none; background:#fff; border:1px solid var(--line);
+    padding:6px 12px; border-radius:18px; }
+
+  section{ background:var(--card); margin:14px 12px 0; padding:22px 20px 24px; border-radius:16px;
+    border:1px solid var(--line); }
+  h2{ margin:0 0 4px; font-size:22px; letter-spacing:.5px; }
+  h2 .no{ color:var(--mut); font-size:14px; font-weight:600; margin-right:8px; }
+  .cap{ color:var(--mut); font-size:13.5px; margin:0 0 16px; }
+  h3{ margin:24px 0 8px; font-size:17.5px; padding-left:11px; border-left:4px solid var(--site); }
+  h4{ margin:18px 0 6px; font-size:15.5px; color:var(--ink2); }
+
+  table{ width:100%; border-collapse:collapse; font-size:14.5px; margin-top:8px; }
+  th,td{ padding:8px 9px; border-bottom:1px solid var(--line); text-align:left; vertical-align:top; }
+  th{ background:#f2f1eb; font-size:13.5px; color:var(--ink2); font-weight:700; }
+  td.c, th.c{ text-align:center; }
+  tr:last-child td{ border-bottom:none; }
+
+  .tag{ display:inline-block; font-size:12px; padding:1px 7px; border-radius:5px; color:#fff; font-weight:600; }
+  .t-star{ background:var(--star); } .t-site{ background:var(--site); }
+  .t-food{ background:var(--food); } .t-hotel{ background:var(--hotel); }
+  .t-free{ background:var(--ok); }
+
+  .mapbox{ margin:14px 0 4px; }
+  .mapbox svg{ width:100%; height:auto; display:block; border-radius:14px; border:1px solid var(--line); background:#f7f6f2; }
+  .mapcap{ font-size:12.5px; color:var(--mut); margin:7px 0 0; }
+
+  .legend{ display:flex; gap:14px; flex-wrap:wrap; font-size:13px; color:var(--ink2); margin:10px 0 2px; }
+  .legend i{ display:inline-block; width:11px; height:11px; border-radius:50%; margin-right:5px; vertical-align:-1px; }
+
+  /* 每日 */
+  .day{ background:var(--card); margin:14px 12px 0; border-radius:16px; border:1px solid var(--line); overflow:hidden; }
+  .day .dh{ padding:16px 20px; color:#fff; }
+  .day .dh .d1{ font-size:13px; opacity:.85; letter-spacing:1px; }
+  .day .dh .d2{ font-size:20px; font-weight:700; margin-top:3px; }
+  .day .dh .d3{ font-size:13.5px; opacity:.92; margin-top:5px; line-height:1.6; }
+  .day .db{ padding:16px 20px 20px; }
+  .route{ background:#f4f3ec; border-radius:10px; padding:10px 13px; font-size:14px; color:var(--ink2); margin-bottom:12px; }
+  .route b{ color:var(--ink); }
+
+  .note{ font-size:14px; background:#fbf7ee; border-left:3px solid var(--ok); padding:9px 12px; border-radius:0 8px 8px 0; margin-top:10px; }
+  .note.w{ background:#fdf6ec; border-left-color:var(--warn); }
+  .note.r{ background:#fdf0ef; border-left-color:var(--no); }
+
+  .eat{ font-size:14.5px; }
+  .eat .row{ padding:8px 0; border-bottom:1px dashed var(--line); }
+  .eat .row:last-child{ border-bottom:none; }
+  .eat b{ font-size:15px; }
+  .ok{ color:var(--ok); font-weight:700; } .warn{ color:var(--warn); font-weight:700; } .no{ color:var(--no); font-weight:700; }
+
+  /* 时间块 · 逐日行程 */
+  .blk{ border:1px solid var(--line); border-radius:11px; margin:0 0 9px; overflow:hidden; background:#fff; }
+  .blk.f{ border-color:#e6c8a4; background:#fffaf4; }
+  .blkh{ display:flex; align-items:baseline; gap:8px; padding:7px 12px; background:#f2f1eb;
+    font-size:14px; font-weight:700; color:var(--ink2); }
+  .blk.f .blkh{ background:#fbeee0; color:#8a3410; }
+  .blkh .rng{ font-variant-numeric:tabular-nums; letter-spacing:.2px; }
+  .blkh .kd{ margin-left:auto; font-size:11.5px; font-weight:700; padding:1px 9px; border-radius:20px;
+    background:#e7e5dc; color:#6d6d72; white-space:nowrap; }
+  .blk.f .blkh .kd{ background:var(--star); color:#fff; }
+  .blkb{ padding:9px 13px 11px; font-size:14.5px; line-height:1.75; }
+  .blkb ul{ margin:0; padding-left:18px; }
+  .blkb li{ margin:2px 0; }
+  .blkb li.pin{ list-style:none; margin-left:-18px; }
+  .pin .tm{ display:inline-block; min-width:46px; color:var(--star); font-weight:800;
+    font-variant-numeric:tabular-nums; }
+  .blk .hard{ margin-top:6px; font-size:13px; color:var(--ink2); background:#f6f5ef;
+    border-radius:7px; padding:5px 9px; }
+  .blk.f .hard{ background:#fdf3e6; color:#7c4a12; }
+  .flexhd{ font-size:12.5px; color:var(--mut); margin:2px 0 3px; }
+
+  code{ background:#f2f1eb; padding:1px 5px; border-radius:4px; font-size:13.5px; }
+  footer{ text-align:center; color:var(--mut); font-size:12.5px; padding:22px 16px 0; }
+
+  /* 旅行记录：照片墙 + 调整说明 */
+  .gallery{ display:grid; grid-template-columns:repeat(auto-fill,minmax(155px,1fr)); gap:11px; margin-top:12px; }
+  .gallery figure{ margin:0; }
+  .gallery img{ width:100%; height:158px; object-fit:cover; border-radius:11px; border:1px solid var(--line);
+    display:block; background:#eee; }
+  .gallery.tall img{ height:252px; }
+  .gallery.sign{ grid-template-columns:repeat(3,1fr); }
+  .gallery.sign img{ height:auto; object-fit:contain; background:#f4f4f4; }
+  .gallery.art{ grid-template-columns:repeat(3,1fr); }
+  .gallery.art img{ height:300px; object-fit:contain; background:#f4f4f4; }
+  .gallery figcaption{ font-size:12.5px; color:var(--mut); margin-top:5px; text-align:center; line-height:1.5; }
+  .adjust{ margin:14px 12px 0; padding:14px 18px; border-radius:14px; background:#fdf6ec;
+    border:1px solid #e6c8a4; border-left:5px solid var(--warn); font-size:14.5px; color:#5a4a2a; line-height:1.75; }
+  .adjust b{ color:#8a3410; }
+  .gallery-sub{ font-size:13.5px; color:var(--mut); margin:14px 0 0; }
+  .story{ font-size:15px; color:var(--ink); line-height:1.95; margin:14px 0 0; }
+  .story + .story{ margin-top:9px; }
+  .receipt{ display:flex; gap:16px; align-items:flex-start; margin-top:14px; flex-wrap:wrap; }
+  .receipt figure{ margin:0; flex:0 0 200px; max-width:200px; }
+  .receipt img{ width:100%; height:auto; border-radius:11px; border:1px solid var(--line); display:block; background:#fff; }
+  .receipt figcaption{ font-size:12.5px; color:var(--mut); margin-top:5px; text-align:center; line-height:1.5; }
+  .receipt .rnote{ flex:1 1 250px; font-size:13.5px; color:var(--ink2); line-height:1.9; }
+  .receipt .rnote b{ color:var(--ink); }
+
+  @media (max-width:700px){
+    body{ font-size:16px; }
+    .hero{ padding:26px 16px 20px; border-radius:0 0 18px 18px; }
+    .hero h1{ font-size:25px; }
+    .hero .facts{ grid-template-columns:repeat(2,1fr); }
+    section, .day{ margin:12px 8px 0; padding:18px 14px 20px; border-radius:14px; }
+    .day .dh{ padding:14px 15px; } .day .db{ padding:14px 15px 18px; }
+    h2{ font-size:20px; } h3{ font-size:16.5px; }
+    table{ font-size:13.5px; } th,td{ padding:7px 6px; }
+    nav{ padding:12px 10px 0; }
+  }
+  .openfig{ margin:0 0 6px; }
+  .openfig img{ width:100%; height:auto; border-radius:15px; border:1px solid var(--line);
+    display:block; background:#fff; box-shadow:0 8px 24px rgba(20,50,45,.12); }
+  .openfig figcaption{ font-size:12.5px; color:var(--mut); margin-top:8px;
+    text-align:center; line-height:1.65; }
+  .openfig figcaption b{ color:var(--ink2); }
+  @media print{
+    body{ background:#fff; } section,.day{ break-inside:avoid; border-color:#ccc; }
+    nav{ display:none; }
+  }
+
+/* 记录页附加样式 */
+.rec-nav{position:sticky; top:0; z-index:30; display:flex; gap:8px; align-items:center;
+  background:rgba(247,246,241,.97); backdrop-filter:blur(8px); border-bottom:1px solid var(--line);
+  padding:10px 14px; flex-wrap:wrap;}
+.rec-nav a{font-size:13.5px; color:var(--site); text-decoration:none; background:#fff;
+  border:1px solid var(--line); padding:6px 12px; border-radius:18px; font-weight:600;}
+.rec-nav .crumb{color:var(--mut); font-size:13px;}
+.gate{display:none;} .gate.show{display:block;}
+.gate-inner{background:var(--card); border:1px solid var(--line); border-radius:18px;
+  padding:28px 22px; margin:18px 16px; box-shadow:0 2px 8px rgba(15,118,110,.06); text-align:center;}
+.gate-inner .lock{font-size:40px; margin-bottom:8px;}
+.gate-inner h2{margin:0 0 6px; font-size:18px; color:#0f3d3a;}
+.gate-inner p{margin:0 0 18px; font-size:13.5px; color:var(--mut);}
+.gate-inner input{width:100%; padding:12px 14px; border:1.5px solid var(--line); border-radius:12px;
+  font-size:16px; text-align:center; letter-spacing:3px; outline:none; color:var(--ink);}
+.gate-inner input:focus{border-color:var(--site);}
+.gate-inner button{margin-top:12px; width:100%; padding:12px; border:none; border-radius:12px;
+  background:var(--site); color:#fff; font-size:16px; font-weight:700; cursor:pointer; letter-spacing:1px;}
+.gate-err{display:none; color:#dc2626; font-size:13px; margin-top:10px;} .gate-err.show{display:block;}
+.content{display:none;} .content.show{display:block;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="gate" id="gate">
+    <div class="gate-inner">
+      <div class="lock">🔒</div>
+      <h2>输入密码查看</h2>
+      <p>这是家人私享的旅行记录</p>
+      <input type="password" id="pwd" placeholder="请输入密码" inputmode="text" autocomplete="off">
+      <button onclick="tryUnlock()">进入</button>
+      <div class="gate-err" id="err">密码不对，再试试</div>
+    </div>
+  </div>
+
+  <div class="content" id="content">
+    <div class="rec-nav">
+      <a href="index.html">‹ 首页</a>
+      <a href="records-sydney.html">悉尼记录</a>
+      <span class="crumb">DAY 4 · 周五</span>
+    </div>
+
+    <div class="hero" style="padding:26px 22px 20px;">
+      <div class="kick">DAY 4 · 周五</div>
+      <h1 style="font-size:26px;">塔龙加动物园</h1>
+      <p class="sub">2026 澳洲旅行 · 悉尼实际行程记录</p>
+    </div>
+
+  <div class="day" data-page-node-id="xx71JRjDDFbgGYRxErmYt6">
+    <div class="dh" style="background:linear-gradient(135deg,#8a3410,#c2410c)" data-page-node-id="nIUtaNw5DbAmCKWpkD5BOs">
+      <div class="d1" data-page-node-id="d4BchztMcPFR0mNt8uKRqC">DAY 4 · 周五</div>
+      <div class="d2" data-page-node-id="hAww1mjubtoXqtqfsBZQNY">9/25 · 塔龙加动物园（渡轮进）</div>
+      <div class="d3" data-page-node-id="aoNH75dZiEcyGHD2Mqfdfo">半日硬项目 + 半日休息，给父母缓一口气；若下午想轻松，可改逛 QVB / 唐人街（不必整日替换）</div>
+    </div>
+    <div class="db" data-page-node-id="CeFHNpl3AlbzURNkB9VJsy">
+      <div class="route" data-page-node-id="X4cc1ePIkCRgY5HPDh3bsu"><b data-page-node-id="kMsHuF9pzdxHcjYsAOhvUU">路线：</b>上午 电车转轮渡到动物园，公交车上山；园内 Nura Diya Australia（袋鼠 · 考拉） + Backyard to Bush（昆虫 · 农场动物） → Seals for the Wild 海豹表演 → 园内午餐 → African Savannah（长颈鹿 · 狮 · 猫鼬） + Rainforest Trail（侏儒河马） + 雨林鸟舍 + Great Southern Oceans（海狗池） → 傍晚渡轮回酒店 → 晚间走一趟 Woolworths</div>
+      <div class="blk" data-page-node-id="day4PlanSum"><div class="blkh" data-page-node-id="day4PlanSumH"><span class="rng" data-page-node-id="day4PlanSumR">原计划想做的事（清单）</span><span class="kd" data-page-node-id="day4PlanSumK">弹性</span></div><div class="blkb" data-page-node-id="day4PlanSumB"><ul data-page-node-id="day4PlanSumU">
+        <li data-page-node-id="p4a">环形码头 F2 渡轮去塔龙加（坐甲板，去程右侧看歌剧院）</li>
+        <li data-page-node-id="p4b">塔龙加动物园：考拉 / 袋鼠区优先，Sky Safari 缆车上下山，长颈鹿观景台（歌剧院 + 大桥背景）</li>
+        <li data-page-node-id="p4c">园内午餐：Food Market 烤鱼 / 汉堡 A$15–25，不去 Me-Gal 景观餐厅</li>
+        <li data-page-node-id="p4d">下午渡轮回酒店休息、洗衣补觉</li>
+        <li data-page-node-id="p4e">晚餐自煮 / 便饭（酒店无炉灶，走便利店 + 微波炉路线）</li>
+      </ul></div></div>
+
+      <p class="story" data-page-node-id="day4S1">9/25 是塔龙加动物园日。上午从酒店出发，先坐电车再转轮渡到对岸的塔龙加，下船后换乘园区公交车一路盘上山，才到动物园门口。</p>
+      <p class="gallery-sub" data-page-node-id="day4GalSubFerry">📷 9/25 · 到达｜去程渡轮（环形码头 → 塔龙加）+ 动物园正门</p>
+      <div class="gallery" data-page-node-id="day4GalFerry">
+        <figure data-page-node-id="phD4Ferry"><img src="photos/rec/0925/01.jpg" alt="渡轮上远看 · 歌剧院与海港大桥横在同一片水面上，身后是 CBD 的高楼"><figcaption>渡轮上远看 · 歌剧院与海港大桥横在同一片水面上，身后是 CBD 的高楼</figcaption></figure>
+        <figure data-page-node-id="phD4Gate"><img src="photos/rec/0925/02.jpg" alt="塔龙加动物园正门 · 砂岩门楼与红瓦穹顶，门楣上刻着 TARONGA ZOOLOGICAL PARK"><figcaption>塔龙加动物园正门 · 砂岩门楼与红瓦穹顶，门楣上刻着 TARONGA ZOOLOGICAL PARK</figcaption></figure>
+      </div>
+
+      <p class="story" data-page-node-id="day4S2">进园后先左转去了澳洲动物区，各种袋鼠在草地上懒洋洋地待着，还有袋熊等等一众本土小动物，算是正式和澳洲原生动物打了个照面。</p>
+      <div class="note" data-page-node-id="day4RegionNote">🗺️ <b>关于塔龙加的分区（9/25）：</b>动物园按 8 条 trail 分区，这天的照片按我们实际走到的五个区归在一起 —— <b>Nura Diya Australia</b>（澳洲本土区：袋鼠地 buru nura · 考拉地 gulamany nura · 澳洲雨林鸟舍）｜<b>Backyard to Bush</b>（后院·儿童路线：袋熊 · 羊驼 · 公鸡 · 蜘蛛与竹节虫全在这一片）｜<b>Great Southern Oceans</b>（南大洋区：海豹表演 · 海狗池）｜<b>African Savannah</b>（非洲草原区：长颈鹿 · 狮子 · 猫鼬 · 斑马）｜<b>Rainforest Trail</b>（雨林路径：侏儒河马）。</div>
+
+      <p class="gallery-sub" data-page-node-id="day4GalSubRoos">📷 9/25 · Nura Diya Australia（澳洲本土区）· buru nura 袋鼠地</p>
+      <div class="gallery" data-page-node-id="day4GalRoos">
+        <figure data-page-node-id="phD4W1"><img src="photos/rec/0925/03.jpg" alt="小袋鼠（wallaby）· 靠着石墙纳凉，旁边立着一截木桩"><figcaption>小袋鼠（wallaby）· 靠着石墙纳凉，旁边立着一截木桩</figcaption></figure>
+        <figure data-page-node-id="phD4W2"><img src="photos/rec/0925/04.jpg" alt="袋鼠 · 草地上这只橘褐色的，前爪撑着地"><figcaption>袋鼠 · 草地上这只橘褐色的，前爪撑着地</figcaption></figure>
+        <figure data-page-node-id="phD4W3"><img src="photos/rec/0925/05.jpg" alt="袋鼠 · 沙地上躺平的两只，大白天补觉"><figcaption>袋鼠 · 沙地上躺平的两只，大白天补觉</figcaption></figure>
+        <figure data-page-node-id="phD4W4"><img src="photos/rec/0925/06.jpg" alt="袋鼠 · 三只挤在一处，还有一只趴着伸长了腿"><figcaption>袋鼠 · 三只挤在一处，还有一只趴着伸长了腿</figcaption></figure>
+      </div>
+
+      <p class="gallery-sub" data-page-node-id="day4GalSubKoala">📷 9/25 · Nura Diya Australia · gulamany nura 考拉地</p>
+      <div class="gallery" data-page-node-id="day4GalKoala">
+        <figure data-page-node-id="phD4Koala"><img src="photos/rec/0925/07.jpg" alt="考拉 · 抱在桉树杈上，环形步道边站满了看它的人"><figcaption>考拉 · 抱在桉树杈上，环形步道边站满了看它的人</figcaption></figure>
+        <figure data-page-node-id="phD4Mom"><img src="photos/rec/0925/08.jpg" alt="妈妈在拍考拉 · 举着手机对着树杈的方向"><figcaption>妈妈在拍考拉 · 举着手机对着树杈的方向</figcaption></figure>
+      </div>
+
+      <p class="gallery-sub" data-page-node-id="day4GalSubInsect">📷 9/25 · Backyard to Bush（后院·儿童路线）· 蜘蛛与昆虫</p>
+      <div class="gallery" data-page-node-id="day4GalInsect">
+        <figure data-page-node-id="phD4B1"><img src="photos/rec/0925/09.jpg" alt="一种蜘蛛 · 吊在展缸角落"><figcaption>一种蜘蛛 · 吊在展缸角落</figcaption></figure>
+        <figure data-page-node-id="phD4B2"><img src="photos/rec/0925/10.jpg" alt="竹节虫 · 趴在树枝上"><figcaption>竹节虫 · 趴在树枝上</figcaption></figure>
+        <figure data-page-node-id="phD4B3"><img src="photos/rec/0925/11.jpg" alt="第二种竹节虫 · 绿色的大个儿"><figcaption>第二种竹节虫 · 绿色的大个儿</figcaption></figure>
+        <figure data-page-node-id="phD4B4"><img src="photos/rec/0925/12.jpg" alt="一种拟态螳螂 · 牌子上写的是 Crowned Stick Insect"><figcaption>一种拟态螳螂 · 牌子上写的是 Crowned Stick Insect</figcaption></figure>
+        <figure data-page-node-id="phD4B5"><img src="photos/rec/0925/13.jpg" alt="又一种竹节虫 · 细得跟枝条分不清"><figcaption>又一种竹节虫 · 细得跟枝条分不清</figcaption></figure>
+        <figure data-page-node-id="phD4B6"><img src="photos/rec/0925/14.jpg" alt="竹节虫 · 贴在纱网上的一只"><figcaption>竹节虫 · 贴在纱网上的一只</figcaption></figure>
+        <figure data-page-node-id="phD4B7"><img src="photos/rec/0925/15.jpg" alt="竹节虫 · 橘褐色的这只"><figcaption>竹节虫 · 橘褐色的这只</figcaption></figure>
+        <figure data-page-node-id="phD4B8"><img src="photos/rec/0925/16.jpg" alt="隔着展柜玻璃和巨型竹节虫合影 · 笑到停不下来"><figcaption>隔着展柜玻璃和巨型竹节虫合影 · 笑到停不下来</figcaption></figure>
+        <figure data-page-node-id="phD4B9"><img src="photos/rec/0925/17.jpg" alt="同一只 Goliath Stick Insect 跟前 · 张嘴的一瞬"><figcaption>同一只 Goliath Stick Insect 跟前 · 张嘴的一瞬</figcaption></figure>
+        <figure data-page-node-id="phD4B10"><img src="photos/rec/0925/18.jpg" alt="Goliath Stick Insect（Eurycnema goliath）· 牌子写着澳洲有 150 多种竹节虫"><figcaption>Goliath Stick Insect（Eurycnema goliath）· 牌子写着澳洲有 150 多种竹节虫</figcaption></figure>
+      </div>
+
+      <p class="gallery-sub" data-page-node-id="day4GalSubFarm">📷 9/25 · Backyard to Bush · 农场动物（羊驼 · 公鸡）</p>
+      <div class="gallery" data-page-node-id="day4GalFarm">
+        <figure data-page-node-id="phD4Alpaca"><img src="photos/rec/0925/19.jpg" alt="这只羊驼好像于荣光"><figcaption>这只羊驼好像于荣光</figcaption></figure>
+        <figure data-page-node-id="phD4Hen"><img src="photos/rec/0925/20.jpg" alt="鸡舍边的公鸡 · 尾羽翘得老高"><figcaption>鸡舍边的公鸡 · 尾羽翘得老高</figcaption></figure>
+      </div>
+
+      <p class="story" data-page-node-id="day4S3">从澳洲动物区出来，正好撞上🦭海豹表演的排队，就跟着排了进去，看完一场海豹表演才往午饭那边走。</p>
+      <p class="gallery-sub" data-page-node-id="day4GalSubSealShow">📷 9/25 · Great Southern Oceans（南大洋区）· 海豹表演（开场前）</p>
+      <div class="gallery" data-page-node-id="day4GalSealShow">
+        <figure data-page-node-id="phD4SS1"><img src="photos/rec/0925/21.jpg" alt="海豹表演开场前 · 蓝色水池与写着 Seal for the Wild 的舞台，头顶扯着遮阳布"><figcaption>海豹表演开场前 · 蓝色水池与写着 Seal for the Wild 的舞台，头顶扯着遮阳布</figcaption></figure>
+        <figure data-page-node-id="phD4SS2"><img src="photos/rec/0925/22.jpg" alt="开场前在看台上 · 一家三口的自拍，爸爸比了个耶"><figcaption>开场前在看台上 · 一家三口的自拍，爸爸比了个耶</figcaption></figure>
+      </div>
+
+      <p class="story" data-page-node-id="day4S4">午饭在园内吃的：给小朋友的儿童牛肉汉堡 A$15、炸鱼薯条 A$25、炸鸡配米饭 A$18，三份加起来 A$58。</p>
+      <div class="note" data-page-node-id="day4LunchNote">🍴 园内午餐实付 <b>A$58</b> ＝ 儿童牛肉汉堡 A$15 ＋ 炸鱼薯条 A$25 ＋ 炸鸡配米饭 A$18（餐厅餐食含 GST 但税率 0，不进 TRS）。</div>
+      <p class="gallery-sub" data-page-node-id="day4GalSubLunch">📷 9/25 · 园内午餐（Taronga Food Market 一带）</p>
+      <div class="gallery" data-page-node-id="day4GalLunch">
+        <figure data-page-node-id="phD4Lunch"><img src="photos/rec/0925/23.jpg" alt="园内午餐 · 儿童牛肉汉堡、炸鱼薯条、炸鸡配米饭，三份摆了一桌"><figcaption>园内午餐 · 儿童牛肉汉堡、炸鱼薯条、炸鸡配米饭，三份摆了一桌</figcaption></figure>
+      </div>
+
+      <p class="story" data-page-node-id="day4S5">下午按顺序去了非洲动物区和鸟类区，看到了海狮和海狗，不过企鹅这天没出来，没能看成。</p>
+      <p class="gallery-sub" data-page-node-id="day4GalSubGiraffe">📷 9/25 · African Savannah（非洲草原区）· 长颈鹿</p>
+      <div class="gallery" data-page-node-id="day4GalGiraffe">
+        <figure data-page-node-id="phD4G1"><img src="photos/rec/0925/24.jpg" alt="长颈鹿 · 低头啃垂下来的枝叶，海港大桥正好架在它背后"><figcaption>长颈鹿 · 低头啃垂下来的枝叶，海港大桥正好架在它背后</figcaption></figure>
+        <figure data-page-node-id="phD4G2"><img src="photos/rec/0925/25.jpg" alt="长颈鹿 · 三只散开站着，远处是大桥和 CBD 的楼"><figcaption>长颈鹿 · 三只散开站着，远处是大桥和 CBD 的楼</figcaption></figure>
+        <figure data-page-node-id="phD4G3"><img src="photos/rec/0925/26.jpg" alt="长颈鹿 · 左边一只正走开，右边两只凑在草架旁，斑马夹在中间"><figcaption>长颈鹿 · 左边一只正走开，右边两只凑在草架旁，斑马夹在中间</figcaption></figure>
+        <figure data-page-node-id="phD4G4"><img src="photos/rec/0925/27.jpg" alt="妈妈和园里的青铜长颈鹿像 · 旁边立着身高尺，写着 WORLD'S TALLEST BABY"><figcaption>妈妈和园里的青铜长颈鹿像 · 旁边立着身高尺，写着 WORLD'S TALLEST BABY</figcaption></figure>
+      </div>
+
+      <p class="gallery-sub" data-page-node-id="day4GalSubCat">📷 9/25 · African Savannah · 狮子与猫鼬</p>
+      <div class="gallery" data-page-node-id="day4GalCat">
+        <figure data-page-node-id="phD4C1"><img src="photos/rec/0925/28.jpg" alt="母狮 · 立在红墙前的草地上"><figcaption>母狮 · 立在红墙前的草地上</figcaption></figure>
+        <figure data-page-node-id="phD4C2"><img src="photos/rec/0925/29.jpg" alt="雄狮 · 一转身只给看个背，深色的鬃毛垂下来"><figcaption>雄狮 · 一转身只给看个背，深色的鬃毛垂下来</figcaption></figure>
+        <figure data-page-node-id="phD4C3"><img src="photos/rec/0925/30.jpg" alt="雄狮 · 侧身走过草地，鬃毛从肩一直垂到胸口"><figcaption>雄狮 · 侧身走过草地，鬃毛从肩一直垂到胸口</figcaption></figure>
+        <figure data-page-node-id="phD4C4"><img src="photos/rec/0925/31.jpg" alt="猫鼬 · 天快黑时爬上石头，站得笔直放哨"><figcaption>猫鼬 · 天快黑时爬上石头，站得笔直放哨</figcaption></figure>
+      </div>
+
+      <p class="gallery-sub" data-page-node-id="day4GalSubHippo">📷 9/25 · Rainforest Trail（雨林路径）· 侏儒河马</p>
+      <div class="gallery" data-page-node-id="day4GalHippo">
+        <figure data-page-node-id="phD4C5"><img src="photos/rec/0925/32.jpg" alt="侏儒河马（Pygmy Hippo）· 只把眼睛和鼻孔露出水面"><figcaption>侏儒河马（Pygmy Hippo）· 只把眼睛和鼻孔露出水面</figcaption></figure>
+      </div>
+
+      <p class="gallery-sub" data-page-node-id="day4GalSubAviary">📷 9/25 · 雨林鸟舍（Rainforest Aviaries）· 凤头鹦鹉与花鸠</p>
+      <div class="gallery" data-page-node-id="day4GalAviary">
+        <figure data-page-node-id="phD4Bd1"><img src="photos/rec/0925/33.jpg" alt="白凤头鹦鹉 · 几只挤在同一根横枝上"><figcaption>白凤头鹦鹉 · 几只挤在同一根横枝上</figcaption></figure>
+        <figure data-page-node-id="phD4Bd2"><img src="photos/rec/0925/34.jpg" alt="花鸠（fruit-dove）· 紫红的头顶、橙色的后颈，站在竹枝上"><figcaption>花鸠（fruit-dove）· 紫红的头顶、橙色的后颈，站在竹枝上</figcaption></figure>
+      </div>
+
+      <p class="gallery-sub" data-page-node-id="day4GalSubFurSeal">📷 9/25 · Great Southern Oceans · 海狗池（fur seal）</p>
+      <div class="gallery" data-page-node-id="day4GalFurSeal">
+        <figure data-page-node-id="phD4FS1"><img src="photos/rec/0925/35.jpg" alt="海狗池 · 一只爬上石台，爸妈在桥上举着相机"><figcaption>海狗池 · 一只爬上石台，爸妈在桥上举着相机</figcaption></figure>
+        <figure data-page-node-id="phD4FS2"><img src="photos/rec/0925/36.jpg" alt="海狗 · 隔着纱网，妈妈举着手机拍它"><figcaption>海狗 · 隔着纱网，妈妈举着手机拍它</figcaption></figure>
+        <figure data-page-node-id="phD4FS3"><img src="photos/rec/0925/37.jpg" alt="海狗池 · 一只贴着水面，另一只趴在石头上"><figcaption>海狗池 · 一只贴着水面，另一只趴在石头上</figcaption></figure>
+      </div>
+
+      <p class="story" data-page-node-id="day4S6">出园前在园内的纪念品店停了一下，妈妈给买了一顶塔龙加的棒球帽（A$34.95，小票在下面）。再走到山下的码头坐渡轮回到环形码头 —— 船开出去时天正在暗，歌剧院和大桥一路在右舷跟着。晚饭后出门走了趟附近的 Woolworths Metro（Haymarket，79 Quay St），补了牛奶、鸡蛋、面包、燕麦和生菜，回程路上穿过唐人街。</p>
+      <p class="gallery-sub" data-page-node-id="day4GalSubLeave">📷 9/25 · 出园 · 走去码头</p>
+      <div class="gallery" data-page-node-id="day4GalLeave">
+        <figure data-page-node-id="phD4Lv1"><img src="photos/rec/0925/38.jpg" alt="出园路上远望 · 傍晚的歌剧院与 CBD 高楼"><figcaption>出园路上远望 · 傍晚的歌剧院与 CBD 高楼</figcaption></figure>
+        <figure data-page-node-id="phD4Lv2"><img src="photos/rec/0925/39.jpg" alt="出园时的熊玩偶 · 爸爸和纪念品店里这只大熊合了影"><figcaption>出园时的熊玩偶 · 爸爸和纪念品店里这只大熊合了影</figcaption></figure>
+        <figure data-page-node-id="phD4Lv3"><img src="photos/rec/0925/40.jpg" alt="去轮渡的路上 · 爸妈在路口等着，背后就是海港大桥"><figcaption>去轮渡的路上 · 爸妈在路口等着，背后就是海港大桥</figcaption></figure>
+      </div>
+
+      <p class="gallery-sub" data-page-node-id="day4GalSubBack">📷 9/25 · 傍晚渡轮回程（船上）</p>
+      <div class="gallery" data-page-node-id="day4GalBack">
+        <figure data-page-node-id="phD4Bk1"><img src="photos/rec/0925/41.jpg" alt="在船上回拍动物园码头 · 绿牌子上写着 Taronga Zoo"><figcaption>在船上回拍动物园码头 · 绿牌子上写着 Taronga Zoo</figcaption></figure>
+        <figure data-page-node-id="phD4Bk2"><img src="photos/rec/0925/42.jpg" alt="回程船上 · 暮色里的海港大桥"><figcaption>回程船上 · 暮色里的海港大桥</figcaption></figure>
+        <figure data-page-node-id="phD4Bk3"><img src="photos/rec/0925/43.jpg" alt="回程船上 · 一艘渡轮正靠上歌剧院"><figcaption>回程船上 · 一艘渡轮正靠上歌剧院</figcaption></figure>
+      </div>
+
+      <p class="gallery-sub" data-page-node-id="day4GalSubNight">📷 9/25 晚间 · 去 Woolworths 路过唐人街</p>
+      <div class="gallery" data-page-node-id="day4GalNight">
+        <figure data-page-node-id="phD4Nt1"><img src="photos/rec/0925/44.jpg" alt="去 Woolworths 路过 · 唐人街这栋 1921 年的白楼，楼上挂着国民党驻澳洲总支部的旧匾额，楼下开着参茸国药行"><figcaption>去 Woolworths 路过 · 唐人街这栋 1921 年的白楼，楼上挂着国民党驻澳洲总支部的旧匾额，楼下开着参茸国药行</figcaption></figure>
+      </div>
+
+      <p class="gallery-sub" data-page-node-id="day4SubReceipt">🧾 9/25 · 园内纪念品店 &amp; 晚间超市 · 小票</p>
+      <div class="receipt" data-page-node-id="day4Receipts">
+        <figure data-page-node-id="phRcpTaronga"><img src="photos/rec/0925/45.jpg" alt="Taronga 园内纪念品店小票"><figcaption>Taronga Conservation Society · Middle Zoo Shop · 9/25 15:49</figcaption></figure>
+        <figure data-page-node-id="phRcpWoolies925"><img src="photos/rec/0925/46.jpg" alt="Woolworths Metro Haymarket 小票"><figcaption>Woolworths Metro · Haymarket · 9/25 18:10</figcaption></figure>
+        <div class="rnote" data-page-node-id="day4ReceiptNote"><b>两张小票：一张留纪念，一张是食材。</b><br>
+        <b>· Taronga Conservation Society Australia</b>（园内 <b>Middle Zoo Shop</b> · Store 0350）· ABN 41 733 619 876 · Tax Invoice · 25/09/2026 <b>15:49</b> · 1 件合计 <b>A$34.95</b>：<b>KIDS WE TRAIN CAP</b>（货号 *401047）—— <b>这顶帽子是妈妈付的钱</b>；含 GST <b>A$3.18</b>。<br>
+        ⚠️ 这单<b>够不上退税门槛</b>：Taronga 商店的 ABN 与 UGG、Chemist Warehouse 等都不是同一家，A$34.95 既没过 A$300、也没法跟别家合并 —— 小票留作纪念就好。<br>
+        <b>· Woolworths Metro · Haymarket</b>（79 Quay St，店号 1716，电话 (02) 8736 7467）· ABN 88 000 014 675 · 25/09/2026 <b>18:10</b> · 共 6 件 <b>A$15.70</b>，刷卡（Mastercard 尾号 6165）：<br>
+        — 生菜（Lettuce Iceberg）A$2.00<br>
+        — Woolworths Quick Oats 燕麦片 750g A$1.70<br>
+        — Woolworths UHT 脱脂牛奶 1L ×2，A$1.75/盒 = A$3.50<br>
+        — Woolworths 全麦软面包 650g A$2.80<br>
+        — Woolworths 走地鸡蛋 XL 12 枚 700g A$5.70<br>
+        全是食材，GST 为零（小票上连 GST 一栏都没有），不进退税。底部那句「Receive + 5 Container Credits · Join Everyday Rewards today!」是自带购物袋返积分。</div>
+      </div>
+
+      <div class="note" data-page-node-id="day4PhotoNote">📷 9/25 的照片已按上面五个区分组。上午提到的<b>袋熊（wombat）</b>就在 Backyard to Bush 那一片（和羊驼、公鸡、蜘蛛同区），这天没拍到，如另有照片发来再补。</div>
+    </div>
+  </div>
+
+    <footer style="text-align:center; color:var(--mut); font-size:12.5px; padding:22px 16px 0;">Essie 的旅行手册 · 旅行记录 · 仅供家人查看</footer>
+  </div>
+
+</div>
+<script>
+var PASSWORD = "lxjh2026";
+function tryUnlock(){
+  var v = document.getElementById('pwd').value.trim();
+  if(v === PASSWORD){
+    sessionStorage.setItem('essie_unlocked','1');
+    document.getElementById('gate').classList.remove('show');
+    document.getElementById('content').classList.add('show');
+    document.getElementById('err').classList.remove('show');
+  } else {
+    document.getElementById('err').classList.add('show');
+    document.getElementById('pwd').value='';
+  }
+}
+document.getElementById('pwd').addEventListener('keydown', function(e){ if(e.key==='Enter') tryUnlock(); });
+if(sessionStorage.getItem('essie_unlocked')==='1'){ document.getElementById('content').classList.add('show'); }
+else { document.getElementById('gate').classList.add('show'); }
+</script>
+</body>
+</html>

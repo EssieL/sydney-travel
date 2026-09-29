@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0f3d3a">
+<title>9/26 市中心 + Bondi 海滩</title>
+<style>
+
+  :root{
+    --paper:#f7f6f1; --card:#ffffff; --ink:#1c1c1e; --ink2:#4a4a4e; --mut:#8a8a8e;
+    --line:#e3e1d8; --star:#c2410c; --site:#0f766e; --food:#b45309; --hotel:#1d4ed8;
+    --ok:#15803d; --warn:#a16207; --no:#b91c1c; --water:#cfe3ee;
+  }
+  *{ box-sizing:border-box; }
+  body{ margin:0; padding:0; background:var(--paper); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    font-size:16.5px; line-height:1.8; -webkit-text-size-adjust:100%; }
+  .wrap{ max-width:880px; margin:0 auto; padding:0 0 46px; background:transparent; }
+
+  /* 头部 */
+  .hero{ background:linear-gradient(150deg,#0f3d3a 0%,#14494a 55%,#1b3f63 100%); color:#fff;
+    padding:32px 26px 26px; border-radius:0 0 22px 22px; }
+  .hero .kick{ display:inline-block; font-size:13px; letter-spacing:2px; background:rgba(255,255,255,.16);
+    padding:5px 13px; border-radius:20px; margin-bottom:12px; }
+  .hero h1{ margin:0; font-size:31px; line-height:1.3; letter-spacing:.5px; }
+  .hero .sub{ margin:10px 0 0; font-size:15.5px; color:#dfe9e6; }
+  .hero .facts{ margin-top:18px; display:grid; grid-template-columns:repeat(4,1fr); gap:9px; }
+  .hero .facts div{ background:rgba(255,255,255,.11); border-radius:11px; padding:9px 10px; }
+  .hero .facts b{ display:block; font-size:12.5px; color:#b9d5cf; font-weight:600; }
+  .hero .facts span{ font-size:14.5px; }
+
+  /* 导航 */
+  nav{ display:flex; gap:7px; flex-wrap:wrap; padding:14px 16px 0; }
+  nav a{ font-size:13.5px; color:var(--site); text-decoration:none; background:#fff; border:1px solid var(--line);
+    padding:6px 12px; border-radius:18px; }
+
+  section{ background:var(--card); margin:14px 12px 0; padding:22px 20px 24px; border-radius:16px;
+    border:1px solid var(--line); }
+  h2{ margin:0 0 4px; font-size:22px; letter-spacing:.5px; }
+  h2 .no{ color:var(--mut); font-size:14px; font-weight:600; margin-right:8px; }
+  .cap{ color:var(--mut); font-size:13.5px; margin:0 0 16px; }
+  h3{ margin:24px 0 8px; font-size:17.5px; padding-left:11px; border-left:4px solid var(--site); }
+  h4{ margin:18px 0 6px; font-size:15.5px; color:var(--ink2); }
+
+  table{ width:100%; border-collapse:collapse; font-size:14.5px; margin-top:8px; }
+  th,td{ padding:8px 9px; border-bottom:1px solid var(--line); text-align:left; vertical-align:top; }
+  th{ background:#f2f1eb; font-size:13.5px; color:var(--ink2); font-weight:700; }
+  td.c, th.c{ text-align:center; }
+  tr:last-child td{ border-bottom:none; }
+
+  .tag{ display:inline-block; font-size:12px; padding:1px 7px; border-radius:5px; color:#fff; font-weight:600; }
+  .t-star{ background:var(--star); } .t-site{ background:var(--site); }
+  .t-food{ background:var(--food); } .t-hotel{ background:var(--hotel); }
+  .t-free{ background:var(--ok); }
+
+  .mapbox{ margin:14px 0 4px; }
+  .mapbox svg{ width:100%; height:auto; display:block; border-radius:14px; border:1px solid var(--line); background:#f7f6f2; }
+  .mapcap{ font-size:12.5px; color:var(--mut); margin:7px 0 0; }
+
+  .legend{ display:flex; gap:14px; flex-wrap:wrap; font-size:13px; color:var(--ink2); margin:10px 0 2px; }
+  .legend i{ display:inline-block; width:11px; height:11px; border-radius:50%; margin-right:5px; vertical-align:-1px; }
+
+  /* 每日 */
+  .day{ background:var(--card); margin:14px 12px 0; border-radius:16px; border:1px solid var(--line); overflow:hidden; }
+  .day .dh{ padding:16px 20px; color:#fff; }
+  .day .dh .d1{ font-size:13px; opacity:.85; letter-spacing:1px; }
+  .day .dh .d2{ font-size:20px; font-weight:700; margin-top:3px; }
+  .day .dh .d3{ font-size:13.5px; opacity:.92; margin-top:5px; line-height:1.6; }
+  .day .db{ padding:16px 20px 20px; }
+  .route{ background:#f4f3ec; border-radius:10px; padding:10px 13px; font-size:14px; color:var(--ink2); margin-bottom:12px; }
+  .route b{ color:var(--ink); }
+
+  .note{ font-size:14px; background:#fbf7ee; border-left:3px solid var(--ok); padding:9px 12px; border-radius:0 8px 8px 0; margin-top:10px; }
+  .note.w{ background:#fdf6ec; border-left-color:var(--warn); }
+  .note.r{ background:#fdf0ef; border-left-color:var(--no); }
+
+  .eat{ font-size:14.5px; }
+  .eat .row{ padding:8px 0; border-bottom:1px dashed var(--line); }
+  .eat .row:last-child{ border-bottom:none; }
+  .eat b{ font-size:15px; }
+  .ok{ color:var(--ok); font-weight:700; } .warn{ color:var(--warn); font-weight:700; } .no{ color:var(--no); font-weight:700; }
+
+  /* 时间块 · 逐日行程 */
+  .blk{ border:1px solid var(--line); border-radius:11px; margin:0 0 9px; overflow:hidden; background:#fff; }
+  .blk.f{ border-color:#e6c8a4; background:#fffaf4; }
+  .blkh{ display:flex; align-items:baseline; gap:8px; padding:7px 12px; background:#f2f1eb;
+    font-size:14px; font-weight:700; color:var(--ink2); }
+  .blk.f .blkh{ background:#fbeee0; color:#8a3410; }
+  .blkh .rng{ font-variant-numeric:tabular-nums; letter-spacing:.2px; }
+  .blkh .kd{ margin-left:auto; font-size:11.5px; font-weight:700; padding:1px 9px; border-radius:20px;
+    background:#e7e5dc; color:#6d6d72; white-space:nowrap; }
+  .blk.f .blkh .kd{ background:var(--star); color:#fff; }
+  .blkb{ padding:9px 13px 11px; font-size:14.5px; line-height:1.75; }
+  .blkb ul{ margin:0; padding-left:18px; }
+  .blkb li{ margin:2px 0; }
+  .blkb li.pin{ list-style:none; margin-left:-18px; }
+  .pin .tm{ display:inline-block; min-width:46px; color:var(--star); font-weight:800;
+    font-variant-numeric:tabular-nums; }
+  .blk .hard{ margin-top:6px; font-size:13px; color:var(--ink2); background:#f6f5ef;
+    border-radius:7px; padding:5px 9px; }
+  .blk.f .hard{ background:#fdf3e6; color:#7c4a12; }
+  .flexhd{ font-size:12.5px; color:var(--mut); margin:2px 0 3px; }
+
+  code{ background:#f2f1eb; padding:1px 5px; border-radius:4px; font-size:13.5px; }
+  footer{ text-align:center; color:var(--mut); font-size:12.5px; padding:22px 16px 0; }
+
+  /* 旅行记录：照片墙 + 调整说明 */
+  .gallery{ display:grid; grid-template-columns:repeat(auto-fill,minmax(155px,1fr)); gap:11px; margin-top:12px; }
+  .gallery figure{ margin:0; }
+  .gallery img{ width:100%; height:158px; object-fit:cover; border-radius:11px; border:1px solid var(--line);
+    display:block; background:#eee; }
+  .gallery.tall img{ height:252px; }
+  .gallery.sign{ grid-template-columns:repeat(3,1fr); }
+  .gallery.sign img{ height:auto; object-fit:contain; background:#f4f4f4; }
+  .gallery.art{ grid-template-columns:repeat(3,1fr); }
+  .gallery.art img{ height:300px; object-fit:contain; background:#f4f4f4; }
+  .gallery figcaption{ font-size:12.5px; color:var(--mut); margin-top:5px; text-align:center; line-height:1.5; }
+  .adjust{ margin:14px 12px 0; padding:14px 18px; border-radius:14px; background:#fdf6ec;
+    border:1px solid #e6c8a4; border-left:5px solid var(--warn); font-size:14.5px; color:#5a4a2a; line-height:1.75; }
+  .adjust b{ color:#8a3410; }
+  .gallery-sub{ font-size:13.5px; color:var(--mut); margin:14px 0 0; }
+  .story{ font-size:15px; color:var(--ink); line-height:1.95; margin:14px 0 0; }
+  .story + .story{ margin-top:9px; }
+  .receipt{ display:flex; gap:16px; align-items:flex-start; margin-top:14px; flex-wrap:wrap; }
+  .receipt figure{ margin:0; flex:0 0 200px; max-width:200px; }
+  .receipt img{ width:100%; height:auto; border-radius:11px; border:1px solid var(--line); display:block; background:#fff; }
+  .receipt figcaption{ font-size:12.5px; color:var(--mut); margin-top:5px; text-align:center; line-height:1.5; }
+  .receipt .rnote{ flex:1 1 250px; font-size:13.5px; color:var(--ink2); line-height:1.9; }
+  .receipt .rnote b{ color:var(--ink); }
+
+  @media (max-width:700px){
+    body{ font-size:16px; }
+    .hero{ padding:26px 16px 20px; border-radius:0 0 18px 18px; }
+    .hero h1{ font-size:25px; }
+    .hero .facts{ grid-template-columns:repeat(2,1fr); }
+    section, .day{ margin:12px 8px 0; padding:18px 14px 20px; border-radius:14px; }
+    .day .dh{ padding:14px 15px; } .day .db{ padding:14px 15px 18px; }
+    h2{ font-size:20px; } h3{ font-size:16.5px; }
+    table{ font-size:13.5px; } th,td{ padding:7px 6px; }
+    nav{ padding:12px 10px 0; }
+  }
+  .openfig{ margin:0 0 6px; }
+  .openfig img{ width:100%; height:auto; border-radius:15px; border:1px solid var(--line);
+    display:block; background:#fff; box-shadow:0 8px 24px rgba(20,50,45,.12); }
+  .openfig figcaption{ font-size:12.5px; color:var(--mut); margin-top:8px;
+    text-align:center; line-height:1.65; }
+  .openfig figcaption b{ color:var(--ink2); }
+  @media print{
+    body{ background:#fff; } section,.day{ break-inside:avoid; border-color:#ccc; }
+    nav{ display:none; }
+  }
+
+/* 记录页附加样式 */
+.rec-nav{position:sticky; top:0; z-index:30; display:flex; gap:8px; align-items:center;
+  background:rgba(247,246,241,.97); backdrop-filter:blur(8px); border-bottom:1px solid var(--line);
+  padding:10px 14px; flex-wrap:wrap;}
+.rec-nav a{font-size:13.5px; color:var(--site); text-decoration:none; background:#fff;
+  border:1px solid var(--line); padding:6px 12px; border-radius:18px; font-weight:600;}
+.rec-nav .crumb{color:var(--mut); font-size:13px;}
+.gate{display:none;} .gate.show{display:block;}
+.gate-inner{background:var(--card); border:1px solid var(--line); border-radius:18px;
+  padding:28px 22px; margin:18px 16px; box-shadow:0 2px 8px rgba(15,118,110,.06); text-align:center;}
+.gate-inner .lock{font-size:40px; margin-bottom:8px;}
+.gate-inner h2{margin:0 0 6px; font-size:18px; color:#0f3d3a;}
+.gate-inner p{margin:0 0 18px; font-size:13.5px; color:var(--mut);}
+.gate-inner input{width:100%; padding:12px 14px; border:1.5px solid var(--line); border-radius:12px;
+  font-size:16px; text-align:center; letter-spacing:3px; outline:none; color:var(--ink);}
+.gate-inner input:focus{border-color:var(--site);}
+.gate-inner button{margin-top:12px; width:100%; padding:12px; border:none; border-radius:12px;
+  background:var(--site); color:#fff; font-size:16px; font-weight:700; cursor:pointer; letter-spacing:1px;}
+.gate-err{display:none; color:#dc2626; font-size:13px; margin-top:10px;} .gate-err.show{display:block;}
+.content{display:none;} .content.show{display:block;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="gate" id="gate">
+    <div class="gate-inner">
+      <div class="lock">🔒</div>
+      <h2>输入密码查看</h2>
+      <p>这是家人私享的旅行记录</p>
+      <input type="password" id="pwd" placeholder="请输入密码" inputmode="text" autocomplete="off">
+      <button onclick="tryUnlock()">进入</button>
+      <div class="gate-err" id="err">密码不对，再试试</div>
+    </div>
+  </div>
+
+  <div class="content" id="content">
+    <div class="rec-nav">
+      <a href="index.html">‹ 首页</a>
+      <a href="records-sydney.html">悉尼记录</a>
+      <span class="crumb">DAY 5 · 周六</span>
+    </div>
+
+    <div class="hero" style="padding:26px 22px 20px;">
+      <div class="kick">DAY 5 · 周六</div>
+      <h1 style="font-size:26px;">市中心 + Bondi 海滩</h1>
+      <p class="sub">2026 澳洲旅行 · 悉尼实际行程记录</p>
+    </div>
+
+  <div class="day" data-page-node-id="7Bv9L5RGWqEYk2e1aqODiE">
+    <div class="dh" style="background:linear-gradient(135deg,#5b3fa8,#7c5bd6)" data-page-node-id="4Jnve1ErDoGUY8atRBFHM7">
+      <div class="d1" data-page-node-id="G4OKbTr2PaSMb3JrHyeTA5">DAY 5 · 周六</div>
+      <div class="d2" data-page-node-id="BKCrVoMAnwFirOpbh8CM6O">9/26 · 市中心地标 + 促销 CW 凑单 + ★ Bondi 海滩</div>
+      <div class="d3" data-page-node-id="FoBDmjSaGCqdvgqpivVcX0">圣玛丽赶上弥撒 · Bondi Junction 打折 CW · 海滩遇雨即撤</div>
+    </div>
+    <div class="db" data-page-node-id="LfYFxbvsG9s3ZZqWqUdRBW">
+      <div class="route" data-page-node-id="day5Route">实际路线：酒店步行 → 海德公园（一战纪念馆；顺路认 T8 Museum 站）→ 圣玛丽大教堂 → Bondi Junction（T8 转 T4；打折 CW 凑单 2:20–3:30）→ Lululemon + 商场 5 楼寿司 → 公交到 Bondi 海滩（遇雨即撤）→ 回 CW 买齐保健品 → 回酒店</div>
+      <div class="blk" data-page-node-id="day5PlanSum"><div class="blkh" data-page-node-id="day5PlanSumH"><span class="rng" data-page-node-id="day5PlanSumR">原计划想做的事（清单）</span><span class="kd" data-page-node-id="day5PlanSumK">弹性</span></div><div class="blkb" data-page-node-id="day5PlanSumB"><ul data-page-node-id="day5PlanSumU">
+        <li data-page-node-id="p5a">海德公园 + 圣玛丽大教堂（免费，内进需安静）</li>
+        <li data-page-node-id="p5b">QVB 午餐 + 第一批采买（发票收好，同一 ABN 累计 ≥A$300 退税）</li>
+        <li data-page-node-id="p5c">★ Bondi 海滩（333 路 / 日落约 17:45 / 海滩步道 + Icebergs 泳池外景）</li>
+        <li data-page-node-id="p5d">唐人街便饭（今晚便饭日）</li>
+        <li data-page-node-id="p5e">Lululemon 改到 Bondi Junction 顺路看（9/23 Birkenhead 没找到）</li>
+      </ul></div></div>
+      <p class="story" data-page-node-id="day5S1">9/26 是市中心地标 + Bondi 的一天。上午吃完早饭，步行去海德公园，顺路认了一下行程末尾要坐的 T8 火车 Museum 站——提前给下午返程踩个点。公园南端那座砂岩砌的一战纪念馆（Anzac Memorial）进去转了一圈，内堂石壁上刻着 SOMME、YPRES、AMIENS 一串战役地名。再从公园走到圣玛丽大教堂，正赶上里面在做弥撒，便安静地稍微参观了一下，趁弥撒间隙拍了几张照片。随后在公园里的希腊塑像喷泉（Archibald Fountain）前，把喷泉和教堂同框拍了下来；路边无花果树下还捡了一颗刚落下来的果。</p>
+      <p class="gallery-sub" data-page-node-id="day5GalSubMemorial">📷 9/26 · 海德公园 · 一战纪念馆（Anzac Memorial）</p>
+      <div class="gallery tall" data-page-node-id="day5GalMemorial">
+        <figure data-page-node-id="ph5_01"><img src="photos/rec/0926/01.jpg" alt="Anzac Memorial 内堂 · 石壁上刻着 FRANCE AND BELGIUM、SOMME、YPRES、AMIENS"><figcaption>Anzac Memorial 内堂 · 石壁上刻着 FRANCE AND BELGIUM、SOMME、YPRES、AMIENS</figcaption></figure>
+        <figure style="grid-column:span 2" data-page-node-id="ph5_02"><img src="photos/rec/0926/02.jpg" alt="海德公园 · 一战纪念馆与背后的悉尼塔"><figcaption>海德公园 · 一战纪念馆与背后的悉尼塔</figcaption></figure>
+      </div>
+      <p class="gallery-sub" data-page-node-id="day5GalSubStMaryOut">📷 9/26 · 圣玛丽大教堂 · 外观</p>
+      <div class="gallery tall" data-page-node-id="day5GalStMaryOut">
+        <figure data-page-node-id="ph5_03"><img src="photos/rec/0926/03.jpg" alt="圣玛丽大教堂 · 隔着行道树看双塔尖顶"><figcaption>圣玛丽大教堂 · 隔着行道树看双塔尖顶</figcaption></figure>
+        <figure data-page-node-id="ph5_04"><img src="photos/rec/0926/04.jpg" alt="圣玛丽大教堂 · 街角全景"><figcaption>圣玛丽大教堂 · 街角全景</figcaption></figure>
+      </div>
+      <figure class="openfig" data-page-node-id="day5VidStMary">
+        <video src="photos/rec/0926/32.mp4" controls playsinline preload="metadata" style="width:100%;border-radius:15px;border:1px solid var(--line);display:block;background:#111"></video>
+        <figcaption>圣玛丽大教堂 · 现场片段（点开可播放）</figcaption>
+      </figure>
+      <div class="note" data-page-node-id="day5MassNote">⛪ <b>圣玛丽大教堂正赶上弥撒</b>：内堂需保持安静，参观和拍照都放轻动作，趁弥撒间隙才拍了几张；想进内堂记得着装得体、不大声。</div>
+      <p class="gallery-sub" data-page-node-id="day5GalSubStMaryIn">📷 9/26 · 圣玛丽大教堂 · 内堂（正赶上弥撒）</p>
+      <div class="gallery tall" data-page-node-id="day5GalStMaryIn">
+        <figure data-page-node-id="ph5_05"><img src="photos/rec/0926/06.jpg" alt="内堂抬头 · 玫瑰窗与肋拱顶"><figcaption>内堂抬头 · 玫瑰窗与肋拱顶</figcaption></figure>
+        <figure style="grid-column:span 2" data-page-node-id="ph5_06"><img src="photos/rec/0926/07.jpg" alt="彩窗 · 五联窗上的圣徒像与名号"><figcaption>彩窗 · 五联窗上的圣徒像与名号</figcaption></figure>
+        <figure style="grid-column:span 2" data-page-node-id="ph5_07"><img src="photos/rec/0926/08.jpg" alt="回望西端 · 玫瑰窗与管风琴"><figcaption>回望西端 · 玫瑰窗与管风琴</figcaption></figure>
+        <figure data-page-node-id="ph5_08"><img src="photos/rec/0926/09.jpg" alt="妈妈在中殿"><figcaption>妈妈在中殿</figcaption></figure>
+        <figure data-page-node-id="ph5_09"><img src="photos/rec/0926/10.jpg" alt="妈妈在中殿 · 换了个角度"><figcaption>妈妈在中殿 · 换了个角度</figcaption></figure>
+        <figure data-page-node-id="ph5_10"><img src="photos/rec/0926/11.jpg" alt="我的自拍 · 身后是中殿长廊"><figcaption>我的自拍 · 身后是中殿长廊</figcaption></figure>
+        <figure data-page-node-id="ph5_11"><img src="photos/rec/0926/12.jpg" alt="侧廊 · 尖拱一重连一重"><figcaption>侧廊 · 尖拱一重连一重</figcaption></figure>
+      </div>
+      <p class="gallery-sub" data-page-node-id="day5GalSubFountain">📷 9/26 · 海德公园 · 阿奇博尔德喷泉</p>
+      <div class="gallery tall" data-page-node-id="day5GalFountain">
+        <figure data-page-node-id="ph5_12"><img src="photos/rec/0926/13.jpg" alt="阿奇博尔德喷泉前 · 爸妈凑在一起看手机"><figcaption>阿奇博尔德喷泉前 · 爸妈凑在一起看手机</figcaption></figure>
+        <figure style="grid-column:span 2" data-page-node-id="ph5_13"><img src="photos/rec/0926/14.jpg" alt="妈妈与圣玛丽大教堂 · 喷泉与双塔同框"><figcaption>妈妈与圣玛丽大教堂 · 喷泉与双塔同框</figcaption></figure>
+      </div>
+      <p class="gallery-sub" data-page-node-id="day5GalSubFig">📷 9/26 · 海德公园 · 无花果树下的落果</p>
+      <div class="gallery tall" data-page-node-id="day5GalFig">
+        <figure style="grid-column:span 2" data-page-node-id="ph5_14"><img src="photos/rec/0926/15.jpg" alt="海德公园无花果树下捡到的落果"><figcaption>海德公园无花果树下捡到的落果</figcaption></figure>
+      </div>
+      <p class="story" data-page-node-id="day5S2">午后，按计划乘 T8 转 T4 去 Bondi Junction。刚到还没找着 Lululemon，反而路过一家正在促销打折的 Chemist Warehouse，价格特别合适，于是在里头凑单花了好一阵——大约从 2:20 待到 3:30，顺带把货架上的价牌拍了下来。之后才进 Bondi Junction，在 Lululemon 试了几身、最后买下三件（两件夹克、一条长裤，小票 A$867.00），又去商场 5 楼吃了几个寿司，再坐公交去 Bondi 海滩。</p>
+      <p class="gallery-sub" data-page-node-id="day5GalSubCW">📷 9/26 · Chemist Warehouse · 保健品实拍价牌（FOOTY FINALS SALE，9/27 截止）</p>
+      <div class="gallery sign" data-page-node-id="day5GalCW">
+        <figure data-page-node-id="ph5_15"><img src="photos/rec/0926/16.jpg" alt="Swisse 复合维生素 · 50+ 90 粒 A$31.99 / 65+ 60 粒 A$24.74"><figcaption>Swisse 复合维生素 · 50+ 90 粒 A$31.99 / 65+ 60 粒 A$24.74</figcaption></figure>
+        <figure data-page-node-id="ph5_16"><img src="photos/rec/0926/17.jpg" alt="Blackmores Macu-Vision Plus 120 粒 · 半价 A$37.49（省 A$32.50）"><figcaption>Blackmores Macu-Vision Plus 120 粒 · 半价 A$37.49（省 A$32.50）</figcaption></figure>
+        <figure data-page-node-id="ph5_17"><img src="photos/rec/0926/18.jpg" alt="Swisse 无腥味野生鱼油 1000mg 500 粒 · A$34.99（加大装独家）"><figcaption>Swisse 无腥味野生鱼油 1000mg 500 粒 · A$34.99（加大装独家）</figcaption></figure>
+        <figure data-page-node-id="ph5_18"><img src="photos/rec/0926/19.jpg" alt="Swisse 镁钙 + D3 200 粒 · A$21.99（加大装独家）"><figcaption>Swisse 镁钙 + D3 200 粒 · A$21.99（加大装独家）</figcaption></figure>
+        <figure data-page-node-id="ph5_19"><img src="photos/rec/0926/20.jpg" alt="Healthy Care 木瓜膏玫瑰果麦卢卡润唇膏 10g · A$2.09"><figcaption>Healthy Care 木瓜膏玫瑰果麦卢卡润唇膏 10g · A$2.09</figcaption></figure>
+        <figure data-page-node-id="ph5_20"><img src="photos/rec/0926/21.jpg" alt="Healthy Care 蜂胶 · 1000mg 200 粒 A$9.59 / 2000mg 200 粒 A$14.39"><figcaption>Healthy Care 蜂胶 · 1000mg 200 粒 A$9.59 / 2000mg 200 粒 A$14.39</figcaption></figure>
+        <figure data-page-node-id="ph5_21"><img src="photos/rec/0926/22.jpg" alt="Healthy Care 辅酶 Q10 150mg 100 粒 · A$20.99"><figcaption>Healthy Care 辅酶 Q10 150mg 100 粒 · A$20.99</figcaption></figure>
+        <figure data-page-node-id="ph5_22"><img src="photos/rec/0926/23.jpg" alt="Ostelin 维生素 D3 1000IU 300 粒 · A$25.99（加大装独家）"><figcaption>Ostelin 维生素 D3 1000IU 300 粒 · A$25.99（加大装独家）</figcaption></figure>
+      </div>
+      <div class="note" data-page-node-id="day5CWNote">🛒 <b>Bondi Junction 这家 Chemist Warehouse 正在促销打折</b>，价格比平时合适，下午先凑了一单、晚上回来把保健品一并买齐。<b>TRS 提醒</b>：退税看的是<b>同一个 ABN</b>——这张小票含税 <b>A$317.35</b>，单张就过了 A$300 门槛、可以独立申报；<b>但 CW 是加盟制，不同门店的 ABN 常常不一样</b>（本店 ABN 96 657 410 129），<b>跨店的小票不能合并</b>，将来补货要认准同一家店、核对小票上的 ABN。这趟保健品小票务必收好<b>纸质原件</b>，离境在墨尔本 T2 一次性申报退 GST。</div>
+      <p class="gallery-sub" data-page-node-id="day5GalSubLulu">📷 9/26 · Bondi Junction · Lululemon 试衣间</p>
+      <div class="gallery tall" data-page-node-id="day5GalLulu">
+        <figure data-page-node-id="ph5_23"><img src="photos/rec/0926/24.jpg" alt="Lululemon 试衣间 · 白色外套 + 黑色阔腿裤"><figcaption>Lululemon 试衣间 · 白色外套 + 黑色阔腿裤</figcaption></figure>
+        <figure data-page-node-id="ph5_24"><img src="photos/rec/0926/25.jpg" alt="Lululemon 试衣间 · 藕粉背心 + 黑色紧身裤"><figcaption>Lululemon 试衣间 · 藕粉背心 + 黑色紧身裤</figcaption></figure>
+      </div>
+      <p class="story" data-page-node-id="day5S3">Bondi 的沙子很细很好，可惜天色不对，云压得很低，很快就要下雨，没怎么待就撤了。晚上回到那家 Chemist Warehouse，把保健品一次买齐——19:23 结账，25 件共 A$317.35，小票上印着「You have saved A$225.40」；再从中央火车站穿过大厅走回酒店。</p>
+      <p class="gallery-sub" data-page-node-id="day5GalSubBondi">📷 9/26 · Bondi 海滩 · 暮色与将至的雨</p>
+      <div class="gallery tall" data-page-node-id="day5GalBondi">
+        <figure style="grid-column:span 2" data-page-node-id="ph5_25"><img src="photos/rec/0926/26.jpg" alt="Bondi 海滩 · 暮色里的山坡与亮起的窗"><figcaption>Bondi 海滩 · 暮色里的山坡与亮起的窗</figcaption></figure>
+        <figure style="grid-column:span 2" data-page-node-id="ph5_26"><img src="photos/rec/0926/27.jpg" alt="Bondi 海滩 · 云压得很低，雨就要来"><figcaption>Bondi 海滩 · 云压得很低，雨就要来</figcaption></figure>
+      </div>
+      <div class="note" data-page-node-id="day5RainNote">🌧️ <b>Bondi 海滩遇雨即撤</b>：9 月悉尼海边天气变脸快，去海滩一定要看准晴窗；当天沙子虽好但没多待。</div>
+      <p class="gallery-sub" data-page-node-id="day5GalSubNight">📷 9/26 · 晚间 · 回 Chemist Warehouse 采购与回程</p>
+      <div class="gallery tall" data-page-node-id="day5GalNight">
+        <figure data-page-node-id="ph5_27"><img src="photos/rec/0926/28.jpg" alt="晚间回 Chemist Warehouse · 买到手的木瓜膏"><figcaption>晚间回 Chemist Warehouse · 买到手的木瓜膏</figcaption></figure>
+        <figure style="grid-column:span 2" data-page-node-id="ph5_28"><img src="photos/rec/0926/29.jpg" alt="中央火车站 · 回程穿过大厅"><figcaption>中央火车站 · 回程穿过大厅</figcaption></figure>
+      </div>
+
+      <p class="gallery-sub" data-page-node-id="day5GalSubReceipt">🧾 9/26 · Bondi Junction · 购物小票（lululemon &amp; Chemist Warehouse）</p>
+      <div class="receipt" data-page-node-id="day5Receipts">
+        <figure data-page-node-id="phRcpLulu926"><img src="photos/rec/0926/30.jpg" alt="lululemon Bondi Junction 购物小票"><figcaption>lululemon · Bondi Junction（500 Oxford St）· 9/26 16:49</figcaption></figure>
+        <figure data-page-node-id="phRcpCW926"><img src="photos/rec/0926/31.jpg" alt="Chemist Warehouse Bondi Junction 购物小票"><figcaption>Chemist Warehouse · Bondi Junction（133–135 Oxford St）· 9/26 19:23</figcaption></figure>
+        <div class="rnote" data-page-node-id="day5ReceiptNote">
+        <b>① lululemon · Bondi Junction</b>（500 Oxford Street, Level 4 Shop 4015 · 店号 50071 · 注册机 3）· Tax Invoice · ABN <b>45 110 186 233</b> · 26/09/2026 <b>16:49</b> · 3 件合计 <b>A$867.00</b>（含 GST <b>A$78.82</b>），Mastercard 尾号 6165：<br>
+        — Rain Rebel Jacket BLK 10（157715464）　A$349.00<br>
+        — Groove No Line High Rise Flared Pant GGRE（159394429）　A$169.00<br>
+        — Oversized Cinch Hem Reversible Jacket RUCO（159454690）　A$349.00<br>
+        📌 单张含税 A$867.00 ≥ A$300，且这张的 ABN 是 lululemon 自己的 → <b>这一单可独立申报 TRS，约退 A$78.82</b>。<br><br>
+        <b>② Chemist Warehouse · Bondi Junction</b>（133–135 Oxford Street · 收银 TILL04）· Tax Invoice · ABN <b>96 657 410 129</b> · Invoice Number 7809522060007870 · 26/09/2026 <b>19:23</b> · <b>25 件合计 A$317.35</b>（含 GST <b>A$28.85</b>；小票上印着「You have saved A$225.40」）：<br>
+        — Swisse 无腥鱼油 1500mg <b>400 粒</b> ×1　A$39.99（原价 $79.99）<br>
+        — Swisse 复合维生素 63+ 女性 90 粒 ×1　A$32.99<br>
+        — Swisse 复合维生素 65+ 男性 90 粒 ×1　A$32.99<br>
+        — Ostelin 维生素 D3 1000IU <b>300 粒</b>（加大装） ×1　A$25.99<br>
+        — Swisse 镁钙 + D3 <b>200 粒</b>（加大装） ×2　A$21.99 → A$43.98<br>
+        — Healthy Care 蜂胶 2000mg 200 粒 ×2　A$14.39 → A$28.78<br>
+        — Blackmores Macu-Vision Plus 120 粒 ×2　A$37.49 → A$74.98（👩 妈妈）<br>
+        — Healthy Care 绵羊油（含葡萄籽）100g ×4　A$3.29 → A$13.16（送人）<br>
+        — Healthy Care 木瓜膏玫瑰果润唇 10g ×6　A$12.54<br>
+        — Healthy Care 木瓜膏 30g ×5　A$11.95<br>
+        📌 含税 A$317.35 也过了 A$300 → <b>可退 A$28.85</b>。<br>
+        ⚠️ <b>CW 是加盟制，不同门店的 ABN 常不相同</b>（本店为 96 657 410 129），<b>跨门店的小票不能合并</b>凑 A$300；日后补货认准同一家店、核对小票上的 ABN。<br>
+        📌 小票上带 <b>*</b> 号的才是含 GST 的应税品；食物、药品（GST 为 0）不进退税。</div>
+      </div>
+    </div>
+  </div>
+
+    <footer style="text-align:center; color:var(--mut); font-size:12.5px; padding:22px 16px 0;">Essie 的旅行手册 · 旅行记录 · 仅供家人查看</footer>
+  </div>
+
+</div>
+<script>
+var PASSWORD = "lxjh2026";
+function tryUnlock(){
+  var v = document.getElementById('pwd').value.trim();
+  if(v === PASSWORD){
+    sessionStorage.setItem('essie_unlocked','1');
+    document.getElementById('gate').classList.remove('show');
+    document.getElementById('content').classList.add('show');
+    document.getElementById('err').classList.remove('show');
+  } else {
+    document.getElementById('err').classList.add('show');
+    document.getElementById('pwd').value='';
+  }
+}
+document.getElementById('pwd').addEventListener('keydown', function(e){ if(e.key==='Enter') tryUnlock(); });
+if(sessionStorage.getItem('essie_unlocked')==='1'){ document.getElementById('content').classList.add('show'); }
+else { document.getElementById('gate').classList.add('show'); }
+</script>
+</body>
+</html>

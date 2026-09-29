@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0f3d3a">
+<title>9/27 雨休整日 · 博物馆 + 达令港</title>
+<style>
+
+  :root{
+    --paper:#f7f6f1; --card:#ffffff; --ink:#1c1c1e; --ink2:#4a4a4e; --mut:#8a8a8e;
+    --line:#e3e1d8; --star:#c2410c; --site:#0f766e; --food:#b45309; --hotel:#1d4ed8;
+    --ok:#15803d; --warn:#a16207; --no:#b91c1c; --water:#cfe3ee;
+  }
+  *{ box-sizing:border-box; }
+  body{ margin:0; padding:0; background:var(--paper); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    font-size:16.5px; line-height:1.8; -webkit-text-size-adjust:100%; }
+  .wrap{ max-width:880px; margin:0 auto; padding:0 0 46px; background:transparent; }
+
+  /* 头部 */
+  .hero{ background:linear-gradient(150deg,#0f3d3a 0%,#14494a 55%,#1b3f63 100%); color:#fff;
+    padding:32px 26px 26px; border-radius:0 0 22px 22px; }
+  .hero .kick{ display:inline-block; font-size:13px; letter-spacing:2px; background:rgba(255,255,255,.16);
+    padding:5px 13px; border-radius:20px; margin-bottom:12px; }
+  .hero h1{ margin:0; font-size:31px; line-height:1.3; letter-spacing:.5px; }
+  .hero .sub{ margin:10px 0 0; font-size:15.5px; color:#dfe9e6; }
+  .hero .facts{ margin-top:18px; display:grid; grid-template-columns:repeat(4,1fr); gap:9px; }
+  .hero .facts div{ background:rgba(255,255,255,.11); border-radius:11px; padding:9px 10px; }
+  .hero .facts b{ display:block; font-size:12.5px; color:#b9d5cf; font-weight:600; }
+  .hero .facts span{ font-size:14.5px; }
+
+  /* 导航 */
+  nav{ display:flex; gap:7px; flex-wrap:wrap; padding:14px 16px 0; }
+  nav a{ font-size:13.5px; color:var(--site); text-decoration:none; background:#fff; border:1px solid var(--line);
+    padding:6px 12px; border-radius:18px; }
+
+  section{ background:var(--card); margin:14px 12px 0; padding:22px 20px 24px; border-radius:16px;
+    border:1px solid var(--line); }
+  h2{ margin:0 0 4px; font-size:22px; letter-spacing:.5px; }
+  h2 .no{ color:var(--mut); font-size:14px; font-weight:600; margin-right:8px; }
+  .cap{ color:var(--mut); font-size:13.5px; margin:0 0 16px; }
+  h3{ margin:24px 0 8px; font-size:17.5px; padding-left:11px; border-left:4px solid var(--site); }
+  h4{ margin:18px 0 6px; font-size:15.5px; color:var(--ink2); }
+
+  table{ width:100%; border-collapse:collapse; font-size:14.5px; margin-top:8px; }
+  th,td{ padding:8px 9px; border-bottom:1px solid var(--line); text-align:left; vertical-align:top; }
+  th{ background:#f2f1eb; font-size:13.5px; color:var(--ink2); font-weight:700; }
+  td.c, th.c{ text-align:center; }
+  tr:last-child td{ border-bottom:none; }
+
+  .tag{ display:inline-block; font-size:12px; padding:1px 7px; border-radius:5px; color:#fff; font-weight:600; }
+  .t-star{ background:var(--star); } .t-site{ background:var(--site); }
+  .t-food{ background:var(--food); } .t-hotel{ background:var(--hotel); }
+  .t-free{ background:var(--ok); }
+
+  .mapbox{ margin:14px 0 4px; }
+  .mapbox svg{ width:100%; height:auto; display:block; border-radius:14px; border:1px solid var(--line); background:#f7f6f2; }
+  .mapcap{ font-size:12.5px; color:var(--mut); margin:7px 0 0; }
+
+  .legend{ display:flex; gap:14px; flex-wrap:wrap; font-size:13px; color:var(--ink2); margin:10px 0 2px; }
+  .legend i{ display:inline-block; width:11px; height:11px; border-radius:50%; margin-right:5px; vertical-align:-1px; }
+
+  /* 每日 */
+  .day{ background:var(--card); margin:14px 12px 0; border-radius:16px; border:1px solid var(--line); overflow:hidden; }
+  .day .dh{ padding:16px 20px; color:#fff; }
+  .day .dh .d1{ font-size:13px; opacity:.85; letter-spacing:1px; }
+  .day .dh .d2{ font-size:20px; font-weight:700; margin-top:3px; }
+  .day .dh .d3{ font-size:13.5px; opacity:.92; margin-top:5px; line-height:1.6; }
+  .day .db{ padding:16px 20px 20px; }
+  .route{ background:#f4f3ec; border-radius:10px; padding:10px 13px; font-size:14px; color:var(--ink2); margin-bottom:12px; }
+  .route b{ color:var(--ink); }
+
+  .note{ font-size:14px; background:#fbf7ee; border-left:3px solid var(--ok); padding:9px 12px; border-radius:0 8px 8px 0; margin-top:10px; }
+  .note.w{ background:#fdf6ec; border-left-color:var(--warn); }
+  .note.r{ background:#fdf0ef; border-left-color:var(--no); }
+
+  .eat{ font-size:14.5px; }
+  .eat .row{ padding:8px 0; border-bottom:1px dashed var(--line); }
+  .eat .row:last-child{ border-bottom:none; }
+  .eat b{ font-size:15px; }
+  .ok{ color:var(--ok); font-weight:700; } .warn{ color:var(--warn); font-weight:700; } .no{ color:var(--no); font-weight:700; }
+
+  /* 时间块 · 逐日行程 */
+  .blk{ border:1px solid var(--line); border-radius:11px; margin:0 0 9px; overflow:hidden; background:#fff; }
+  .blk.f{ border-color:#e6c8a4; background:#fffaf4; }
+  .blkh{ display:flex; align-items:baseline; gap:8px; padding:7px 12px; background:#f2f1eb;
+    font-size:14px; font-weight:700; color:var(--ink2); }
+  .blk.f .blkh{ background:#fbeee0; color:#8a3410; }
+  .blkh .rng{ font-variant-numeric:tabular-nums; letter-spacing:.2px; }
+  .blkh .kd{ margin-left:auto; font-size:11.5px; font-weight:700; padding:1px 9px; border-radius:20px;
+    background:#e7e5dc; color:#6d6d72; white-space:nowrap; }
+  .blk.f .blkh .kd{ background:var(--star); color:#fff; }
+  .blkb{ padding:9px 13px 11px; font-size:14.5px; line-height:1.75; }
+  .blkb ul{ margin:0; padding-left:18px; }
+  .blkb li{ margin:2px 0; }
+  .blkb li.pin{ list-style:none; margin-left:-18px; }
+  .pin .tm{ display:inline-block; min-width:46px; color:var(--star); font-weight:800;
+    font-variant-numeric:tabular-nums; }
+  .blk .hard{ margin-top:6px; font-size:13px; color:var(--ink2); background:#f6f5ef;
+    border-radius:7px; padding:5px 9px; }
+  .blk.f .hard{ background:#fdf3e6; color:#7c4a12; }
+  .flexhd{ font-size:12.5px; color:var(--mut); margin:2px 0 3px; }
+
+  code{ background:#f2f1eb; padding:1px 5px; border-radius:4px; font-size:13.5px; }
+  footer{ text-align:center; color:var(--mut); font-size:12.5px; padding:22px 16px 0; }
+
+  /* 旅行记录：照片墙 + 调整说明 */
+  .gallery{ display:grid; grid-template-columns:repeat(auto-fill,minmax(155px,1fr)); gap:11px; margin-top:12px; }
+  .gallery figure{ margin:0; }
+  .gallery img{ width:100%; height:158px; object-fit:cover; border-radius:11px; border:1px solid var(--line);
+    display:block; background:#eee; }
+  .gallery.tall img{ height:252px; }
+  .gallery.sign{ grid-template-columns:repeat(3,1fr); }
+  .gallery.sign img{ height:auto; object-fit:contain; background:#f4f4f4; }
+  .gallery.art{ grid-template-columns:repeat(3,1fr); }
+  .gallery.art img{ height:300px; object-fit:contain; background:#f4f4f4; }
+  .gallery figcaption{ font-size:12.5px; color:var(--mut); margin-top:5px; text-align:center; line-height:1.5; }
+  .adjust{ margin:14px 12px 0; padding:14px 18px; border-radius:14px; background:#fdf6ec;
+    border:1px solid #e6c8a4; border-left:5px solid var(--warn); font-size:14.5px; color:#5a4a2a; line-height:1.75; }
+  .adjust b{ color:#8a3410; }
+  .gallery-sub{ font-size:13.5px; color:var(--mut); margin:14px 0 0; }
+  .story{ font-size:15px; color:var(--ink); line-height:1.95; margin:14px 0 0; }
+  .story + .story{ margin-top:9px; }
+  .receipt{ display:flex; gap:16px; align-items:flex-start; margin-top:14px; flex-wrap:wrap; }
+  .receipt figure{ margin:0; flex:0 0 200px; max-width:200px; }
+  .receipt img{ width:100%; height:auto; border-radius:11px; border:1px solid var(--line); display:block; background:#fff; }
+  .receipt figcaption{ font-size:12.5px; color:var(--mut); margin-top:5px; text-align:center; line-height:1.5; }
+  .receipt .rnote{ flex:1 1 250px; font-size:13.5px; color:var(--ink2); line-height:1.9; }
+  .receipt .rnote b{ color:var(--ink); }
+
+  @media (max-width:700px){
+    body{ font-size:16px; }
+    .hero{ padding:26px 16px 20px; border-radius:0 0 18px 18px; }
+    .hero h1{ font-size:25px; }
+    .hero .facts{ grid-template-columns:repeat(2,1fr); }
+    section, .day{ margin:12px 8px 0; padding:18px 14px 20px; border-radius:14px; }
+    .day .dh{ padding:14px 15px; } .day .db{ padding:14px 15px 18px; }
+    h2{ font-size:20px; } h3{ font-size:16.5px; }
+    table{ font-size:13.5px; } th,td{ padding:7px 6px; }
+    nav{ padding:12px 10px 0; }
+  }
+  .openfig{ margin:0 0 6px; }
+  .openfig img{ width:100%; height:auto; border-radius:15px; border:1px solid var(--line);
+    display:block; background:#fff; box-shadow:0 8px 24px rgba(20,50,45,.12); }
+  .openfig figcaption{ font-size:12.5px; color:var(--mut); margin-top:8px;
+    text-align:center; line-height:1.65; }
+  .openfig figcaption b{ color:var(--ink2); }
+  @media print{
+    body{ background:#fff; } section,.day{ break-inside:avoid; border-color:#ccc; }
+    nav{ display:none; }
+  }
+
+/* 记录页附加样式 */
+.rec-nav{position:sticky; top:0; z-index:30; display:flex; gap:8px; align-items:center;
+  background:rgba(247,246,241,.97); backdrop-filter:blur(8px); border-bottom:1px solid var(--line);
+  padding:10px 14px; flex-wrap:wrap;}
+.rec-nav a{font-size:13.5px; color:var(--site); text-decoration:none; background:#fff;
+  border:1px solid var(--line); padding:6px 12px; border-radius:18px; font-weight:600;}
+.rec-nav .crumb{color:var(--mut); font-size:13px;}
+.gate{display:none;} .gate.show{display:block;}
+.gate-inner{background:var(--card); border:1px solid var(--line); border-radius:18px;
+  padding:28px 22px; margin:18px 16px; box-shadow:0 2px 8px rgba(15,118,110,.06); text-align:center;}
+.gate-inner .lock{font-size:40px; margin-bottom:8px;}
+.gate-inner h2{margin:0 0 6px; font-size:18px; color:#0f3d3a;}
+.gate-inner p{margin:0 0 18px; font-size:13.5px; color:var(--mut);}
+.gate-inner input{width:100%; padding:12px 14px; border:1.5px solid var(--line); border-radius:12px;
+  font-size:16px; text-align:center; letter-spacing:3px; outline:none; color:var(--ink);}
+.gate-inner input:focus{border-color:var(--site);}
+.gate-inner button{margin-top:12px; width:100%; padding:12px; border:none; border-radius:12px;
+  background:var(--site); color:#fff; font-size:16px; font-weight:700; cursor:pointer; letter-spacing:1px;}
+.gate-err{display:none; color:#dc2626; font-size:13px; margin-top:10px;} .gate-err.show{display:block;}
+.content{display:none;} .content.show{display:block;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="gate" id="gate">
+    <div class="gate-inner">
+      <div class="lock">🔒</div>
+      <h2>输入密码查看</h2>
+      <p>这是家人私享的旅行记录</p>
+      <input type="password" id="pwd" placeholder="请输入密码" inputmode="text" autocomplete="off">
+      <button onclick="tryUnlock()">进入</button>
+      <div class="gate-err" id="err">密码不对，再试试</div>
+    </div>
+  </div>
+
+  <div class="content" id="content">
+    <div class="rec-nav">
+      <a href="index.html">‹ 首页</a>
+      <a href="records-sydney.html">悉尼记录</a>
+      <span class="crumb">DAY 6 · 周日</span>
+    </div>
+
+    <div class="hero" style="padding:26px 22px 20px;">
+      <div class="kick">DAY 6 · 周日</div>
+      <h1 style="font-size:26px;">雨休整日 · 博物馆 + 达令港</h1>
+      <p class="sub">2026 澳洲旅行 · 悉尼实际行程记录</p>
+    </div>
+
+    <div class="day" data-page-node-id="LPp8iWsL3p28YpoZPtf9xg">
+    <div class="dh" style="background:linear-gradient(135deg,#155e75,#0e7490)" data-page-node-id="xCTU5FH8BO0sxdD47SHVXr">
+      <div class="d1" data-page-node-id="qSgMtxhx4eCllZA3GpIAEU">DAY 6 · 周日</div>
+      <div class="d2" data-page-node-id="5ym8T6BzrnPXRcXBLtRgXJ">9/27 · 雨休整日：博物馆 + 达令港</div>
+      <div class="d3" data-page-node-id="MQcO88E2Srv1uKlikzcCG8">上午休整 · 下午室内博物馆 · 傍晚达令港（巧遇 Nike 夜间半马）</div>
+    </div>
+    <div class="db" data-page-node-id="hw5lGJBdAEMEoQSk5H3IvC">
+      <div class="blk" data-page-node-id="day6PlanSum"><div class="blkh" data-page-node-id="day6PlanSumH"><span class="rng" data-page-node-id="day6PlanSumR">原计划想做的事（清单）</span><span class="kd" data-page-node-id="day6PlanSumK">弹性</span></div><div class="blkb" data-page-node-id="day6PlanSumB"><ul data-page-node-id="day6PlanSumU">
+        <li data-page-node-id="d6pp1">09:30 环形码头 F1 渡轮 → 曼利（20 min，全程海景）</li>
+        <li data-page-node-id="d6pp2">10:00–12:00 曼利海滩 → 雪莉海滩步道（1.4 km 平路）</li>
+        <li data-page-node-id="d6pp3">12:00–13:30 The Boathouse Shelly Beach 午餐（鱼薯 / 虾卷）</li>
+        <li data-page-node-id="d6pp4">14:30–16:30 渡轮回 → 酒店午休；傍晚达令港看落日</li>
+        <li data-page-node-id="d6pp5">18:30 可选晚餐升级 The Boathouse Glebe（周日晚开，须订位）</li>
+      </ul></div></div>
+      <p class="story" data-page-node-id="day6Story">9/27 是个雨天，原定的曼利渡轮海景日直接取消了。上午就在酒店歇着，把前几天的疲累缓一缓。下午雨势小了些，出门去了澳大利亚博物馆（Australian Museum）逛了逛——室内正好避雨，也顺路看了悉尼的自然史与人文藏品，楼上正好在办自然摄影年展，看得比预想久。大约三点往回走，路过一家药妆店，又补了一些伴手礼，这趟要给家里带的小东西，差不多在这最后一家收尾了。回酒店歇了一阵，五点来钟再出门，步行去达令港。没想到正赶上 Nike 的夜间半程马拉松（After Dark Tour 悉尼站）封路，终点就设在达令港，沿路全是跑者与围观的人，倒像是附赠的一场街头热闹。顺着人流走了一圈，约七点回到酒店，这一天就这么松松地收了尾。</p>
+      <p class="gallery-sub" data-page-node-id="day6GalSubZone">🗺️ 9/27 · 澳大利亚博物馆 · 看展分区导览（按楼层）</p>
+      <div class="note" data-page-node-id="day6ZoneIdx"><b>本次看展共 7 个分区，按楼层分布如下（馆方官方楼层图）：</b><br>
+      🔻 <b>入口层 / 地面层 · Upper Ground（含 Hintze Hall 主厅、Crystal Hall、Garrigarrang 原住民海洋文化厅、Wild Planet、200 珍宝下半段）</b>：<br>
+      ① AGNPY 自然摄影师大奖特展 — Hintze Hall 主厅（免费临时展，2026/9/12–2027/2/14）<br>
+      ② Wild Planet 野生动物长廊（约 60 m，约 400 标本）<br>
+      ③ 200 件珍宝 — Westpac Long Gallery（横跨本层与 1 层）<br>
+      ④ 从馆内窗口望圣玛丽大教堂（中央大楼梯 / 各层观景窗，<b>非展厅</b>）<br>
+      🔻 <b>1 层 · Level 1（Minerals、200 珍宝上半段）</b>：<br>
+      ⑤ Minerals Gallery 矿物常设展（Albert Chapman 收藏，&gt;1,800 标本，2022/12/10 起）<br>
+      🔻 <b>2 层 · Level 2（Dinosaurs、Birds of Australia、Surviving Australia、Wansolmoana）</b>：<br>
+      ⑥ Wansolmoana 太平洋常设展（Pasifika，「一片咸海」）<br>
+      ⑦ Dinosaurs 恐龙常设展（Jobaria ＋ Afrovenator 入口装架）<br>
+      <br>🏛️ <b>全馆楼层</b>：B1 无障碍入口（William St）· LG 团体入口/会员厅 · G 主入口（Crystal Hall / Hintze Hall / Garrigarrang / Wild Planet / 200 Treasures）· 1 层（Minerals / 200 Treasures）· 2 层（Dinosaurs / Birds / Surviving Australia / Wansolmoana）· 4 层 Bistro Gadi（海景餐厅）。<br>
+      👀 <b>本次未拍到的馆内展区</b>：First Nations <b>Garrigarrang: Sea Country</b>（原住民与托雷斯海峡岛民的海洋文化）· <b>Birds of Australia</b>（在 Westpac Long Gallery 的 2 层段）· <b>Surviving Australia</b>（澳洲独有有袋类/危险动物）。</div>
+
+      <p class="story" data-page-node-id="day6S1">博物馆里正好赶上 <b>2026 澳大利亚地理自然摄影师大奖（Australian Geographic Nature Photographer of the Year，AGNPY）</b>特展——由南澳博物馆主办，9/12 起在澳大利亚博物馆免费展出，一直排到 2027 年 2 月。这一届从 17 个国家、501 位摄影师、2,129 件投稿里选出来，一张张看过去，最抓人的是几组动物题材：西澳摄影师 Lewis Burnett 拿下 Portfolio 大奖的《Our Island Ark》系列，把蜜袋鼩、短吻针鼹、袋食蚁兽这些澳洲特有小型哺乳动物拍得极近极细；青少年组更让人意外——10 岁英国小孩拍的镜面蛛、17 岁昆士兰少年拍的两只对峙的跳蛛、16 岁南澳女孩拍的一只鹈鹕喙尖挂着的「珍珠」；动物行为组里则是为一块滩涂大打出手的弹涂鱼与泥蟹。每件作品旁边都配一块说明牌，写明类别、作品名、物种拉丁名、拍摄地，以及相机与镜头参数，凑近看特别有意思——顺手把作品和展牌都拍了下来。</p>
+      <p class="gallery-sub" data-page-node-id="day6GalSubAGNPYImg">🖼️ 9/27 · 澳大利亚博物馆 · AGNPY 特展（Hintze Hall · 入口层）· 参展作品（按展厅顺序）</p>
+      <div class="gallery art" data-page-node-id="day6GalAGNPYImg">
+        <figure data-page-node-id="ph6_01"><img src="photos/rec/0927/01.jpg" alt="Morning Dew · 蜜袋鼩趴在橙红色棒状花穗上"><figcaption>① Morning Dew · 蜜袋鼩（Honey Possum）<br>Portfolio 大奖《Our Island Ark》· Lewis Burnett（西澳）</figcaption></figure>
+        <figure data-page-node-id="ph6_02"><img src="photos/rec/0927/02.jpg" alt="展墙上并挂两幅：上方短吻针鼹、下方三只袋食蚁兽"><figcaption>② Sticky Situation · 短吻针鼹（上）／Numbats · 袋食蚁兽（下）<br>同属《Our Island Ark》系列</figcaption></figure>
+        <figure data-page-node-id="ph6_03"><img src="photos/rec/0927/03.jpg" alt="雨中倒挂在枯枝上的灰头狐蝠，翅膀像雨衣"><figcaption>③ Wings as Raincoats · 灰头狐蝠<br>Animals in Nature · Doug Gimesy（维州）</figcaption></figure>
+        <figure data-page-node-id="ph6_04"><img src="photos/rec/0927/04.jpg" alt="黑暗中腹部闪着银黄斑点的镜面蛛正捕食一只蝇"><figcaption>④ Glitterball Trophy · 镜面蛛<br>Junior · Jamie Smart（英国威尔士，10 岁）</figcaption></figure>
+        <figure data-page-node-id="ph6_05"><img src="photos/rec/0927/05.jpg" alt="两只雄性跳蛛正面相对、举起前足对峙"><figcaption>⑤ Personal Space · 跳蛛<br>Junior · Oliver Lacey（昆士兰，17 岁）</figcaption></figure>
+        <figure data-page-node-id="ph6_06"><img src="photos/rec/0927/06.jpg" alt="澳洲鹈鹕喙尖挂着一颗水珠，逆光下的特写"><figcaption>⑥ Percival's Pearl · 澳洲鹈鹕<br>Junior · Maya Hughes（南澳，16 岁）</figcaption></figure>
+        <figure data-page-node-id="ph6_07"><img src="photos/rec/0927/07.jpg" alt="沙滩上几只南象海豹，小海豹卧在中间、两边母海豹张着嘴吼"><figcaption>⑦ Rock and a Hard Place · 南象海豹<br>Animal Behaviour · Rachelle Mackintosh（新州）</figcaption></figure>
+        <figure data-page-node-id="ph6_08"><img src="photos/rec/0927/08.jpg" alt="浅水泥滩上泥蟹钳住一只蓝斑弹涂鱼"><figcaption>⑧ Crab Attack · 蓝斑弹涂鱼与泥蟹<br>Animal Behaviour · Emma Parker（新州）</figcaption></figure>
+      </div>
+      <p class="gallery-sub" data-page-node-id="day6GalSubAGNPYSign">🏷️ 9/27 · AGNPY 特展 · 作品说明牌（类别 / 作品名 / 物种 / 作者 / 拍摄参数）</p>
+      <div class="gallery sign" data-page-node-id="day6GalAGNPYSign">
+        <figure data-page-node-id="ph6L_01"><img src="photos/rec/0927/09.jpg" alt="展牌：Portfolio 大奖 Our Island Ark / Lewis Burnett / Morning Dew - Honey Possum"><figcaption>展牌 · Portfolio 大奖《Our Island Ark》<br>Lewis Burnett（西澳）</figcaption></figure>
+        <figure data-page-node-id="ph6L_02"><img src="photos/rec/0927/10.jpg" alt="展牌：Sticky Situation / Short-beaked Echidna / Tachyglossus aculeatus / Lewis Burnett"><figcaption>展牌 · Sticky Situation<br>短吻针鼹（Tachyglossus aculeatus）</figcaption></figure>
+        <figure data-page-node-id="ph6L_03"><img src="photos/rec/0927/11.jpg" alt="展牌：Animals in Nature / Wings as Raincoats / Grey-headed Flying-fox / Doug Gimesy"><figcaption>展牌 · Wings as Raincoats<br>灰头狐蝠（Pteropus poliocephalus）</figcaption></figure>
+        <figure data-page-node-id="ph6L_04"><img src="photos/rec/0927/12.jpg" alt="展牌：Junior / Glitterball Trophy / Mirror Spider / Jamie Smart, Wales UK, age 10"><figcaption>展牌 · Junior / Glitterball Trophy<br>镜面蛛（Thwaitesia argentiopunctata）</figcaption></figure>
+        <figure data-page-node-id="ph6L_05"><img src="photos/rec/0927/13.jpg" alt="展牌：Junior / Personal Space / Jumping Spider / Oliver Lacey, Queensland, age 17"><figcaption>展牌 · Junior / Personal Space<br>跳蛛（Jacksonoides sp.）</figcaption></figure>
+        <figure data-page-node-id="ph6L_06"><img src="photos/rec/0927/14.jpg" alt="展牌：Junior / Percival's Pearl / Australian Pelican / Maya Hughes, South Australia, age 16"><figcaption>展牌 · Junior / Percival's Pearl<br>澳洲鹈鹕（Pelecanus conspicillatus）</figcaption></figure>
+        <figure data-page-node-id="ph6L_07"><img src="photos/rec/0927/15.jpg" alt="展牌：Animal Behaviour / Rock and a Hard Place / Southern Elephant Seal / Rachelle Mackintosh"><figcaption>展牌 · Rock and a Hard Place<br>南象海豹（Mirounga leonina）</figcaption></figure>
+        <figure data-page-node-id="ph6L_08"><img src="photos/rec/0927/16.jpg" alt="展牌：Animal Behaviour / Crab Attack / Blue Spotted Mudskipper + Mud Crab / Emma Parker"><figcaption>展牌 · Crab Attack<br>蓝斑弹涂鱼 + 泥蟹（Scylla sp.）</figcaption></figure>
+      </div>
+      <div class="note" data-page-node-id="day6AGNPYNote">🖼️ <b>AGNPY 特展（免费）</b>：2026 澳大利亚地理自然摄影师大奖展 · 澳大利亚博物馆（1 William St, Darlinghurst）· <b>2026/9/12–2027/2/14</b> · 免票，由南澳博物馆主办 · 展场＝<b>Hintze Hall（入口层主厅）</b>。<br>
+      📊 <b>本届规模</b>：2,129 件投稿 / 501 位摄影师 / 17 个国家。总冠军 <i>Ethereal Encounter</i>（Matt Deakin，西澳）—— 濒危绿锯鳐从绿海龟群中穿过；Portfolio 大奖 <i>Our Island Ark</i>（Lewis Burnett，西澳，六幅组照）；Junior 冠军 <i>Silent Grace</i>（Aaryan Dhakal，维州，17 岁）—— 澳洲鹈鹕肖像。<br>
+      🏷️ <b>展牌很值得读</b>：每件作品都标了类别、作品名、物种拉丁名、拍摄地原住民地名与相机/镜头参数（如 Sony A1 + 400mm f/2.8、Nikon Z9 + 105mm 微距），看作品顺带把摄影师的器材和机位一并看了。<br>
+      📷 <b>本页拍到的 8 组</b>：蜜袋鼩、短吻针鼹／袋食蚁兽、灰头狐蝠、镜面蛛、跳蛛、澳洲鹈鹕、南象海豹、弹涂鱼与泥蟹。</div>
+      <p class="story" data-page-node-id="day6S2">特展之外，博物馆的常设展厅也一并逛了。其中最大的一间是 <b>Wild Planet</b>——一条 60 米长的长廊，天花板是格纹藻井，两列科林斯式立柱之间摆着四百多件动物标本，从长颈鹿、斑马、豹这样的大块头，到蜜獾、豪猪、针鼹这些中小型兽，还有悬在半空的鹈鹕和一条完整的蛇骨架。整个展区按「生命之树」的思路排：每一件标本旁边都有一块牌子，写明它的保护等级（Least Concern / Vulnerable / Critically Endangered）和「演化独特性」高低——独特性越高，说明它在演化树上越是孤零零的一根枝，一旦没了就是彻底没了。也因此看得比预想的慢，一柜一柜挨着读过去，倒像上了一堂动物分类课。</p>
+      <p class="gallery-sub" data-page-node-id="day6GalSubMuseumImg">🦴 9/27 · 澳大利亚博物馆 · Wild Planet 展厅（地面层 / UG）· 标本</p>
+      <div class="gallery art" data-page-node-id="day6GalMuseumImg">
+        <figure data-page-node-id="ph6M_01"><img src="photos/rec/0927/17.jpg" alt="浅色展台上一条盘成 S 形的死亡蝮标本，旁边有编号 4 的圆牌"><figcaption>① 死亡蝮（Common Death Adder）<br><i>Acanthophis antarcticus</i> · 展牌编号 4</figcaption></figure>
+        <figure data-page-node-id="ph6M_02"><img src="photos/rec/0927/18.jpg" alt="玻璃柜中上方悬着盘绕的蛇骨架，中间一只黑身白颈、头顶有角状突起的角叫鸭，右下有鸟骨与考拉标本"><figcaption>② 综合陈列柜：蛇类骨架、角叫鸭、鸟骨与考拉</figcaption></figure>
+        <figure data-page-node-id="ph6M_03"><img src="photos/rec/0927/19.jpg" alt="左侧玻璃柜里一只斑袋鼬趴在枯枝上，右侧立着一只大型猛禽标本"><figcaption>③ 斑袋鼬（左）与大型猛禽标本（右）</figcaption></figure>
+        <figure data-page-node-id="ph6M_04"><img src="photos/rec/0927/20.jpg" alt="天花藻井下悬挂着两只展翅的鹈鹕标本"><figcaption>④ 悬空展翅的鹈鹕</figcaption></figure>
+        <figure data-page-node-id="ph6M_05"><img src="photos/rec/0927/21.jpg" alt="玻璃柜中一只豹标本口衔珍珠鸡，左侧露出斑马的腿"><figcaption>⑤ 豹与珍珠鸡（左侧为斑马腿）</figcaption></figure>
+        <figure data-page-node-id="ph6M_06"><img src="photos/rec/0927/22.jpg" alt="展厅全景：长颈鹿、斑马、豹标本与多具兽类骨骼同处一室"><figcaption>⑥ 展厅全景：长颈鹿 · 斑马 · 豹 · 骨骼陈列</figcaption></figure>
+        <figure data-page-node-id="ph6M_07"><img src="photos/rec/0927/23.jpg" alt="斑马标本前方摆着数具兽类骨骼"><figcaption>⑦ 斑马与兽类骨骼</figcaption></figure>
+        <figure data-page-node-id="ph6M_08"><img src="photos/rec/0927/24.jpg" alt="一只黑褐色背带白纹的蜜獾标本站在土色基座上"><figcaption>⑧ 蜜獾（Honey Badger）<br><i>Mellivora capensis</i> · 展牌编号 1</figcaption></figure>
+        <figure data-page-node-id="ph6M_09"><img src="photos/rec/0927/25.jpg" alt="一只长满黑褐与白色长刺的北非冠豪猪标本，旁边有编号 6 的圆牌"><figcaption>⑨ 北非冠豪猪（North African Crested Porcupine）<br><i>Hystrix cristata</i> · 展牌编号 6</figcaption></figure>
+        <figure data-page-node-id="ph6M_10"><img src="photos/rec/0927/26.jpg" alt="一只棕黑带刺的短吻针鼹标本伏在土色基座上，下方展牌编号 10"><figcaption>⑩ 短吻针鼹（Short-beaked Echidna）<br><i>Tachyglossus aculeatus</i> · 展牌编号 10</figcaption></figure>
+      </div>
+      <p class="gallery-sub" data-page-node-id="day6GalSubMuseumSign">🏷️ 9/27 · Wild Planet · 标本说明牌（保护等级 / 演化独特性 / 馆藏编号）</p>
+      <div class="gallery sign" data-page-node-id="day6GalMuseumSign">
+        <figure data-page-node-id="ph6MS_01"><img src="photos/rec/0927/27.jpg" alt="展牌：4 Common Death Adder / Acanthophis antarcticus / Least Concern / not assessed"><figcaption>展牌 4 · 死亡蝮<br>Least Concern · 演化独特性未评估</figcaption></figure>
+        <figure data-page-node-id="ph6MS_02"><img src="photos/rec/0927/28.jpg" alt="展牌：1 Honey Badger / Mellivora capensis / Least Concern / Medium / M.56134, registered 2024"><figcaption>展牌 1 · 蜜獾<br>Least Concern · 独特性 Medium · M.56134（2024）</figcaption></figure>
+        <figure data-page-node-id="ph6MS_03"><img src="photos/rec/0927/29.jpg" alt="展牌：6 North African Crested Porcupine / Hystrix cristata / Least Concern / Medium / M.38608, registered late 1800s"><figcaption>展牌 6 · 北非冠豪猪<br>Least Concern · 独特性 Medium · M.38608（19 世纪末）</figcaption></figure>
+        <figure data-page-node-id="ph6MS_04"><img src="photos/rec/0927/30.jpg" alt="展牌：10 Short-beaked Echidna and Skeleton / Tachyglossus aculeatus / PA.398, Clarence River, Tasmania, registered 1866；右侧 11 Western Long-beaked Echidna / Zaglossus bruijnii / Critically Endangered"><figcaption>展牌 10 · 短吻针鼹<br>PA.398（1866 登记，塔州 Clarence River）<br>右邻 11 西部长吻针鼹 · Critically Endangered</figcaption></figure>
+        <figure data-page-node-id="ph6MS_05"><img src="photos/rec/0927/31.jpg" alt="展牌：15 Andean Condor / Vultur gryphus / Vulnerable / High / PA.1746, Chile, registered 1878"><figcaption>展牌 15 · 安第斯神鹫<br>Vulnerable · 独特性 High · PA.1746（1878，智利）</figcaption></figure>
+      </div>
+      <div class="note" data-page-node-id="day6MuseumNote">🦴 <b>Wild Planet（常设展，免费）</b>：澳大利亚博物馆地面层 / 下层（Level UG / Upper Ground）的 60 米长廊，陈列馆藏约 400 件动物标本；坐标 1 William St, Darlinghurst，<b>每日 10:00–17:00</b>（圣诞节闭馆）。<br>
+      🌳 <b>看展线索</b>：整间展厅围绕「生命之树（Tree of Life）」编排，每块展牌都给三样东西——<b>保护等级</b>（Least Concern / Vulnerable / Critically Endangered）、<b>演化独特性</b>（Low / Medium / High，越独立于近亲越高）与<b>馆藏编号+登记年份</b>。展出的标本有些是 19 世纪就入藏的（如短吻针鼹 PA.398 登记于 1866 年、安第斯神鹫 PA.1746 登记于 1878 年）。<br>
+      🏷️ <b>本页拍到的 5 块展牌</b>：死亡蝮 4 · 蜜獾 1 · 北非冠豪猪 6 · 短吻针鼹 10（右邻 11 西部长吻针鼹）· 安第斯神鹫 15。<br>
+      📷 <b>标本题材</b>：死亡蝮、角叫鸭与蛇骨、斑袋鼬、鹈鹕、豹衔珍珠鸡、展厅全景（长颈鹿/斑马/豹）、斑马骨骼、蜜獾、冠豪猪、短吻针鼹，共 10 张。</div>
+      <p class="story" data-page-node-id="day6S3">从 Wild Planet 出来，又在长廊里看了一圈「200 件珍宝」（200 Treasures of the Australian Museum）。这间西太平洋长廊（Westpac Long Gallery）建于 1846–1855 年，是全澳第一间博物馆展厅，2017 年翻修后重新开放，一并做了这个常设展：100 件馆藏重器，配 100 位塑造过这个国家的人物故事，合起来正好 200 个条目。最出名的一件，是所谓「Bone Ranger」——马骨架上还端坐着一具人骨骑手。马是 1843 年生在霍克斯伯里河 Clifton 马场的种公马「Sir Hercules」：它自己一场没跑过，却育出 18 匹大赛冠军，其中就有 1866 年墨尔本杯的 The Barb；1865 年它死在巴瑟斯特附近，遗骨后来被掘出来，1870 年赠予博物馆，1873 年起就一直立在这间展厅里，骑手是 1983 年才配上去的。长廊入口摆着豪勋爵岛的生态景窗，1923 年开放，是澳洲现存最老的自然史景窗；挑空处则架着一具爱尔兰麋鹿（Megaloceros giganteus）的骨架，鹿角横展开来超过三米，骨头不是常见的白，而是深褐色——在爱尔兰的泥炭沼里埋得太久，被染了色。</p>
+      <p class="gallery-sub" data-page-node-id="day6GalSubTreasureImg">💎 9/27 · 澳大利亚博物馆 · 200 件珍宝（Westpac Long Gallery · UG & L1）· 本页拍到的 4 件</p>
+      <div class="gallery art" style="grid-template-columns:repeat(2,1fr)" data-page-node-id="day6GalTreasureImg">
+        <figure data-page-node-id="ph6T_01"><img src="photos/rec/0927/32.jpg" alt="赛马骨架端坐在柱间，背上坐着张开手臂的人骨骑手"><figcaption>① Skeleton of 'Sir Hercules' and a rider（1870）· 珍宝 #17<br>「Bone Ranger」：种公马 Sir Hercules 的骨架 ＋ 1983 年加上的骑手<br>馆藏 S.1325（1913 登记）</figcaption></figure>
+        <figure data-page-node-id="ph6T_02"><img src="photos/rec/0927/33.jpg" alt="大幅生态景窗：岩岸上成群海鸟与鸟巢，前景有解说牌，背景是海面与山峦的绘制布景"><figcaption>② 豪勋爵岛生态景窗（Lord Howe Island Diorama）<br>1923 年开放 · 仍在长廊入口原位 · 澳洲现存最老的自然史景窗</figcaption></figure>
+        <figure data-page-node-id="ph6T_03"><img src="photos/rec/0927/34.jpg" alt="挑空处架着一具带巨大掌状鹿角的鹿类骨架，两侧是长廊的立柱与铸铁栏杆"><figcaption>③ 爱尔兰麋鹿骨架（Megaloceros giganteus）<br>鹿角横展逾 3 米 · 1886 年登记 · 陈列于长廊挑空处</figcaption></figure>
+        <figure data-page-node-id="ph6T_04"><img src="photos/rec/0927/35.jpg" alt="展柜中一只深色背、白胸带斑点的猛禽立于木桩上，爪下压着一只红黄蓝相间的鹦鹉"><figcaption>④ 猛禽与鹦鹉标本（疑为游隼 Peregrine Falcon）<br>展柜内：立在木桩上，爪下为捕得的鹦鹉</figcaption></figure>
+      </div>
+      <p class="gallery-sub" data-page-node-id="day6GalSubTreasureSign">🏷️ 9/27 · 珍宝 #17 展牌（Bone Ranger 的完整来历）</p>
+      <div class="gallery sign" style="grid-template-columns:repeat(2,1fr)" data-page-node-id="day6GalTreasureSign">
+        <figure data-page-node-id="ph6TL_01"><img src="photos/rec/0927/36.jpg" alt="展牌：TREASURE 标签下写 17 Skeleton of 'Sir Hercules' and a rider, 1870，Australian Museum Collection S.1325, registered 1913"><figcaption>展牌 · 珍宝 #17《Skeleton of 'Sir Hercules' and a rider, 1870》<br>TREASURE 标签 · Mammalogy Collection S.1325, registered 1913<br>「Sir Hercules」1843 年生于 Hawkesbury River 的 Clifton Stud；1865 年卒于 Bathurst 附近，1870 年遗骨入馆</figcaption></figure>
+      </div>
+      <div class="note" data-page-node-id="day6TreasureNote">💎 <b>200 件珍宝（常设展，免费）</b>：西太平洋长廊（Westpac Long Gallery，1846–1855 年建，全澳第一间博物馆展厅，2017/10/13 起常设）· 位于西太平洋长廊（Westpac Long Gallery），<b>横跨地面层（UG）与 1 层（Level 1）</b>（Birds of Australia 在同一条长廊的 2 层段）。构成＝<b>100 件馆藏珍品 ＋ 100 位塑造澳洲的人物故事</b>，人物按 Spirited / Innovators / Revolutionaries / Resilient / Curious / Underdogs 六组编排。<br>
+      🏛️ <b>长廊本身也是展品</b>：新古典柱廊、挑空天窗与铸铁栏杆，上下两层贴着立柱嵌了 39 个定制玻璃柜（地面层 24 个 + 夹层 15 个），被策展人称作「19 世纪的展示剧场」。<br>
+      🔎 <b>同场必看（本页未拍到）</b>：<i>Eric</i> 蛋白石化上龙（约 1.2 亿年前；1987 年蛋白石矿工 Joe Vida 发现，胃里还留着鱼骨化石）· 2200 年前底比斯木乃伊（2004 年 CT 扫描才发现棺中为女性）· 库克船长的夏威夷羽毛披风 <i>‘Ahu‘ula</i> · 袋狼幼崽标本（1886 年起入藏）· Mawson 1911–14 南极雪橇与冰镐 · 澳洲第一张纸币 · Maitland Bar 金块（10.7 kg）· 75 张鸭嘴兽皮缝成的皮毯 · 天堂鹦鹉（Paradise Parrot）· 天狼星号上的<b>Krefft 馆长之椅</b>。<br>
+      📷 <b>本页拍到的 5 张</b>：Bone Ranger 骨架（#17）、其展牌、豪勋爵岛生态景窗、爱尔兰麋鹿骨架、猛禽与鹦鹉标本。</div>
+      <p class="story" data-page-node-id="day6S4">从珍宝展出来，一层（Level 1）还有一间专门的矿物展厅（Minerals Gallery）。这间是 2022 年 12 月起的常设展，把馆里攒了近两百年的家底一次摆开——澳博的矿物岩石收藏超过 8 万件，是全澳规模最大的，展厅里常年陈列 1800 多件。柜子一件件看过去，一件比一件耐看：黑亮的一丛晶簇、暗红的结晶壳、粉色的晶花长在黑色基岩上，旁边还立着一根块头不小的茶色水晶柱；隔壁那柜更特别，白色的方晶外面密密麻麻长了一层蓝绿色细晶，远看像撒了糖霜。最扎眼的还是金块那一柜，墙上写着「The largest ever: Welcome Stranger」——1869 年 2 月，康沃尔矿工在维多利亚州 Moliagul 一棵树的根部挖出世上最大的冲积金块，只埋在土下 3 厘米，净重 72 公斤，换了 9,381 英镑（约合今天 300 多万澳元），可惜最后被熔成金锭送进了英格兰银行；柜里并排摆着好几块大小不一的自然金，一旁还有讲 Broken Hill 采矿掌故的展板。</p>
+      <p class="gallery-sub" data-page-node-id="day6GalSubMineral">💎 9/27 · 澳大利亚博物馆 · Minerals Gallery 矿物常设展（1 层）</p>
+      <div class="gallery art" style="grid-template-columns:repeat(2,1fr)" data-page-node-id="day6GalMineralImg">
+        <figure data-page-node-id="ph6Mi_01"><img src="photos/rec/0927/37.jpg" alt="白色展台上的矿物标本：黑亮的针状晶簇、暗红结晶壳、粉色晶花长在黑色基岩上（编号 37）、绿色葡萄状晶块（编号 38），右侧一根茶色水晶柱"><figcaption>① 矿物展柜：黑亮晶簇 · 暗红结晶壳 · 粉色晶花（编号 37）<br>绿色葡萄状晶块（编号 38）· 右侧为茶色水晶柱</figcaption></figure>
+        <figure data-page-node-id="ph6Mi_02"><img src="photos/rec/0927/38.jpg" alt="一块大型标本：白色方晶表面密生蓝绿色细晶，呈糖霜状；右下编号 40，左上编号 41"><figcaption>② 白晶面上密生蓝绿色微晶（编号 40，左上为编号 41）<br>外观近似蓝绿锌铜矿类次生矿物常见的「糖霜」状</figcaption></figure>
+      </div>
+      <figure class="openfig" data-page-node-id="ph6Mi_03"><img src="photos/rec/0927/39.jpg" alt="玻璃展柜内的金块陈列：右侧一块大型自然金，下层数块小金块，柜后展板写着 The largest ever: Welcome Stranger 及 1869 年 Moliagul 发现经过"><figcaption>③ <b>金块展柜</b>：柜后展板「The largest ever: Welcome Stranger」——1869 年 2 月发现于维多利亚州 Moliagul，净重 72 公斤，后被熔铸送往英格兰银行；柜中为大小不一的自然金（澳博 Gold Collection 逾 980 件）</figcaption></figure>
+      <p class="story" data-page-node-id="day6S4b">同厅还有两组展示值得多站一会儿。一组是把一整座洞穴搬进了展柜：岩体被掏成一个洞，顶板垂着白色的钟乳石与石幔，洞底立着一根鼓鼓囊囊的石笋，侧壁是一片层叠的石帷，光从下方打上去，像真的站在洞里。澳博「把洞穴搬进馆」是有传统的——1936 年矿物学馆长 Thomas Hodge-Smith 想让城里人不必跑远路也能看见一座装饰华丽的石灰岩洞穴，专门从新州中西部的 Cliefden 洞穴采集洞穴沉积物，在馆里搭了一座复制洞穴；1984 年矿物展厅改造时换成一座简化的石灰岩洞，到 2010 年才拆掉。2022 年新矿物展重新把「洞穴矿物」列为主题，用的还是国际与澳洲标本，眼前这一组正是照洞穴原样做的立体景观。</p>
+      <p class="story" data-page-node-id="day6S4b2">另一组是「会发光的矿物」——一整柜荧光矿物摆在深色展台上，柜前展牌把 16 件标本按 1–16 号列得清清楚楚（名录见下方资料块）：从 Broken Hill 的含锰方解石、次生闪锌矿，到新西兰南岛 Glenorchy 的白钨矿、格陵兰 Kvanefjeld 的 tugtupite、越南安沛（Yên Bái）的刚玉（红宝石）、墨西哥 Ojuela 矿的水砷锌矿，产地横跨四大洲。这些标本要在紫外灯下才显出发光的本色，白天看就是一堆安安静静的石块；柜面的玻璃把站在柜前的人也照了进去。旁边一柜又是另一种好看：一件蓝色葡萄状标本铺在铁锈色的基岩上，挨着一件橙色的，同样鼓成一串串小圆球、表面亮得像上了釉，左下还有一件白色晶簇。两件都挂着黑色圆牌（55、56）；柜里的编号牌有白、黑两种，这一柜没找到对应名录，只好先按模样记下。</p>
+      <p class="gallery-sub" data-page-node-id="day6GalSubMineral2">🪨 9/27 · 澳大利亚博物馆 · Minerals Gallery · 洞穴矿物景观与荧光矿物柜</p>
+      <div class="gallery art" data-page-node-id="day6GalMineralImg2">
+        <figure data-page-node-id="ph6Mi_04"><img src="photos/rec/0927/40.jpg" alt="展柜内的洞穴矿物景观：赭褐色岩体被做成一个洞穴，顶板垂下白色钟乳石与石幔，洞底立着一根表面呈葡萄状的石笋，右侧侧壁为层叠的石灰华帷幔，玻璃面上有灯光与环境的反光"><figcaption>④ <b>洞穴矿物景观</b>：钟乳石与石幔自顶板垂下<br>洞底葡萄状石笋 · 侧壁层叠石帷 · 光自下方打上<br>2022 年新矿物展的「洞穴矿物」主题（立体景观＋洞穴沉积）</figcaption></figure>
+        <figure data-page-node-id="ph6Mi_05"><img src="photos/rec/0927/41.jpg" alt="荧光矿物展柜全貌：深色展台上分上下两层陈列 16 件浅色矿物标本，每件旁配小号白色圆牌；玻璃柜面上照出站在柜前的观众人影"><figcaption>⑤ <b>「Fluorescent minerals」荧光矿物柜</b>（全貌）<br>深色展台分两层陈列 16 件标本，各配小号白色圆牌<br>柜面玻璃照见柜前的观众——参观的痕迹也在照片里</figcaption></figure>
+        <figure data-page-node-id="ph6Mi_06"><img src="photos/rec/0927/42.jpg" alt="同一荧光矿物展柜的另一角度：上下两层标本清晰可见，柜前深色展牌印着 Fluorescent minerals 标题与 1 至 16 号名录，含 Calcite、Scheelite、Gypsum、Tugtupite、Sphalerite、Fluorite、Corundum (ruby)、Halite、Adamite、Hyalite 等"><figcaption>⑥ 同一展柜的另一角度：柜前展牌即 <b>1–16 号名录</b><br>Calcite / Scheelite / Gypsum / Tugtupite / Sphalerite / Fluorite /<br>Corundum (ruby) / Halite / Adamite / Hyalite …（已逐字抄录于下方资料块）</figcaption></figure>
+      </div>
+      <figure class="openfig" data-page-node-id="ph6Mi_07"><img src="photos/rec/0927/43.jpg" alt="两块葡萄状次生矿物并排特写：左侧一块天空蓝色的皮壳状标本长在褐色铁锈色基岩上，表面鼓起圆润的蓝色球状块体；右侧一块橙色标本同样呈密集的葡萄状球粒、表面呈玻璃光泽；下方可见黑色圆形编号牌 55 与 56，左下角另有一件白色晶簇"><figcaption>⑦ <b>葡萄状（botryoidal）次生矿物</b>：蓝色皮壳状标本长在铁锈色基岩上<br>右侧橙色标本同样密生球粒、表面呈玻璃光泽 · 黑色编号牌 55、56 · 左下为白色晶簇（编号名称未找到对应名录，只按外观记）</figcaption></figure>
+      <div class="note" data-page-node-id="day6MineralNote">🪨 <b>Minerals Gallery（矿物常设展，免费）</b>：馆内 <b>1 层（Level 1）</b> · 2022/12/10 起常设 · <b>每日 10:00–17:00</b>（周三延长至 21:00，12/25 闭馆）· 1 William St, Darlinghurst。<br>
+      📊 <b>规模</b>：澳博矿物岩石收藏 <b>逾 8 万件</b>（全澳最大）；展厅一次陈列 <b>1800 多件</b>标本，既有宝石级晶体，也有现代工业用的稀土矿物，另含陨石与地球上最古老的岩石。<br>
+      🏛️ <b>撑起这间展厅的几大收藏</b>：Albert Chapman Collection（820 件，1988 年由新州政府购入，其中约 1/4 出自 Broken Hill）· George Smith Collection · Warren Somerville Collection · Sir Douglas Mawson 南极标本（2000 件）· Gold Collection（980+ 件）· Opal Collection · Meteorite Collection（澳洲最老、最大之一）。<br>
+      🔎 <b>馆方点名的展品</b>：金和石英（澳）· 辉钼矿和石英 · 铬铅矿与褐铁矿 Crocoite（塔州 Dundas，2000 年被定为塔州州矿）· 茶晶＋钠长石＋托帕石（俄罗斯乌拉尔）· 银与螺状硫银矿（挪威）· 菱锰矿 Rhodochrosite · 绿柱石 Beryl（纳米比亚）· 蒙德拉比拉铁陨石（澳）· 萤石与方解石（美国）。<br>
+      📷 <b>本页拍到的 7 张</b>：矿物展柜（编号 37／38）· 蓝绿微晶标本（编号 40）· 金块展柜（Welcome Stranger 展板）· 洞穴矿物景观 · 荧光矿物柜（全貌 ＋ 名录）· 葡萄状次生矿物（编号 55／56）。<br>
+      🔬 <b>「荧光矿物」柜名录（Fluorescent minerals 1–16，照展牌逐字抄录）</b>：① Calcite (manganese-bearing) 含锰方解石 · 碳酸钙 · South Mine, Broken Hill, NSW, Australia｜② Scheelite 白钨矿 · 钨酸钙 · Glenorchy, South Island, New Zealand｜③ Gypsum 石膏 · 含水硫酸钙 · Europe｜④ Tugtupite · 钠铝铍氯硅酸盐 · Kvanefjeld, Ilimaussaq, Greenland｜⑤ Sphalerite (secondary) 次生闪锌矿 · 硫化锌 · North Broken Hill Mine, Broken Hill, NSW, Australia｜⑥ Willemite with calcite 硅锌矿＋方解石 · 硅酸锌 · Franklin, New Jersey, USA｜⑦ Fluorite 萤石 · 氟化钙 · Weardale, Durham, England｜⑧ Willemite with calcite, franklinite and zincite · 硅酸锌 · Franklin, New Jersey, USA｜⑨ Corundum (ruby) 刚玉（红宝石）· 氧化铝 · May Thuong, Yên Bái Province, Vietnam｜⑩ Calcite 方解石 · 碳酸钙 · Terlingua, Chisos Mountains, Texas, USA｜⑪ Scapolite (wernerite) 方柱石 · 钙钠铝氯碳酸盐硅酸盐 · Grenville, Québec, Canada｜⑫ Sodalite (hackmanite) 方钠石（紫方钠石）· 钠铝氯硅酸盐 · Bancroft, Ontario, Canada｜⑬ Halite 石盐 · 氯化钠 · Pernatty Lagoon, South Australia, Australia｜⑭ Adamite 水砷锌矿 · 砷酸锌氢氧化物 · Ojuela Mine, Mapimí, Durango, Mexico｜⑮ Willemite with calcite and franklinite · 硅酸锌 · Franklin, New Jersey, USA｜⑯ Hyalite 玉滴石 · 含水的二氧化硅 · Mitchell County, North Carolina, USA。<br>
+      🕳️ <b>洞穴矿物这一组</b>：展评（GAA《The Australian Gemmologist》介绍 2022 年新展厅）称洞穴矿物展示为「一处三维模型，配钟乳石、石笋等洞穴沉积」，用国际与澳洲标本。澳博与此另有旧缘——1936 年矿物学馆长 Thomas Hodge-Smith 为让市民「不必远行也能看一座装饰华丽的石灰岩洞穴」，用新州中部 Cliefden 洞穴采集的沉积物在馆内搭成复制洞穴；1984 年矿物展厅改造时改为简化版石灰岩洞，2010 年拆除。<br>
+      📌 <b>说明</b>：荧光柜 1–16 名录已逐字抄录；其余编号牌（白牌 37／38／40、黑牌 55／56）未找到对应名录，故只按外观描述。</div>
+      <p class="story" data-page-node-id="day6S5">从矿物展出来，又上到 2 层，把太平洋展厅 <b>Wansolmoana</b>（「一片咸海」）走了一遍。这间 2023 年 10 月 13 日开幕的常设展，是澳博两百年来头一回把太平洋藏品成规模摆出来——六万多件馆藏里选出三百来件，横跨 19 个太平洋国家、32 个社区，由澳博的太平洋裔团队与各地知识持有者一起编排。一进展厅最先撞见的就是一件当代作品：《Te Moana-nui-a-Kiwa/Middle Passage》（2023），作者是澳大利亚南太平洋岛民（Australian South Sea Islander，ASSI）艺术家 Jasmine Togo-Brisby。作品像一条长长的「船」，船身密密铺满黑色的乌鸦羽毛与支起的鸦翼，近看才知道羽片是一片片贴上去的，远看又像起伏的海面。墙面说明牌的标题就叫「Middle Passage」：black-birding 是太平洋劳工贸易那个带粉饰意味的旧称，字面意思是「俯冲而下掠走黑色身体」；ASSI 社群把这个刺人的词收回来自用，用黑乌鸦指代先辈被掠往澳洲的那段航程。牌子末一句记在了心里——这件作品是黑鸟贸易的实体呈现，同时承载死亡与重生，在时间与空间里既固定又来回往复。</p>
+      <p class="story" data-page-node-id="day6S5b">同厅另一处是太平洋各地的织物与编织：一整幅黑、棕两色织出的挂毯，两件垂着长长流苏的圆形编织器立在展台上，右后方还立着一卷树皮布，左下角是编织篮，旁边摆着一件木器；左侧一张黑白老照片里，一位穿白衣的女子端坐着。展柜的说明牌在照片里只拍到一半，读到的部分是讲编织与篮艺的传承，以及 koloa（汤加语「贵重之物」）如何在女性手中成为代代相传的家当。</p>
+      <p class="gallery-sub" data-page-node-id="day6GalSubPasifikaImg">🌊 9/27 · 澳大利亚博物馆 · Wansolmoana 太平洋展厅（2 层）</p>
+      <div class="gallery art" style="grid-template-columns:repeat(2,1fr)" data-page-node-id="day6GalPasifikaImg">
+        <figure data-page-node-id="ph6P_01"><img src="photos/rec/0927/44.jpg" alt="低矮的玻璃展柜内，一件船形装置：表面密铺黑色乌鸦羽毛，一端立着几片支起的鸦翼；柜前黄色说明牌标题为 Middle Passage，右侧蓝色物件牌写明作品名 Te Moana-nui-a-Kiwa/Middle Passage 与作者 Jasmine Togo-Brisby"><figcaption>① <b>《Te Moana-nui-a-Kiwa/Middle Passage》</b>（2023）<br>Jasmine Togo-Brisby（澳大利亚南太平洋岛民）· 乌鸦羽毛 / 鸦翼 / 综合材料 · 2023 年入藏<br>下方展牌标题「Middle Passage」—— 讲 black-birding 与 ASSI 先辈被掠往澳洲的航程</figcaption></figure>
+        <figure data-page-node-id="ph6P_02"><img src="photos/rec/0927/45.jpg" alt="青绿色展柜内的太平洋织物：大幅黑棕两色织出的挂毯、两件挂着长流苏的圆形编织器、右侧一卷树皮布、下方编织篮与木器，左下是一张黑白老照片，左侧墙板为绿色底、橙色标题的说明文字"><figcaption>② 太平洋织物与编织柜：双色织出的挂毯 · 两件长流苏圆形编织器<br>右后为一卷树皮布（bark cloth）· 左下编织篮与木器 · 左侧黑白老照片<br>说明牌讲编织与篮艺的传承，并提到 koloa（汤加语「贵重之物」）</figcaption></figure>
+      </div>
+      <div class="note" data-page-node-id="day6PasifikaNote">🌊 <b>Wansolmoana（太平洋常设展，免费）</b>：馆内 <b>2 层（Level 2，Vernon Wing）</b> · 2023/10/13 开幕 · <b>每日 10:00–17:00</b>（12/25 闭馆）· 1 William St, Darlinghurst。<br>
+      📊 <b>规模</b>：澳博太平洋藏品 <b>逾 6 万件</b>（世界最重要之一）；展厅一次陈列 <b>300 余件</b>，来自 <b>19 个太平洋国家、32 个社区</b>，按 Deep Connections / Identities / Disruptions 三个主题展开，直述殖民、劳工贸易（black-birding）与气候危机。<br>
+      🔎 <b>同场必看（本页未拍到）</b>：托克劳独木舟 <i>Tai Tokelau</i>（2014 年纽卡斯尔港气候抗议用过的那条）· 罗图马 <i>Suru</i> 头饰（一千年来首次复原）· 斐济 <i>Turaga</i> 酋长礼服 · 汤加传统绑扎工艺（澳洲博物馆首见）· Roen Hufford 的夏威夷树皮布 <i>kapa</i> · Angela Tiatia 录像装置 · ASSI 艺术家 Dylan Mooney 的作品。<br>
+      🧭 <b>与「原住民」展区的关系</b>：澳博的人文展区分两条线——第一民族的 <b>Garrigarrang: Sea Country</b>（原住民与托雷斯海峡岛民的海洋文化）与太平洋的 <b>Wansolmoana</b>；本页这两张拍自后者。Wansolmoana 里也含澳大利亚南太平洋岛民（ASSI）的艺术与历史，与第一民族的叙事相互照看。<br>
+      📷 <b>本页拍到的 2 张</b>：Togo-Brisby《Te Moana-nui-a-Kiwa/Middle Passage》· 织物／koloa 展柜。第二张的说明牌在照片里只拍到一半，柜内织物未逐件核对到名称，故只按外观描述。</div>
+      <p class="story" data-page-node-id="day6S6">临走前在馆内的窗口站了一会儿。澳博跟圣玛丽大教堂其实是「面对面」的一对——两边之间原本是一块被两条马路切开的三角形空地，1999 年才改成现在的库克与菲利普公园（Cook and Phillip Park）：水上运动中心整个埋进坡地里，屋顶铺成广场，靠博物馆这头是两方镜面水池，靠教堂那头抬起来做成前庭石阶。窗下那几片斜着的玻璃顶，就是地下泳池大厅的采光顶，好让 College Street 上的行人能看见底下有人游泳。隔着水池望过去，教堂的双塔几乎正对着窗口——阴雨天的天空白得发亮，塔身反倒成了一片沉沉的暗色，背后是 CBD 的玻璃楼群和一台塔吊。</p>
+      <p class="story" data-page-node-id="day6S6b">这座教堂是悉尼天主教的总堂。William Wardell 设计，1865 年原堂失火后动工，1868 年奠基，盖盖停停，中殿到 1928 年才算完成；而 Wardell 图纸上的双尖塔一直空着，直到 2000 年 6 月才用直升机把钢架吊上去、外覆 Gosford 砂岩，算是给一百多年前的图纸补上了最后两笔。全长 107 米、中殿宽 24.3 米、中央塔 46.3 米、双塔尖 74.6 米，是澳洲最长的一座教堂，1932 年由教皇庇护十一世授予「宗座圣殿」（minor basilica）称号。受街区所限，它的长轴罕见地是南北向，所以正立面朝着公园这一侧，西边隔着 College Street 与海德公园相望。</p>
+      <p class="gallery-sub" data-page-node-id="day6GalSubCathedralImg">⛪ 9/27 · 澳大利亚博物馆 · 从馆内窗口望圣玛丽大教堂（中央大楼梯 / 各层观景窗）</p>
+      <div class="gallery art" style="grid-template-columns:repeat(2,1fr)" data-page-node-id="day6GalCathedralImg">
+        <figure data-page-node-id="ph6C_01"><img style="height:auto" src="photos/rec/0927/46.jpg" alt="从澳大利亚博物馆馆内窗口俯瞰：近景是库克与菲利普公园的两方镜面水池与成排棕榈，中景是水上运动中心斜铺的玻璃采光顶与台阶式水景，远景为圣玛丽大教堂——蜜色砂岩的哥特复兴双塔立面、中央圆窗；教堂背后是悉尼 CBD 的高楼群与一台塔吊，天空为阴雨天的白亮"><figcaption>① <b>从馆内窗口望出去</b>：窗下是库克与菲利普公园的镜面水池与采光顶<br>正对圣玛丽大教堂双塔立面 · 远景为 CBD 玻璃楼群</figcaption></figure>
+        <figure data-page-node-id="ph6C_02"><img style="height:auto" src="photos/rec/0927/47.jpg" alt="长焦拍摄的圣玛丽大教堂立面细部：一座方形塔身，上有双联尖券窗与多层小尖饰，塔顶为深色尖塔；右侧是中央开间的圆形玫瑰窗，石作窗花呈放射网状，其下为尖拱门；画面左下方可见带山墙的砂岩附属建筑与树冠"><figcaption>② <b>长焦细部</b>：塔身双联尖券窗 · 层层小尖饰 · 深色尖塔顶<br>右侧中央开间的<b>圆形玫瑰窗</b>（石作窗花呈放射网状）与其下的尖拱门<br>左下带山墙的砂岩房为教堂附属建筑</figcaption></figure>
+      </div>
+      <div class="note" data-page-node-id="day6CathedralNote">⛪ <b>圣玛丽大教堂（St Mary's Cathedral）</b>：College St 近海德公园东侧 · <b>2 St Marys Rd</b> · 免费开放（开放时间以官网为准）· stmaryscathedral.org.au。全名 The Cathedral Church and Minor Basilica of the Immaculate Mother of God, Help of Christians —— 悉尼天主教总教区的主教座堂，主保为「进教之佑」圣母。<br>
+      📐 <b>量出来的规模</b>：长 <b>107 m</b>（澳洲最长的教堂）· 中殿宽 <b>24.3 m</b> · 中殿高 <b>30.3 m</b> · 中央塔 <b>46.3 m</b> · 双尖塔 <b>74.6 m</b>；材料＝悉尼砂岩（蜜色）＋ Oamaru 石、大理石、雪花石膏、Moruya 花岗岩；塔钟 <b>14 口</b>（1986 年祝圣）。长轴罕见地南北向，西侧隔 College Street 与海德公园相望。<br>
+      🕰️ <b>造了一百三十多年</b>：1821 第一座 St Mary's Chapel 奠基（Macquarie 总督）→ <b>1865 原堂焚毁</b> → William Wardell 受 Polding 大主教委托重新设计（1866 动工、1868 奠基）→ 1882 尚未完工即启用 → 1900 由 Moran 枢机正式开放 → 1912–1928 建成中殿 → 1932 教皇庇护十一世授予 minor basilica → <b>2000 年 6 月</b>直升机吊装双塔尖钢架、外覆 Gosford 砂岩，Wardell 原设计至此才算完成 → 2004 列入新州州遗产名录（2008 世界青年日教皇本笃十六世到访；2018 建堂 150 年）。<br>
+      🔎 <b>本页未入内（下次可看）</b>：常被称为世界最大的「英式哥特复兴」教堂建筑；主风琴（1997–99 由加拿大 Orgues Létourneau 造，46 音栓，就在玫瑰窗下）· 地穴 crypt（1961 年整修，水磨石马赛克地坪）· 彩窗与石作雕刻 · 正门外广场上澳洲首位圣人 Mary MacKillop 的铜像。<br>
+      🧭 <b>它跟澳博是一对</b>：两边原本隔着一块被两条街切开的三角形空地相对望；1996 年设计竞赛、1997 年 11 月开工、1999 年 8 月启用的 <b>Cook and Phillip Park</b>（BVN ＋ Spackman Mossop 景观，2001 年 RAIA NSW 城市设计奖）把水上运动中心埋进坡地、屋顶做成广场，才保住了「教堂 ↔ 博物馆」的视觉与步行连接——所以站在澳博窗口能一眼看全教堂。<br>
+      🪟 <b>观景提示</b>：澳博官方参观地图专门写了一句「中央大楼梯（central staircase）有看圣玛丽大教堂的绝佳视野」；改建工程（Project Discover）又把 Parkes Farmer 楼梯北移以取教堂景，4 层餐厅 No.1 William／Bistro Gadi 也俯瞰教堂与海德公园——都是馆内不花钱的风景。<br>
+      📷 <b>本页 2 张</b>：从馆内窗口拍的远景（含镜面水池与采光顶）＋长焦拍的双塔与玫瑰窗细部。当日阴雨逆光，天空白亮、塔身发暗；教堂内部当天未进。</div>
+      <p class="story" data-page-node-id="day6S7">恐龙厅在 2 层。进门先是一整面红墙——澳博把这段展线整个压在红光里，骨架的影子被投在墙上，比站着的人还高。正对门口是两具骨架：右边那具大得几乎占满视线，后肢粗壮、厚实的脚掌踩在黑色基座上，前肢却整条抬着离开了地面；脖子从肩上斜斜向上伸出去，头一直探到上一层展台的高度。左边另外悬着一具瘦长的骨架，四肢离地，红板前面像个正在腾空的影子。厅前玻璃展台的反光里，还照出一排大大的 DINOSAURS 白字——那是这间厅的名字，被玻璃倒过来又写了一遍。</p>
+      <p class="story" data-page-node-id="day6S7b">这两具骨架都是复制品，原化石出自同一片地层：尼日尔的撒哈拉沙漠。1997 年 Paul Sereno 带队在阿加德兹（Agadez）附近的 Tiourarén 组挖出一处「群死」地点，把一副骨架的 95% 完整取回，1999 年命名约巴龙（<i>Jobaria tiguidensis</i>）——种名取自发现地 Tiguidi 崖，属名来自图阿雷格人传说中的巨兽 Jobar，当地牧民看见露头的巨大骨头，以为那就是传说里的 Jobar。它全长约 18 米，脖子只有 12 节却格外灵活，牙齿是勺形的；脊椎与尾巴比北美的梁龙、迷惑龙原始得多，却出现在更晚的地层里，一度让演化时间表尴尬，后来那层沉积的年代又从早白垩改判为中侏罗世。它最出名的是站姿：Sereno 把它的肱骨与股骨周长比拿去和现代大象比，发现体重主要由后肢承担——大象能抬起身子，约巴龙应当更容易。眼前这具抬着前身、长颈上探的骨架，就是那篇研究结论的立体展示。左边那具瘦长的是阿巴卡非洲猎龙（<i>Afrovenator abakensis</i>），同在尼日尔、同一片地层出土，长臂长颌、牙齿带锯齿，体长约 8 米；约巴龙幼体的骨头上留有咬痕，可能就是它留下的——两具摆在一处，正是这片化石层里的掠食者与它的猎物。</p>
+      <p class="gallery-sub" data-page-node-id="day6GalSubDinoImg">🦖 9/27 · 澳大利亚博物馆 · Dinosaurs 恐龙展（2 层）· 展厅入口</p>
+      <figure class="openfig" style="max-width:520px;margin:0 auto 6px;" data-page-node-id="ph6D_01"><img src="photos/rec/0927/48.jpg" alt="澳大利亚博物馆恐龙展厅入口：右侧一具巨大的蜥脚类骨架以抬起前身的姿态站在黑色基座上，粗壮的后肢与厚实的脚掌接地，前肢离地，长颈向上弯、头部探向上一层展台，红色射灯把骨节照成橙红色；左前方另有一具瘦长的两足兽脚类骨架悬空吊挂、四肢离地；背景是红色墙面与墙上的深色骨架剪影，画面下方的玻璃展台上倒映着白色的 DINOSAURS 大字，右侧有观众衣袖入镜"><figcaption>① <b>恐龙厅入口</b>：右为 <b>约巴龙（Jobaria tiguidensis）</b>复制骨架 —— 抬起前身、长颈上探至上层展台<br>左为 <b>阿巴卡非洲猎龙（Afrovenator abakensis）</b>悬吊骨架 · 红光把骨节照成橙红<br>下方玻璃展台倒映着展厅名 <b>DINOSAURS</b> · 两具原化石同出于尼日尔撒哈拉</figcaption></figure>
+      <div class="note" data-page-node-id="day6DinoNote">🦖 <b>Dinosaurs（恐龙常设展，免费）</b>：馆内 <b>2 层（Level 2）</b> · <b>每日 10:00–17:00</b>（12/25 闭馆）· 1 William St, Darlinghurst。动线：可从 Birds of Australia 或 Wild Planet 的大理石楼梯进入，与 Surviving Australia 相通；馆方另有 Vision Australia 制作的音频描述导览可下载。<br>
+      🦴 <b>馆方点名的展品</b>：<b>Minmi paravertebra</b>（敏迷龙，南半球第一种甲龙类，全身硬脊鳞片，「自然界的坦克」）· <b>Jobaria tiguidensis ＋ Afrovenator abakensis</b>（非洲尼日尔，即本页拍到的两具）· <b>Muttaburrasaurus langdoni</b>（木他龙，1963 年由昆士兰 Muttaburra 的农民 Doug Langdon 发现，早白垩 112–100 Ma）· <b>Centrosaurus</b> 头骨 · <b>Bambiraptor</b>（与现生鸟类比对）· Stegosaurus · Giganotosaurus 骨架 cast · 以及世界第一具解剖学正确的 <b>T. rex 模型</b>（11 米长，为纪录片《T.rex Autopsy》制作，后由 National Geographic 捐赠）。官网开场那句问话很妙：「你分得清 Afrovenator 和 Jobaria 吗？Stegosaurus 和 Giganotosaurus 呢？」<br>
+      🎬 <b>这间厅是有动静的</b>：红墙＋骨影剪影＋多媒体投影是它的招牌视觉；互动项目可以闻中生代的气味（「A Changing World」植物区的气味按钮：三叠纪是针叶、白垩纪是开花植物）、学恐龙叫、以恐龙的视角看世界，还有讲白垩纪末大灭绝的「什么杀死了恐龙？」。官方参观指南专门提醒：厅内会**突然响起恐龙吼声与雷声**，打雷时伴一次闪光；另有展示死亡与恐龙解剖模型的部分，怕吓到可以绕过。<br>
+      📐 <b>约巴龙的两笔数据</b>：全长约 <b>18 米</b>（Sereno 复原的成体约 60 英尺，另有 21 米以上的估计）· 颈椎 <b>12 节</b>且灵活 · 勺形齿 · 95% 骨架完整，是最完整的蜥脚类之一 · 化石出自尼日尔 Agadez 附近的 <b>Tiourarén 组</b>，与非洲猎龙同层。<br>
+      📷 <b>本页 1 张</b>：展厅入口的两具骨架。照片里标本牌未拍清，两具的身份是据**入口展陈位置**（展厅名 DINOSAURS 招牌上方）与馆方展品清单、以及 2023 年一位澳博志愿者留下的完整展品记录（「Dinosaur Gallery Entrance: Replica skeleton of Jobaria tiguidensis and Afrovenator abakensis」）认定的。</div>
+      <p class="story" data-page-node-id="day6S8">五点多再出门时，雨已经停了，天还留着一层灰蓝的光。从酒店走到达令港没几步，先上的是皮尔蒙特桥（Pyrmont Bridge）——桥面两侧一整排旗杆，中跨那座带绿顶的小亭子，就是一百多年前的开关控制室；当年工人坐在这里合上电闸，把这一整段桥转开，让高桅的船开进湾里。桥左头泊着的那一片高桅杆，是澳大利亚国家海事博物馆的船位。站在桥心往东望，整个港口像被雨水擦过一遍：水面平得能倒出楼影，CBD 的玻璃楼群和一台塔吊都泡在灰白色的天光里，连倒影都是钝的。往里走，暮色一层层沉下来，W 酒店那栋弧形的楼先亮了灯——一格一格暖黄的窗子像被人从里面点起来；对岸 ICC 的彩色幕墙开始变色，水面下也浮着一层同样的光。浮码头沿着岸边一路排开，白色的游艇静静拴着，桥上桥下的车灯连成一线，整个港湾比白天更是另一种好看。</p>
+      <p class="story" data-page-node-id="day6S8b">当晚把路封起来的那场比赛，其实不是我们以为的「马拉松」，而是 Nike 的夜间半程赛——<b>After Dark Tour 悉尼站</b>，21.1 公里，周日下午五点起跑，从 Inner West 的 Rozelle Parklands 出发，绕过 White Bay、Jones Bay Wharf，正是从皮尔蒙特桥、沿着我们刚走过的那条水岸一路跑进达令港，<b>终点就设在 Tumbalong 公园</b>。参赛的七千五百人几乎全是女性跑者——这项赛事本来就是 Nike 为女性跑步文化办的：下午三点开始封路，赛道沿途布满临时灯光装置，配着音乐，让跑者从黄昏一路跑进夜里；六个饮水站、急救与移动医疗、还有配速员一路跟着；冲线之后在公园里接着办赛后派对，有美食村、酒吧、现场乐队和恢复区。说起来它在澳洲不是新事——Nike 的夜间女子跑就始于悉尼，当年叫「She Runs the Night」，后来一路办到世界各大城市，2015 年停了一阵，2025 年又以 After Dark Tour 的名字重启，全球五万人参加，光悉尼站就有七千名女性；今年是这项赛事选定的七个全球站之一。我们只是在路边站了一会儿，看跑者一队队从水边经过、拐进终点区，也算赶上了一场热闹。</p>
+      <p class="gallery-sub" data-page-node-id="day6GalSubNightImg">🌃 9/27 · 达令港 · 暮色与夜景（从皮尔蒙特桥走到水边）</p>
+      <div class="gallery tall" style="grid-template-columns:repeat(2,1fr)" data-page-node-id="day6GalNightImg">
+        <figure data-page-node-id="ph6N_01"><img src="photos/rec/0927/49.jpg" alt="阴雨傍晚的达令港水面：中景横跨皮尔蒙特桥，钢桁架桥身、桥面两侧整排旗杆与中跨带绿顶的小控制亭；桥左端泊着一片高桅帆船的桅杆；远景是悉尼 CBD 的玻璃楼群与一台塔吊，天空灰白，水面倒影清晰"><figcaption>① <b>皮尔蒙特桥（Pyrmont Bridge）</b>· 1902 年通车的电动旋转开启桥<br>中跨绿顶小亭＝当年的开关控制室（如今周末仍有开桥演示）<br>左端那片桅杆＝澳大利亚国家海事博物馆泊位 · 远景为 CBD 天际线</figcaption></figure>
+        <figure data-page-node-id="ph6N_02"><img src="photos/rec/0927/50.jpg" alt="暮色的达令港：左侧是弧形水滴状的 W Sydney 酒店（深色玻璃幕墙密布暖黄灯窗、楼身白色 W 标），中部双层高架桥横过画面，右侧远处是带彩色 LED 幕墙的会展中心；前景是成排浮码头与白色游艇，水面反光"><figcaption>② <b>暮色里的 W Sydney</b>（The Ribbon 弧形楼）<br>中部高架＝Western Distributor · 右侧彩色幕墙＝ICC Sydney<br>前景浮码头与游艇 · 水面浮着一层灯影</figcaption></figure>
+        <figure data-page-node-id="ph6N_03"><img src="photos/rec/0927/51.jpg" alt="W Sydney 弧形立面近景：深色玻璃幕墙亮着成片暖黄灯窗，前方是双层高架桥上往来的车灯；桥下水岸步道有商铺灯光与蓝色旗；水面浮码头入口立着 MARINA 标牌，泊着白色游艇，右侧远处是锯齿屋顶的会展中心"><figcaption>③ <b>W Sydney 弧形立面近景</b>· 高架桥上车流与桥下水岸<br>水边浮码头入口写着 MARINA · 泊着白色游艇<br>右侧锯齿屋顶＝ICC Sydney 会展中心</figcaption></figure>
+        <figure data-page-node-id="ph6N_04"><img src="photos/rec/0927/52.jpg" alt="入夜后的达令港竖版全景：左为亮着成片灯窗的 W Sydney 弧形轮廓，中部是高架桥与水岸灯光，右侧远处是彩色幕墙的会展中心与亮着 SOFITEL 字样的索菲特酒店；前景浮码头与水面倒影，天空深蓝"><figcaption>④ <b>入夜的港湾全景</b>· 左为 W Sydney，右侧为 ICC 与 Sofitel<br>浮码头与水面倒影 · 天空沉成深蓝</figcaption></figure>
+      </div>
+      <figure class="openfig" data-page-node-id="day6VidNight">
+        <video src="photos/rec/0927/55.mp4" controls playsinline preload="metadata" style="width:100%;border-radius:15px;border:1px solid var(--line);display:block;background:#111"></video>
+        <figcaption>达令港夜色 · 现场片段（点开可播放）</figcaption>
+      </figure>
+      <div class="note" data-page-node-id="day6NightNote">🌃 <b>达令港（Darling Harbour）</b>：悉尼市中心西侧的水岸区，围绕 Cockle Bay 与 Tumbalong 一带 · 轻轨 L1（Convention / Pyrmont Bay / The Star）、渡轮（King Street Wharf）、地铁与公交都到 · 全天开放、免费 · 两岸步道与浮码头相连。<br>
+      🏙️ <b>岸边这几栋楼</b>：<b>W Sydney</b>＝The Ribbon（Hassell 设计，30 层、<b>588 间房/套房</b>，<b>世界最大的 W 酒店</b>，2023/10/13 开业；业主 Greaton、Multiplex 建成，$10 亿项目，比原定 2020 年晚了三年多；铜色入口致敬悉尼地下废弃铁路隧道，大堂以澳洲园丁鸟与「larrikin」为母题；楼内还有 <b>IMAX Sydney</b>，银幕 29×24 m、世界第三大）· <b>ICC Sydney</b> 国际会展中心（2016 年启用，彩色幕墙）· <b>Sofitel Sydney Darling Harbour</b> · <b>澳大利亚国家海事博物馆</b>（桥上看到的那片桅杆）· 这三者与老桥同属 1988 年起、2010 年代又扩建一轮的达令港改造。<br>
+      🌉 <b>皮尔蒙特桥（Pyrmont Bridge）</b>：第一代 1857 年（木制旋转桥），现桥 1899 年动工、<b>1902/6/28 通车</b>，造价 £112,500；设计者 <b>Percy Allan</b>（一生设计 583 座桥），钢桁架旋转跨＋本地铁树皮（ironbark）木桁架引桥；电力来自附近的 Ultimo 发电厂（今 Powerhouse 博物馆），用改装的电车马达驱动旋转跨，开启速度 6.4 km/h，号称当时世界最快，1907 年伦敦土木工程师学会会议上被称许为现代工程奇迹，<b>1992 年列为国家工程地标</b>。1981 年因 Western Distributor 通车而对机动车关闭，一度差点被拆，经市议会与工程师学会力争得以保留，1988 年达令港重建后重开为步行桥（单轨曾架上桥面，2013 年拆）。旋转跨至今已开合 <b>60 万次以上</b>，如今周末与公共假期 11:00／12:00／13:00／14:00 仍有开桥演示——塔下那个绿顶小亭就是控制室。<br>
+      🏃 <b>当晚的赛事＝Nike After Dark Tour 悉尼站半程马拉松</b>：2026/9/27（周日）17:00 起跑、组委会赛程至 23:00 · <b>21.1 km</b> · 起点 Rozelle Parklands → White Bay → Jones Bay Wharf → <b>Pyrmont Bridge</b> → 达令港 <b>Tumbalong Park</b> 终点 · 预计 <b>7,500 人</b>，以女性跑者为主（16 岁以上、欢迎所有符合条件者）· 报名 A$120（含税，含 Expotique、计时号布、参赛 T 恤，须为 Nike 会员；4/8 开放、9/22 截止）· 沿线六个饮水站、急救与移动医疗、配速员；赛道含临时灯光装置与音乐，属低光夜跑（对闪光敏感者需自行评估）· 赛后 Tumbalong Park 有美食村、酒吧、现场音乐与恢复区 · 封路 15:00–21:45（Rozelle、Forest Lodge、Pyrmont 部分路段）。<br>
+      📖 <b>它其实不是「马拉松」</b>：半程 21.1 km，且原名史更早——Nike 在澳洲的夜间女子跑就始于悉尼（当年叫 <b>She Runs the Night</b>），后来办到全球各大城市、2015 年停办，2025 年以 <b>After Dark Tour</b> 重启，全球约 5 万人参加（悉尼站 7,000 名女性）；2026 年是它选定的七个全球站之一（另有洛杉矶、墨西哥城半马，上海、伦敦、马尼拉、孟买 10 km）。<br>
+      📷 <b>本页 4 图 1 视频</b>：从皮尔蒙特桥一路拍到水边的暮色与夜景（含 W 酒店、ICC、浮码头）。赛事只是沿路旁观，未报名、未进任何收费项目。</div>
+      <div class="note" data-page-node-id="day6Note">🌧️ <b>天气改线：</b>9/27 预报雨 95%，原定曼利渡轮（海景日）取消，整日改为「上午休整 + 下午室内博物馆 + 傍晚达令港」的轻松节奏。达令港因已逛过塔龙加、对水族馆无感，仅作傍晚散步看夜景，不进馆、不安排馆内晚餐。<br>
+      🏃 <b>巧遇夜跑赛事：</b>约 17:00–19:00 步行达令港时遇封路赛事，沿街都是跑者与观众，未进任何收费项目；赛事真身与沿岸楼群见下方「达令港夜色」段。<br>
+      🛍️ <b>药妆店伴手礼：</b>回程途经补的最后一批小件（CC 防晒霜、羊奶皂），无小票图，明细见下方 receipt 块与「花销总账 · §2.1 行11/12」。</div>
+      <div class="receipt" data-page-node-id="day6Receipts">
+        <figure data-page-node-id="phRcpColes927"><img src="photos/rec/0927/54.jpg" alt="Coles World Square 9/27 小票"><figcaption>Coles · World Square 店 · 27/09/2026 16:14</figcaption></figure>
+        <div class="rnote" data-page-node-id="day6ReceiptNote">
+        <b>① Coles · World Square</b>（710 George St）· 27/09/2026 <b>16:14</b> · 6 件合计 <b>A$24.65</b>；GST 为 $0（食材，不进退税）。<br><br>
+        <b>② 药妆店伴手礼（回程途经，无小票图）</b>：<br>
+        — CC 面部防晒霜　¥16.99<br>
+        — 羊奶皂 ×5（1.5A/块）　A$7.50<br>
+        📌 这两笔为 9/27 当日补的伴手礼，无小票图；金额明细见「花销总账 · §2.1 行11/12」。
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <footer style="text-align:center; color:var(--mut); font-size:12.5px; padding:22px 16px 0;">Essie 的旅行手册 · 旅行记录 · 仅供家人查看</footer>
+  </div>
+
+</div>
+<script>
+var PASSWORD = "lxjh2026";
+function tryUnlock(){
+  var v = document.getElementById('pwd').value.trim();
+  if(v === PASSWORD){
+    sessionStorage.setItem('essie_unlocked','1');
+    document.getElementById('gate').classList.remove('show');
+    document.getElementById('content').classList.add('show');
+    document.getElementById('err').classList.remove('show');
+  } else {
+    document.getElementById('err').classList.add('show');
+    document.getElementById('pwd').value='';
+  }
+}
+document.getElementById('pwd').addEventListener('keydown', function(e){ if(e.key==='Enter') tryUnlock(); });
+if(sessionStorage.getItem('essie_unlocked')==='1'){ document.getElementById('content').classList.add('show'); }
+else { document.getElementById('gate').classList.add('show'); }
+</script>
+</body>
+</html>

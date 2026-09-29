@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0f3d3a">
+<title>9/24 歌剧院 + 植物园 + 岩石区</title>
+<style>
+
+  :root{
+    --paper:#f7f6f1; --card:#ffffff; --ink:#1c1c1e; --ink2:#4a4a4e; --mut:#8a8a8e;
+    --line:#e3e1d8; --star:#c2410c; --site:#0f766e; --food:#b45309; --hotel:#1d4ed8;
+    --ok:#15803d; --warn:#a16207; --no:#b91c1c; --water:#cfe3ee;
+  }
+  *{ box-sizing:border-box; }
+  body{ margin:0; padding:0; background:var(--paper); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    font-size:16.5px; line-height:1.8; -webkit-text-size-adjust:100%; }
+  .wrap{ max-width:880px; margin:0 auto; padding:0 0 46px; background:transparent; }
+
+  /* 头部 */
+  .hero{ background:linear-gradient(150deg,#0f3d3a 0%,#14494a 55%,#1b3f63 100%); color:#fff;
+    padding:32px 26px 26px; border-radius:0 0 22px 22px; }
+  .hero .kick{ display:inline-block; font-size:13px; letter-spacing:2px; background:rgba(255,255,255,.16);
+    padding:5px 13px; border-radius:20px; margin-bottom:12px; }
+  .hero h1{ margin:0; font-size:31px; line-height:1.3; letter-spacing:.5px; }
+  .hero .sub{ margin:10px 0 0; font-size:15.5px; color:#dfe9e6; }
+  .hero .facts{ margin-top:18px; display:grid; grid-template-columns:repeat(4,1fr); gap:9px; }
+  .hero .facts div{ background:rgba(255,255,255,.11); border-radius:11px; padding:9px 10px; }
+  .hero .facts b{ display:block; font-size:12.5px; color:#b9d5cf; font-weight:600; }
+  .hero .facts span{ font-size:14.5px; }
+
+  /* 导航 */
+  nav{ display:flex; gap:7px; flex-wrap:wrap; padding:14px 16px 0; }
+  nav a{ font-size:13.5px; color:var(--site); text-decoration:none; background:#fff; border:1px solid var(--line);
+    padding:6px 12px; border-radius:18px; }
+
+  section{ background:var(--card); margin:14px 12px 0; padding:22px 20px 24px; border-radius:16px;
+    border:1px solid var(--line); }
+  h2{ margin:0 0 4px; font-size:22px; letter-spacing:.5px; }
+  h2 .no{ color:var(--mut); font-size:14px; font-weight:600; margin-right:8px; }
+  .cap{ color:var(--mut); font-size:13.5px; margin:0 0 16px; }
+  h3{ margin:24px 0 8px; font-size:17.5px; padding-left:11px; border-left:4px solid var(--site); }
+  h4{ margin:18px 0 6px; font-size:15.5px; color:var(--ink2); }
+
+  table{ width:100%; border-collapse:collapse; font-size:14.5px; margin-top:8px; }
+  th,td{ padding:8px 9px; border-bottom:1px solid var(--line); text-align:left; vertical-align:top; }
+  th{ background:#f2f1eb; font-size:13.5px; color:var(--ink2); font-weight:700; }
+  td.c, th.c{ text-align:center; }
+  tr:last-child td{ border-bottom:none; }
+
+  .tag{ display:inline-block; font-size:12px; padding:1px 7px; border-radius:5px; color:#fff; font-weight:600; }
+  .t-star{ background:var(--star); } .t-site{ background:var(--site); }
+  .t-food{ background:var(--food); } .t-hotel{ background:var(--hotel); }
+  .t-free{ background:var(--ok); }
+
+  .mapbox{ margin:14px 0 4px; }
+  .mapbox svg{ width:100%; height:auto; display:block; border-radius:14px; border:1px solid var(--line); background:#f7f6f2; }
+  .mapcap{ font-size:12.5px; color:var(--mut); margin:7px 0 0; }
+
+  .legend{ display:flex; gap:14px; flex-wrap:wrap; font-size:13px; color:var(--ink2); margin:10px 0 2px; }
+  .legend i{ display:inline-block; width:11px; height:11px; border-radius:50%; margin-right:5px; vertical-align:-1px; }
+
+  /* 每日 */
+  .day{ background:var(--card); margin:14px 12px 0; border-radius:16px; border:1px solid var(--line); overflow:hidden; }
+  .day .dh{ padding:16px 20px; color:#fff; }
+  .day .dh .d1{ font-size:13px; opacity:.85; letter-spacing:1px; }
+  .day .dh .d2{ font-size:20px; font-weight:700; margin-top:3px; }
+  .day .dh .d3{ font-size:13.5px; opacity:.92; margin-top:5px; line-height:1.6; }
+  .day .db{ padding:16px 20px 20px; }
+  .route{ background:#f4f3ec; border-radius:10px; padding:10px 13px; font-size:14px; color:var(--ink2); margin-bottom:12px; }
+  .route b{ color:var(--ink); }
+
+  .note{ font-size:14px; background:#fbf7ee; border-left:3px solid var(--ok); padding:9px 12px; border-radius:0 8px 8px 0; margin-top:10px; }
+  .note.w{ background:#fdf6ec; border-left-color:var(--warn); }
+  .note.r{ background:#fdf0ef; border-left-color:var(--no); }
+
+  .eat{ font-size:14.5px; }
+  .eat .row{ padding:8px 0; border-bottom:1px dashed var(--line); }
+  .eat .row:last-child{ border-bottom:none; }
+  .eat b{ font-size:15px; }
+  .ok{ color:var(--ok); font-weight:700; } .warn{ color:var(--warn); font-weight:700; } .no{ color:var(--no); font-weight:700; }
+
+  /* 时间块 · 逐日行程 */
+  .blk{ border:1px solid var(--line); border-radius:11px; margin:0 0 9px; overflow:hidden; background:#fff; }
+  .blk.f{ border-color:#e6c8a4; background:#fffaf4; }
+  .blkh{ display:flex; align-items:baseline; gap:8px; padding:7px 12px; background:#f2f1eb;
+    font-size:14px; font-weight:700; color:var(--ink2); }
+  .blk.f .blkh{ background:#fbeee0; color:#8a3410; }
+  .blkh .rng{ font-variant-numeric:tabular-nums; letter-spacing:.2px; }
+  .blkh .kd{ margin-left:auto; font-size:11.5px; font-weight:700; padding:1px 9px; border-radius:20px;
+    background:#e7e5dc; color:#6d6d72; white-space:nowrap; }
+  .blk.f .blkh .kd{ background:var(--star); color:#fff; }
+  .blkb{ padding:9px 13px 11px; font-size:14.5px; line-height:1.75; }
+  .blkb ul{ margin:0; padding-left:18px; }
+  .blkb li{ margin:2px 0; }
+  .blkb li.pin{ list-style:none; margin-left:-18px; }
+  .pin .tm{ display:inline-block; min-width:46px; color:var(--star); font-weight:800;
+    font-variant-numeric:tabular-nums; }
+  .blk .hard{ margin-top:6px; font-size:13px; color:var(--ink2); background:#f6f5ef;
+    border-radius:7px; padding:5px 9px; }
+  .blk.f .hard{ background:#fdf3e6; color:#7c4a12; }
+  .flexhd{ font-size:12.5px; color:var(--mut); margin:2px 0 3px; }
+
+  code{ background:#f2f1eb; padding:1px 5px; border-radius:4px; font-size:13.5px; }
+  footer{ text-align:center; color:var(--mut); font-size:12.5px; padding:22px 16px 0; }
+
+  /* 旅行记录：照片墙 + 调整说明 */
+  .gallery{ display:grid; grid-template-columns:repeat(auto-fill,minmax(155px,1fr)); gap:11px; margin-top:12px; }
+  .gallery figure{ margin:0; }
+  .gallery img{ width:100%; height:158px; object-fit:cover; border-radius:11px; border:1px solid var(--line);
+    display:block; background:#eee; }
+  .gallery.tall img{ height:252px; }
+  .gallery.sign{ grid-template-columns:repeat(3,1fr); }
+  .gallery.sign img{ height:auto; object-fit:contain; background:#f4f4f4; }
+  .gallery.art{ grid-template-columns:repeat(3,1fr); }
+  .gallery.art img{ height:300px; object-fit:contain; background:#f4f4f4; }
+  .gallery figcaption{ font-size:12.5px; color:var(--mut); margin-top:5px; text-align:center; line-height:1.5; }
+  .adjust{ margin:14px 12px 0; padding:14px 18px; border-radius:14px; background:#fdf6ec;
+    border:1px solid #e6c8a4; border-left:5px solid var(--warn); font-size:14.5px; color:#5a4a2a; line-height:1.75; }
+  .adjust b{ color:#8a3410; }
+  .gallery-sub{ font-size:13.5px; color:var(--mut); margin:14px 0 0; }
+  .story{ font-size:15px; color:var(--ink); line-height:1.95; margin:14px 0 0; }
+  .story + .story{ margin-top:9px; }
+  .receipt{ display:flex; gap:16px; align-items:flex-start; margin-top:14px; flex-wrap:wrap; }
+  .receipt figure{ margin:0; flex:0 0 200px; max-width:200px; }
+  .receipt img{ width:100%; height:auto; border-radius:11px; border:1px solid var(--line); display:block; background:#fff; }
+  .receipt figcaption{ font-size:12.5px; color:var(--mut); margin-top:5px; text-align:center; line-height:1.5; }
+  .receipt .rnote{ flex:1 1 250px; font-size:13.5px; color:var(--ink2); line-height:1.9; }
+  .receipt .rnote b{ color:var(--ink); }
+
+  @media (max-width:700px){
+    body{ font-size:16px; }
+    .hero{ padding:26px 16px 20px; border-radius:0 0 18px 18px; }
+    .hero h1{ font-size:25px; }
+    .hero .facts{ grid-template-columns:repeat(2,1fr); }
+    section, .day{ margin:12px 8px 0; padding:18px 14px 20px; border-radius:14px; }
+    .day .dh{ padding:14px 15px; } .day .db{ padding:14px 15px 18px; }
+    h2{ font-size:20px; } h3{ font-size:16.5px; }
+    table{ font-size:13.5px; } th,td{ padding:7px 6px; }
+    nav{ padding:12px 10px 0; }
+  }
+  .openfig{ margin:0 0 6px; }
+  .openfig img{ width:100%; height:auto; border-radius:15px; border:1px solid var(--line);
+    display:block; background:#fff; box-shadow:0 8px 24px rgba(20,50,45,.12); }
+  .openfig figcaption{ font-size:12.5px; color:var(--mut); margin-top:8px;
+    text-align:center; line-height:1.65; }
+  .openfig figcaption b{ color:var(--ink2); }
+  @media print{
+    body{ background:#fff; } section,.day{ break-inside:avoid; border-color:#ccc; }
+    nav{ display:none; }
+  }
+
+/* 记录页附加样式 */
+.rec-nav{position:sticky; top:0; z-index:30; display:flex; gap:8px; align-items:center;
+  background:rgba(247,246,241,.97); backdrop-filter:blur(8px); border-bottom:1px solid var(--line);
+  padding:10px 14px; flex-wrap:wrap;}
+.rec-nav a{font-size:13.5px; color:var(--site); text-decoration:none; background:#fff;
+  border:1px solid var(--line); padding:6px 12px; border-radius:18px; font-weight:600;}
+.rec-nav .crumb{color:var(--mut); font-size:13px;}
+.gate{display:none;} .gate.show{display:block;}
+.gate-inner{background:var(--card); border:1px solid var(--line); border-radius:18px;
+  padding:28px 22px; margin:18px 16px; box-shadow:0 2px 8px rgba(15,118,110,.06); text-align:center;}
+.gate-inner .lock{font-size:40px; margin-bottom:8px;}
+.gate-inner h2{margin:0 0 6px; font-size:18px; color:#0f3d3a;}
+.gate-inner p{margin:0 0 18px; font-size:13.5px; color:var(--mut);}
+.gate-inner input{width:100%; padding:12px 14px; border:1.5px solid var(--line); border-radius:12px;
+  font-size:16px; text-align:center; letter-spacing:3px; outline:none; color:var(--ink);}
+.gate-inner input:focus{border-color:var(--site);}
+.gate-inner button{margin-top:12px; width:100%; padding:12px; border:none; border-radius:12px;
+  background:var(--site); color:#fff; font-size:16px; font-weight:700; cursor:pointer; letter-spacing:1px;}
+.gate-err{display:none; color:#dc2626; font-size:13px; margin-top:10px;} .gate-err.show{display:block;}
+.content{display:none;} .content.show{display:block;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="gate" id="gate">
+    <div class="gate-inner">
+      <div class="lock">🔒</div>
+      <h2>输入密码查看</h2>
+      <p>这是家人私享的旅行记录</p>
+      <input type="password" id="pwd" placeholder="请输入密码" inputmode="text" autocomplete="off">
+      <button onclick="tryUnlock()">进入</button>
+      <div class="gate-err" id="err">密码不对，再试试</div>
+    </div>
+  </div>
+
+  <div class="content" id="content">
+    <div class="rec-nav">
+      <a href="index.html">‹ 首页</a>
+      <a href="records-sydney.html">悉尼记录</a>
+      <span class="crumb">DAY 3 · 周四</span>
+    </div>
+
+    <div class="hero" style="padding:26px 22px 20px;">
+      <div class="kick">DAY 3 · 周四</div>
+      <h1 style="font-size:26px;">歌剧院 + 植物园 + 岩石区</h1>
+      <p class="sub">2026 澳洲旅行 · 悉尼实际行程记录</p>
+    </div>
+
+  <div class="day" data-page-node-id="0YrVZnhDC2V8XFxocTLgaJ">
+    <div class="dh" style="background:linear-gradient(135deg,#0f766e,#1b7f6a)" data-page-node-id="Cm0kZW5TWLCjJ3ggGPXotr">
+      <div class="d1" data-page-node-id="r05YSVQb8NnaGrriKUAzI3">DAY 3 · 周四</div>
+      <div class="d2" data-page-node-id="IZGgzvo9rOjavVSnVfmBT5">9/24 · 歌剧院 + 植物园 + 岩石区</div>
+      <div class="d3" data-page-node-id="KDiK2tEayMd91PenF1ydZw">地标核心日：歌剧院 + 植物园 + 岩石区 + QVB</div>
+    </div>
+    <b data-page-node-id="sirrSKRRLWRUqnlDMKdC8z">路线：</b>
+<div class="blk" data-page-node-id="day3PlanSum"><div class="blkh" data-page-node-id="day3PlanSumH"><span class="rng" data-page-node-id="day3PlanSumR">原计划想做的事（清单）</span><span class="kd" data-page-node-id="day3PlanSumK">弹性</span></div><div class="blkb" data-page-node-id="day3PlanSumB"><ul data-page-node-id="day3PlanSumU">
+        <li data-page-node-id="p3a">08:30–09:45 去环形码头（原计划步行 25 min 或城铁 2 站；实际从唐人街坐轻轨，途中在游客中心领了一份中文介绍）</li>
+        <li data-page-node-id="p3b">10:00 歌剧院免费外观 —— 贝壳帆顶拍照 + 内部大厅若开放</li>
+        <li data-page-node-id="p3c">11:30–15:30 皇家植物园一线：麦考利夫人石椅（歌剧院 + 大桥同框机位）→ 园内特色植物 → 温室；园内咖啡 / Gelato Messina 甜点站</li>
+        <li data-page-node-id="p3d">15:30–17:00 岩石区巷弄 + 海港大桥人行道（免费，约 40 min 折返）；实际途中还进了悉尼博物馆、岩石区发现博物馆</li>
+        <li data-page-node-id="p3e">17:30 Sydney Cove Oyster Bar 水边晚餐（实际没去，改回酒店自己做）</li>
+      </ul></div></div>
+
+      <p class="story" data-page-node-id="day3S1">9/24 是这趟悉尼的「封面日」。早上从唐人街坐轻轨出发，路过游客中心时领了一份中文介绍，一路坐到环形码头。先去歌剧院拍照 —— 先在水边远远看了一遍，再走到广场上：帆顶底下、大台阶前，一家人挨着拍了个遍，爸爸还抬手指着那个著名的顶。广场上正赶上一个乐手在排练。接着从栏杆边拍了海港大桥，</p>
+<p class="gallery-sub" data-page-node-id="day3GalSubOperaHouse">📷 9/24 · 悉尼歌剧院（水岸 · 广场 · 留影）</p>
+      <div class="gallery" data-page-node-id="day3GalOperaHouse">
+        <figure data-page-node-id="phOH1"><img src="photos/rec/0924/01.jpg" alt="从水边远望歌剧院"><figcaption>从水边望过去 · 白帆、栈桥与对岸</figcaption></figure>
+        <figure data-page-node-id="phOH2"><img src="photos/rec/0924/02.jpg" alt="歌剧院广场全景"><figcaption>广场全景 · 大台阶前，正赶上一个乐手在排练</figcaption></figure>
+        <figure data-page-node-id="phOH3"><img src="photos/rec/0924/03.jpg" alt="歌剧院台阶合影"><figcaption>歌剧院台阶 · 贝壳帆顶下的合影</figcaption></figure>
+        <figure data-page-node-id="phOH4"><img src="photos/rec/0924/04.jpg" alt="歌剧院广场互拍"><figcaption>歌剧院广场 · 互相拍一张（远处是 CBD 高楼与环形码头西侧）</figcaption></figure>
+        <figure data-page-node-id="phOH5"><img src="photos/rec/0924/05.jpg" alt="妈妈在歌剧院前留影"><figcaption>妈妈的留影 · 包上挂着那只袋鼠挂件</figcaption></figure>
+        <figure data-page-node-id="phOH6"><img src="photos/rec/0924/06.jpg" alt="爸爸在歌剧院广场留影"><figcaption>爸爸的留影 · 帆下广场正中</figcaption></figure>
+        <figure data-page-node-id="phOH7"><img src="photos/rec/0924/07.jpg" alt="爸爸指着歌剧院帆顶"><figcaption>“瞧这个顶” · 爸爸指着帆顶</figcaption></figure>
+        <figure data-page-node-id="phOH8"><img src="photos/rec/0924/08.jpg" alt="在歌剧院栏杆边拍海港大桥"><figcaption>栏杆边 · 举着手机拍海港大桥</figcaption></figure>
+        <figure data-page-node-id="phOH9"><img src="photos/rec/0924/09.jpg" alt="妈妈在歌剧院前的自拍"><figcaption>我的自拍 · 帆顶就在头顶</figcaption></figure>
+      </div>
+
+      <p class="story" data-page-node-id="day3S2">然后沿着歌剧院东侧的海堤往东走 —— 这一段就是去麦考利夫人石椅的路：先经过 Man O' War Steps，砂岩墙里嵌着一块铜牌，是 1810 年代麦克夸里总督时期给海军小船用的石码头，1973 年跟歌剧院一起整修过，墙边还立着指示牌和一块钓鱼规则牌。</p>
+<p class="gallery-sub" data-page-node-id="day3GalSubManOWar">📷 9/24 · 歌剧院 → 麦考利夫人石椅 · 沿途（Man O' War Steps）</p>
+      <div class="gallery" data-page-node-id="day3GalManOWar">
+        <figure data-page-node-id="phMOW1"><img src="photos/rec/0924/10.jpg" alt="出发 · 海堤上回头一指歌剧院与海港大桥"><figcaption>出发 · 海堤上回头一指歌剧院与海港大桥</figcaption></figure>
+        <figure data-page-node-id="phMOW2"><img src="photos/rec/0924/11.jpg" alt="石栏边 · 歌剧院与大桥就在身后"><figcaption>石栏边 · 歌剧院与大桥就在身后</figcaption></figure>
+        <figure data-page-node-id="phMOW3"><img src="photos/rec/0924/12.jpg" alt="石栏边 · 换个姿势再来一张"><figcaption>石栏边 · 换个姿势再来一张</figcaption></figure>
+        <figure data-page-node-id="phMOW4"><img src="photos/rec/0924/13.jpg" alt="桉树底下 · 爸爸举着手机给妈妈拍照"><figcaption>桉树底下 · 爸爸举着手机给妈妈拍照</figcaption></figure>
+        <figure data-page-node-id="phMOW5"><img src="photos/rec/0924/14.jpg" alt="海堤合影 · 身后对岸是旧海军码头（Kirribilli 一侧）"><figcaption>海堤合影 · 身后对岸是旧海军码头（Kirribilli 一侧）</figcaption></figure>
+        <figure data-page-node-id="phMOW6"><img src="photos/rec/0924/15.jpg" alt="海堤合影 · 妈妈抱着胳膊，爸爸举着手机"><figcaption>海堤合影 · 妈妈抱着胳膊，爸爸举着手机</figcaption></figure>
+        <figure data-page-node-id="phMOW7"><img src="photos/rec/0924/16.jpg" alt="Man O' War Steps · 指示牌前（远处是丹尼森堡圆形碉堡）"><figcaption>Man O' War Steps · 指示牌前（远处是丹尼森堡圆形碉堡）</figcaption></figure>
+        <figure data-page-node-id="phMOW8"><img src="photos/rec/0924/17.jpg" alt="嵌在砂岩墙里的铜牌 · 1973 年与歌剧院同年整修落成"><figcaption>嵌在砂岩墙里的铜牌 · 1973 年与歌剧院同年整修落成</figcaption></figure>
+        <figure data-page-node-id="phMOW9"><img src="photos/rec/0924/18.jpg" alt="墙边立的钓鱼规则牌（NSW Maritime）"><figcaption>墙边立的钓鱼规则牌（NSW Maritime）</figcaption></figure>
+        <figure data-page-node-id="phMOW10"><img src="photos/rec/0924/19.jpg" alt="皇家植物园 · 草坪长椅上坐着两尊铜像"><figcaption>皇家植物园 · 草坪长椅上坐着两尊铜像</figcaption></figure>
+      </div>
+
+      <p class="story" data-page-node-id="day3S3">再往东进皇家植物园，草坪的长椅上坐着两尊铜像，树影斜斜地落在步道上，爸爸一路给妈妈拍照。走到头就是麦考利夫人石椅 —— 那是拍歌剧院和海港大桥同框的经典机位：先在观景栏杆边拍了一轮，一家人轮流站过去；再退到石台上并排坐；最后索性踩着礁石走到水边，远处是丹尼森堡的灯塔，湾里渡轮和一艘军舰来来去去。</p>
+<p class="gallery-sub" data-page-node-id="day3GalSubMrsMac">📷 9/24 · 麦考利夫人石椅周边 · 歌剧院 + 海港大桥（观景栏杆 · 石台 · 礁石）</p>
+      <div class="gallery" data-page-node-id="day3GalMrsMac">
+        <figure data-page-node-id="phMM1"><img src="photos/rec/0924/20.jpg" alt="妈妈指着对岸 · 歌剧院与大桥都在画面里"><figcaption>妈妈指着对岸 · 歌剧院与大桥都在画面里</figcaption></figure>
+        <figure data-page-node-id="phMM2"><img src="photos/rec/0924/21.jpg" alt="观景栏杆边 · 爸爸倚着栏杆"><figcaption>观景栏杆边 · 爸爸倚着栏杆</figcaption></figure>
+        <figure data-page-node-id="phMM3"><img src="photos/rec/0924/22.jpg" alt="栏杆边合影"><figcaption>栏杆边合影</figcaption></figure>
+        <figure data-page-node-id="phMM4"><img src="photos/rec/0924/23.jpg" alt="海边栏杆 · 换个机位再来一张"><figcaption>海边栏杆 · 换个机位再来一张</figcaption></figure>
+        <figure data-page-node-id="phMM5"><img src="photos/rec/0924/24.jpg" alt="歌剧院前的留影"><figcaption>歌剧院前的留影</figcaption></figure>
+        <figure data-page-node-id="phMM6"><img src="photos/rec/0924/25.jpg" alt="妈妈靠着栏杆 · 草叶探出画面"><figcaption>妈妈靠着栏杆 · 草叶探出画面</figcaption></figure>
+        <figure data-page-node-id="phMM7"><img src="photos/rec/0924/26.jpg" alt="妈妈扶着帽檐"><figcaption>妈妈扶着帽檐</figcaption></figure>
+        <figure data-page-node-id="phMM8"><img src="photos/rec/0924/27.jpg" alt="说到高兴处 · 妈妈笑起来"><figcaption>说到高兴处 · 妈妈笑起来</figcaption></figure>
+        <figure data-page-node-id="phMM9"><img src="photos/rec/0924/28.jpg" alt="爸爸靠在栏杆边"><figcaption>爸爸靠在栏杆边</figcaption></figure>
+        <figure data-page-node-id="phMM10"><img src="photos/rec/0924/29.jpg" alt="挂着相机与手机的那个下午"><figcaption>挂着相机与手机的那个下午</figcaption></figure>
+        <figure data-page-node-id="phMM11"><img src="photos/rec/0924/30.jpg" alt="同机位的另一张"><figcaption>同机位的另一张</figcaption></figure>
+        <figure data-page-node-id="phMM12"><img src="photos/rec/0924/31.jpg" alt="栏杆边 · 半身"><figcaption>栏杆边 · 半身</figcaption></figure>
+        <figure data-page-node-id="phMM13"><img src="photos/rec/0924/32.jpg" alt="石台上 · 歌剧院 + 海港大桥同框"><figcaption>石台上 · 歌剧院 + 海港大桥同框</figcaption></figure>
+        <figure data-page-node-id="phMM14"><img src="photos/rec/0924/33.jpg" alt="石台远眺 · 歌剧院、大桥与对岸天际线"><figcaption>石台远眺 · 歌剧院、大桥与对岸天际线</figcaption></figure>
+        <figure data-page-node-id="phMM15"><img src="photos/rec/0924/34.jpg" alt="石台上并排坐 · 身后是渡轮与歌剧院"><figcaption>石台上并排坐 · 身后是渡轮与歌剧院</figcaption></figure>
+        <figure data-page-node-id="phMM16"><img src="photos/rec/0924/35.jpg" alt="石台上 · 再坐一会儿"><figcaption>石台上 · 再坐一会儿</figcaption></figure>
+        <figure data-page-node-id="phMM17"><img src="photos/rec/0924/36.jpg" alt="沿礁石往湾里走 · 远处是丹尼森堡（Fort Denison）灯塔"><figcaption>沿礁石往湾里走 · 远处是丹尼森堡（Fort Denison）灯塔</figcaption></figure>
+        <figure data-page-node-id="phMM18"><img src="photos/rec/0924/37.jpg" alt="礁石上小坐 · 湾里渡轮往来不断"><figcaption>礁石上小坐 · 湾里渡轮往来不断</figcaption></figure>
+        <figure data-page-node-id="phMM19"><img src="photos/rec/0924/38.jpg" alt="礁石上最后一组 · 湾里驶过渡轮，右后方停着军舰"><figcaption>礁石上最后一组 · 湾里驶过渡轮，右后方停着军舰</figcaption></figure>
+        <figure data-page-node-id="phMM20"><img src="photos/rec/0924/39.jpg" alt="爸爸站在礁石上举相机"><figcaption>爸爸站在礁石上举相机</figcaption></figure>
+        <figure data-page-node-id="phMM21"><img src="photos/rec/0924/40.jpg" alt="妈妈坐在礁石上，正对丹尼森堡"><figcaption>妈妈坐在礁石上，正对丹尼森堡</figcaption></figure>
+        <figure data-page-node-id="phMM22"><img src="photos/rec/0924/41.jpg" alt="妈妈坐在礁石上 · 背后是被潮水啃过的砂岩"><figcaption>妈妈坐在礁石上 · 背后是被潮水啃过的砂岩</figcaption></figure>
+        <figure data-page-node-id="phMM23"><img src="photos/rec/0924/42.jpg" alt="石椅的经典机位 · 歌剧院与海港大桥同框"><figcaption>石椅的经典机位 · 歌剧院与海港大桥同框</figcaption></figure>
+      </div>
+<div class="note" data-page-node-id="day3CoverNote">✏️ <b>实况（9/24）：</b>这一整天全靠两条腿 —— 歌剧院、植物园、岩石区、QVB 全部步行可达，白天只在早上去程坐了一段轻轨，几乎没花交通费。</div>
+
+      <p class="story" data-page-node-id="day3S4">园里一路看过去：花境边缘一丛粉色的冰花（日中花属）开得正亮，花瓣细长，中心一圈红斑；地被铺满碎木屑，旁边插着一块很小的告示牌 ——「STOP THIEF！本区域近期有植物被偷，如见可疑行为请报告园区管理员」——大概是园里最直白的一块牌子。最后进了温室：竹芋科的「祈祷草」叶面是墨绿配浅色条纹，一块黄牌写着它来自非洲、亚洲与美洲的低地热带雨林；圆筒里种着名字起得俏皮的「澳洲松叶蕨」（Rock Tassel Fern），牌子上说它其实不是真蕨，比蕨类早四千万年出现，不用授粉者，靠会飞的微小孢子繁殖；挂成一串的绿色澳洲坚果（Macadamia）也在展区里 —— 那是澳洲唯一进入全球贸易的本地食材；最抢眼的是巴西来的斑点秋海棠，白点洒在墨绿叶面上，叶子背面是红的。运气不错：两点半多到，温室三点闭馆，刚好赶上。</p>
+<div class="note" data-page-node-id="day3GlassNote">🌿 <b>实况 · 温室（9/24）：</b>温室 <b>15:00 闭馆</b>，我们 14:30 多到，刚好赶上最后一批 —— 再晚半小时就进不去了。植物园本身免费，这一段最好排在下午 2 点前进场。</div>
+<p class="gallery-sub" data-page-node-id="day3GalSubGarden">📷 9/24 · 皇家植物园 · 园中植物与温室</p>
+      <div class="gallery" data-page-node-id="day3GalGarden">
+        <figure data-page-node-id="phGD1"><img src="photos/rec/0924/43.jpg" alt="花境边一丛粉色的冰花 · 花瓣细长、中心一圈红斑"><figcaption>花境边一丛粉色的冰花 · 花瓣细长、中心一圈红斑</figcaption></figure>
+        <figure data-page-node-id="phGD2"><img src="photos/rec/0924/44.jpg" alt="凑近拍一张 · 花瓣从花心放射出来"><figcaption>凑近拍一张 · 花瓣从花心放射出来</figcaption></figure>
+        <figure data-page-node-id="phGD3"><img src="photos/rec/0924/45.jpg" alt="木屑地被边的告示牌 ·「STOP THIEF！本区域近期有植物被偷」"><figcaption>木屑地被边的告示牌 ·「STOP THIEF！本区域近期有植物被偷」</figcaption></figure>
+        <figure data-page-node-id="phGD4"><img src="photos/rec/0924/46.jpg" alt="竹芋科「祈祷草」（Calathea）· 牌上写它来自非洲、亚洲与美洲的低地雨林"><figcaption>竹芋科「祈祷草」（Calathea）· 牌上写它来自非洲、亚洲与美洲的低地雨林</figcaption></figure>
+        <figure data-page-node-id="phGD5"><img src="photos/rec/0924/47.jpg" alt="「PLAYING PRETEND」澳洲松叶蕨（Huperzia squarrosa）· 比蕨类还早四千万年，靠微小孢子繁殖"><figcaption>「PLAYING PRETEND」澳洲松叶蕨（Huperzia squarrosa）· 比蕨类还早四千万年，靠微小孢子繁殖</figcaption></figure>
+        <figure data-page-node-id="phGD6"><img src="photos/rec/0924/48.jpg" alt="澳洲坚果（Macadamia）· 澳洲唯一进入全球贸易的本地食材，展区在讲它的种质保育"><figcaption>澳洲坚果（Macadamia）· 澳洲唯一进入全球贸易的本地食材，展区在讲它的种质保育</figcaption></figure>
+        <figure data-page-node-id="phGD7"><img src="photos/rec/0924/49.jpg" alt="斑点秋海棠（Begonia maculata）· 白点洒在墨绿叶面，叶子背面是红的，原产巴西"><figcaption>斑点秋海棠（Begonia maculata）· 白点洒在墨绿叶面，叶子背面是红的，原产巴西</figcaption></figure>
+      </div>
+
+      <p class="story" data-page-node-id="day3S5">
+
+从温室出来往岩石区走，半路偶然撞见悉尼博物馆，进去转了一圈 —— 馆很小，讲的主要是当年修悉尼市政厅时挖出大批文物的事。展墙上挂着一幅深蓝调的油画：举着米字旗的红衣军人、篝火与白色剪影的相遇场景，右下角签名 SYRON；出口附近还摆着一张长桌，桌上覆着纹样、纸和蜡笔，来的人可以自己拓一张带走。</p>
+<p class="gallery-sub" data-page-node-id="day3GalSubMuseum">📷 9/24 · 悉尼博物馆（Museum of Sydney）</p>
+      <div class="gallery" data-page-node-id="day3GalMuseum">
+        <figure data-page-node-id="phMS1"><img src="photos/rec/0924/50.jpg" alt="展墙上的油画 · 深蓝夜色里的相遇场景，签名 SYRON，29/99"><figcaption>展墙上的油画 · 深蓝夜色里的相遇场景，签名 SYRON，29/99</figcaption></figure>
+        <figure data-page-node-id="phMS2"><img src="photos/rec/0924/51.jpg" alt="从馆里出来 · 砂岩立面、棕榈与路边的绿色共享单车"><figcaption>从馆里出来 · 砂岩立面、棕榈与路边的绿色共享单车</figcaption></figure>
+        <figure data-page-node-id="phMS3"><img src="photos/rec/0924/52.jpg" alt="馆内的拓印工作台 · 把纸覆在纹样上，自己拓一张《Museums of History NSW》带走（此张为 looki 生成的插画）"><figcaption>馆内的拓印工作台 · 把纸覆在纹样上，自己拓一张《Museums of History NSW》带走（此张为 looki 生成的插画）</figcaption></figure>
+      </div>
+<div class="note" data-page-node-id="day3MuseumNote">🏛️ <b>实况 · 两个博物馆（9/24）：</b>去岩石区路上偶然进了<b>悉尼博物馆</b> —— 馆很小，主要讲当年修悉尼市政厅时发掘出大批文物的事。<b>岩石区发现博物馆</b>小而精致，17:00 关门，我们 16:20 到、十五分钟就看完；馆里给了一本导览小册子（见下图），从原住民的 Warrnane 时期、Colony、Port 一路讲到今天的 Transformations。</div>
+
+      <p class="story" data-page-node-id="day3S6">真正让这个下午有意思的是岩石区的发现博物馆，小而精致，五点关门，我们四点二十到，其实十五分钟就看完了。馆里给了一本导览小册子，从原住民的 Warrnane 时期一路讲到今天，薄薄几页就把岩石区两百多年讲完了。</p>
+<p class="gallery-sub" data-page-node-id="day3GalSub">📷 9/24 · 岩石区发现博物馆 · 导览小册子</p>
+      <div class="gallery" data-page-node-id="day3Gal">
+        <figure data-page-node-id="phRDM1"><img src="photos/rec/0924/53.jpg" alt="小册子封面与参观说明"><figcaption>封面 · Welcome to The Rocks Discovery Museum</figcaption></figure>
+        <figure data-page-node-id="phRDM2"><img src="photos/rec/0924/54.jpg" alt="资源中心与参观信息"><figcaption>资源中心 · 参观信息（Kendall Lane，10am–5pm Daily）</figcaption></figure>
+        <figure data-page-node-id="phRDM3"><img src="photos/rec/0924/55.jpg" alt="展区导览 Warrnane 与 Colony"><figcaption>展区导览 · Warrnane（原住民时期）+ Colony（1788–1820）</figcaption></figure>
+        <figure data-page-node-id="phRDM4"><img src="photos/rec/0924/56.jpg" alt="展区导览 Port 与 Transformations"><figcaption>展区导览 · Port（1820–1900）+ Transformations（1900–至今）</figcaption></figure>
+      </div>
+
+      <p class="story" data-page-node-id="day3S7">
+
+回程顺路看了 QVB（维多利亚女王大厦），等于把 26 号的一部分提前走掉了 —— 从楼上往下看，中庭的彩色马赛克地面、铸铁栏杆和两侧的小店一览到底，悬在穹顶下的城堡造型大钟正对着走廊；抬头又是整片玻璃天窗。后来在楼上的座位区坐了一会儿，爸爸翻手机，妈妈坐在对面歇脚。</p>
+<div class="note" data-page-node-id="day3QVBNote">✏️ <b>顺带（9/24）：</b>QVB 当天回程已看过 —— 9/26 的行程可以少排一项。</div>
+<p class="gallery-sub" data-page-node-id="day3GalSubQVB">📷 9/24 · QVB（维多利亚女王大厦）</p>
+      <div class="gallery" data-page-node-id="day3GalQVB">
+        <figure data-page-node-id="phQVB1"><img src="photos/rec/0924/57.jpg" alt="从楼上俯视中庭 · 彩色马赛克地面、铸铁栏杆与城堡造型的悬钟（两侧是 UGG、COTTON ON 等店铺）"><figcaption>从楼上俯视中庭 · 彩色马赛克地面、铸铁栏杆与城堡造型的悬钟（两侧是 UGG、COTTON ON 等店铺）</figcaption></figure>
+        <figure data-page-node-id="phQVB2"><img src="photos/rec/0924/58.jpg" alt="站在栏杆边仰视 · 玻璃穹顶下的大钟"><figcaption>站在栏杆边仰视 · 玻璃穹顶下的大钟</figcaption></figure>
+        <figure data-page-node-id="phQVB3"><img src="photos/rec/0924/59.jpg" alt="楼上的座位区 · 爸爸在看手机、妈妈坐在对面（此张为 looki 生成的插画）"><figcaption>楼上的座位区 · 爸爸在看手机、妈妈坐在对面（此张为 looki 生成的插画）</figcaption></figure>
+      </div>
+
+      <p class="story" data-page-node-id="day3S8">晚上在 Woolworths 买了牛肉、金枪鱼罐头和生菜，回酒店自己做晚饭。</p>
+<p class="gallery-sub" data-page-node-id="day3Sub1">🧾 9/24 晚间 · 回酒店 · 采买小票 &amp; 当晚自炊</p>
+      <div class="receipt" data-page-node-id="day3Receipts">
+        <figure data-page-node-id="phRcpWoolies"><img src="photos/rec/0924/60.jpg" alt="Woolworths Metro 小票"><figcaption>Woolworths Metro · Haymarket · 9/24 19:27</figcaption></figure>
+        <div class="rnote" data-page-node-id="day3ReceiptNote"><b>Woolworths Metro · Haymarket</b>（79 Quay St，距酒店步行几分钟）· 24/09/2026 <b>19:27</b> · 6 件合计 <b>A$28.60</b>；付现 A$30.00，找零 A$1.40。<br>
+        — 生菜（Lettuce Iceberg）A$2.00<br>
+        — Woolworths 走地鸡蛋 XL 12 枚 700g A$5.70<br>
+        — 咸牛肉（Corned Beef Silverside）A$13.30<br>
+        — Essentials 盐水金枪鱼块 425g A$3.30<br>
+        — 全麦三明治面包 650g A$2.80<br>
+        — Macro 有机鹰嘴豆 425g A$1.50<br>
+        都是食材、免 GST；小票还带了「+5 Container Credits」—— 自带购物袋能返积分。</div>
+      </div>
+
+      <div class="gallery" data-page-node-id="day3GalDinner">
+        <figure data-page-node-id="phDinner"><img src="photos/rec/0924/61.jpg" alt="当晚自炊的烤牛肉"><figcaption>当晚自炊 · 用 Woolworths 买的咸牛肉（Corned Beef Silverside）烤的一盘</figcaption></figure>
+      </div>
+
+  </div>
+
+    <footer style="text-align:center; color:var(--mut); font-size:12.5px; padding:22px 16px 0;">Essie 的旅行手册 · 旅行记录 · 仅供家人查看</footer>
+  </div>
+
+</div>
+<script>
+var PASSWORD = "lxjh2026";
+function tryUnlock(){
+  var v = document.getElementById('pwd').value.trim();
+  if(v === PASSWORD){
+    sessionStorage.setItem('essie_unlocked','1');
+    document.getElementById('gate').classList.remove('show');
+    document.getElementById('content').classList.add('show');
+    document.getElementById('err').classList.remove('show');
+  } else {
+    document.getElementById('err').classList.add('show');
+    document.getElementById('pwd').value='';
+  }
+}
+document.getElementById('pwd').addEventListener('keydown', function(e){ if(e.key==='Enter') tryUnlock(); });
+if(sessionStorage.getItem('essie_unlocked')==='1'){ document.getElementById('content').classList.add('show'); }
+else { document.getElementById('gate').classList.add('show'); }
+</script>
+</body>
+</html>

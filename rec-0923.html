@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0f3d3a">
+<title>9/23 购物日 · Birkenhead Point</title>
+<style>
+
+  :root{
+    --paper:#f7f6f1; --card:#ffffff; --ink:#1c1c1e; --ink2:#4a4a4e; --mut:#8a8a8e;
+    --line:#e3e1d8; --star:#c2410c; --site:#0f766e; --food:#b45309; --hotel:#1d4ed8;
+    --ok:#15803d; --warn:#a16207; --no:#b91c1c; --water:#cfe3ee;
+  }
+  *{ box-sizing:border-box; }
+  body{ margin:0; padding:0; background:var(--paper); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    font-size:16.5px; line-height:1.8; -webkit-text-size-adjust:100%; }
+  .wrap{ max-width:880px; margin:0 auto; padding:0 0 46px; background:transparent; }
+
+  /* 头部 */
+  .hero{ background:linear-gradient(150deg,#0f3d3a 0%,#14494a 55%,#1b3f63 100%); color:#fff;
+    padding:32px 26px 26px; border-radius:0 0 22px 22px; }
+  .hero .kick{ display:inline-block; font-size:13px; letter-spacing:2px; background:rgba(255,255,255,.16);
+    padding:5px 13px; border-radius:20px; margin-bottom:12px; }
+  .hero h1{ margin:0; font-size:31px; line-height:1.3; letter-spacing:.5px; }
+  .hero .sub{ margin:10px 0 0; font-size:15.5px; color:#dfe9e6; }
+  .hero .facts{ margin-top:18px; display:grid; grid-template-columns:repeat(4,1fr); gap:9px; }
+  .hero .facts div{ background:rgba(255,255,255,.11); border-radius:11px; padding:9px 10px; }
+  .hero .facts b{ display:block; font-size:12.5px; color:#b9d5cf; font-weight:600; }
+  .hero .facts span{ font-size:14.5px; }
+
+  /* 导航 */
+  nav{ display:flex; gap:7px; flex-wrap:wrap; padding:14px 16px 0; }
+  nav a{ font-size:13.5px; color:var(--site); text-decoration:none; background:#fff; border:1px solid var(--line);
+    padding:6px 12px; border-radius:18px; }
+
+  section{ background:var(--card); margin:14px 12px 0; padding:22px 20px 24px; border-radius:16px;
+    border:1px solid var(--line); }
+  h2{ margin:0 0 4px; font-size:22px; letter-spacing:.5px; }
+  h2 .no{ color:var(--mut); font-size:14px; font-weight:600; margin-right:8px; }
+  .cap{ color:var(--mut); font-size:13.5px; margin:0 0 16px; }
+  h3{ margin:24px 0 8px; font-size:17.5px; padding-left:11px; border-left:4px solid var(--site); }
+  h4{ margin:18px 0 6px; font-size:15.5px; color:var(--ink2); }
+
+  table{ width:100%; border-collapse:collapse; font-size:14.5px; margin-top:8px; }
+  th,td{ padding:8px 9px; border-bottom:1px solid var(--line); text-align:left; vertical-align:top; }
+  th{ background:#f2f1eb; font-size:13.5px; color:var(--ink2); font-weight:700; }
+  td.c, th.c{ text-align:center; }
+  tr:last-child td{ border-bottom:none; }
+
+  .tag{ display:inline-block; font-size:12px; padding:1px 7px; border-radius:5px; color:#fff; font-weight:600; }
+  .t-star{ background:var(--star); } .t-site{ background:var(--site); }
+  .t-food{ background:var(--food); } .t-hotel{ background:var(--hotel); }
+  .t-free{ background:var(--ok); }
+
+  .mapbox{ margin:14px 0 4px; }
+  .mapbox svg{ width:100%; height:auto; display:block; border-radius:14px; border:1px solid var(--line); background:#f7f6f2; }
+  .mapcap{ font-size:12.5px; color:var(--mut); margin:7px 0 0; }
+
+  .legend{ display:flex; gap:14px; flex-wrap:wrap; font-size:13px; color:var(--ink2); margin:10px 0 2px; }
+  .legend i{ display:inline-block; width:11px; height:11px; border-radius:50%; margin-right:5px; vertical-align:-1px; }
+
+  /* 每日 */
+  .day{ background:var(--card); margin:14px 12px 0; border-radius:16px; border:1px solid var(--line); overflow:hidden; }
+  .day .dh{ padding:16px 20px; color:#fff; }
+  .day .dh .d1{ font-size:13px; opacity:.85; letter-spacing:1px; }
+  .day .dh .d2{ font-size:20px; font-weight:700; margin-top:3px; }
+  .day .dh .d3{ font-size:13.5px; opacity:.92; margin-top:5px; line-height:1.6; }
+  .day .db{ padding:16px 20px 20px; }
+  .route{ background:#f4f3ec; border-radius:10px; padding:10px 13px; font-size:14px; color:var(--ink2); margin-bottom:12px; }
+  .route b{ color:var(--ink); }
+
+  .note{ font-size:14px; background:#fbf7ee; border-left:3px solid var(--ok); padding:9px 12px; border-radius:0 8px 8px 0; margin-top:10px; }
+  .note.w{ background:#fdf6ec; border-left-color:var(--warn); }
+  .note.r{ background:#fdf0ef; border-left-color:var(--no); }
+
+  .eat{ font-size:14.5px; }
+  .eat .row{ padding:8px 0; border-bottom:1px dashed var(--line); }
+  .eat .row:last-child{ border-bottom:none; }
+  .eat b{ font-size:15px; }
+  .ok{ color:var(--ok); font-weight:700; } .warn{ color:var(--warn); font-weight:700; } .no{ color:var(--no); font-weight:700; }
+
+  /* 时间块 · 逐日行程 */
+  .blk{ border:1px solid var(--line); border-radius:11px; margin:0 0 9px; overflow:hidden; background:#fff; }
+  .blk.f{ border-color:#e6c8a4; background:#fffaf4; }
+  .blkh{ display:flex; align-items:baseline; gap:8px; padding:7px 12px; background:#f2f1eb;
+    font-size:14px; font-weight:700; color:var(--ink2); }
+  .blk.f .blkh{ background:#fbeee0; color:#8a3410; }
+  .blkh .rng{ font-variant-numeric:tabular-nums; letter-spacing:.2px; }
+  .blkh .kd{ margin-left:auto; font-size:11.5px; font-weight:700; padding:1px 9px; border-radius:20px;
+    background:#e7e5dc; color:#6d6d72; white-space:nowrap; }
+  .blk.f .blkh .kd{ background:var(--star); color:#fff; }
+  .blkb{ padding:9px 13px 11px; font-size:14.5px; line-height:1.75; }
+  .blkb ul{ margin:0; padding-left:18px; }
+  .blkb li{ margin:2px 0; }
+  .blkb li.pin{ list-style:none; margin-left:-18px; }
+  .pin .tm{ display:inline-block; min-width:46px; color:var(--star); font-weight:800;
+    font-variant-numeric:tabular-nums; }
+  .blk .hard{ margin-top:6px; font-size:13px; color:var(--ink2); background:#f6f5ef;
+    border-radius:7px; padding:5px 9px; }
+  .blk.f .hard{ background:#fdf3e6; color:#7c4a12; }
+  .flexhd{ font-size:12.5px; color:var(--mut); margin:2px 0 3px; }
+
+  code{ background:#f2f1eb; padding:1px 5px; border-radius:4px; font-size:13.5px; }
+  footer{ text-align:center; color:var(--mut); font-size:12.5px; padding:22px 16px 0; }
+
+  /* 旅行记录：照片墙 + 调整说明 */
+  .gallery{ display:grid; grid-template-columns:repeat(auto-fill,minmax(155px,1fr)); gap:11px; margin-top:12px; }
+  .gallery figure{ margin:0; }
+  .gallery img{ width:100%; height:158px; object-fit:cover; border-radius:11px; border:1px solid var(--line);
+    display:block; background:#eee; }
+  .gallery.tall img{ height:252px; }
+  .gallery.sign{ grid-template-columns:repeat(3,1fr); }
+  .gallery.sign img{ height:auto; object-fit:contain; background:#f4f4f4; }
+  .gallery.art{ grid-template-columns:repeat(3,1fr); }
+  .gallery.art img{ height:300px; object-fit:contain; background:#f4f4f4; }
+  .gallery figcaption{ font-size:12.5px; color:var(--mut); margin-top:5px; text-align:center; line-height:1.5; }
+  .adjust{ margin:14px 12px 0; padding:14px 18px; border-radius:14px; background:#fdf6ec;
+    border:1px solid #e6c8a4; border-left:5px solid var(--warn); font-size:14.5px; color:#5a4a2a; line-height:1.75; }
+  .adjust b{ color:#8a3410; }
+  .gallery-sub{ font-size:13.5px; color:var(--mut); margin:14px 0 0; }
+  .story{ font-size:15px; color:var(--ink); line-height:1.95; margin:14px 0 0; }
+  .story + .story{ margin-top:9px; }
+  .receipt{ display:flex; gap:16px; align-items:flex-start; margin-top:14px; flex-wrap:wrap; }
+  .receipt figure{ margin:0; flex:0 0 200px; max-width:200px; }
+  .receipt img{ width:100%; height:auto; border-radius:11px; border:1px solid var(--line); display:block; background:#fff; }
+  .receipt figcaption{ font-size:12.5px; color:var(--mut); margin-top:5px; text-align:center; line-height:1.5; }
+  .receipt .rnote{ flex:1 1 250px; font-size:13.5px; color:var(--ink2); line-height:1.9; }
+  .receipt .rnote b{ color:var(--ink); }
+
+  @media (max-width:700px){
+    body{ font-size:16px; }
+    .hero{ padding:26px 16px 20px; border-radius:0 0 18px 18px; }
+    .hero h1{ font-size:25px; }
+    .hero .facts{ grid-template-columns:repeat(2,1fr); }
+    section, .day{ margin:12px 8px 0; padding:18px 14px 20px; border-radius:14px; }
+    .day .dh{ padding:14px 15px; } .day .db{ padding:14px 15px 18px; }
+    h2{ font-size:20px; } h3{ font-size:16.5px; }
+    table{ font-size:13.5px; } th,td{ padding:7px 6px; }
+    nav{ padding:12px 10px 0; }
+  }
+  .openfig{ margin:0 0 6px; }
+  .openfig img{ width:100%; height:auto; border-radius:15px; border:1px solid var(--line);
+    display:block; background:#fff; box-shadow:0 8px 24px rgba(20,50,45,.12); }
+  .openfig figcaption{ font-size:12.5px; color:var(--mut); margin-top:8px;
+    text-align:center; line-height:1.65; }
+  .openfig figcaption b{ color:var(--ink2); }
+  @media print{
+    body{ background:#fff; } section,.day{ break-inside:avoid; border-color:#ccc; }
+    nav{ display:none; }
+  }
+
+/* 记录页附加样式 */
+.rec-nav{position:sticky; top:0; z-index:30; display:flex; gap:8px; align-items:center;
+  background:rgba(247,246,241,.97); backdrop-filter:blur(8px); border-bottom:1px solid var(--line);
+  padding:10px 14px; flex-wrap:wrap;}
+.rec-nav a{font-size:13.5px; color:var(--site); text-decoration:none; background:#fff;
+  border:1px solid var(--line); padding:6px 12px; border-radius:18px; font-weight:600;}
+.rec-nav .crumb{color:var(--mut); font-size:13px;}
+.gate{display:none;} .gate.show{display:block;}
+.gate-inner{background:var(--card); border:1px solid var(--line); border-radius:18px;
+  padding:28px 22px; margin:18px 16px; box-shadow:0 2px 8px rgba(15,118,110,.06); text-align:center;}
+.gate-inner .lock{font-size:40px; margin-bottom:8px;}
+.gate-inner h2{margin:0 0 6px; font-size:18px; color:#0f3d3a;}
+.gate-inner p{margin:0 0 18px; font-size:13.5px; color:var(--mut);}
+.gate-inner input{width:100%; padding:12px 14px; border:1.5px solid var(--line); border-radius:12px;
+  font-size:16px; text-align:center; letter-spacing:3px; outline:none; color:var(--ink);}
+.gate-inner input:focus{border-color:var(--site);}
+.gate-inner button{margin-top:12px; width:100%; padding:12px; border:none; border-radius:12px;
+  background:var(--site); color:#fff; font-size:16px; font-weight:700; cursor:pointer; letter-spacing:1px;}
+.gate-err{display:none; color:#dc2626; font-size:13px; margin-top:10px;} .gate-err.show{display:block;}
+.content{display:none;} .content.show{display:block;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="gate" id="gate">
+    <div class="gate-inner">
+      <div class="lock">🔒</div>
+      <h2>输入密码查看</h2>
+      <p>这是家人私享的旅行记录</p>
+      <input type="password" id="pwd" placeholder="请输入密码" inputmode="text" autocomplete="off">
+      <button onclick="tryUnlock()">进入</button>
+      <div class="gate-err" id="err">密码不对，再试试</div>
+    </div>
+  </div>
+
+  <div class="content" id="content">
+    <div class="rec-nav">
+      <a href="index.html">‹ 首页</a>
+      <a href="records-sydney.html">悉尼记录</a>
+      <span class="crumb">DAY 2 · 周三</span>
+    </div>
+
+    <div class="hero" style="padding:26px 22px 20px;">
+      <div class="kick">DAY 2 · 周三</div>
+      <h1 style="font-size:26px;">购物日 · Birkenhead Point</h1>
+      <p class="sub">2026 澳洲旅行 · 悉尼实际行程记录</p>
+    </div>
+
+  <div class="day" data-page-node-id="ttW6QCvvktFTbpnb0wZUxs">
+    <div class="dh" style="background:linear-gradient(135deg,#2f6b4f,#3f8a5f)" data-page-node-id="j7O1YVabdkctPZ7PhrmknO">
+      <div class="d1" data-page-node-id="PC5qrco5hvtDYfyC5wgXuY">DAY 2 · 周三</div>
+      <div class="d2" data-page-node-id="mHEYCLqMx6k6AahkiSnfKX">9/23 · 🛍️ 购物日（Birkenhead Point）</div>
+      <div class="d3" data-page-node-id="L2b5XfI2g0Dw7YC3KootVM">整日购物：Birkenhead Point 水岸工厂店，公交直达，不租车。</div>
+    </div>
+    <div class="db" data-page-node-id="JO7BSQGeanX9eiKplbRJY1">
+      <figure class="openfig" data-page-node-id="day2OpenFig">
+        <img src="photos/rec/0923/01.jpg" alt="9/23 购物日全天回顾插画">
+        <figcaption data-page-node-id="day2OpenCap"><b>9/23 全天回顾</b>（looki 生成的插画）—— 上排：公交刷卡 · 在 Columbia 鞋墙前挑靴子 · 夜里对着地图找路 ｜ 中排：Coles 冷柜前选肉 · 泰餐这一顿 ｜ 下排：回酒店分装收拾 · 推着车补货 · 买完牛奶的那个晚上</figcaption>
+      </figure>
+
+      <div class="route" data-page-node-id="EdYXJvZ3jMn5STg9cPSR4w"><b data-page-node-id="zaRvXLf9c0fmbzDc6QMYpF">路线：</b>酒店 → 公交 / 火车 1 站到 Town Hall → Stand L 公交过 Anzac Bridge → Birkenhead Point → 逛店 + 水岸午餐 → 公交回 → 唐人街便饭</div>
+            <div class="blk" data-page-node-id="day2PlanSum"><div class="blkh" data-page-node-id="day2PlanSumH"><span class="rng" data-page-node-id="day2PlanSumR">原计划想做的事（清单）</span><span class="kd" data-page-node-id="day2PlanSumK">弹性</span></div><div class="blkb" data-page-node-id="day2PlanSumB"><ul data-page-node-id="day2PlanSumU">
+        <li data-page-node-id="pp1">09:30 出发：公交 / 火车 1 站到 Town Hall → Stand L 公交过 Anzac Bridge → Birkenhead Point（约 30–40 min，单程 A$4–6 / 人）</li>
+        <li data-page-node-id="pp2">10:30–16:30 逛 Birkenhead Point：水岸工厂店 120+ 家，UGG / 运动品牌重点看；周三 17:30 关门</li>
+        <li data-page-node-id="pp3">16:30 返程回 Central；傍晚 Haymarket / 唐人街便饭</li>
+        <li data-page-node-id="pp4">备选 DFO Homebush（折扣更深、家居 / 奢侈品全），当天未成行</li>
+      </ul></div></div><p class="story" data-page-node-id="day2GalCap">9/23 是这趟的购物日。上午坐 501 路公交到 Birkenhead Point Outlet，跟妈妈挑了一双一模一样的 UGG 鞋；为了凑退税的单，又顺手带了一只 A$35 的袋鼠包挂 —— 两双靴子 A$278、钥匙包 A$35，整单 A$313，小票都留好了，这笔记着离澳那天去办退税 —— 这只毛绒袋鼠后来一直挂在妈妈的手机上，吃泰餐那晚就被她捏在手里。下午四点来钟回到酒店，歇了一会儿，五点前又出门，在附近找了家泰餐吃晚饭 —— 一只腌蟹沙拉、一份泰式烤牛排、一份菠萝炒饭，最后是芒果椰浆饭，四个人一共 A$92.91，味道很好，是这一天里吃得最舒服的一顿。饭后顺着逛了唐人街和 Paddy’s Market，还看了一家保健品店，最后再去了一趟 Coles 把要用的补齐，才回酒店。</p>
+      <div class="note" data-page-node-id="day2TaxNote">🛍️ <b>退税提醒（UGG 那单已核实）：</b>UGG Express 的这张是带 ABN 的 <b>Tax Invoice</b>，整单 <b>A$313.00</b>（含 GST A$28.45）—— <b>单张就过 A$300 门槛，可以单独申报</b>。留好纸质小票，离澳当天（9/29 墨尔本 T2）办 TRS：起飞前 90 分钟到柜台、随身携带、要托运的先验货。Coles 那张 A$7.32 是食品、GST 为零，不在退税范围。</div>
+      <div class="receipt" data-page-node-id="day2Receipts">
+        <figure data-page-node-id="phRcpColes2"><img src="photos/rec/0923/02.jpg" alt="Coles Local Birkenhead 小票"><figcaption>Coles Local · Birkenhead 店 · 9/23 14:54</figcaption></figure>
+        <figure data-page-node-id="phRcpUGG1"><img src="photos/rec/0923/03.jpg" alt="UGG Express 小票"><figcaption>UGG Express · Birkenhead Point · 9/23 15:08</figcaption></figure>
+        <figure data-page-node-id="phRcpColesMilk"><img src="photos/rec/0923/04.jpg" alt="Coles World Square 买奶小票"><figcaption>Coles · World Square 店 · 9/23 19:28</figcaption></figure>
+        <div class="rnote" data-page-node-id="day2ReceiptNote"><b>三张小票：两张留档，一张要退税。</b><br>
+        <b>· UGG Express Australia</b>（ABN 44 168 455 405 · SYD Birkenhead Point）· Tax Invoice <b>#8002</b> · 23 Sep 2026 3:08pm<br>
+        共 3 件，合计 <b>A$313.00</b>（GST A$28.45）；付现 A$350，找零 A$37。<br>
+        — Australian Shepherd 短筒雪地靴（栗色 / 37 码）×2，A$139.00/双 = <b>A$278.00</b>（原价 A$250/双，每双省 A$111.00）<br>
+        — Australian Shepherd「Roozie」袋鼠钥匙包（棕色）×1 = <b>A$35.00</b>（原价 A$60，省 A$25.00）<br>
+        整单共省下 <b>A$247.00</b>。<br>
+        <b>· Coles Local · Birkenhead 店</b> · 23/09/2026 14:54 · 3 件 <b>A$7.32</b>：Heinz 番茄酱 500ml A$2.60、Coles 盐水金枪鱼罐头 425g A$3.30、全麦小圆面包 6 只 A$1.42，省 A$2.60。食品类免 GST（「GST INCLUDED IN TOTAL」一栏是 $0.00），所以不进退税。同样刷了那张 Mastercard 尾号 6165，直接扣 <b>AUD$7.32</b>。<br>
+        <b>· Coles · World Square 店</b> · 23/09/2026 19:28 · 2 件 <b>A$3.50</b>：Coles 1L 脱脂（UHT Skim）牛奶 ×2，A$1.75/盒；付现 A$5.00，找零 A$1.50 —— 就是晚上逛完唐人街顺路补的那一趟，食品免 GST。</div>
+      </div>
+      <div class="note" data-page-node-id="day2LuluNote">✏️ <b>实况（9/23）：</b>规划里给 Birkenhead Point 列了 Lululemon 工厂店，但当天逛下来这一带并没有 Lululemon —— 应该是规划时记岔了。Lululemon 改到 9/26 去 Bondi 那天，顺路看附近的店。</div>
+      <p class="gallery-sub" data-page-node-id="day2GalSubBP">📷 9/23 上午 · Birkenhead Point</p>
+      <div class="gallery" data-page-node-id="day2GalBP">
+        <figure data-page-node-id="phBP1"><img src="photos/rec/0923/05.jpg" alt="Birkenhead Point 实拍"><figcaption>Birkenhead Point ①</figcaption></figure>
+        <figure data-page-node-id="phBP2"><img src="photos/rec/0923/06.jpg" alt="Birkenhead Point 实拍"><figcaption>Birkenhead Point ②</figcaption></figure>
+        <figure data-page-node-id="phBP3"><img src="photos/rec/0923/07.jpg" alt="Birkenhead Point 实拍"><figcaption>Birkenhead Point ③</figcaption></figure>
+        <figure data-page-node-id="phBP4"><img src="photos/rec/0923/08.jpg" alt="Birkenhead Point 实拍"><figcaption>Birkenhead Point ④</figcaption></figure>
+        <figure data-page-node-id="phBPKangaroo"><img src="photos/rec/0923/09.jpg" alt="UGG Express 袋鼠包挂"><figcaption>战利品 · UGG Express 的袋鼠包挂（A$35）</figcaption></figure>
+      </div>
+      <p class="gallery-sub" data-page-node-id="day2GalSub">📷 9/23 晚餐 · 泰餐</p>
+      <div class="gallery" data-page-node-id="day2Gal">
+        <figure data-page-node-id="phThaiMom"><img src="photos/rec/0923/10.jpg" alt="泰餐晚饭 · 妈妈与袋鼠包挂"><figcaption>泰餐晚饭 · 妈妈拿着刚到手的袋鼠包挂</figcaption></figure>
+        <figure data-page-node-id="phThaiSalad1"><img src="photos/rec/0923/11.jpg" alt="腌蟹沙拉"><figcaption>腌蟹沙拉</figcaption></figure>
+        <figure data-page-node-id="phThaiSalad2"><img src="photos/rec/0923/12.jpg" alt="腌蟹沙拉（大盘）"><figcaption>腌蟹沙拉 · 大盘</figcaption></figure>
+        <figure data-page-node-id="phThaiSteak"><img src="photos/rec/0923/13.jpg" alt="泰式烤牛排"><figcaption>泰式烤牛排</figcaption></figure>
+        <figure data-page-node-id="phThaiRice"><img src="photos/rec/0923/14.jpg" alt="菠萝炒饭"><figcaption>菠萝炒饭</figcaption></figure>
+        <figure data-page-node-id="phThaiMango"><img src="photos/rec/0923/15.jpg" alt="芒果椰浆饭"><figcaption>芒果椰浆饭</figcaption></figure>
+      </div>
+      <p class="gallery-sub" data-page-node-id="day2GalSubCH">📷 9/23 晚间 · 唐人街 + Paddy’s Market</p>
+      <div class="gallery" data-page-node-id="day2GalCH">
+        <figure data-page-node-id="phCH1"><img src="photos/rec/0923/16.jpg" alt="唐人街"><figcaption>唐人街 ①</figcaption></figure>
+        <figure data-page-node-id="phCH2"><img src="photos/rec/0923/17.jpg" alt="唐人街"><figcaption>唐人街 ②</figcaption></figure>
+        <figure data-page-node-id="phCH3"><img src="photos/rec/0923/18.jpg" alt="唐人街"><figcaption>唐人街 ③</figcaption></figure>
+        <figure data-page-node-id="phCH4"><img src="photos/rec/0923/19.jpg" alt="唐人街"><figcaption>唐人街 ④</figcaption></figure>
+        <figure data-page-node-id="phCH5"><img src="photos/rec/0923/20.jpg" alt="唐人街牌坊夜景"><figcaption>唐人街牌坊 · 入夜</figcaption></figure>
+        <figure data-page-node-id="phCH6"><img src="photos/rec/0923/21.jpg" alt="唐人街保健品店"><figcaption>唐人街 · 保健品店（Dr Vitamins）</figcaption></figure>
+        <figure data-page-node-id="phCH7"><img src="photos/rec/0923/22.jpg" alt="唐人街牌坊近景"><figcaption>唐人街牌坊 · 近景</figcaption></figure>
+      </div>
+    </div>
+  </div>
+
+    <footer style="text-align:center; color:var(--mut); font-size:12.5px; padding:22px 16px 0;">Essie 的旅行手册 · 旅行记录 · 仅供家人查看</footer>
+  </div>
+
+</div>
+<script>
+var PASSWORD = "lxjh2026";
+function tryUnlock(){
+  var v = document.getElementById('pwd').value.trim();
+  if(v === PASSWORD){
+    sessionStorage.setItem('essie_unlocked','1');
+    document.getElementById('gate').classList.remove('show');
+    document.getElementById('content').classList.add('show');
+    document.getElementById('err').classList.remove('show');
+  } else {
+    document.getElementById('err').classList.add('show');
+    document.getElementById('pwd').value='';
+  }
+}
+document.getElementById('pwd').addEventListener('keydown', function(e){ if(e.key==='Enter') tryUnlock(); });
+if(sessionStorage.getItem('essie_unlocked')==='1'){ document.getElementById('content').classList.add('show'); }
+else { document.getElementById('gate').classList.add('show'); }
+</script>
+</body>
+</html>

@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0f3d3a">
+<title>9/28 鱼市场 + 悉尼大学</title>
+<style>
+
+  :root{
+    --paper:#f7f6f1; --card:#ffffff; --ink:#1c1c1e; --ink2:#4a4a4e; --mut:#8a8a8e;
+    --line:#e3e1d8; --star:#c2410c; --site:#0f766e; --food:#b45309; --hotel:#1d4ed8;
+    --ok:#15803d; --warn:#a16207; --no:#b91c1c; --water:#cfe3ee;
+  }
+  *{ box-sizing:border-box; }
+  body{ margin:0; padding:0; background:var(--paper); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    font-size:16.5px; line-height:1.8; -webkit-text-size-adjust:100%; }
+  .wrap{ max-width:880px; margin:0 auto; padding:0 0 46px; background:transparent; }
+
+  /* 头部 */
+  .hero{ background:linear-gradient(150deg,#0f3d3a 0%,#14494a 55%,#1b3f63 100%); color:#fff;
+    padding:32px 26px 26px; border-radius:0 0 22px 22px; }
+  .hero .kick{ display:inline-block; font-size:13px; letter-spacing:2px; background:rgba(255,255,255,.16);
+    padding:5px 13px; border-radius:20px; margin-bottom:12px; }
+  .hero h1{ margin:0; font-size:31px; line-height:1.3; letter-spacing:.5px; }
+  .hero .sub{ margin:10px 0 0; font-size:15.5px; color:#dfe9e6; }
+  .hero .facts{ margin-top:18px; display:grid; grid-template-columns:repeat(4,1fr); gap:9px; }
+  .hero .facts div{ background:rgba(255,255,255,.11); border-radius:11px; padding:9px 10px; }
+  .hero .facts b{ display:block; font-size:12.5px; color:#b9d5cf; font-weight:600; }
+  .hero .facts span{ font-size:14.5px; }
+
+  /* 导航 */
+  nav{ display:flex; gap:7px; flex-wrap:wrap; padding:14px 16px 0; }
+  nav a{ font-size:13.5px; color:var(--site); text-decoration:none; background:#fff; border:1px solid var(--line);
+    padding:6px 12px; border-radius:18px; }
+
+  section{ background:var(--card); margin:14px 12px 0; padding:22px 20px 24px; border-radius:16px;
+    border:1px solid var(--line); }
+  h2{ margin:0 0 4px; font-size:22px; letter-spacing:.5px; }
+  h2 .no{ color:var(--mut); font-size:14px; font-weight:600; margin-right:8px; }
+  .cap{ color:var(--mut); font-size:13.5px; margin:0 0 16px; }
+  h3{ margin:24px 0 8px; font-size:17.5px; padding-left:11px; border-left:4px solid var(--site); }
+  h4{ margin:18px 0 6px; font-size:15.5px; color:var(--ink2); }
+
+  table{ width:100%; border-collapse:collapse; font-size:14.5px; margin-top:8px; }
+  th,td{ padding:8px 9px; border-bottom:1px solid var(--line); text-align:left; vertical-align:top; }
+  th{ background:#f2f1eb; font-size:13.5px; color:var(--ink2); font-weight:700; }
+  td.c, th.c{ text-align:center; }
+  tr:last-child td{ border-bottom:none; }
+
+  .tag{ display:inline-block; font-size:12px; padding:1px 7px; border-radius:5px; color:#fff; font-weight:600; }
+  .t-star{ background:var(--star); } .t-site{ background:var(--site); }
+  .t-food{ background:var(--food); } .t-hotel{ background:var(--hotel); }
+  .t-free{ background:var(--ok); }
+
+  .mapbox{ margin:14px 0 4px; }
+  .mapbox svg{ width:100%; height:auto; display:block; border-radius:14px; border:1px solid var(--line); background:#f7f6f2; }
+  .mapcap{ font-size:12.5px; color:var(--mut); margin:7px 0 0; }
+
+  .legend{ display:flex; gap:14px; flex-wrap:wrap; font-size:13px; color:var(--ink2); margin:10px 0 2px; }
+  .legend i{ display:inline-block; width:11px; height:11px; border-radius:50%; margin-right:5px; vertical-align:-1px; }
+
+  /* 每日 */
+  .day{ background:var(--card); margin:14px 12px 0; border-radius:16px; border:1px solid var(--line); overflow:hidden; }
+  .day .dh{ padding:16px 20px; color:#fff; }
+  .day .dh .d1{ font-size:13px; opacity:.85; letter-spacing:1px; }
+  .day .dh .d2{ font-size:20px; font-weight:700; margin-top:3px; }
+  .day .dh .d3{ font-size:13.5px; opacity:.92; margin-top:5px; line-height:1.6; }
+  .day .db{ padding:16px 20px 20px; }
+  .route{ background:#f4f3ec; border-radius:10px; padding:10px 13px; font-size:14px; color:var(--ink2); margin-bottom:12px; }
+  .route b{ color:var(--ink); }
+
+  .note{ font-size:14px; background:#fbf7ee; border-left:3px solid var(--ok); padding:9px 12px; border-radius:0 8px 8px 0; margin-top:10px; }
+  .note.w{ background:#fdf6ec; border-left-color:var(--warn); }
+  .note.r{ background:#fdf0ef; border-left-color:var(--no); }
+
+  .eat{ font-size:14.5px; }
+  .eat .row{ padding:8px 0; border-bottom:1px dashed var(--line); }
+  .eat .row:last-child{ border-bottom:none; }
+  .eat b{ font-size:15px; }
+  .ok{ color:var(--ok); font-weight:700; } .warn{ color:var(--warn); font-weight:700; } .no{ color:var(--no); font-weight:700; }
+
+  /* 时间块 · 逐日行程 */
+  .blk{ border:1px solid var(--line); border-radius:11px; margin:0 0 9px; overflow:hidden; background:#fff; }
+  .blk.f{ border-color:#e6c8a4; background:#fffaf4; }
+  .blkh{ display:flex; align-items:baseline; gap:8px; padding:7px 12px; background:#f2f1eb;
+    font-size:14px; font-weight:700; color:var(--ink2); }
+  .blk.f .blkh{ background:#fbeee0; color:#8a3410; }
+  .blkh .rng{ font-variant-numeric:tabular-nums; letter-spacing:.2px; }
+  .blkh .kd{ margin-left:auto; font-size:11.5px; font-weight:700; padding:1px 9px; border-radius:20px;
+    background:#e7e5dc; color:#6d6d72; white-space:nowrap; }
+  .blk.f .blkh .kd{ background:var(--star); color:#fff; }
+  .blkb{ padding:9px 13px 11px; font-size:14.5px; line-height:1.75; }
+  .blkb ul{ margin:0; padding-left:18px; }
+  .blkb li{ margin:2px 0; }
+  .blkb li.pin{ list-style:none; margin-left:-18px; }
+  .pin .tm{ display:inline-block; min-width:46px; color:var(--star); font-weight:800;
+    font-variant-numeric:tabular-nums; }
+  .blk .hard{ margin-top:6px; font-size:13px; color:var(--ink2); background:#f6f5ef;
+    border-radius:7px; padding:5px 9px; }
+  .blk.f .hard{ background:#fdf3e6; color:#7c4a12; }
+  .flexhd{ font-size:12.5px; color:var(--mut); margin:2px 0 3px; }
+
+  code{ background:#f2f1eb; padding:1px 5px; border-radius:4px; font-size:13.5px; }
+  footer{ text-align:center; color:var(--mut); font-size:12.5px; padding:22px 16px 0; }
+
+  /* 旅行记录：照片墙 + 调整说明 */
+  .gallery{ display:grid; grid-template-columns:repeat(auto-fill,minmax(155px,1fr)); gap:11px; margin-top:12px; }
+  .gallery figure{ margin:0; }
+  .gallery img{ width:100%; height:158px; object-fit:cover; border-radius:11px; border:1px solid var(--line);
+    display:block; background:#eee; }
+  .gallery.tall img{ height:252px; }
+  .gallery.sign{ grid-template-columns:repeat(3,1fr); }
+  .gallery.sign img{ height:auto; object-fit:contain; background:#f4f4f4; }
+  .gallery.art{ grid-template-columns:repeat(3,1fr); }
+  .gallery.art img{ height:300px; object-fit:contain; background:#f4f4f4; }
+  .gallery figcaption{ font-size:12.5px; color:var(--mut); margin-top:5px; text-align:center; line-height:1.5; }
+  .adjust{ margin:14px 12px 0; padding:14px 18px; border-radius:14px; background:#fdf6ec;
+    border:1px solid #e6c8a4; border-left:5px solid var(--warn); font-size:14.5px; color:#5a4a2a; line-height:1.75; }
+  .adjust b{ color:#8a3410; }
+  .gallery-sub{ font-size:13.5px; color:var(--mut); margin:14px 0 0; }
+  .story{ font-size:15px; color:var(--ink); line-height:1.95; margin:14px 0 0; }
+  .story + .story{ margin-top:9px; }
+  .receipt{ display:flex; gap:16px; align-items:flex-start; margin-top:14px; flex-wrap:wrap; }
+  .receipt figure{ margin:0; flex:0 0 200px; max-width:200px; }
+  .receipt img{ width:100%; height:auto; border-radius:11px; border:1px solid var(--line); display:block; background:#fff; }
+  .receipt figcaption{ font-size:12.5px; color:var(--mut); margin-top:5px; text-align:center; line-height:1.5; }
+  .receipt .rnote{ flex:1 1 250px; font-size:13.5px; color:var(--ink2); line-height:1.9; }
+  .receipt .rnote b{ color:var(--ink); }
+
+  @media (max-width:700px){
+    body{ font-size:16px; }
+    .hero{ padding:26px 16px 20px; border-radius:0 0 18px 18px; }
+    .hero h1{ font-size:25px; }
+    .hero .facts{ grid-template-columns:repeat(2,1fr); }
+    section, .day{ margin:12px 8px 0; padding:18px 14px 20px; border-radius:14px; }
+    .day .dh{ padding:14px 15px; } .day .db{ padding:14px 15px 18px; }
+    h2{ font-size:20px; } h3{ font-size:16.5px; }
+    table{ font-size:13.5px; } th,td{ padding:7px 6px; }
+    nav{ padding:12px 10px 0; }
+  }
+  .openfig{ margin:0 0 6px; }
+  .openfig img{ width:100%; height:auto; border-radius:15px; border:1px solid var(--line);
+    display:block; background:#fff; box-shadow:0 8px 24px rgba(20,50,45,.12); }
+  .openfig figcaption{ font-size:12.5px; color:var(--mut); margin-top:8px;
+    text-align:center; line-height:1.65; }
+  .openfig figcaption b{ color:var(--ink2); }
+  @media print{
+    body{ background:#fff; } section,.day{ break-inside:avoid; border-color:#ccc; }
+    nav{ display:none; }
+  }
+
+/* 记录页附加样式 */
+.rec-nav{position:sticky; top:0; z-index:30; display:flex; gap:8px; align-items:center;
+  background:rgba(247,246,241,.97); backdrop-filter:blur(8px); border-bottom:1px solid var(--line);
+  padding:10px 14px; flex-wrap:wrap;}
+.rec-nav a{font-size:13.5px; color:var(--site); text-decoration:none; background:#fff;
+  border:1px solid var(--line); padding:6px 12px; border-radius:18px; font-weight:600;}
+.rec-nav .crumb{color:var(--mut); font-size:13px;}
+.gate{display:none;} .gate.show{display:block;}
+.gate-inner{background:var(--card); border:1px solid var(--line); border-radius:18px;
+  padding:28px 22px; margin:18px 16px; box-shadow:0 2px 8px rgba(15,118,110,.06); text-align:center;}
+.gate-inner .lock{font-size:40px; margin-bottom:8px;}
+.gate-inner h2{margin:0 0 6px; font-size:18px; color:#0f3d3a;}
+.gate-inner p{margin:0 0 18px; font-size:13.5px; color:var(--mut);}
+.gate-inner input{width:100%; padding:12px 14px; border:1.5px solid var(--line); border-radius:12px;
+  font-size:16px; text-align:center; letter-spacing:3px; outline:none; color:var(--ink);}
+.gate-inner input:focus{border-color:var(--site);}
+.gate-inner button{margin-top:12px; width:100%; padding:12px; border:none; border-radius:12px;
+  background:var(--site); color:#fff; font-size:16px; font-weight:700; cursor:pointer; letter-spacing:1px;}
+.gate-err{display:none; color:#dc2626; font-size:13px; margin-top:10px;} .gate-err.show{display:block;}
+.content{display:none;} .content.show{display:block;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="gate" id="gate">
+    <div class="gate-inner">
+      <div class="lock">🔒</div>
+      <h2>输入密码查看</h2>
+      <p>这是家人私享的旅行记录</p>
+      <input type="password" id="pwd" placeholder="请输入密码" inputmode="text" autocomplete="off">
+      <button onclick="tryUnlock()">进入</button>
+      <div class="gate-err" id="err">密码不对，再试试</div>
+    </div>
+  </div>
+
+  <div class="content" id="content">
+    <div class="rec-nav">
+      <a href="index.html">‹ 首页</a>
+      <a href="records-sydney.html">悉尼记录</a>
+      <span class="crumb">DAY 7 · 周一</span>
+    </div>
+
+    <div class="hero" style="padding:26px 22px 20px;">
+      <div class="kick">DAY 7 · 周一</div>
+      <h1 style="font-size:26px;">鱼市场 + 悉尼大学</h1>
+      <p class="sub">2026 澳洲旅行 · 悉尼实际行程记录</p>
+    </div>
+
+<div class="day" data-page-node-id="eNubABBablqcKRPnon7Jvl">
+    <div class="dh" style="background:linear-gradient(135deg,#7c2d12,#a16207)" data-page-node-id="1M6hZKkfY0Ic5wgq79giVC">
+      <div class="d1" data-page-node-id="K5fAjDbJlZ3PktOOJzTEGJ">DAY 7 · 周一</div>
+      <div class="d2" data-page-node-id="F0bzvMN0GqkizdYIwZbjnm">9/28 · ★ 鱼市场新馆 + 悉尼大学</div>
+      <div class="d3" data-page-node-id="EwZ3G87clYtuo1hHlMBIFz">上午鱼市场大餐 → 下午悉尼大学 → 傍晚回酒店 → 夜里收行李</div>
+    </div>
+    <div class="db" data-page-node-id="0Grcz6CLG3XblIB9yqwxtj">
+      <div class="blk" data-page-node-id="day7PlanSum"><div class="blkh" data-page-node-id="day7PlanSumH"><span class="rng" data-page-node-id="day7PlanSumR">原计划想做的事（清单）</span><span class="kd" data-page-node-id="day7PlanSumK">弹性</span></div><div class="blkb" data-page-node-id="day7PlanSumB"><ul data-page-node-id="day7PlanSumU">
+        <li data-page-node-id="d7pp1">08:00 悉尼鱼市场新馆（1A Bridge Rd, Glebe）—— 周一上午一周最空</li>
+        <li data-page-node-id="d7pp2">08:30–11:00 海鲜早午餐：生蚝 / 白灼大虾 / 盐水青口 / 烤鱼 / 龙虾尾</li>
+        <li data-page-node-id="d7pp3">11:30–14:00 Glebe 漫步 → 回酒店午休</li>
+        <li data-page-node-id="d7pp4">14:30–16:30 悉尼大学 Quadrangle「哈利波特楼」拍照（免费）</li>
+        <li data-page-node-id="d7pp5">17:00 Broadway 补货 → 18:30 晚餐 + 打包行李（明早飞墨尔本）</li>
+      </ul></div></div>
+
+      <p class="story" data-page-node-id="day7Story">上午直奔悉尼鱼市场（Sydney Fish Market，新馆 1A Bridge Rd, Glebe）。周一上午是一周里最空的窗口，果然不用排队；几家档口挑完直接开吃，还配了酒，一顿海鲜大餐吃得相当满足。原产地刚上岸的鱼和虾就是不一样，鲜味直接、毫不腥气——刺身便当、小鲍鱼、大虾、龙虾拼盘，一样样摆开来吃。最惊喜的是那只活蟹：A$45 一只，活蟹现捞、档口免费给做好，还配了一碗面条，肉质鲜嫩、葱姜味浓，是这趟在悉尼吃得最踏实的一顿。吃饱后再到新馆外的水岸台阶上走了一圈——隔着 Blackwattle Bay 能看到对岸的斜拉桥和整排游艇桅杆，码头边还有银鸥蹲着等食。</p>
+
+      <p class="gallery-sub" data-page-node-id="day7GalSubFishScene">📷 9/28 · 悉尼鱼市场 · 新馆水岸（Blackwattle Bay）· 拍到的 4 张</p>
+      <div class="gallery tall" data-page-node-id="day7GalFishScene">
+        <figure style="grid-column:span 2" data-page-node-id="ph7fm01"><img src="photos/rec/0928/01.jpg" alt="从悉尼鱼市场外望向 Blackwattle Bay：对岸的澳新军团大桥（Anzac Bridge）、Sydney City Marine 泊位与停满游艇的码头"><figcaption>市场外望向 Blackwattle Bay：澳新军团大桥（Anzac Bridge）、Sydney City Marine 泊位与成排游艇桅杆</figcaption></figure>
+        <figure style="grid-column:span 2" data-page-node-id="ph7fm08"><img src="photos/rec/0928/02.jpg" alt="悉尼鱼市场新馆：木结构大屋顶下的台阶（1A Bridge Rd, Glebe）"><figcaption>新馆的木结构大屋顶 · 屋顶下的台阶（1A Bridge Rd, Glebe）</figcaption></figure>
+        <figure style="grid-column:span 2" data-page-node-id="ph7fm09"><img src="photos/rec/0928/03.jpg" alt="悉尼鱼市场新馆外的水岸台阶与玻璃栏杆步道，人们沿海湾散步"><figcaption>新馆外的水岸台阶与玻璃栏杆步道</figcaption></figure>
+        <figure style="grid-column:span 2" data-page-node-id="ph7fm10"><img src="photos/rec/0928/04.jpg" alt="码头木栈上的澳洲银鸥（红嘴红脚）"><figcaption>码头木栈上等食的澳洲银鸥（Silver Gull）</figcaption></figure>
+      </div>
+
+      <p class="gallery-sub" data-page-node-id="day7GalSubFishCrab">🦀 9/28 · 悉尼鱼市场 · 挑活蟹（Nicholas Seafood）· 拍到的 2 张</p>
+      <div class="gallery tall" data-page-node-id="day7GalFishCrab">
+        <figure style="grid-column:span 2" data-page-node-id="ph7fm07"><img src="photos/rec/0928/05.jpg" alt="Nicholas Seafood 档口水缸里的活蟹（Live Spanner Crab），隔着玻璃现挑现做"><figcaption>档口水缸里的活蟹（Live Spanner Crab）· 隔着玻璃现挑现做</figcaption></figure>
+        <figure data-page-node-id="ph7fm02"><img src="photos/rec/0928/06.jpg" alt="Nicholas Seafood 档口招牌：SPECIAL LIVE SPANNER CRAB A$45/EACH，FREE COOKING + Free Noodle"><figcaption>档口招牌：活蟹 A$45/只 · 免费加工＋送面条</figcaption></figure>
+      </div>
+
+      <p class="gallery-sub" data-page-node-id="day7GalSubFishMeal">🍽️ 9/28 · 悉尼鱼市场 · 这一桌（大虾 · 生蚝 · 龙虾 · 刺身 · 配酒）· 拍到的 4 张</p>
+      <figure class="openfig" data-page-node-id="ph7fm03"><img src="photos/rec/0928/07.jpg" alt="悉尼鱼市场这一桌：刺身便当、生蚝、白灼大虾、龙虾拼盘与粉红葡萄酒"><figcaption>这一桌：生蚝 · 白灼大虾 · 龙虾拼盘 · 刺身便当 · 粉红葡萄酒（La Vieille Ferme）</figcaption></figure>
+      <div class="gallery tall" data-page-node-id="day7GalFishMeal">
+        <figure data-page-node-id="ph7fm04"><img src="photos/rec/0928/08.jpg" alt="白灼大虾剥壳蘸汁（SCAMPI BIG 0.25kg @ A$139.99/kg）"><figcaption>白灼大虾 · 剥壳蘸汁（A$139.99/kg）</figcaption></figure>
+        <figure style="grid-column:span 2" data-page-node-id="ph7fm05"><img src="photos/rec/0928/09.jpg" alt="活蟹现做：葱姜炒蟹＋垫在盘底吸满汤汁的面条"><figcaption>活蟹现做 · 葱姜炒蟹＋垫底的面条（A$45/只）</figcaption></figure>
+        <figure style="grid-column:span 2" data-page-node-id="ph7fm06"><img src="photos/rec/0928/10.jpg" alt="父母在鱼市场水岸座位上用塑料杯碰粉红葡萄酒，桌上是葱姜炒蟹配面条"><figcaption>爸妈在水岸座位碰杯 · 一杯粉红葡萄酒配炒蟹面</figcaption></figure>
+      </div>
+      <p class="gallery-sub" data-page-node-id="day7GalSubFishOld">🏛️ 9/28 · 悉尼鱼市场 · 老馆与澳新军团大桥 · 拍到的 2 张</p>
+      <div class="gallery tall" data-page-node-id="day7GalFishOld">
+        <figure style="grid-column:span 2" data-page-node-id="ph7fm11"><img src="photos/rec/0928/11.jpg" alt="悉尼鱼市场老馆（Bank St, Pyrmont）：蓝色波纹钢外墙与成排棕榈树，临水一侧围着施工挡板"><figcaption>鱼市场老馆 · 蓝色外墙与成排棕榈（临水一侧正在施工）</figcaption></figure>
+        <figure style="grid-column:span 2" data-page-node-id="ph7fm12"><img src="photos/rec/0928/12.jpg" alt="从悉尼鱼市场水岸台阶望向澳新军团大桥（Anzac Bridge）：混凝土主塔与较矮的回力副塔、扇形拉索，桥下是游艇泊位"><figcaption>澳新军团大桥（Anzac Bridge）· 主塔＋回力副塔的扇形拉索</figcaption></figure>
+      </div>
+      <p class="story" data-page-node-id="day7S2">酒足饭饱，慢悠悠挪到悉尼大学（University of Sydney）逛校园。主角是那座砂岩哥特复兴风格的 Quadrangle——拱廊、塔楼、庭院太像电影里的魔法学校，被大家叫做「哈利波特楼」。沿着回廊绕了一圈、拍了照，阳光打在老石墙上很有味道；校园里别的楼反倒没它出片。Quadrangle 前那块大草坪四周拉着一圈绳栏护草，进庭院只能走两侧的石板道，大家就都在草坪边找角度取景。</p>
+      <p class="gallery-sub" data-page-node-id="day7GalSubUni">📸 9/28 · 悉尼大学 Quadrangle（「哈利波特楼」）· 照片墙 · 拍到的 26 张</p>
+      <figure class="openfig" data-page-node-id="ph7uni01"><img src="photos/rec/0928/13.jpg" alt="悉尼大学 Quadrangle 正立面：砂岩塔楼与钟面、坡屋顶与山墙，前方是拉绳保护的绿色大草坪"><figcaption>Quadrangle（「哈利波特楼」）正立面 · 砂岩塔楼＋钟面＋山墙，前是拉绳护着的大草坪</figcaption></figure>
+      <div class="gallery tall" data-page-node-id="day7GalUni">
+        <figure style="grid-column:span 2" data-page-node-id="ph7uni02"><img src="photos/rec/0928/14.jpg" alt="在 Quadrangle 前的大草坪边留影：白色绳栏、石板道与身后的砂岩主楼"><figcaption>草坪边留影 · 绳栏与石板道</figcaption></figure>
+        <figure style="grid-column:span 2" data-page-node-id="ph7uni03"><img src="photos/rec/0928/15.jpg" alt="Quadrangle 砂岩塔楼与钟面下留影，屋顶为深色石板瓦，屋脊立着排烟囱"><figcaption>塔楼与钟面下 · 屋脊上一排烟囱</figcaption></figure>
+        <figure data-page-node-id="ph7uni04"><img src="photos/rec/0928/16.jpg" alt="Quadrangle 主楼前留影（竖幅）：砂岩墙面、连拱柱廊与爬满常春藤的山墙"><figcaption>山墙与连拱回廊（竖幅）</figcaption></figure>
+        <figure style="grid-column:span 2" data-page-node-id="ph7uni05"><img src="photos/rec/0928/17.jpg" alt="Quadrangle 砂岩连拱柱廊前留影，拱内是深色阴影，草坪上一排白色绳栏"><figcaption>连拱柱廊前的草坪 · 拱内是深色阴影</figcaption></figure>
+        <figure style="grid-column:span 2" data-page-node-id="ph7uni06"><img src="photos/rec/0928/18.jpg" alt="在 Quadrangle 草坪边互相拍照：身后是常绿大树与砂岩连拱"><figcaption>草坪边互拍 · 身后是常绿大树与连拱</figcaption></figure>
+        <figure style="grid-column:span 2" data-page-node-id="ph7uni07"><img src="photos/rec/0928/19.jpg" alt="Quadrangle 塔楼前的近景自拍，背景有绿色尖顶塔与砂岩主楼"><figcaption>塔楼前的近景 · 绿色尖顶塔</figcaption></figure>
+        <figure data-page-node-id="ph7uni08"><img src="photos/rec/0928/20.jpg" alt="通往 Quadrangle 主入口的石板路上合影（竖幅），两侧是草坪与砂岩建筑"><figcaption>通往主入口的石板道（竖幅）</figcaption></figure>
+        <figure data-page-node-id="ph7uni09"><img src="photos/rec/0928/21.jpg" alt="Quadrangle 主楼前留影（竖幅）：砂岩墙面、深色石板屋顶与山墙"><figcaption>主楼前（竖幅）· 砂岩墙面与石板屋顶</figcaption></figure>
+        <figure data-page-node-id="ph7uni10"><img src="photos/rec/0928/22.jpg" alt="悉尼大学 Quadrangle（「哈利波特楼」）：砂岩墙面与窗格近景"><figcaption>砂岩墙面与窗格（竖幅）</figcaption></figure>
+        <figure style="grid-column:span 2" data-page-node-id="ph7uni11"><img src="photos/rec/0928/23.jpg" alt="悉尼大学 Quadrangle（「哈利波特楼」）：庭院一侧的连拱回廊"><figcaption>庭院一侧的连拱回廊</figcaption></figure>
+        <figure data-page-node-id="ph7uni12"><img src="photos/rec/0928/24.jpg" alt="悉尼大学 Quadrangle（「哈利波特楼」）：山墙与爬满的常春藤"><figcaption>山墙与爬藤（竖幅）</figcaption></figure>
+        <figure data-page-node-id="ph7uni13"><img src="photos/rec/0928/25.jpg" alt="悉尼大学 Quadrangle（「哈利波特楼」）：砂岩主楼一角与屋脊"><figcaption>主楼一角 · 屋脊</figcaption></figure>
+        <figure style="grid-column:span 2" data-page-node-id="ph7uni14"><img src="photos/rec/0928/26.jpg" alt="悉尼大学 Quadrangle（「哈利波特楼」）：草坪与身后的砂岩塔楼"><figcaption>草坪与塔楼</figcaption></figure>
+        <figure data-page-node-id="ph7uni15"><img src="photos/rec/0928/27.jpg" alt="悉尼大学 Quadrangle（「哈利波特楼」）：连拱柱廊下的光影"><figcaption>连拱柱廊下的光影（竖幅）</figcaption></figure>
+        <figure data-page-node-id="ph7uni16"><img src="photos/rec/0928/28.jpg" alt="悉尼大学 Quadrangle（「哈利波特楼」）：主楼转角与屋顶烟囱"><figcaption>主楼转角 · 烟囱</figcaption></figure>
+        <figure data-page-node-id="ph7uni17"><img src="photos/rec/0928/29.jpg" alt="悉尼大学 Quadrangle（「哈利波特楼」）：庭院内的砂岩连拱回廊"><figcaption>庭院内的连拱回廊（竖幅）</figcaption></figure>
+        <figure data-page-node-id="ph7uni18"><img src="photos/rec/0928/30.jpg" alt="悉尼大学 Quadrangle（「哈利波特楼」）：钟楼与钟面近景"><figcaption>钟楼近景（竖幅）</figcaption></figure>
+        <figure data-page-node-id="ph7uni19"><img src="photos/rec/0928/31.jpg" alt="悉尼大学 Quadrangle（「哈利波特楼」）：山墙上的窗格细节"><figcaption>山墙窗格细节（竖幅）</figcaption></figure>
+        <figure style="grid-column:span 2" data-page-node-id="ph7uni20"><img src="photos/rec/0928/32.jpg" alt="悉尼大学 Quadrangle（「哈利波特楼」）：草坪上的 Quadrangle 全景"><figcaption>草坪上的 Quadrangle 全景</figcaption></figure>
+        <figure data-page-node-id="ph7uni21"><img src="photos/rec/0928/33.jpg" alt="悉尼大学 Quadrangle（「哈利波特楼」）：连拱与塔楼同框"><figcaption>连拱与塔楼（竖幅）</figcaption></figure>
+        <figure style="grid-column:span 2" data-page-node-id="ph7uni22"><img src="photos/rec/0928/34.jpg" alt="悉尼大学 Quadrangle（「哈利波特楼」）：石板道通向庭院"><figcaption>石板道通向庭院</figcaption></figure>
+        <figure style="grid-column:span 2" data-page-node-id="ph7uni23"><img src="photos/rec/0928/35.jpg" alt="悉尼大学 Quadrangle（「哈利波特楼」）：砂岩墙与绿顶塔"><figcaption>砂岩墙与绿顶塔</figcaption></figure>
+        <figure data-page-node-id="ph7uni24"><img src="photos/rec/0928/36.jpg" alt="悉尼大学 Quadrangle（「哈利波特楼」）：尖顶与钟面近景"><figcaption>尖顶与钟面（竖幅）</figcaption></figure>
+        <figure data-page-node-id="ph7uni25"><img src="photos/rec/0928/37.jpg" alt="悉尼大学 Quadrangle（「哈利波特楼」）：回廊拱内的深色阴影"><figcaption>回廊拱影（竖幅）</figcaption></figure>
+        <figure data-page-node-id="ph7uni26"><img src="photos/rec/0928/38.jpg" alt="悉尼大学 Quadrangle（「哈利波特楼」）：砂岩墙面与深色石板屋顶"><figcaption>砂岩墙面与石板屋顶（竖幅）</figcaption></figure>
+      </div>
+      <p class="story" data-page-node-id="day7S3">约下午 5 点回到酒店休息。晚上吃完饭后，按明天的航班把行李全部收好打包——9/29 一早就要飞墨尔本，这一步省不得。</p>
+
+      <p class="gallery-sub" data-page-node-id="day7GalSubFishRcp">🧾 9/28 · 悉尼鱼市场 · 6 张小票（4 家档口）</p>
+      <div class="gallery sign" data-page-node-id="day7Receipts">
+        <figure data-page-node-id="phRcpFm01"><img src="photos/rec/0928/39.jpg" alt="Peter's Sydney Fish Market 小票：SCAMPI BIG 0.250kg @ A$139.99/kg = A$35.00，28/09/2026 11:01，Reg. PS10"><figcaption>① Peter's · 大虾 0.25 kg　A$35.00</figcaption></figure>
+        <figure data-page-node-id="phRcpFm02"><img src="photos/rec/0928/40.jpg" alt="Peter's Cold Bar 小票：Lobster Platter A$35.00（含 GST 3.18），28/09/2026 11:05"><figcaption>② Peter's Cold Bar · 龙虾拼盘　A$35.00</figcaption></figure>
+        <figure data-page-node-id="phRcpFm03"><img src="photos/rec/0928/41.jpg" alt="Peter's 小票：RAINBOW SASHIMI BENTO(69) A$26.99 + WILD BABY ABALONE COOKED A$14.99 = A$41.98，28/09/2026 11:07"><figcaption>③ Peter's · 刺身便当 + 小鲍鱼　A$41.98</figcaption></figure>
+        <figure data-page-node-id="phRcpFm04"><img src="photos/rec/0928/42.jpg" alt="Nicholas Seafood 小票：LIVE SPANNER CRAB FREE COOK A$45.00，28/09/2026 11:12"><figcaption>④ Nicholas Seafood · 活蟹现做　A$45.00</figcaption></figure>
+        <figure data-page-node-id="phRcpFm05"><img src="photos/rec/0928/43.jpg" alt="Fishermen's Fine Wines 小票：LA VIEILLE FERME ROSE 750ML A$27.99 + BEER CUP ×2 A$1.00 = A$28.99，28/09/2026 11:17"><figcaption>⑤ Fishermen's Fine Wines · 粉红葡萄酒 + 啤酒杯　A$28.99</figcaption></figure>
+        <figure data-page-node-id="phRcpFm06"><img src="photos/rec/0928/44.jpg" alt="Peter's 小票：IKURA SALMON/TUNA LUMPFISH 4×A$5.99 + NIGIRI(8I) 4×A$3.90 = A$39.56（含 GST 3.60），28/09/2026 11:20"><figcaption>⑥ Peter's · 鲑鱼卵刺身 + 握寿司　A$39.56</figcaption></figure>
+      </div>
+      <div class="note" data-page-node-id="day7ReceiptNote">🧾 <b>这一顿在 4 家档口买了 6 张单，合计 A$225.53</b>（金额明细见「花销总账 · §2.1 行13」）：<br>
+      ① <b>Peter's</b> — SCAMPI BIG 大虾 0.25 kg @ A$139.99/kg　<b>A$35.00</b>（11:01）<br>
+      ② <b>Peter's Cold Bar</b> — Lobster Platter 龙虾拼盘　<b>A$35.00</b>（含 GST A$3.18；11:04）<br>
+      ③ <b>Peter's</b> — Rainbow Sashimi Bento(69) 彩虹刺身便当 A$26.99 ＋ Wild Baby Abalone Cooked 野生小鲍鱼 A$14.99＝<b>A$41.98</b>（11:07）<br>
+      ④ <b>Nicholas Seafood</b> — Live Spanner Crab Free Cook 活蟹现做　<b>A$45.00</b>（11:12）<br>
+      ⑤ <b>Fishermen's Fine Wines</b> — La Vieille Ferme 粉红葡萄酒 750ml A$27.99 ＋ Beer Cup 啤酒杯 ×2 A$1.00＝<b>A$28.99</b>（另刷卡附加费 A$0.43；11:17）<br>
+      ⑥ <b>Peter's</b> — Ikura 鲑鱼卵/金枪鱼/圆鳍鱼刺身 4 件 A$23.96 ＋ Nigiri(8I) 握寿司 4 件 A$15.60＝<b>A$39.56</b>（含 GST A$3.60；11:20）<br>
+      📌 6 张单的税号 ABN 分属三家：Peter's 与 Peter's Cold Bar（83 835 862 251）、Nicholas Seafood（42 610 962 235）、Fishermen's Fine Wines（88 271 150 361）。生鲜类 GST 为 0；仅龙虾拼盘、握寿司与酒含 GST。餐饮堂食不进 TRS。</div>
+
+      <div class="note" data-page-node-id="day7Note">🐟 <b>悉尼鱼市场（Sydney Fish Market）</b>：南半球最大的鱼市场之一，新馆在 Glebe 的 <b>1A Bridge Rd</b>；轻轨 L1 到 <b>Bank Street</b> 站（原「Fish Market」站已改名，别下错），约 15 min。营业 7:00–22:00（日–四）。<br>
+      🦀 <b>活蟹现做</b>：小票作 <b>LIVE SPANNER CRAB</b>（家人称「椰子蟹」），A$45/只 —— 活蟹现捞、档口免费加工、配面条；肉质鲜嫩、葱姜味浓。<br>
+      🌉 <b>水岸景观</b>：新馆外侧是面向 Blackwattle Bay 的台阶平台，隔湾就是<b>澳新军团大桥（Anzac Bridge）</b>——跨越 Blackwattle Bay、连接 Pyrmont 与 Glebe Island 的斜拉桥，1995 年通车（原名 Glebe Island Bridge，后改名纪念一战澳新军团 ANZAC），混凝土主塔＋一座较矮的回力副塔、扇形拉索，桥下是 Sydney City Marine 的泊位与成排游艇桅杆；码头木栈上常有澳洲银鸥（Silver Gull，红嘴红脚）蹲着等食。老馆（Bank St, Pyrmont）的蓝色外墙与成排棕榈就在一侧，临水一带正在施工。<br>
+      🏛️ <b>悉尼大学 Quadrangle「哈利波特楼」</b>：澳洲第一所大学（1850 年建校），Quadrangle 由建筑师 <b>Edmund Blacket</b> 设计、1859 年起陆续落成，砂岩哥特复兴风格——连拱回廊、山墙、钟楼，院内有 <b>Great Hall</b>；因拱廊庭院神似电影里的魔法学校而得了「哈利波特楼」的俗称。前草坪四周拉一圈绳栏护草、只能走两侧石板道，游客都在草坪边取景；免费进庭院拍照，是校园里最出片的地方。<br>
+      🧳 <b>当晚收行李</b>：为 9/29 08:15 出发、11:00 VA834（SYD T2 → MEL T3）做准备；托运 23 kg/人，超重现场很贵。</div></div>
+
+
+    <footer style="text-align:center; color:var(--mut); font-size:12.5px; padding:22px 16px 0;">Essie 的旅行手册 · 旅行记录 · 仅供家人查看</footer>
+  </div>
+
+</div>
+<script>
+var PASSWORD = "lxjh2026";
+function tryUnlock(){
+  var v = document.getElementById('pwd').value.trim();
+  if(v === PASSWORD){
+    sessionStorage.setItem('essie_unlocked','1');
+    document.getElementById('gate').classList.remove('show');
+    document.getElementById('content').classList.add('show');
+    document.getElementById('err').classList.remove('show');
+  } else {
+    document.getElementById('err').classList.add('show');
+    document.getElementById('pwd').value='';
+  }
+}
+document.getElementById('pwd').addEventListener('keydown', function(e){ if(e.key==='Enter') tryUnlock(); });
+if(sessionStorage.getItem('essie_unlocked')==='1'){ document.getElementById('content').classList.add('show'); }
+else { document.getElementById('gate').classList.add('show'); }
+</script>
+</body>
+</html>
