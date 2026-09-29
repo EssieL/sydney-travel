@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#0f766e">
+<title>小火车 · 企鹅岛 一日游 · 9/30 周三</title>
+<style>
+  :root{
+    --teal:#0f766e; --teal-d:#115e59; --teal-l:#14b8a6;
+    --amber:#f59e0b; --amber-bg:#fff7ed; --amber-bd:#fcd34d;
+    --ink:#1f2937; --sub:#64748b; --line:#e2e8f0;
+    --bg:#f5f7f7; --card:#ffffff; --soft:#eef4f4;
+    --red:#dc2626; --red-bg:#fef2f2; --red-bd:#fecaca;
+  }
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+  html,body{margin:0; padding:0;}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    background:var(--bg); color:var(--ink); line-height:1.65;
+    font-size:16px; -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:480px; margin:0 auto; background:var(--bg); min-height:100vh; padding-bottom:40px;}
+
+  .hero{background:linear-gradient(135deg,var(--teal-d),var(--teal-l)); color:#fff; padding:22px 20px 18px;}
+  .hero h1{margin:0 0 6px; font-size:23px; font-weight:800; letter-spacing:.5px;}
+  .hero .sub{font-size:13.5px; opacity:.92; margin:0;}
+  .hero .badge{display:inline-block; margin-top:12px; background:rgba(255,255,255,.16);
+    border:1px solid rgba(255,255,255,.35); padding:5px 12px; border-radius:999px; font-size:13px; font-weight:600;}
+
+  .nav{position:sticky; top:0; z-index:20; background:rgba(245,247,247,.96); backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line); padding:8px 10px; display:flex; gap:8px; overflow-x:auto; -webkit-overflow-scrolling:touch;}
+  .nav a{flex:0 0 auto; text-decoration:none; color:var(--teal-d); background:#fff; border:1px solid var(--line);
+    padding:6px 12px; border-radius:999px; font-size:13px; font-weight:600; white-space:nowrap;}
+  .nav a:active{background:var(--teal); color:#fff;}
+
+  section{padding:16px 16px 4px;}
+  .sec-title{display:flex; align-items:center; gap:8px; font-size:18px; font-weight:800; color:var(--teal-d); margin:6px 0 12px;}
+  .sec-title .ic{width:26px; height:26px; border-radius:8px; background:var(--soft); color:var(--teal); display:flex; align-items:center; justify-content:center; font-size:15px;}
+  .card{background:var(--card); border:1px solid var(--line); border-radius:16px; padding:14px 14px; margin-bottom:12px; box-shadow:0 1px 3px rgba(15,118,110,.05);}
+  .card h3{margin:0 0 8px; font-size:15.5px; color:var(--ink); font-weight:700;}
+  .kv{display:flex; gap:10px; padding:7px 0; border-bottom:1px dashed var(--line); font-size:14.5px;}
+  .kv:last-child{border-bottom:none;}
+  .kv .k{flex:0 0 86px; color:var(--sub); font-weight:600;}
+  .kv .v{flex:1; color:var(--ink);}
+  .hl{background:var(--amber-bg); border:1px solid var(--amber-bd); border-radius:12px; padding:10px 12px; font-size:14px; color:var(--teal-d); font-weight:600; margin-bottom:10px;}
+  .warn{background:var(--red-bg); border:1px solid var(--red-bd); border-radius:12px; padding:11px 12px; font-size:14px; color:#991b1b; font-weight:600; margin-bottom:10px; line-height:1.55;}
+
+  .bus-card{background:linear-gradient(135deg,#ecfdf5,#f0fdfa); border:1px solid #99f6e4; border-radius:14px; padding:13px 14px; margin-bottom:10px;}
+  .bus-card .t{font-weight:800; color:var(--teal-d); font-size:15px; margin-bottom:4px;}
+  .bus-card .d{font-size:13.5px; color:#334155; line-height:1.6;}
+  .tag{display:inline-block; background:var(--teal); color:#fff; font-size:11.5px; font-weight:700; padding:2px 8px; border-radius:6px; margin-right:4px;}
+
+  ul.clean{margin:0; padding-left:0; list-style:none;}
+  ul.clean li{padding:6px 0; border-bottom:1px dashed var(--line); font-size:14.5px;}
+  ul.clean li:last-child{border-bottom:none;}
+  ul.clean li b{color:var(--teal-d);}
+
+  .tl{position:relative; padding-left:20px;}
+  .tl:before{content:""; position:absolute; left:6px; top:4px; bottom:4px; width:2px; background:var(--teal-l);}
+  .tl .it{position:relative; margin-bottom:12px;}
+  .tl .it:before{content:""; position:absolute; left:-17px; top:5px; width:9px; height:9px; border-radius:50%; background:var(--teal); border:2px solid #fff; box-shadow:0 0 0 1px var(--teal-l);}
+  .tl .tm{font-weight:800; color:var(--teal-d); font-size:14px;}
+  .tl .tx{font-size:14px; color:#334155;}
+
+  .note{font-size:13px; color:var(--sub); margin:6px 2px 0;}
+  .foot{text-align:center; font-size:12px; color:var(--sub); padding:18px 16px 0;}
+  .top{display:block; text-align:center; color:var(--teal); font-size:13px; font-weight:600; padding:10px; text-decoration:none;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <h1>🚂 小火车 · 企鹅岛 一日游</h1>
+    <p class="sub">普芬比利蒸汽小火车 + 考拉公园 + 小企鹅归巢 ｜ 3 人跟团</p>
+    <span class="badge">2026-09-30（周三）· 全天中文团</span>
+  </div>
+
+  <nav class="nav">
+    <a href="#meet">集合</a>
+    <a href="#weather">天气</a>
+    <a href="#stops">站点</a>
+    <a href="#bring">清单</a>
+    <a href="#family">提醒</a>
+  </nav>
+
+  <!-- 集合 -->
+  <section id="meet">
+    <div class="sec-title"><span class="ic">🚌</span>集合 &amp; 司导信息</div>
+    <div class="card">
+      <div class="kv"><span class="k">集合时间</span><span class="v"><b>10:00</b>（09:55 前到门口等候）</span></div>
+      <div class="kv"><span class="k">集合地点</span><span class="v">宜必思公寓式酒店门口<br>15-21 Therry Street, Melbourne</span></div>
+      <div class="kv"><span class="k">司导</span><span class="v"><b>赵导</b> · 0466 390 980</span></div>
+      <div class="kv"><span class="k">车牌</span><span class="v"><b>BS13NF</b>（认准车牌上车）</span></div>
+      <div class="kv"><span class="k">司导服务费</span><span class="v"><b>A$5/人</b>（3 人共 A$15，现金或微信）</span></div>
+      <div class="kv"><span class="k">紧急电话</span><span class="v">+61 046 058 7988</span></div>
+    </div>
+    <div class="warn">⏰ <b>必须准时</b>：超过集合时间未到 = 自动放弃当日行程、费用不退 → <b>09:55 必须站在酒店门口</b></div>
+    <div class="hl">📋 车上规则：禁止进食饮水（自备水，下车喝）· 晕车药自备 · 污损赔偿 A$220 起 · 每站按约定时间返车 · 下车带齐随身物品</div>
+  </section>
+
+  <!-- 天气 -->
+  <section id="weather">
+    <div class="sec-title"><span class="ic">🌤</span>明天天气（BOM 官方 · 9/30）</div>
+    <div class="card">
+      <div class="kv"><span class="k">墨尔本</span><span class="v">☁️ 多云 · <b>15–23°C</b> · 傍晚或有小阵雨（40%）· 北风 25–40 km/h</span></div>
+      <div class="kv"><span class="k">菲利普岛</span><span class="v">🌥 阴到多云 · <b>13–17°C</b> · 阵雨概率 40–48% · 海风大</span></div>
+    </div>
+    <div class="hl">🐧 日落约 <b>18:22</b> · 官方预测小企鹅<b> 18:30 前后</b>归巢（明天是 18:30 档最后一天）· 建议 <b>17:30 前入座</b></div>
+    <div class="warn">🧥 观企鹅是露天看台，夜间海边风大、体感可能只有 <b>8–12°C</b> → <b>厚外套+防风是硬需求</b></div>
+    <div class="note">☔ 阵雨概率不小且看台露天，企鹅下雨照常归巢，带折叠伞或轻便雨衣。</div>
+  </section>
+
+  <!-- 站点 -->
+  <section id="stops">
+    <div class="sec-title"><span class="ic">📍</span>六站看点 &amp; 攻略</div>
+
+    <div class="bus-card">
+      <div class="t">1️⃣ 普芬比利蒸汽小火车（约 30 分钟）</div>
+      <div class="d">1900 年通车的百年蒸汽窄轨铁路，穿越丹德农山脉原始森林。<br><br><b>看点</b>：冒白烟的复古机车头、木栈桥和蕨类雨林、复古制服工作人员。<br><b>攻略</b>：坐<b>车尾/靠后车厢</b>过桥能拍到整列车转弯；想拍机车头出发前在站台多留几分钟。<br><b>注意</b>：⚠️ 蒸汽带煤灰，<b>别穿浅色衣服</b>、手机镜头防沾灰；伸腿出窗时坐稳扶好。</div>
+    </div>
+    <div class="bus-card">
+      <div class="t">2️⃣ 午餐（约 45 分钟 · 餐食自理）</div>
+      <div class="d">导游停靠用餐点，<b>餐食自理</b>（自己点、自己付）。<b>注意</b>：下车先看菜单价位再点；长辈怕不合口味可自备干粮；别拖堂，按约定时间返车。</div>
+    </div>
+    <div class="bus-card">
+      <div class="t">3️⃣ Maru 考拉和动物公园（约 1 小时）</div>
+      <div class="d">⚠️ <b>门票自费</b>；<b>是否成行取决于当日实际情况</b>（以赵导现场安排为准）。<br><b>看点</b>：<b>手喂袋鼠和沙袋鼠</b>（买饲料 A$2–4）、近距离看考拉、袋熊、丁狗、鸸鹋。<br><b>攻略</b>：饲料分几次喂，多互动多拍照；找工作人员打听「哪只考拉醒着」。<br><b>注意</b>：考拉合影通常<b>自费</b>；喂袋鼠摊平手掌防被牙蹭到。</div>
+    </div>
+    <div class="bus-card">
+      <div class="t">4️⃣ 菲利普岛（约 30 分钟）</div>
+      <div class="d">登岛后的自然风光段。<b>看点</b>：跨海大桥（San Remo 桥，桥下常见海豚、鹈鹕）、丘陵牧场湿地、顺路看 <b>The Nobbies 海豹岩</b>栈道。<br><b>注意</b>：<b>海风极大</b>，抓稳手机和帽子；这段是车游+短暂下车观景，听赵导安排。</div>
+    </div>
+    <div class="bus-card">
+      <div class="t">5️⃣ 菲利普岛自然公园（约 45 分钟）</div>
+      <div class="d">企鹅归巢所在地，先逛游客中心。<b>看点</b>：企鹅科普展、纪念品商店（可买伴手礼）。<br><b>攻略</b>：<b>先去上厕所</b>（看台厕所少）、买好水；纪念品趁这段选好。<br><b>注意</b>：看好时间提前往看台走，好位置先到先坐。</div>
+    </div>
+    <div class="bus-card">
+      <div class="t">6️⃣ 小企鹅归巢（约 50 分钟 · 重头戏）</div>
+      <div class="d">世界上最小的企鹅（约 30cm、1kg），日落后成群破浪上岸、列队穿过沙滩回窝。<br><b>攻略</b>：露天看台<b>先到先坐</b>，占前排偏侧（企鹅多从两侧上岸）；天越黑批次越多，别急着走。</div>
+    </div>
+    <div class="warn">⛔ <b>企鹅归巢全场禁止拍照录像</b>（含手机屏幕光、智能手表）——违规会被请出场。官方照片出园扫二维码<b>免费下载</b>，安心用眼睛看。</div>
+  </section>
+
+  <!-- 清单 -->
+  <section id="bring">
+    <div class="sec-title"><span class="ic">🎒</span>随身物品清单</div>
+    <div class="card">
+      <ul class="clean">
+        <li>🧥 <b>厚外套/防风外套 + 帽子</b>（夜间海边体感 8–12°C）</li>
+        <li>☔ 折叠伞或轻便雨衣（傍晚阵雨概率最高）</li>
+        <li>🤢 <b>晕车药</b>（山路 + 海岛弯道）</li>
+        <li>💧 饮用水（车内禁饮，下车休息时喝）</li>
+        <li>💵 <b>A$15 司导费</b>（现金或微信）</li>
+        <li>🔋 充电宝（白天都好拍，省着点用）</li>
+        <li>👟 舒适步行鞋（栈道 + 看台台阶）</li>
+        <li>🚫 企鹅归巢时段手机相机全部收起——不是「可以不拍」，是「必须收」</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 提醒 -->
+  <section id="family">
+    <div class="sec-title"><span class="ic">👨‍👩‍👦</span>家庭分工提醒</div>
+    <div class="card">
+      <h3>👨 老公侯宇清（自行行程）</h3>
+      <div class="kv"><span class="k">落地</span><span class="v">CX105 <b>11:15</b> 落地墨尔本</span></div>
+      <div class="kv"><span class="k">回酒店</span><span class="v">SkyBus（4:00–次日 1:00 运营，A$25.9/人）→ Southern Cross → <b>免费电车</b>回酒店（上车别 tap）</span></div>
+      <div class="kv"><span class="k">入住</span><span class="v">到酒店<b>前台领房间卡</b>：房间号 <b>824</b>，<b>出示护照</b>，与刘一芃留的名字核对</span></div>
+    </div>
+    <div class="note">🏠 3 人 21:00 前后回酒店后全家汇合吃晚饭：<b>QVM 周三闭市</b>；唐人街 Little Bourke St 多数餐厅开到 22:00 以后，或酒店旁便利店补给。次日（10/1 周四）上午按原计划逛 QVM。</div>
+  </section>
+
+  <div class="note" style="margin:14px 18px 0;">💡 具体各站停留时间以赵导现场安排为准；日落和企鹅归巢时间来自菲利普岛自然公园官方预测。</div>
+  <a class="top" href="index.html">‹ 返回手册首页</a>
+  <div class="foot">Essie 的旅行手册 · 仅供家人查看</div>
+
+</div>
+</body>
+</html>
