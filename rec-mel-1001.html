@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0f3d3a">
+<title>10/1 雨里的市场与博物馆 · 墨尔本记录 DAY 3</title>
+<style>
+
+  :root{
+    --paper:#f7f6f1; --card:#ffffff; --ink:#1c1c1e; --ink2:#4a4a4e; --mut:#8a8a8e;
+    --line:#e3e1d8; --star:#c2410c; --site:#0f766e; --food:#b45309; --hotel:#1d4ed8;
+    --ok:#15803d; --warn:#a16207; --no:#b91c1c; --water:#cfe3ee;
+  }
+  *{ box-sizing:border-box; }
+  body{ margin:0; padding:0; background:var(--paper); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    font-size:16.5px; line-height:1.8; -webkit-text-size-adjust:100%; }
+  .wrap{ max-width:880px; margin:0 auto; padding:0 0 46px; background:transparent; }
+
+  /* 头部 */
+  .hero{ background:linear-gradient(150deg,#0f3d3a 0%,#14494a 55%,#1b3f63 100%); color:#fff;
+    padding:32px 26px 26px; border-radius:0 0 22px 22px; }
+  .hero .kick{ display:inline-block; font-size:13px; letter-spacing:2px; background:rgba(255,255,255,.16);
+    padding:5px 13px; border-radius:20px; margin-bottom:12px; }
+  .hero h1{ margin:0; font-size:31px; line-height:1.3; letter-spacing:.5px; }
+  .hero .sub{ margin:10px 0 0; font-size:15.5px; color:#dfe9e6; }
+  .hero .facts{ margin-top:18px; display:grid; grid-template-columns:repeat(4,1fr); gap:9px; }
+  .hero .facts div{ background:rgba(255,255,255,.11); border-radius:11px; padding:9px 10px; }
+  .hero .facts b{ display:block; font-size:12.5px; color:#b9d5cf; font-weight:600; }
+  .hero .facts span{ font-size:14.5px; }
+
+  /* 导航 */
+  nav{ display:flex; gap:7px; flex-wrap:wrap; padding:14px 16px 0; }
+  nav a{ font-size:13.5px; color:var(--site); text-decoration:none; background:#fff; border:1px solid var(--line);
+    padding:6px 12px; border-radius:18px; }
+
+  section{ background:var(--card); margin:14px 12px 0; padding:22px 20px 24px; border-radius:16px;
+    border:1px solid var(--line); }
+  h2{ margin:0 0 4px; font-size:22px; letter-spacing:.5px; }
+  h2 .no{ color:var(--mut); font-size:14px; font-weight:600; margin-right:8px; }
+  .cap{ color:var(--mut); font-size:13.5px; margin:0 0 16px; }
+  h3{ margin:24px 0 8px; font-size:17.5px; padding-left:11px; border-left:4px solid var(--site); }
+  h4{ margin:18px 0 6px; font-size:15.5px; color:var(--ink2); }
+
+  table{ width:100%; border-collapse:collapse; font-size:14.5px; margin-top:8px; }
+  th,td{ padding:8px 9px; border-bottom:1px solid var(--line); text-align:left; vertical-align:top; }
+  th{ background:#f2f1eb; font-size:13.5px; color:var(--ink2); font-weight:700; }
+  td.c, th.c{ text-align:center; }
+  tr:last-child td{ border-bottom:none; }
+  td .cut{ color:var(--no); }
+  td .keep{ color:var(--ok); }
+
+  .tag{ display:inline-block; font-size:12px; padding:1px 7px; border-radius:5px; color:#fff; font-weight:600; }
+  .t-star{ background:var(--star); } .t-site{ background:var(--site); }
+  .t-food{ background:var(--food); } .t-hotel{ background:var(--hotel); }
+  .t-free{ background:var(--ok); }
+
+  /* 每日 */
+  .day{ background:var(--card); margin:14px 12px 0; border-radius:16px; border:1px solid var(--line); overflow:hidden; }
+  .day .dh{ padding:16px 20px; color:#fff; }
+  .day .dh .d1{ font-size:13px; opacity:.85; letter-spacing:1px; }
+  .day .dh .d2{ font-size:20px; font-weight:700; margin-top:3px; }
+  .day .dh .d3{ font-size:13.5px; opacity:.92; margin-top:5px; line-height:1.6; }
+  .day .db{ padding:16px 20px 20px; }
+  .route{ background:#f4f3ec; border-radius:10px; padding:10px 13px; font-size:14px; color:var(--ink2); margin-bottom:12px; }
+  .route b{ color:var(--ink); }
+
+  .note{ font-size:14px; background:#fbf7ee; border-left:3px solid var(--ok); padding:9px 12px; border-radius:0 8px 8px 0; margin-top:10px; }
+  .note.w{ background:#fdf6ec; border-left-color:var(--warn); }
+  .note.r{ background:#fdf0ef; border-left-color:var(--no); }
+
+  /* 时间块 */
+  .blk{ border:1px solid var(--line); border-radius:11px; margin:0 0 9px; overflow:hidden; background:#fff; }
+  .blk.f{ border-color:#e6c8a4; background:#fffaf4; }
+  .blkh{ display:flex; align-items:baseline; gap:8px; padding:7px 12px; background:#f2f1eb;
+    font-size:14px; font-weight:700; color:var(--ink2); }
+  .blk.f .blkh{ background:#fbeee0; color:#8a3410; }
+  .blkh .rng{ font-variant-numeric:tabular-nums; letter-spacing:.2px; }
+  .blkh .kd{ margin-left:auto; font-size:11.5px; font-weight:700; padding:1px 9px; border-radius:20px;
+    background:#e7e5dc; color:#6d6d72; white-space:nowrap; }
+  .blk.f .blkh .kd{ background:var(--star); color:#fff; }
+  .blkb{ padding:9px 13px 11px; font-size:14.5px; line-height:1.75; }
+  .blkb ul{ margin:0; padding-left:18px; }
+  .blkb li{ margin:2px 0; }
+  .blkb li.pin{ list-style:none; margin-left:-18px; }
+  .pin .tm{ display:inline-block; min-width:46px; color:var(--star); font-weight:800;
+    font-variant-numeric:tabular-nums; }
+  .blk .hard{ margin-top:6px; font-size:13px; color:var(--ink2); background:#f6f5ef;
+    border-radius:7px; padding:5px 9px; }
+  .blk.f .hard{ background:#fdf3e6; color:#7c4a12; }
+  .flexhd{ font-size:12.5px; color:var(--mut); margin:2px 0 3px; }
+
+  code{ background:#f2f1eb; padding:1px 5px; border-radius:4px; font-size:13.5px; }
+  footer{ text-align:center; color:var(--mut); font-size:12.5px; padding:22px 16px 0; }
+
+  /* 旅行记录：照片墙 + 调整说明 */
+  .gallery{ display:grid; grid-template-columns:repeat(auto-fill,minmax(155px,1fr)); gap:11px; margin-top:12px; }
+  .gallery figure{ margin:0; }
+  .gallery img{ width:100%; height:158px; object-fit:cover; border-radius:11px; border:1px solid var(--line);
+    display:block; background:#eee; }
+  .gallery.tall img{ height:252px; }
+  .gallery.sign{ grid-template-columns:repeat(3,1fr); }
+  .gallery.sign img{ height:auto; object-fit:contain; background:#f4f4f4; }
+  .gallery.art{ grid-template-columns:repeat(3,1fr); }
+  .gallery.art img{ height:300px; object-fit:contain; background:#f4f4f4; }
+  .gallery figcaption{ font-size:12.5px; color:var(--mut); margin-top:5px; text-align:center; line-height:1.5; }
+  .adjust{ margin:14px 12px 0; padding:14px 18px; border-radius:14px; background:#fdf6ec;
+    border:1px solid #e6c8a4; border-left:5px solid var(--warn); font-size:14.5px; color:#5a4a2a; line-height:1.75; }
+  .adjust b{ color:#8a3410; }
+  .gallery-sub{ font-size:13.5px; color:var(--mut); margin:14px 0 0; }
+  .story{ font-size:15px; color:var(--ink); line-height:1.95; margin:14px 0 0; }
+  .story + .story{ margin-top:9px; }
+  .receipt{ display:flex; gap:16px; align-items:flex-start; margin-top:14px; flex-wrap:wrap; }
+  .receipt figure{ margin:0; flex:0 0 200px; max-width:200px; }
+  .receipt img{ width:100%; height:auto; border-radius:11px; border:1px solid var(--line); display:block; background:#fff; }
+  .receipt figcaption{ font-size:12.5px; color:var(--mut); margin-top:5px; text-align:center; line-height:1.5; }
+  .receipt .rnote{ flex:1 1 250px; font-size:13.5px; color:var(--ink2); line-height:1.9; }
+  .receipt .rnote b{ color:var(--ink); }
+
+  @media (max-width:700px){
+    body{ font-size:16px; }
+    .hero{ padding:26px 16px 20px; border-radius:0 0 18px 18px; }
+    .hero h1{ font-size:25px; }
+    .hero .facts{ grid-template-columns:repeat(2,1fr); }
+    section, .day{ margin:12px 8px 0; padding:18px 14px 20px; border-radius:14px; }
+    .day .dh{ padding:14px 15px; } .day .db{ padding:14px 15px 18px; }
+    h2{ font-size:20px; } h3{ font-size:16.5px; }
+    table{ font-size:13.5px; } th,td{ padding:7px 6px; }
+    nav{ padding:12px 10px 0; }
+  }
+  .openfig{ margin:0 0 6px; }
+  .openfig img{ width:100%; height:auto; border-radius:15px; border:1px solid var(--line);
+    display:block; background:#fff; box-shadow:0 8px 24px rgba(20,50,45,.12); }
+  .openfig figcaption{ font-size:12.5px; color:var(--mut); margin-top:8px;
+    text-align:center; line-height:1.65; }
+  .openfig figcaption b{ color:var(--ink2); }
+  @media print{
+    body{ background:#fff; } section,.day{ break-inside:avoid; border-color:#ccc; }
+    nav{ display:none; }
+  }
+
+/* 记录页附加样式 */
+.rec-nav{position:sticky; top:0; z-index:30; display:flex; gap:8px; align-items:center;
+  background:rgba(247,246,241,.97); backdrop-filter:blur(8px); border-bottom:1px solid var(--line);
+  padding:10px 14px; flex-wrap:wrap;}
+.rec-nav a{font-size:13.5px; color:var(--site); text-decoration:none; background:#fff;
+  border:1px solid var(--line); padding:6px 12px; border-radius:18px; font-weight:600;}
+.rec-nav .crumb{color:var(--mut); font-size:13px;}
+.gate{display:none;} .gate.show{display:block;}
+.gate-inner{background:var(--card); border:1px solid var(--line); border-radius:18px;
+  padding:28px 22px; margin:18px 16px; box-shadow:0 2px 8px rgba(15,118,110,.06); text-align:center;}
+.gate-inner .lock{font-size:40px; margin-bottom:8px;}
+.gate-inner h2{margin:0 0 6px; font-size:18px; color:#0f3d3a;}
+.gate-inner p{margin:0 0 18px; font-size:13.5px; color:var(--mut);}
+.gate-inner input{width:100%; padding:12px 14px; border:1.5px solid var(--line); border-radius:12px;
+  font-size:16px; text-align:center; letter-spacing:3px; outline:none; color:var(--ink);}
+.gate-inner input:focus{border-color:var(--site);}
+.gate-inner button{margin-top:12px; width:100%; padding:12px; border:none; border-radius:12px;
+  background:var(--site); color:#fff; font-size:16px; font-weight:700; cursor:pointer; letter-spacing:1px;}
+.gate-err{display:none; color:#dc2626; font-size:13px; margin-top:10px;} .gate-err.show{display:block;}
+.content{display:none;} .content.show{display:block;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="gate" id="gate">
+    <div class="gate-inner">
+      <div class="lock">🔒</div>
+      <h2>输入密码查看</h2>
+      <p>这是家人私享的旅行记录</p>
+      <input type="password" id="pwd" placeholder="请输入密码" inputmode="text" autocomplete="off">
+      <button onclick="tryUnlock()">进入</button>
+      <div class="gate-err" id="err">密码不对，再试试</div>
+    </div>
+  </div>
+
+  <div class="content" id="content">
+    <div class="rec-nav">
+      <a href="index.html">‹ 首页</a>
+      <a href="records-melbourne.html">‹ 返回墨尔本记录</a>
+      <span class="crumb">DAY 3 · 周四</span>
+    </div>
+
+    <div class="hero" style="padding:26px 22px 20px;">
+      <div class="kick">DAY 3 · 周四 · 10/01</div>
+      <h1 style="font-size:26px;">雨里的市场与博物馆</h1>
+      <p class="sub">2026 澳洲旅行 · 墨尔本实际行程记录</p>
+    </div>
+
+    <!-- ============ 计划 vs 实际 ============ -->
+    <section>
+      <h2><span class="no">01</span>原计划 vs 实际</h2>
+      <p class="cap">当天的攻略是《QVM 简看 → 全天 CBD 经典线 + Carlton 两博物馆》。这是它真实落地后的样子。</p>
+
+      <table>
+        <tr><th style="width:30%">时段</th><th style="width:35%">原计划</th><th>实际发生的事</th></tr>
+        <tr>
+          <td>上午</td>
+          <td>QVM 简看 + 早餐，<b>30 分钟</b>搞定；正日子在 10/3 周六</td>
+          <td>没停在"看"，停在了"买"：橙子、梨、蘑菇、一份蜂蜜棒棒糖。<b class="keep">延长</b></td>
+        </tr>
+        <tr>
+          <td>上午尾</td>
+          <td>09:00 起 CBD 室内线（图书馆 → 唐人街 → 拱廊 → 大教堂）</td>
+          <td>—— <b class="cut">整段取消</b>：州立图书馆、唐人街、涂鸦街、弗林德斯街火车站、圣保罗大教堂、雅拉河、NGV、皇家植物园，一个都没去</td>
+        </tr>
+        <tr>
+          <td>中午</td>
+          <td>唐人街午餐</td>
+          <td><b>回酒店</b>（<b class="cut">计划外的一站</b>）—— 雨没停的意思，把袋子放下、人歇一歇</td>
+        </tr>
+        <tr>
+          <td>下午前半</td>
+          <td>14:30 才轮到 Carlton：皇家展览馆<b>外观</b> + 墨尔本博物馆（全室内避雨）</td>
+          <td><b class="keep">提前到下午第一站</b>，而且博物馆成了整天的正戏 —— 恐龙长廊、原住民馆、标本廊、Phar Lap 全看了</td>
+        </tr>
+        <tr>
+          <td>下午后半</td>
+          <td>Carlton 看完 17:00 回酒店</td>
+          <td>出馆<b>搭电车</b>进城 → 皇家拱廊（老店、拱顶、女巫店抽签）→ 一碗河粉 → 走回酒店</td>
+        </tr>
+      </table>
+
+      <div class="adjust">
+        <b>📌 一句话总结：</b>雨把这一天的顺序整个倒过来了。<br>
+        原计划是「<b>CBD 九点环线当主角、Carlton 两馆当收尾避雨</b>」；实际成了「<b>博物馆当主角、CBD 只留下皇家拱廊一站</b>」。
+        攻略里那句"雨小可补皇家植物园"直接作废；反过来，本该只是"外观免费"的<b>皇家展览馆</b>，反而在卡尔顿花园里隔着雨好好看了穹顶和纪念亭。
+        天气预判是对的（10/1 官方就是降雨概率 100%、午后转雷暴），但应对方式不是硬撑户外，而是<b>把下午整段往东北挪进 Carlton</b>——这一步走对了。
+      </div>
+    </section>
+
+    <!-- ============ 当天散文 ============ -->
+    <div class="day">
+      <div class="dh" style="background:linear-gradient(135deg,#1b3f63,#2a5c7a)">
+        <div class="d1">DAY 3 · 周四 10/01</div>
+        <div class="d2">雨 · QVM 一把菜 · 墨尔本博物馆 · 皇家拱廊</div>
+        <div class="d3">天气替这一天做了主；我们把 CBD 的九站砍成了一站</div>
+      </div>
+      <div class="db">
+
+        <div class="route"><b>路线：</b>酒店 → 维多利亚女王市场 QVM（购物）→ 回酒店 → 电车 / 步行 → 卡尔顿花园 + 墨尔本博物馆 → 电车 → 皇家拱廊 → 河粉 → 走回酒店</div>
+
+        <div class="blk f">
+          <div class="blkh"><span class="rng">上午 · 下雨</span><span class="kd">QVM 买了东西</span></div>
+          <div class="blkb">
+            <ul>
+              <li class="pin">酒店出门过条街就是 QVM。本来打算只绕三十分钟、买个早餐就走 —— 真正的市集日子是后天周六（CRFT*WRK 手作市集和周末书市都在那天），今天不值得慢慢逛。</li>
+              <li class="pin">结果在 Deli Hall 那几排摊子前慢了下来：一篮一篮的西葫芦、橙子、梨，还有一把把摊开的蘑菇。挑了些橙子、梨、蘑菇，另外买了<b>一份蜂蜜棒棒糖</b>。</li>
+              <li class="pin">雨还是那种不停但也下不狠的阴天。拎着袋子回酒店 —— 这一站原来根本不在计划里。</li>
+            </ul>
+            <div class="hard">雨势没减 → 上午户外段收短，直接回房搁袋子、歇一口气。</div>
+          </div>
+        </div>
+
+        <div class="blk f">
+          <div class="blkh"><span class="rng">下午 · 雨</span><span class="kd">Carlton 两馆 · 主线</span></div>
+          <div class="blkb">
+            <ul>
+              <li class="pin">往东北进 Carlton。<b>卡尔顿花园</b>很大，雨里反而没人，园子那头就是<b>皇家展览馆</b>的穹顶 —— 1880 年世博会留下的老房子，世界文化遗产，湿漉漉地亮着。隔着雨拍了几张穹顶、正立面和女王维多利亚纪念亭。</li>
+              <li class="pin">花园对面是<b>墨尔本博物馆</b>。原计划里它只是"14:30–17:00 收尾避雨"的一站，今天反倒成了整天的正戏。</li>
+              <li class="pin">进门先撞上<b>恐龙长廊</b>：红黑配色的骨架在暗处压着人，一排排往上走。<b>Bunjilaka 原住民馆</b>的展墙、<b>MANY NATIONS</b> 那间展厅，还有 <b>Phar Lap</b> —— 1930 年代那匹赛马的名字，被做成一整面红绿拱门。</li>
+              <li class="pin">标本廊里也慢慢看：小蓝企鹅的展柜、展开双翼的长喙大鸟、<b>南鹤鸵母子</b>一大一小站在绿幕布前，还有一册摊开的图册，一页上只画着一片叶子。展厅人不多，雨声在屋顶上，人一圈圈往下走，看得倒比晴天慢。</li>
+            </ul>
+            <div class="hard">全程室内；只有进园和出园各淋了几步。</div>
+          </div>
+        </div>
+
+        <div class="blk f">
+          <div class="blkh"><span class="rng">傍晚 · 雨</span><span class="kd">电车 → 拱廊 → 河粉</span></div>
+          <div class="blkb">
+            <ul>
+              <li class="pin">出馆搭<b>电车</b>进城（免费电车区，没买票也没刷卡）。终点是<b>皇家拱廊</b> —— 1869 年的老拱廊，玻璃顶拱起来，地上是黑白棋盘格的砖。人在有顶的地方会自己慢下来。</li>
+              <li class="pin">拱廊里那家 <b>Sullivan's</b> 老字号还开着，玻璃柜一层层摆着老包装和旧海报，柜台后面的人抱着报纸在翻。抬头是拱顶的木雕和窗棂，黑色鸢尾花饰一排排垂下来。</li>
+              <li class="pin">在拱廊那片的<b>女巫店</b>抽了两张签。留下的这张是 <b>FEATHER OF THE SYLPH</b> —— 气之精灵的羽毛。卡上印着：<i>"A CLEVER MIND. The Sylph's message to you: You have been touched with the Feather of Clever. You have the gift of great thoughts; ideas come together. You will use your dear mind through good and bad weather, whatever endeavour, with fine skill: forever."</i> —— <b>good and bad weather</b> 都给你写上了，看得人笑出来。</li>
+              <li class="pin">从拱廊出来想要点热的，吃了一碗<b>河粉</b>。汤白，里有牛肉和九层塔，热气把眼镜糊了一下。雨还在下，回酒店。</li>
+            </ul>
+            <div class="hard">女巫店抽签 + 河粉，两笔都是计划外的。</div>
+          </div>
+        </div>
+
+        <p class="story">10 月 1 日周四，墨尔本。早上起来外面是那种把整座城市泡软的阴雨 —— 不是倾盆，是连绵的、灰的、一直不晴。昨晚的攻略早写明了：降雨概率 100%，下午到傍晚还有雷暴。所以今天不跟天气赌。</p>
+        <p class="story">第一站还是维多利亚女王市场，过条街就到。原打算三十分钟绕一圈、买个早餐走人，毕竟真正的市集是后天周六。可那一排排摊子让人慢下来：西葫芦、橙子、梨、一把蘑菇，还有一支蜂蜜棒棒糖，是留给自己的 —— 走了一路，甜的东西最顶用。买完已是中午，雨没停的意思，索性拎回来搁在酒店。原计划里上午完了直奔 CBD 九点环线，就这么被一场雨截在一半。</p>
+        <p class="story">下午换个方向，往东北去 Carlton。卡尔顿花园很大，雨里反而安静，园子那头立着皇家展览馆的穹顶，1880 年世博会的房子，湿漉漉地亮着 —— 本来说好只是"外观免费"看一眼，结果隔着雨好好拍了半天。花园对面是墨尔本博物馆，原本排在 14:30 当收尾避雨用的，今天反倒成了整天的正戏。恐龙长廊、原住民馆、MANY NATIONS、还有 Phar Lap 那道红绿拱门，一圈走下来人一点没急。</p>
+        <p class="story">出馆搭电车进城，只去了一处：皇家拱廊。1869 年的老拱廊，玻璃顶拱起来，地上黑白棋盘格的砖，人在有顶的地方会自己慢下来。Sullivan's 那家老店还开着，玻璃柜里一层层摆着老包装。抬头看拱顶的木雕，黑色鸢尾花饰一排排垂下来。</p>
+        <p class="story">在拱廊那片的女巫店里抽了两张签，一张是「FEATHER OF THE SYLPH」—— 气之精灵的羽毛。卡上那句话写着：你会用你亲爱的头脑穿过好天气和坏天气，不管做什么都有巧劲，永远。中文译过来大概就是：别管天晴还是下雨，接着想你的事。剩下那张也留了影，一并收在下面。</p>
+        <p class="story">最后从拱廊出来要了点热的，一碗河粉。汤白，有牛肉和九层塔，热气把眼镜糊了一下。雨一直没停，吃完走回酒店。这一天没走过几个街区，把原计划的九站砍成了一站半 —— 但博物馆那几小时，比晴天时走马观花地拍要值。</p>
+
+        <div class="gallery-sub">📷 今天的 20 张</div>
+        <div class="gallery" style="grid-template-columns:repeat(auto-fill,minmax(150px,1fr));">
+          <figure><img src="photos/rec/mel-1001/01.jpg" alt="QVM 摊上的西葫芦"><figcaption>QVM · Market Organics 摊上的西葫芦</figcaption></figure>
+          <figure><img src="photos/rec/mel-1001/02.jpg" alt="卡尔顿花园望皇家展览馆"><figcaption>卡尔顿花园 · 雨里望皇家展览馆穹顶</figcaption></figure>
+          <figure><img src="photos/rec/mel-1001/03.jpg" alt="皇家展览馆正立面"><figcaption>皇家展览馆 · 正立面（1880 世博会场馆）</figcaption></figure>
+          <figure><img src="photos/rec/mel-1001/04.jpg" alt="皇家展览馆拱门与纪念亭"><figcaption>皇家展览馆 · 拱门与女王维多利亚纪念亭</figcaption></figure>
+          <figure><img src="photos/rec/mel-1001/05.jpg" alt="小蓝企鹅展柜"><figcaption>墨尔本博物馆 · 小蓝企鹅展柜</figcaption></figure>
+          <figure><img src="photos/rec/mel-1001/06.jpg" alt="展开双翼的长喙大鸟标本"><figcaption>博物馆 · 展开双翼的长喙大鸟标本</figcaption></figure>
+          <figure><img src="photos/rec/mel-1001/07.jpg" alt="圆形凹槽互动展墙"><figcaption>博物馆 · 圆形凹槽互动展墙</figcaption></figure>
+          <figure><img src="photos/rec/mel-1001/08.jpg" alt="南鹤鸵母子标本"><figcaption>博物馆 · 南鹤鸵（Cassowary）母子标本</figcaption></figure>
+          <figure><img src="photos/rec/mel-1001/09.jpg" alt="恐龙长廊骨架"><figcaption>博物馆 · 恐龙长廊的骨架</figcaption></figure>
+          <figure><img src="photos/rec/mel-1001/10.jpg" alt="古生物标本骨架与皮张"><figcaption>博物馆 · 古生物标本（骨架与皮张）</figcaption></figure>
+          <figure><img src="photos/rec/mel-1001/11.jpg" alt="摊开的展品图册"><figcaption>博物馆 · 摊开的展品图册（红书脊）</figcaption></figure>
+          <figure><img src="photos/rec/mel-1001/12.jpg" alt="MANY NATIONS 展厅"><figcaption>博物馆 · MANY NATIONS 展厅</figcaption></figure>
+          <figure><img src="photos/rec/mel-1001/13.jpg" alt="展览指南封面二维码"><figcaption>博物馆 · 展览指南封面（二维码）</figcaption></figure>
+          <figure><img src="photos/rec/mel-1001/14.jpg" alt="Australia 展区"><figcaption>博物馆 · Australia 展区（国徽 · 鸸鹋 · 袋鼠）</figcaption></figure>
+          <figure><img src="photos/rec/mel-1001/15.jpg" alt="Phar Lap 红色拱门"><figcaption>博物馆 · Phar Lap 红色拱门</figcaption></figure>
+          <figure><img src="photos/rec/mel-1001/16.jpg" alt="皇家拱廊内部"><figcaption>皇家拱廊 · 玻璃顶与黑白棋盘格</figcaption></figure>
+          <figure><img src="photos/rec/mel-1001/17.jpg" alt="Sullivan's 老字号店铺"><figcaption>皇家拱廊 · Sullivan's 老字号店铺</figcaption></figure>
+          <figure><img src="photos/rec/mel-1001/18.jpg" alt="拱顶木雕与窗棂"><figcaption>皇家拱廊 · 拱顶木雕与窗棂</figcaption></figure>
+          <figure><img src="photos/rec/mel-1001/19.jpg" alt="一碗河粉"><figcaption>一碗河粉（Pho）</figcaption></figure>
+          <figure><img src="photos/rec/mel-1001/20.jpg" alt="女巫店抽的签"><figcaption>女巫店抽的签 · Feather of the Sylph</figcaption></figure>
+        </div>
+
+        <div class="note"><b>📌 记录：</b>共 20 张照片。上午 QVM（橙子 / 梨 / 蘑菇 / 蜂蜜棒棒糖）→ 回酒店 → 卡尔顿花园 + 墨尔本博物馆（恐龙长廊 · Bunjilaka · MANY NATIONS · Phar Lap）→ 电车 → 皇家拱廊（Sullivan's · 女巫店抽签）→ 河粉 → 回酒店。原计划 9 站 CBD 环线，实际只保留皇家拱廊；Carlton 两馆由"收尾"升为主戏。</div>
+        <div class="note w"><b>📌 照片更正：</b>第 20 张为女巫店抽的两张签之一（Feather of the Sylph）；另一张待补。</div>
+
+      </div>
+    </div>
+
+    <footer style="text-align:center; color:var(--mut); font-size:12.5px; padding:22px 16px 0;">Essie 的旅行手册 · 旅行记录 · 仅供家人查看</footer>
+  </div>
+
+</div>
+<script>
+var PASSWORD = "lxjh2026";
+function tryUnlock(){
+  var v = document.getElementById('pwd').value.trim();
+  if(v === PASSWORD){
+    sessionStorage.setItem('essie_unlocked','1');
+    document.getElementById('gate').classList.remove('show');
+    document.getElementById('content').classList.add('show');
+    document.getElementById('err').classList.remove('show');
+  } else {
+    document.getElementById('err').classList.add('show');
+    document.getElementById('pwd').value='';
+  }
+}
+document.getElementById('pwd').addEventListener('keydown', function(e){ if(e.key==='Enter') tryUnlock(); });
+if(sessionStorage.getItem('essie_unlocked')==='1'){ document.getElementById('content').classList.add('show'); }
+else { document.getElementById('gate').classList.add('show'); }
+</script>
+</body>
+</html>
