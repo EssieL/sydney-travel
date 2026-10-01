@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#0f766e">
+<title>大洋路 一日游 · 10/2 周五</title>
+<style>
+  :root{
+    --teal:#0f766e; --teal-d:#115e59; --teal-l:#14b8a6;
+    --amber:#f59e0b; --amber-bg:#fff7ed; --amber-bd:#fcd34d;
+    --ink:#1f2937; --sub:#64748b; --line:#e2e8f0;
+    --bg:#f5f7f7; --card:#ffffff; --soft:#eef4f4;
+    --red:#dc2626; --red-bg:#fef2f2; --red-bd:#fecaca;
+  }
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+  html,body{margin:0; padding:0;}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    background:var(--bg); color:var(--ink); line-height:1.65;
+    font-size:16px; -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:480px; margin:0 auto; background:var(--bg); min-height:100vh; padding-bottom:40px;}
+
+  .hero{background:linear-gradient(135deg,var(--teal-d),var(--teal-l)); color:#fff; padding:22px 20px 18px;}
+  .hero h1{margin:0 0 6px; font-size:23px; font-weight:800; letter-spacing:.5px;}
+  .hero .sub{font-size:13.5px; opacity:.92; margin:0;}
+  .hero .badge{display:inline-block; margin-top:12px; background:rgba(255,255,255,.16);
+    border:1px solid rgba(255,255,255,.35); padding:5px 12px; border-radius:999px; font-size:13px; font-weight:600;}
+
+  .nav{position:sticky; top:0; z-index:20; background:rgba(245,247,247,.96); backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line); padding:8px 10px; display:flex; gap:8px; overflow-x:auto; -webkit-overflow-scrolling:touch;}
+  .nav a{flex:0 0 auto; text-decoration:none; color:var(--teal-d); background:#fff; border:1px solid var(--line);
+    padding:6px 12px; border-radius:999px; font-size:13px; font-weight:600; white-space:nowrap;}
+  .nav a:active{background:var(--teal); color:#fff;}
+
+  section{padding:16px 16px 4px;}
+  .sec-title{display:flex; align-items:center; gap:8px; font-size:18px; font-weight:800; color:var(--teal-d); margin:6px 0 12px;}
+  .sec-title .ic{width:26px; height:26px; border-radius:8px; background:var(--soft); color:var(--teal); display:flex; align-items:center; justify-content:center; font-size:15px;}
+  .card{background:var(--card); border:1px solid var(--line); border-radius:16px; padding:14px 14px; margin-bottom:12px; box-shadow:0 1px 3px rgba(15,118,110,.05);}
+  .card h3{margin:0 0 8px; font-size:15.5px; color:var(--ink); font-weight:700;}
+  .kv{display:flex; gap:10px; padding:7px 0; border-bottom:1px dashed var(--line); font-size:14.5px;}
+  .kv:last-child{border-bottom:none;}
+  .kv .k{flex:0 0 86px; color:var(--sub); font-weight:600;}
+  .kv .v{flex:1; color:var(--ink);}
+  .hl{background:var(--amber-bg); border:1px solid var(--amber-bd); border-radius:12px; padding:10px 12px; font-size:14px; color:var(--teal-d); font-weight:600; margin-bottom:10px;}
+  .warn{background:var(--red-bg); border:1px solid var(--red-bd); border-radius:12px; padding:11px 12px; font-size:14px; color:#991b1b; font-weight:600; margin-bottom:10px; line-height:1.55;}
+
+  .bus-card{background:linear-gradient(135deg,#ecfdf5,#f0fdfa); border:1px solid #99f6e4; border-radius:14px; padding:13px 14px; margin-bottom:10px;}
+  .bus-card .t{font-weight:800; color:var(--teal-d); font-size:15px; margin-bottom:4px;}
+  .bus-card .d{font-size:13.5px; color:#334155; line-height:1.6;}
+
+  ul.clean{margin:0; padding-left:0; list-style:none;}
+  ul.clean li{padding:6px 0; border-bottom:1px dashed var(--line); font-size:14.5px;}
+  ul.clean li:last-child{border-bottom:none;}
+  ul.clean li b{color:var(--teal-d);}
+
+  table{width:100%; border-collapse:collapse; font-size:13.5px; margin:6px 0;}
+  th,td{border:1px solid var(--line); padding:7px 8px; text-align:left; vertical-align:top;}
+  th{background:var(--soft); color:var(--teal-d); font-weight:700; font-size:13px;}
+  td b{color:var(--teal-d);}
+
+  .note{font-size:13px; color:var(--sub); margin:6px 2px 0;}
+  .foot{text-align:center; font-size:12px; color:var(--sub); padding:18px 16px 0;}
+  .top{display:block; text-align:center; color:var(--teal); font-size:13px; font-weight:600; padding:10px; text-decoration:none;}
+  .back-home{display:block; text-align:center; margin:6px 16px 0; padding:14px 16px; background:var(--teal); color:#fff;
+    font-size:15px; font-weight:700; text-decoration:none; border-radius:14px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <h1>🌊 大洋路 一日游</h1>
+    <p class="sub">十二门徒 · 洛克阿德峡谷 · 阿波罗贝 · 伦敦桥 ｜ 3 人跟团</p>
+    <span class="badge">2026-10-02（周五）· 全天团</span>
+  </div>
+
+  <nav class="nav">
+    <a href="#meet">集合</a>
+    <a href="#rule">车上规则</a>
+    <a href="#weather">天气</a>
+    <a href="#stops">站点</a>
+    <a href="#bring">清单</a>
+  </nav>
+
+  <!-- 集合 -->
+  <section id="meet">
+    <div class="sec-title"><span class="ic">🚌</span>集合 &amp; 司机信息</div>
+    <div class="card">
+      <div class="kv"><span class="k">集合时间</span><span class="v"><b>07:45</b>（07:40 前就位）</span></div>
+      <div class="kv"><span class="k">集合地点</span><span class="v"><b>270 Queen St</b>, Melbourne VIC 3000（CBD）</span></div>
+      <div class="kv"><span class="k">司机</span><span class="v"><b>Austin</b></span></div>
+      <div class="kv"><span class="k">手机</span><span class="v"><b>+61 449 988 773</b>（澳洲拨 0449 988 773）</span></div>
+      <div class="kv"><span class="k">车牌</span><span class="v"><b>BS02PM</b>（认准车牌上车）</span></div>
+    </div>
+    <div class="bus-card">
+      <div class="t">🚶 从酒店怎么去</div>
+      <div class="d">沿 Queen St 往南步行约 <b>864 米 / 12 分钟</b>。<b>07:35 从酒店出门</b>，07:40 前到集合点。</div>
+    </div>
+    <div class="warn">⏰ <b>迟到 = 弃团</b>：迟到超 5 分钟且联系不上 = 视为放弃（费用不退）；联系得上才多等 5 分钟，之后自行打车去下一个上车点 → <b>07:40 必须到 270 Queen St</b>。</div>
+  </section>
+
+  <!-- 车上规则 -->
+  <section id="rule">
+    <div class="sec-title"><span class="ic">📋</span>司机通知的 4 条硬规则</div>
+    <div class="card">
+      <ul class="clean">
+        <li>📱 <b>联系方式保持畅通</b>：手机别静音/没电；出发前一天会发最终行程更新，记得查邮件/短信/WhatsApp。</li>
+        <li>⏱ <b>集合准时</b>：迟到超 5 分钟联系不上=放弃；联系上多等 5 分钟。</li>
+        <li>🚌 <b>每站准时返车</b>：各景点按时回大巴，超 5 分钟联系不上视为弃团。</li>
+        <li>🧹 <b>车内卫生</b>：车上<b>别喝咖啡/含糖饮料</b>（下车再喝）；洒了收 <b>A$50 清洁费</b>，呕吐弄脏车身另收清洁费。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 天气 -->
+  <section id="weather">
+    <div class="sec-title"><span class="ic">🌧</span>明日天气（BOM 官方 · 10/1）</div>
+    <div class="card">
+      <div class="kv"><span class="k">天气</span><span class="v">☁️ 多云转<b>雨</b> · <b>11–17°C</b></span></div>
+      <div class="kv"><span class="k">降雨</span><span class="v"><b>95% 概率</b>，10–35mm</span></div>
+      <div class="kv"><span class="k">雷暴</span><span class="v"><b>下午到傍晚</b>可能雷暴</span></div>
+      <div class="kv"><span class="k">风</span><span class="v">东南风 15–25 km/h（海边更大）</span></div>
+    </div>
+    <div class="warn">🧥 <b>明天和今天一样阴雨雷暴天</b>：大洋路在西南海岸，<b>比市区更冷、海风更大</b>（体感可能 8–12°C）→ <b>厚外套 + 防风是硬需求</b>。</div>
+  </section>
+
+  <!-- 站点 -->
+  <section id="stops">
+    <div class="sec-title"><span class="ic">📍</span>沿途看点（经典一日团线路）</div>
+    <div class="note">团方行程以现场为准，以下是标准停靠点供参考。</div>
+
+    <div class="bus-card">
+      <div class="t">🏛 纪念拱门 Memorial Arch</div>
+      <div class="d">大洋路起点地标，必拍打卡，通常短暂停留。</div>
+    </div>
+    <div class="bus-card">
+      <div class="t">🌊 十二门徒岩 Twelve Apostles（核心）</div>
+      <div class="d">海上石灰岩柱群，最出片。⚠️ <b>海边风极大</b>、护栏边抓稳手机帽子；雨大栈道湿滑。</div>
+    </div>
+    <div class="bus-card">
+      <div class="t">🏝 洛克阿德峡谷 Loch Ard Gorge</div>
+      <div class="d">沉船遗址海滩，海浪冲刷的海湾；观景台 + 下台阶到沙滩，<b>湿滑小心</b>。</div>
+    </div>
+    <div class="bus-card">
+      <div class="t">🍽 阿波罗贝 Apollo Bay（午餐点）</div>
+      <div class="d">沿海小镇，通常停 45–60 分钟，<b>餐食自理</b>。下车先看菜单价位再点；长辈怕不合口味自备干粮。</div>
+    </div>
+    <div class="bus-card">
+      <div class="t">🌉 伦敦桥 London Bridge</div>
+      <div class="d">天然海蚀拱桥（1990 年塌了一段），拍照点。</div>
+    </div>
+    <div class="bus-card">
+      <div class="t">🪜 吉布森台阶 Gibson Steps</div>
+      <div class="d">悬崖台阶下到沙滩，近距离看十二门徒（视天气/潮汐开放）。</div>
+    </div>
+
+    <div class="hl">🍱 午餐：团费通常<b>不含午餐</b>，Apollo Bay 自理；车内不能吃，下车再吃。</div>
+  </section>
+
+  <!-- 清单 -->
+  <section id="bring">
+    <div class="sec-title"><span class="ic">🎒</span>出行清单 &amp; 节奏</div>
+    <div class="card">
+      <ul class="clean">
+        <li>🧥 <b>厚外套 / 防风外套 + 帽子</b>（海边体感 8–12°C）</li>
+        <li>☔ 折叠伞或轻便雨衣（95% 降雨）</li>
+        <li>🤢 <b>晕车药</b>（单程 3h+ 山路沿海弯道，提前 30 分钟吃）</li>
+        <li>💧 饮用水（车上别喝含糖饮料，下车喝）</li>
+        <li>💵 现金少许（午餐、纪念品自理）</li>
+        <li>📱 手机充满电 + 保持畅通（司机靠这个联系你）</li>
+        <li>👟 防滑鞋（观景台栈道雨后湿滑）</li>
+      </ul>
+    </div>
+    <div class="bus-card">
+      <div class="t">⏰ 节奏</div>
+      <div class="d">
+        07:35 从酒店出门（步行 12 分钟）<br>
+        07:40 到 270 Queen St 就位（认 BS02PM）<br>
+        07:45 发车（08:05 前后真正出城）<br>
+        全天：纪念拱门 → 十二门徒 → 洛克阿德 → 阿波罗贝午餐 → 伦敦桥 → 吉布森台阶<br>
+        约 20:00 返回市区
+      </div>
+    </div>
+  </section>
+
+  <div class="note" style="margin:14px 18px 0;">💡 具体停靠与时间以司机 Austin 现场安排为准；天气来自 BOM 10/1 发布。</div>
+  <a class="back-home" href="index.html">🏠 返回行程目录</a>
+  <div class="foot">Essie 的旅行手册 · 墨尔本行程 · 仅供家人查看</div>
+
+</div>
+</body>
+</html>
