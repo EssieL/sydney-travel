@@ -55,7 +55,13 @@
   ul.clean li:last-child{border-bottom:none;}
   ul.clean li b{color:var(--teal-d);}
 
-  /* 站点卡片 */
+  table{width:100%; border-collapse:collapse; font-size:13.2px; margin:6px 0;}
+  th,td{border:1px solid var(--line); padding:6px 7px; text-align:left; vertical-align:top;}
+  th{background:var(--soft); color:var(--teal-d); font-weight:700; font-size:12.5px;}
+  td b{color:var(--teal-d);}
+  td .en{color:#64748b; font-weight:600; font-size:11.5px;}
+  td .stay{font-weight:800; color:var(--teal-d); white-space:nowrap;}
+
   .stop{background:#fff; border:1px solid var(--line); border-left:5px solid var(--teal); border-radius:14px;
     padding:12px 13px; margin-bottom:10px; box-shadow:0 1px 3px rgba(15,118,110,.05);}
   .stop.key{border-left-color:var(--amber); background:linear-gradient(180deg,#fffbeb,#fff);}
@@ -64,18 +70,11 @@
     font-size:14px; font-weight:800; display:flex; align-items:center; justify-content:center;}
   .stop.key .no{background:var(--amber); color:#7c2d12;}
   .stop .nm{flex:1; font-size:15.5px; font-weight:800; color:var(--ink); line-height:1.35;}
+  .stop .nm .en2{display:block; font-size:12.2px; color:#64748b; font-weight:600; margin-top:2px; line-height:1.35;}
   .stop .tm{flex:0 0 auto; font-size:12.5px; color:var(--sub); background:var(--soft);
     border-radius:999px; padding:3px 9px; font-weight:700;}
   .stop .bd{font-size:13.8px; color:#334155; line-height:1.62;}
-  .stop .nm .en2{display:block; font-size:12.2px; color:#64748b; font-weight:600; margin-top:2px; line-height:1.35;}
 
-  table{width:100%; border-collapse:collapse; font-size:13.2px; margin:6px 0;}
-  th,td{border:1px solid var(--line); padding:6px 7px; text-align:left; vertical-align:top;}
-  th{background:var(--soft); color:var(--teal-d); font-weight:700; font-size:12.5px;}
-  td b{color:var(--teal-d);}
-  td .en{color:#64748b; font-weight:600; font-size:11.5px; letter-spacing:.1px;}
-
-  /* 地图 */
   .mapbox{background:#fff; border:1px solid var(--line); border-radius:16px; padding:10px; margin-bottom:12px; box-shadow:0 1px 3px rgba(15,118,110,.05);}
   .mapbox .cap{font-size:13px; color:var(--sub); padding:2px 4px 8px; font-weight:600;}
   #map, #map2{width:100%; height:330px; border-radius:12px; background:#e8eef0;}
@@ -101,8 +100,8 @@
 
   <div class="hero">
     <h1>🌊 大洋路 一日游</h1>
-    <p class="sub">10 站全程：牌坊 → 沙滩 → 巧克力 → 午餐 → 考拉 → 十二门徒 → 峡谷 → 伦敦桥</p>
-    <span class="badge">2026-10-02（周五）· 3 人跟团 · 约 20:00 回市区</span>
+    <p class="sub">10 站全记录：巧克力工坊 → 牌坊 → 洛恩沙滩 → 坎伯兰河 → 阿波罗贝午餐</p>
+    <span class="badge">2026-10-02（周五）· 3 人跟团 · 07:20 出门</span>
   </div>
 
   <nav class="nav">
@@ -114,12 +113,11 @@
     <a href="#bring">清单</a>
   </nav>
 
-  <!-- 集合 -->
   <section id="meet">
     <div class="sec-title"><span class="ic">🚌</span>集合 &amp; 司机信息</div>
     <div class="card">
       <div class="kv"><span class="k">集合时间</span><span class="v"><b>07:45</b>（07:35 前就位）</span></div>
-      <div class="kv"><span class="k">集合地点</span><span class="v"><b>270 Queen St</b>, Melbourne VIC 3000（CBD）</span></div>
+      <div class="kv"><span class="k">集合地点</span><span class="v"><b>270 Queen St</b>, Melbourne VIC 3000（墨尔本市中心）</span></div>
       <div class="kv"><span class="k">司机</span><span class="v"><b>Austin</b></span></div>
       <div class="kv"><span class="k">手机</span><span class="v"><b>+61 449 988 773</b>（澳洲拨 0449 988 773）</span></div>
       <div class="kv"><span class="k">车牌</span><span class="v"><b>BS02PM</b>（认准车牌上车）</span></div>
@@ -131,7 +129,6 @@
     <div class="warn">⏰ <b>迟到 = 弃团</b>：迟到超 5 分钟且联系不上 = 视为放弃（费用不退）；联系得上才多等 5 分钟，之后自行打车去下一个上车点 → <b>07:35 前必须到 270 Queen St</b>。</div>
   </section>
 
-  <!-- 车上规则 -->
   <section id="rule">
     <div class="sec-title"><span class="ic">📋</span>车上 4 条硬规则</div>
     <div class="card">
@@ -144,47 +141,45 @@
     </div>
   </section>
 
-  <!-- 行程 -->
   <section id="itin">
-    <div class="sec-title"><span class="ic">📍</span>行程 10 站（按实际行车方向）</div>
-    <div class="warn">⚠️ <b>顺序提醒</b>：行程单上「①巧克力厂 → ②纪念牌坊 → ③Lorne」在地理上是<b>倒着排的</b>——牌坊（Eastern View）和 Lorne 都在 Wye River 巧克力厂<b>东边</b>（离墨尔本更近），车会先过牌坊和 Lorne 再到巧克力厂。下面编号保留行程单号，按<b>实际由东往西</b>排，以司机现场为准。</div>
+    <div class="sec-title"><span class="ic">📍</span>行程 10 站（按团方顺序 · 只标停留时长）</div>
+    <div class="hl">🕐 07:45 集合发车 → 之后各站<b>只标停留多久</b>（车程长短以司机现场为准）</div>
 
-    <div class="hl">🕐 时间轴（预估，以现场为准）</div>
     <div class="card" style="padding:8px 6px;">
       <table>
-        <tr><th>#</th><th>站点</th><th>预计</th><th>停</th></tr>
-        <tr><td><b>—</b></td><td>集合 Queen St 270 号<br><span class="en">270 Queen St</span></td><td>07:45</td><td>—</td></tr>
-        <tr><td><b>②</b></td><td>大洋路纪念牌坊<br><span class="en">Memorial Arch at Eastern View</span></td><td>约 10:20</td><td>20′</td></tr>
-        <tr><td><b>③</b></td><td>洛恩海滩<br><span class="en">Lorne Beach</span></td><td>约 10:45</td><td>20′</td></tr>
-        <tr><td><b>①</b></td><td>巧克力与冰淇淋工坊<br><span class="en">Great Ocean Road Chocolaterie &amp; Ice Creamery</span></td><td>约 11:15</td><td>30′</td></tr>
-        <tr><td><b>④</b></td><td>坎伯兰河<br><span class="en">Cumberland River</span></td><td>约 11:55</td><td>15′</td></tr>
-        <tr><td><b>⑤</b></td><td><b>阿波罗贝（午餐）</b><br><span class="en">Apollo Bay</span></td><td>12:20–13:20</td><td>1h</td></tr>
-        <tr><td><b>⑥</b></td><td>巴勒姆天堂风景区（找考拉）<br><span class="en">Barham Paradise Scenic Reserve</span></td><td>约 13:40</td><td>20′</td></tr>
-        <tr><td><b>⑦</b></td><td><b>十二门徒岩（核心）</b><br><span class="en">The Twelve Apostles</span></td><td>约 14:40</td><td>45′</td></tr>
-        <tr><td><b>⑧</b></td><td>洛克阿德峡谷<br><span class="en">Loch Ard Gorge</span></td><td>约 15:30</td><td>30′</td></tr>
-        <tr><td><b>⑨</b></td><td>伦敦桥<br><span class="en">London Bridge</span></td><td>约 16:10</td><td>20′</td></tr>
-        <tr><td><b>⑩</b></td><td>返程回墨尔本</td><td>16:30 上车</td><td>3.5h</td></tr>
+        <tr><th>#</th><th>站点（中文 / English）</th><th>停留</th></tr>
+        <tr><td><b>—</b></td><td>集合 Queen St 270 号<br><span class="en">270 Queen St</span></td><td class="stay">—</td></tr>
+        <tr><td><b>①</b></td><td>巧克力与冰淇淋工坊<br><span class="en">Chocolaterie &amp; Ice Creamery</span></td><td class="stay">30′</td></tr>
+        <tr><td><b>②</b></td><td>大洋路纪念牌坊<br><span class="en">Memorial Arch at Eastern View</span></td><td class="stay">20′</td></tr>
+        <tr><td><b>③</b></td><td>洛恩海滩<br><span class="en">Lorne Beach</span></td><td class="stay">20′</td></tr>
+        <tr><td><b>④</b></td><td>坎伯兰河<br><span class="en">Cumberland River</span></td><td class="stay">15′</td></tr>
+        <tr><td><b>⑤</b></td><td>阿波罗贝 · 午餐<br><span class="en">Apollo Bay</span></td><td class="stay">1h</td></tr>
+        <tr><td><b>⑥</b></td><td>巴勒姆天堂风景区 · 找考拉<br><span class="en">Barham Paradise Scenic Reserve</span></td><td class="stay">20′</td></tr>
+        <tr><td><b>⑦</b></td><td>十二门徒岩<br><span class="en">The Twelve Apostles</span></td><td class="stay">45′</td></tr>
+        <tr><td><b>⑧</b></td><td>洛克阿德峡谷<br><span class="en">Loch Ard Gorge</span></td><td class="stay">30′</td></tr>
+        <tr><td><b>⑨</b></td><td>伦敦桥<br><span class="en">London Bridge</span></td><td class="stay">20′</td></tr>
+        <tr><td><b>⑩</b></td><td>返程回墨尔本</td><td class="stay">约 3.5h</td></tr>
       </table>
+    </div>
+
+    <div class="stop key">
+      <div class="hd"><span class="no">①</span><span class="nm">巧克力与冰淇淋工坊<span class="en2">Great Ocean Road Chocolaterie &amp; Ice Creamery（Wye River 韦河小镇）</span></span><span class="tm">30′</span></div>
+      <div class="bd">⭐ 手工巧克力 / 冰淇淋工厂店，<b>咖啡糕点全部自费</b>。室内为主，雨天友好——带父母正好进去暖一暖、坐下歇会儿。🍦</div>
     </div>
 
     <div class="stop">
       <div class="hd"><span class="no">②</span><span class="nm">大洋路纪念牌坊<span class="en2">Memorial Arch at Eastern View</span></span><span class="tm">20′</span></div>
-      <div class="bd">石砌拱门，1919 年大洋路开工纪念，地标第一站。🚗 <b>实际第一个停靠点</b>，必拍第一张「到此一游」合影。</div>
+      <div class="bd">1919 年大洋路开工纪念的石砌拱门，大洋路起点地标，必拍第一张「到此一游」合影。</div>
     </div>
 
     <div class="stop">
-      <div class="hd"><span class="no">③</span><span class="nm">洛恩海滩<span class="en2">Lorne Beach（冲浪小镇洛恩 Lorne）</span></span><span class="tm">20′</span></div>
-      <div class="bd">海滩 + 礁石海蚀洞。20 分钟够拍几张；风大就别久站海边。</div>
-    </div>
-
-    <div class="stop key">
-      <div class="hd"><span class="no">①</span><span class="nm">巧克力与冰淇淋工坊<span class="en2">Great Ocean Road Chocolaterie &amp; Ice Creamery</span></span><span class="tm">30′</span></div>
-      <div class="bd">⭐ 手工巧克力 / 冰淇淋工厂店（Wye River 韦河小镇），<b>咖啡糕点全部自费</b>。室内为主，雨天友好——带父母正好进去暖一暖、坐下歇会儿。🍦</div>
+      <div class="hd"><span class="no">③</span><span class="nm">洛恩海滩<span class="en2">Lorne Beach（小镇 Lorne 洛恩）</span></span><span class="tm">20′</span></div>
+      <div class="bd">冲浪小镇沙滩 + 礁石海蚀洞。20 分钟够拍几张；风大就别久站海边。</div>
     </div>
 
     <div class="stop">
       <div class="hd"><span class="no">④</span><span class="nm">坎伯兰河<span class="en2">Cumberland River（河口 / 沙滩）</span></span><span class="tm">15′</span></div>
-      <div class="bd">河口入海处（洛恩 Lorne 西 7km），过马路就是沙滩。<b>短暂停留拍张照就走</b>，别往滩上走远。</div>
+      <div class="bd">河口入海处（洛恩西 7km），过马路就是沙滩。<b>短暂停留拍张照就走</b>，别往滩上走远。</div>
     </div>
 
     <div class="stop key">
@@ -199,7 +194,7 @@
 
     <div class="stop key">
       <div class="hd"><span class="no">⑦</span><span class="nm">十二门徒岩 · 全天核心<span class="en2">The Twelve Apostles</span></span><span class="tm">45′</span></div>
-      <div class="bd">⭐ <b>全天核心</b>：海上石灰岩柱群（实际只剩 8 座）。45 分钟够走完两个主要观景台。⚠️ <b>风最大、人最多</b>，帽子手机抓稳，护栏边别探身，雨后栈道湿滑。</div>
+      <div class="bd">⭐ 海上石灰岩柱群（实际只剩 8 座）。45 分钟够走完两个主要观景台。⚠️ <b>风最大、人最多</b>，帽子手机抓稳，护栏边别探身，雨后栈道湿滑。</div>
     </div>
 
     <div class="stop">
@@ -213,18 +208,19 @@
     </div>
 
     <div class="stop">
-      <div class="hd"><span class="no">⑩</span><span class="nm">返程 · 约 3.5 小时</span><span class="tm">16:30→20:00</span></div>
-      <div class="bd">车上别吃东西（清洁费），中途可能停 Winchelsea（威切尔西）休息站。预计 <b>20:00–20:30 回市区</b>。</div>
+      <div class="hd"><span class="no">⑩</span><span class="nm">返程回墨尔本<span class="en2">Return to Melbourne（约 3.5 小时）</span></span><span class="tm">3.5h</span></div>
+      <div class="bd">车上别吃东西（清洁费），中途可能停 Winchelsea（威切尔西）休息站。</div>
     </div>
+
+    <div class="note">💡 以上顺序与停留时长按团方行程单整理；实际停靠以司机 Austin 现场安排为准。</div>
   </section>
 
-  <!-- 地图 -->
   <section id="map">
     <div class="sec-title"><span class="ic">🗺</span>可缩放地图</div>
-    <div class="note">双指缩放 / 双击放大；点标记看站点名。图①全程概览，图②西段（午餐→伦敦桥）放大。</div>
+    <div class="note">双指缩放 / 双击放大；点标记看「英文 + 中文」。地图上点位按地理方向排布，编号对应行程单 ①→⑩。</div>
 
     <div class="mapbox">
-      <div class="cap">① 全程概览：集合 → 伦敦桥（约 300 km）</div>
+      <div class="cap">① 全程概览：集合点 → 伦敦桥（约 300 km）</div>
       <div id="map"></div>
     </div>
 
@@ -233,10 +229,9 @@
       <div id="map2"></div>
     </div>
 
-    <div class="hl">🔴 红点 = 集合点（270 Queen St）｜🟢 蓝点 = 沿途各站｜🟠 橙点 = 重点站（巧克力厂 / 午餐 / 十二门徒）</div>
+    <div class="hl">🔴 红点 = 集合点（270 Queen St）｜🟢 蓝点 = 沿途各站｜🟠 橙点 = 重点站（巧克力工坊 / 午餐 / 十二门徒）</div>
   </section>
 
-  <!-- 天气 -->
   <section id="weather">
     <div class="sec-title"><span class="ic">🌧</span>明日天气（BOM 官方 · 10/1）</div>
     <div class="card">
@@ -248,7 +243,6 @@
     <div class="warn">🧥 <b>阴雨雷暴天 + 西南海岸</b>：比市区更冷、海风更大（<b>体感 8–12°C</b>）。十二门徒／洛克阿德／伦敦桥都是<b>海边悬崖观景台，风大雨大</b> → 厚外套 + 防风 + 防滑鞋是硬需求；晕车药提前 30 分钟吃。</div>
   </section>
 
-  <!-- 清单 -->
   <section id="bring">
     <div class="sec-title"><span class="ic">🎒</span>出行清单</div>
     <div class="card">
@@ -257,7 +251,7 @@
         <li>☔ 折叠伞或轻便雨衣（95% 降雨）</li>
         <li>🤢 <b>晕车药</b>（单程 3h+ 沿海山路，提前 30 分钟吃）</li>
         <li>🔭 手机长焦 / 小望远镜（<b>找考拉</b>用）</li>
-        <li>💵 现金 + 银行卡（巧克力厂、午餐、纪念品<b>均自费</b>）</li>
+        <li>💵 现金 + 银行卡（巧克力工坊、午餐、纪念品<b>均自费</b>）</li>
         <li>💧 饮用水（车上别喝含糖饮料，下车喝）</li>
         <li>📱 手机满电 + 保持畅通（司机靠这个联系）</li>
         <li>👟 <b>防滑鞋</b>（观景台、栈道、台阶雨后湿滑）</li>
@@ -265,7 +259,7 @@
     </div>
   </section>
 
-  <div class="note" style="margin:14px 18px 0;">💡 具体停靠时间与顺序以司机 Austin 现场安排为准；天气来自 BOM 10/1 发布。</div>
+  <div class="note" style="margin:14px 18px 0;">💡 天气来自 BOM 10/1 发布；行程与停留时长按团方行程单整理。</div>
   <a class="back-home" href="index.html">🏠 返回行程目录</a>
   <div class="foot">Essie 的旅行手册 · 墨尔本行程 · 仅供家人查看</div>
 
@@ -274,10 +268,9 @@
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
   var STOPS = [
-    {n:'集合', lat:-37.8125, lng:144.9543, e:'270 Queen St', c:'Queen St 270 号集合点（墨尔本市中心）', cls:'s0'},
-    {n:'②', lat:-38.4033, lng:144.0317, e:'Memorial Arch at Eastern View', c:'大洋路纪念牌坊（东景地界）', cls:''},
+    {n:'①', lat:-38.7350, lng:143.8583, e:'Great Ocean Road Chocolaterie &amp; Ice Creamery', c:'巧克力与冰淇淋工坊（自费咖啡糕点）', cls:'key'},
+    {n:'②', lat:-38.4033, lng:144.0317, e:'Memorial Arch at Eastern View', c:'大洋路纪念牌坊（1919 开工纪念）', cls:''},
     {n:'③', lat:-38.6350, lng:143.9970, e:'Lorne Beach', c:'洛恩海滩（洛恩小镇）', cls:''},
-    {n:'①', lat:-38.7350, lng:143.8583, e:'Great Ocean Road Chocolaterie &amp; Ice Creamery', c:'大洋路巧克力与冰淇淋工坊（自费咖啡糕点）', cls:'key'},
     {n:'④', lat:-38.6833, lng:143.8333, e:'Cumberland River', c:'坎伯兰河（河口沙滩）', cls:''},
     {n:'⑤', lat:-38.8483, lng:143.6667, e:'Apollo Bay', c:'阿波罗贝（午餐・全镇餐厅）', cls:'key'},
     {n:'⑥', lat:-38.7767, lng:143.5483, e:'Barham Paradise Scenic Reserve', c:'巴勒姆天堂风景区（找野生考拉）', cls:''},
@@ -291,11 +284,13 @@
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom:18, attribution:'&copy; OpenStreetMap'
     }).addTo(m);
+    var meetIcon = L.divIcon({className:'', html:'<div class="pin-n s0">0</div>',
+      iconSize:[26,26], iconAnchor:[13,13], popupAnchor:[0,-13]});
+    L.marker([-37.8125, 144.9543], {icon:meetIcon}).addTo(m)
+      .bindPopup('<b>270 Queen St</b><br>集合点（07:45 出门 07:20）');
     list.forEach(function(s){
-      var icon = L.divIcon({
-        className:'', html:'<div class="pin-n '+s.cls+'">'+s.n+'</div>',
-        iconSize:[26,26], iconAnchor:[13,13], popupAnchor:[0,-13]
-      });
+      var icon = L.divIcon({className:'', html:'<div class="pin-n '+s.cls+'">'+s.n+'</div>',
+        iconSize:[26,26], iconAnchor:[13,13], popupAnchor:[0,-13]});
       L.marker([s.lat,s.lng], {icon:icon}).addTo(m).bindPopup('<b>'+s.e+'</b><br>'+s.c);
     });
     if(bounds) m.fitBounds(bounds, {padding:[18,18]});
@@ -304,9 +299,7 @@
 
   var all = L.latLngBounds(STOPS.map(function(s){return [s.lat,s.lng];}));
   buildMap('map',  STOPS, all);
-  buildMap('map2', STOPS.slice(4), L.latLngBounds([
-    [-38.90,142.93],[-38.78,143.72]
-  ]));
+  buildMap('map2', STOPS.slice(4), L.latLngBounds([[-38.90,142.93],[-38.78,143.72]]));
 </script>
 </body>
 </html>
