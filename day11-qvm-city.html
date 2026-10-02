@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>10/3 周六 · QVM正日子 + 咖啡 + 市中心续程</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Helvetica Neue",sans-serif;background:#f2f4f3;color:#1e293b;line-height:1.65;padding-bottom:60px}
+.wrap{max-width:480px;margin:0 auto;background:#fff;min-height:100vh}
+.hero{background:linear-gradient(150deg,#0f766e,#134e4a);color:#fff;padding:26px 18px 20px}
+.hero .date{font-size:12px;opacity:.85;letter-spacing:1px}
+.hero h1{font-size:22px;margin:6px 0 4px;font-weight:700}
+.hero .sub{font-size:13px;opacity:.9}
+.hero .chips{margin-top:12px;display:flex;gap:6px;flex-wrap:wrap}
+.hero .chip{background:rgba(255,255,255,.16);border-radius:20px;padding:3px 10px;font-size:11.5px}
+nav{position:sticky;top:0;background:#fff;border-bottom:1px solid #e2e8f0;display:flex;z-index:500;overflow-x:auto}
+nav a{flex:1;min-width:64px;text-align:center;padding:10px 4px;font-size:12px;color:#475569;text-decoration:none;border-bottom:2.5px solid transparent}
+nav a.on{color:#0f766e;border-color:#0f766e;font-weight:600}
+.card{margin:14px 14px 0;background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:15px 15px}
+.card h2{font-size:16px;color:#0f766e;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.card h3{font-size:14px;color:#134e4a;margin:12px 0 6px}
+.kv{display:flex;font-size:13px;padding:4px 0;border-bottom:1px dashed #eef2f1}
+.kv:last-child{border-bottom:none}
+.kv .k{width:72px;color:#64748b;flex-shrink:0}
+.kv .v{flex:1;color:#1e293b}
+.warn{background:#fff7ed;border:1px solid #fed7aa;border-radius:10px;padding:10px 12px;font-size:12.5px;color:#9a3412;margin:10px 0}
+.warn b{color:#c2410c}
+.hl{background:#f0fdfa;border-left:3px solid #14b8a6;padding:9px 11px;border-radius:0 8px 8px 0;font-size:12.5px;color:#134e4a;margin:9px 0}
+.mapbox{margin:14px;border-radius:14px;overflow:hidden;border:1px solid #e5e7eb}
+#map{height:380px;width:100%}
+.map-tip{font-size:11.5px;color:#64748b;padding:8px 12px;background:#f8fafc}
+.pin-n{width:26px;height:26px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:700;box-shadow:0 2px 5px rgba(0,0,0,.3);border:2px solid #fff}
+.pin-n span{transform:rotate(45deg)}
+.pin-n.s0{background:#dc2626}
+.pin-n.key{background:#f59e0b}
+.pin-n.caf{background:#92400e}
+.stop{border:1px solid #e5e7eb;border-radius:12px;padding:12px 13px;margin:10px 0}
+.stop .row1{display:flex;align-items:baseline;gap:8px}
+.stop .no{background:#0f766e;color:#fff;border-radius:8px;padding:1px 8px;font-size:12px;font-weight:700;flex-shrink:0}
+.stop .no.c{background:#92400e}
+.stop .nm{font-size:15px;font-weight:700;color:#0f172a}
+.stop .en2{font-size:11px;color:#94a3b8;margin-left:auto;text-align:right;flex-shrink:0}
+.stop .bd{font-size:12.8px;color:#475569;margin-top:6px}
+.stop .bd b{color:#0f766e}
+.tag{display:inline-block;background:#ecfdf5;color:#047857;font-size:10.5px;border-radius:4px;padding:1px 6px;margin-right:4px}
+.tag.r{background:#fef2f2;color:#b91c1c}
+.tag.o{background:#fffbeb;color:#b45309}
+table{width:100%;border-collapse:collapse;font-size:12.5px;margin:8px 0}
+th{background:#0f766e;color:#fff;padding:6px 8px;font-weight:600;text-align:left}
+td{padding:7px 8px;border-bottom:1px solid #eef2f1;vertical-align:top}
+tr:nth-child(even) td{background:#f8fafc}
+.td-en{display:block;font-size:10.5px;color:#94a3b8}
+ul.tick{list-style:none;font-size:12.8px}
+ul.tick li{padding:5px 0 5px 22px;position:relative;border-bottom:1px dashed #eef2f1}
+ul.tick li:before{content:"✓";position:absolute;left:2px;color:#0f766e;font-weight:700}
+ul.tick li.x:before{content:"✕";color:#dc2626}
+.note{background:#eef7f5;border-radius:10px;padding:10px 12px;font-size:12.3px;color:#0f5132;margin:9px 0}
+.foot{text-align:center;font-size:11px;color:#94a3b8;padding:20px 0 10px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="hero">
+  <div class="date">2026-10-03 周六 · 墨尔本</div>
+  <h1>QVM 正日子 · 咖啡半日 · 市中心续程</h1>
+  <div class="sub">上午市场+第一杯咖啡 → 下午补完拱廊之后的 CBD 段 → 晚上看 SIX</div>
+  <div class="chips">
+    <span class="chip">⛅ 11–18°C</span>
+    <span class="chip">🌧 降雨 95%</span>
+    <span class="chip">⚡ 早晚可能雷暴</span>
+    <span class="chip">🎭 晚 7:30 SIX</span>
+  </div>
+</div>
+
+<nav id="nav">
+  <a href="#sec-weather" class="on">天气</a>
+  <a href="#sec-map">地图</a>
+  <a href="#sec-qvm">QVM</a>
+  <a href="#sec-coffee">☕咖啡</a>
+  <a href="#sec-city">市中心</a>
+  <a href="#sec-six">SIX</a>
+</nav>
+
+<div class="card" id="sec-weather">
+  <h2>🌧 今日天气（BOM 官方）</h2>
+  <div class="kv"><div class="k">气温</div><div class="v">11–18°C，体感偏凉</div></div>
+  <div class="kv"><div class="k">降雨</div><div class="v"><b>95% 概率</b>，7–30mm，阵雨为主</div></div>
+  <div class="kv"><div class="k">雷暴</div><div class="v">上午和下午都<b>可能出现</b>（昨天下午到傍晚那波还没走完）</div></div>
+  <div class="kv"><div class="k">风</div><div class="v">东南风 20–30 km/h，午后转南</div></div>
+  <div class="warn">🔴 <b>节奏建议</b>：上午把 QVM 市集 + 咖啡全安排（市场有顶棚，不怕雨）；市中心段优先<b>室内</b>（NGV、大教堂），涂鸦街 / 雅拉河 / 植物园三个户外点<b>看雨势快拍快走或果断跳过</b>。傍晚雷暴停了再出门去剧院。</div>
+</div>
+
+<div class="mapbox" id="sec-map">
+  <div id="map"></div>
+  <div class="map-tip">🗺 全天路线图 · 点数字看贴士，双指放大。🔴酒店 · 🟠重点 · 🟤咖啡 · 绿=市集与景点</div>
+</div>
+
+<div class="card" id="sec-qvm">
+  <h2>🧺 上午 · QVM 正日子（今天才是主场）</h2>
+  <div class="kv"><div class="k">营业</div><div class="v">周六 <b>6:00–16:00</b>（特色摊位 9:00 起）</div></div>
+  <div class="kv"><div class="k">位置</div><div class="v">酒店正对面，步行 2–3 分钟</div></div>
+  <div class="kv"><div class="k">氛围</div><div class="v">周六是全周最热闹的一天，本地人 + 游客全在</div></div>
+  <div class="hl">🎯 <b>今天专属活动（周四来时都没有）</b>：<br>
+  ① <b>CRFT*WRK 独立手作市集</b> — 9:00–16:00，C Shed（Queen St 侧），本地手作人现卖：首饰 / 陶瓷 / 印刷品 / 伴手礼，买独特纪念品就在这里<br>
+  ② <b>周末书市</b> — 9:00–16:00，A Shed（Peel St 侧），新书 + 二手书淘货<br>
+  ③ 伴手礼摊位全开（周四非食品摊 9 点才开，上次没看的那批今天都在）</div>
+  <div class="stop"><div class="row1"><span class="no">⑴</span><span class="nm">热食区早餐</span><span class="en2">Food Court</span></div>
+    <div class="bd">🍩 <b>American Doughnut Kitchen</b> 果酱甜甜圈 A$8/5 个（出片王）· 波兰香肠 · 现烤 borek · 咖啡边走边吃</div></div>
+  <div class="stop"><div class="row1"><span class="no">⑵</span><span class="nm">Deli Hall + 采购</span><span class="en2">Deli Hall · Sheds</span></div>
+    <div class="bd">奶酪 / 意式肉铺 / 蜂蜜 / 果酱试吃一圈；水果摊比上次品种多，补货顺手买。<b>临近 16:00 收摊前水果常有折扣</b>。</div></div>
+  <div class="stop"><div class="row1"><span class="no">⑶</span><span class="nm">C Shed 手作市集</span><span class="en2">CRFT*WRK 9–16</span></div>
+    <div class="bd">伴手礼主战场，慢慢逛 1 小时不亏</div></div>
+</div>
+
+<div class="card" id="sec-coffee">
+  <h2>☕ 咖啡专攻（妈妈点名要喝的）</h2>
+  <div class="note">墨尔本 = 世界咖啡之都，<b>flat white 就诞生在这里</b>。今天不赶路，专喝这一口。一杯约 <b>A$5–6.5</b>，奶选 oat（燕麦奶）最普遍。</div>
+  <div class="stop"><div class="row1"><span class="no c">☕1</span><span class="nm">Market Lane</span><span class="en2">@ QVM Dairy Hall</span></div>
+    <div class="bd">墨尔本最受尊敬的精品烘焙厂，市场里的窗口店。<b>单品手冲 + flat white</b>。买完菜顺势来一杯，零绕路。<b>推荐：single-origin filter（单品手冲）</b></div></div>
+  <div class="stop"><div class="row1"><span class="no c">☕2</span><span class="nm">Patricia Coffee Brewers</span><span class="en2">493 Little Bourke St</span></div>
+    <div class="bd">站吧、只做浓缩、没有座位——墨尔本最经典的 <b>flat white</b> 就在这。从 QVM 步行约 12 分钟，或免费电车顺路。</div></div>
+  <div class="stop"><div class="row1"><span class="no c">☕3</span><span class="nm">Brother Baba Budan</span><span class="en2">359 Little Bourke St</span></div>
+    <div class="bd">七种子（Seven Seeds）旗下，<b>天花板挂满椅子</b>的网红店。和 Patricia 同一条街，二选一或都去。</div></div>
+  <div class="stop"><div class="row1"><span class="no c">☕4</span><span class="nm">Degraves St / Centre Place</span><span class="en2">Flinders St 站旁</span></div>
+    <div class="bd">经典咖啡巷：涂鸦 + 露天座 + 挤满小咖啡馆，随便进一家都不踩雷。<b>正好接市中心续程的起点</b>，第二杯 flat white 在这喝。</div></div>
+  <h3>🗣 点单黑话</h3>
+  <table>
+    <tr><th>说法</th><th>是什么</th></tr>
+    <tr><td>Flat white<span class="td-en">澳白 · 必喝</span></td><td>双份浓缩 + 极细奶泡，墨尔本标志</td></tr>
+    <tr><td>Magic<span class="td-en">墨尔本独有</span></td><td>双 ristretto + 3/4 奶，比 flat white 更浓更小杯</td></tr>
+    <tr><td>Long black</td><td>美式</td></tr>
+    <tr><td>Single-origin filter<span class="td-en">pour-over</span></td><td>单品手冲，Market Lane / Seven Seeds 系点</td></tr>
+  </table>
+  <div class="hl">⭐ <b>懒人路线（今天完全够用）</b>：QVM 买完菜 → Market Lane 第一杯（5 分钟）→ 免费 19/57/59 电车沿 Elizabeth St 南下 → Little Bourke 下车 Patricia / BBB 第二杯 → 步行继续去涂鸦街，或在 Flinders St 拐进 Degraves 再补一杯。父母不折腾就只喝 Market Lane 那杯。</div>
+</div>
+
+<div class="card" id="sec-city">
+  <h2>🏛 下午 · 市中心续程（接上 10/1 的尾巴）</h2>
+  <div class="note">10/1 走完了「州立图书馆 → 唐人街 → 皇家拱廊」，9/29 路过图书馆和唐人街，卡尔顿两馆也去过了。今天从<b>涂鸦街</b>开始，把剩下的六站补完，由北向南一路顺。</div>
+  <table>
+    <tr><th>#</th><th>站点<span class="td-en" style="color:#cbd5e1">English</span></th><th>看点 / 贴士</th></tr>
+    <tr><td>①</td><td>涂鸦街<span class="td-en">Hosier Lane</span></td><td>网红涂鸦墙 · ⚠️露天，<b>雨大快拍快走</b></td></tr>
+    <tr><td>②</td><td>弗林德斯街火车站<span class="td-en">Flinders Street Station</span></td><td>墨尔本地标，黄圆顶 + 时钟必拍，门口就是 Degraves St</td></tr>
+    <tr><td>③</td><td>圣保罗大教堂<span class="td-en">St Paul's Cathedral</span></td><td>免费入内，彩窗美，<b>避雨好去处</b></td></tr>
+    <tr><td>④</td><td>雅拉河<span class="td-en">Yarra River</span></td><td>河岸步道 · ⚠️风大，看天气决定</td></tr>
+    <tr><td>⑤</td><td>NGV 国际馆<span class="td-en">NGV International</span></td><td>免费，水墙大门 + 彩玻璃顶是招牌 · <b>今天避雨黄金站，可待 2h</b></td></tr>
+    <tr><td>⑥</td><td>皇家植物园<span class="td-en">Royal Botanic Gardens</span></td><td>纯户外 · ⚠️<b>雷暴时果断跳过</b>，NGV 出门即达南门</td></tr>
+  </table>
+  <div class="warn">🚋 全程在<b>免费电车区</b>内：QVM → 涂鸦街搭 19/57/59 沿 Elizabeth St 南下；NGV → 植物园步行 3 分钟；植物园回酒店可搭免费电车回。上车不 tap、不买票。</div>
+  <div class="hl">💡 顺序弹性：雨大就「①→②→③→⑤」室内线（涂鸦街门口打卡即走），植物园跳过；雨停再补 ④⑥。今晚 7:30 有 SIX，<b>15:30 前从植物园往回收</b>，别恋战。</div>
+</div>
+
+<div class="card" id="sec-six">
+  <h2>🎭 晚上 · SIX 音乐剧</h2>
+  <div class="kv"><div class="k">场次</div><div class="v">今晚 <b>19:30</b>（已购票 A$159 × 1）</div></div>
+  <div class="kv"><div class="k">剧院</div><div class="v">Comedy Theatre · <b>240 Exhibition St</b>（酒店步行约 15 分钟，或免费电车）</div></div>
+  <div class="kv"><div class="k">时长</div><div class="v">约 80 分钟，无中场休息</div></div>
+  <ul class="tick">
+    <li>提前 <b>30 分钟</b>到场，电子票存手机 + 带好证件</li>
+    <li>17:30 左右先吃晚饭（Exhibition St / Little Bourke 一带），别掐点</li>
+    <li>21:00 前后散场，溜达回酒店收今天的照片</li>
+  </ul>
+  <div class="note"> queenC 六位都太会唱——开场前别玩手机太久，这场 80 分钟一秒不浪费。</div>
+</div>
+
+<div class="card">
+  <h2>✅ 全天时间轴（弹性）</h2>
+  <table>
+    <tr><th>时段</th><th>安排</th></tr>
+    <tr><td>09:00</td><td>QVM：CRFT*WRK 开市，早餐甜甜圈 + 逛市集 + 采购</td></tr>
+    <tr><td>10:30</td><td>☕1 Market Lane（Dairy Hall）</td></tr>
+    <tr><td>11:00</td><td>电车南下，☕2 Patricia / ☕3 BBB（二选一）</td></tr>
+    <tr><td>12:00</td><td>涂鸦街 → Flinders St 站 →（☕4 Degraves 可选）</td></tr>
+    <tr><td>13:00</td><td>圣保罗大教堂 → 雅拉河（看雨）</td></tr>
+    <tr><td>13:30</td><td>NGV 避雨深度游</td></tr>
+    <tr><td>15:30</td><td>皇家植物园（雨小才去）/ 直接回酒店休整</td></tr>
+    <tr><td>17:30</td><td>晚餐</td></tr>
+    <tr><td>18:45</td><td>出门去 Comedy Theatre</td></tr>
+    <tr><td>19:30</td><td>🎭 SIX 开演</td></tr>
+    <tr><td>~21:00</td><td>散场，回酒店</td></tr>
+  </table>
+</div>
+
+<div class="foot">2026 澳新旅行 · 墨尔本 Day 5 · 10/3 周六<br>雨天版：市集有顶棚，咖啡有屋檐，剧院有座位 ☔</div>
+
+</div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+var STOPS=[
+ {n:'🏨',lat:-37.8095,lng:144.9590,e:'Ibis Melbourne (15/21 Therry St)',c:'酒店起点',cls:'s0',pop:'<b>Ibis Melbourne</b><br>酒店 · 全天起点'},
+ {n:'QVM',lat:-37.8076,lng:144.9568,e:'Queen Victoria Market',c:'维多利亚女王市场（周六正日子 6–16）',cls:'key'},
+ {n:'☕1',lat:-37.8073,lng:144.9584,e:'Market Lane Coffee @ Dairy Hall',c:'精品咖啡第一杯（单品手冲）',cls:'caf'},
+ {n:'☕2',lat:-37.8139,lng:144.9571,e:'Patricia Coffee Brewers',c:'墨尔本最经典 flat white（站吧）',cls:'caf'},
+ {n:'☕3',lat:-37.8123,lng:144.9644,e:'Brother Baba Budan',c:'天花板挂椅子的网红店',cls:'caf'},
+ {n:'①',lat:-37.8176,lng:144.9699,e:'Hosier Lane',c:'涂鸦街（雨天快拍快走）',cls:''},
+ {n:'☕4',lat:-37.8181,lng:144.9663,e:'Degraves St / Centre Place',c:'咖啡巷（可选第二杯）',cls:'caf'},
+ {n:'②',lat:-37.8184,lng:144.9691,e:'Flinders Street Station',c:'弗林德斯街火车站（黄圆顶地标）',cls:''},
+ {n:'③',lat:-37.8169,lng:144.9690,e:"St Paul's Cathedral",c:'圣保罗大教堂（免费，避雨）',cls:''},
+ {n:'④',lat:-37.8205,lng:144.9690,e:'Yarra River',c:'雅拉河河岸（风大看天气）',cls:''},
+ {n:'⑤',lat:-37.8226,lng:144.9688,e:'NGV International',c:'维州国家美术馆（免费，避雨黄金）',cls:'key'},
+ {n:'⑥',lat:-37.8303,lng:144.9794,e:'Royal Botanic Gardens',c:'皇家植物园（雷暴果断跳过）',cls:''},
+ {n:'🎭',lat:-37.8119,lng:144.9706,e:'Comedy Theatre · 240 Exhibition St',c:'今晚 19:30 SIX',cls:'key'}
+];
+var m=L.map('map',{scrollWheelZoom:false}).setView([-37.816,144.968],13);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18,attribution:'&copy; OpenStreetMap'}).addTo(m);
+STOPS.forEach(function(s){
+ var ic=L.divIcon({className:'',html:'<div class="pin-n '+s.cls+'"><span>'+s.n+'</span></div>',iconSize:[26,26],iconAnchor:[13,24],popupAnchor:[0,-22]});
+ L.marker([s.lat,s.lng],{icon:ic}).addTo(m).bindPopup('<b>'+s.e+'</b><br>'+s.c);
+});
+m.fitBounds(L.latLngBounds(STOPS.map(function(s){return [s.lat,s.lng];})),{padding:[20,20]});
+var links=document.querySelectorAll('#nav a');
+links.forEach(function(a){a.addEventListener('click',function(){links.forEach(function(x){x.classList.remove('on')});a.classList.add('on');});});
+</script>
+</body>
+</html>
