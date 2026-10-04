@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>10/5 · 墨尔本 → 新加坡（退税 + 托运 + 樟宜落地）</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Helvetica Neue",sans-serif;background:#f2f4f3;color:#1e293b;line-height:1.65;padding-bottom:60px}
+.wrap{max-width:480px;margin:0 auto;background:#fff;min-height:100vh}
+.hero{background:linear-gradient(150deg,#0f766e,#134e4a);color:#fff;padding:26px 18px 20px}
+.hero .date{font-size:12px;opacity:.85;letter-spacing:1px}
+.hero h1{font-size:21px;margin:6px 0 4px;font-weight:700}
+.hero .sub{font-size:13px;opacity:.9}
+.hero .chips{margin-top:12px;display:flex;gap:6px;flex-wrap:wrap}
+.hero .chip{background:rgba(255,255,255,.16);border-radius:20px;padding:3px 10px;font-size:11.5px}
+nav{position:sticky;top:0;background:#fff;border-bottom:1px solid #e2e8f0;display:flex;z-index:500;overflow-x:auto}
+nav a{flex:1;min-width:62px;text-align:center;padding:10px 4px;font-size:12px;color:#475569;text-decoration:none;border-bottom:2.5px solid transparent}
+nav a.on{color:#0f766e;border-color:#0f766e;font-weight:600}
+.card{margin:14px 14px 0;background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:15px 15px}
+.card h2{font-size:16px;color:#0f766e;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.card h3{font-size:14px;color:#134e4a;margin:12px 0 6px}
+.kv{display:flex;font-size:13px;padding:4px 0;border-bottom:1px dashed #eef2f1}
+.kv:last-child{border-bottom:none}
+.kv .k{width:80px;color:#64748b;flex-shrink:0}
+.kv .v{flex:1;color:#1e293b}
+.warn{background:#fff7ed;border:1px solid #fed7aa;border-radius:10px;padding:10px 12px;font-size:12.5px;color:#9a3412;margin:10px 0}
+.warn b{color:#c2410c}
+.red{background:#fef2f2;border:1px solid #fecaca;border-radius:10px;padding:10px 12px;font-size:12.5px;color:#991b1b;margin:10px 0}
+.red b{color:#b91c1c}
+.hl{background:#f0fdfa;border-left:3px solid #14b8a6;padding:9px 11px;border-radius:0 8px 8px 0;font-size:12.5px;color:#134e4a;margin:9px 0}
+.mapbox{margin:14px;border-radius:14px;overflow:hidden;border:1px solid #e5e7eb}
+#map,#map2{height:300px;width:100%}
+.map-tip{font-size:11.5px;color:#64748b;padding:8px 12px;background:#f8fafc}
+.pin-n{width:26px;height:26px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:700;box-shadow:0 2px 5px rgba(0,0,0,.3);border:2px solid #fff}
+.pin-n span{transform:rotate(45deg);display:block}
+.pin-n.s0{background:#dc2626}
+.pin-n.key{background:#f59e0b}
+.pin-n.gr{background:#0f766e}
+.step{border:1px solid #e5e7eb;border-radius:12px;padding:12px 13px;margin:10px 0}
+.step .hd{display:flex;align-items:baseline;gap:8px}
+.step .tm{background:#0f766e;color:#fff;border-radius:8px;padding:1px 8px;font-size:11.5px;font-weight:700;flex-shrink:0}
+.step .nm{font-size:14.5px;font-weight:700;color:#0f172a}
+.step .loc{font-size:11px;color:#94a3b8;margin-left:auto;text-align:right}
+.step .bd{font-size:12.8px;color:#475569;margin-top:6px}
+.step .bd b{color:#0f766e}
+.tag{display:inline-block;background:#ecfdf5;color:#047857;font-size:10.5px;border-radius:4px;padding:1px 6px;margin-right:4px}
+.tag.r{background:#fef2f2;color:#b91c1c}
+table{width:100%;border-collapse:collapse;font-size:12.5px;margin:8px 0}
+th{background:#0f766e;color:#fff;padding:6px 8px;font-weight:600;text-align:left}
+td{padding:7px 8px;border-bottom:1px solid #eef2f1;vertical-align:top}
+tr:nth-child(even) td{background:#f8fafc}
+.td-en{display:block;font-size:10.5px;color:#94a3b8}
+ul.tick{list-style:none;font-size:12.8px}
+ul.tick li{padding:5px 0 5px 22px;position:relative;border-bottom:1px dashed #eef2f1}
+ul.tick li:before{content:"✓";position:absolute;left:2px;color:#0f766e;font-weight:700}
+ul.tick li.x:before{content:"✕";color:#dc2626;font-size:13px}
+.note{background:#eef7f5;border-radius:10px;padding:10px 12px;font-size:12.3px;color:#0f5132;margin:9px 0}
+.foot{text-align:center;font-size:11px;color:#94a3b8;padding:20px 0 10px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="hero">
+  <div class="date">2026-10-05 周一 · 墨尔本 → 新加坡</div>
+  <h1>退税 · 托运 · 樟宜落地全流程</h1>
+  <div class="sub">两个航班落两个航站楼，今晚先把四件事做完</div>
+  <div class="chips">
+    <span class="chip">✈ JQ007 13:00 → T2</span>
+    <span class="chip">✈ QF035 13:05 → T1</span>
+    <span class="chip">🧾 TRS 退税</span>
+    <span class="chip">🇸🇬 落地 18:00 / 18:15</span>
+  </div>
+</div>
+
+<nav id="nav">
+  <a href="#sec-tonight" class="on">今晚必做</a>
+  <a href="#sec-time">时间轴</a>
+  <a href="#sec-trs">退税</a>
+  <a href="#sec-changi">樟宜</a>
+  <a href="#sec-customs">海关</a>
+  <a href="#sec-map2">地图</a>
+</nav>
+
+<div class="card" id="sec-tonight">
+  <h2>🌙 今晚必做（明早来不及）</h2>
+  <ul class="tick">
+    <li><b>提交 SG Arrival Card</b> —— 入境新加坡强制，落地前必须在线填好（出发前 3 天内可提交）。4 个人都填，包括转机回北京的老公（他要入境取行李）</li>
+    <li><b>整理发票做分拣</b>：同一 ABN（商家号）累计 ≥ A$300（含 GST）、60 天内购买、有原始 tax invoice → 才有得退</li>
+    <li><b>分三袋装好</b>：①要托运的退税品（液体/喷雾/凝胶 &gt;100ml、UGG 鞋盒等大件）；②随身带的退税品；③不退的</li>
+    <li><b>手机装好 ABF TRS App</b>（或网页版）填好生成 QR，现场走专用通道，省一半排队</li>
+  </ul>
+  <div class="warn">🕐 明天 <b>13:00 起飞</b>，务必 <b>10:00 前到 T2</b>。退税要跑两个地方（到达层验货 + 禁区柜台），是所有手续里最耗时的一环。</div>
+</div>
+
+<div class="card" id="sec-time">
+  <h2>⏱ 明天时间轴（墨尔本侧）</h2>
+  <div class="step"><div class="hd"><span class="tm">08:00</span><span class="nm">最后装箱</span><span class="loc">Ibis 酒店</span></div>
+    <div class="bd">液体/凝胶/喷雾 <b>单瓶 &gt;100ml 一律托运</b>：护肤水、防晒喷雾、<b>蜂蜜罐</b>、药膏。随身液体要装进 1L 透明封口袋。<b>退税品记得留在外面</b>，别塞进箱底。</div></div>
+  <div class="step"><div class="hd"><span class="tm">09:15</span><span class="nm">退房出发</span><span class="loc">15/21 Therry St</span></div>
+    <div class="bd">退房规定 11:00 前。<b>打车 / 网约车去 T2 约 25–35 分钟，A$55–75</b>；4 人建议叫两台车或一辆 Maxi。<br>
+    ⚠️ SkyBus 往返票虽在手里，但要先把行李拖到 Southern Cross（就是 9/29 那段费力路），<b>4 人带行李不划算</b>。</div></div>
+  <div class="step"><div class="hd"><span class="tm">10:00</span><span class="nm">STEP A｜退税品验货</span><span class="loc">T2 到达层 L1</span></div>
+    <div class="bd"><span class="tag r">只给要托运的</span>带必须托运的退税品 + 发票 + 护照 + 登机牌到到达层 ABF 查验点（T2 L1 到达大厅右侧、扶梯旁），官员<b>核对盖章后才允许托运</b>。<b>这只是验货，不等于退到钱。</b></div></div>
+  <div class="step"><div class="hd"><span class="tm">10:30</span><span class="nm">STEP B｜值机托运</span><span class="loc">T2 出发层</span></div>
+    <div class="bd"><b>JQ007（Essie + 爸爸）</b>：Jetstar 截件严格 —— <b>起飞前 60 分钟（12:00）止</b>，建议 11:00 前完成；行李额以票据为准（约 20kg/人），<b>手提 7kg 且会秤重</b>，超重现场罚很贵。<br>
+    <b>QF035（妈妈 + 老公）</b>：同样尽量 <b>11:30 前</b>完成托运。</div></div>
+  <div class="step"><div class="hd"><span class="tm">11:10</span><span class="nm">STEP C｜安检 + 出关</span><span class="loc">T2 禁区</span></div>
+    <div class="bd">e 护照可走 SmartGate（不行就走人工通道）。官方建议<b>起飞前 90 分钟完成出关</b>，给退税留出时间。</div></div>
+  <div class="step"><div class="hd"><span class="tm">11:30</span><span class="nm">STEP D｜正式退税</span><span class="loc">海关后 · 主免税店前</span></div>
+    <div class="bd">禁区内 TRS 柜台就在<b>过完海关、还没到主免税店的位置</b>。出示：护照 + 登机牌 + 原始税单 + 购买的商品 + TRS App 的 QR。<b>官员会要求看实物</b>——所以不需托运的退税品必须随身带着走，别托运。</div></div>
+  <div class="step"><div class="hd"><span class="tm">12:20</span><span class="nm">STEP E｜登机</span><span class="loc">闸口以屏幕为准</span></div>
+    <div class="bd">JQ007 通常起飞前 40 分钟开始登机；QF035 同理。留点时间买水、上厕所。</div></div>
+  <div class="step"><div class="hd"><span class="tm">13:00</span><span class="nm">起飞</span><span class="loc">MEL T2</span></div>
+    <div class="bd">飞行约 <b>8 小时</b>。墨尔本夏令时比新加坡<b>快 3 小时</b>：13:00 起飞 = 新加坡时间 10:00，18:00 落地。</div></div>
+</div>
+
+<div class="card" id="sec-trs">
+  <h2>🧾 退税（TRS）硬规则</h2>
+  <table>
+    <tr><th>条件</th><th>要求</th></tr>
+    <tr><td>金额<span class="td-en">同一 ABN</span></td><td>在同一商家（同一 ABN）累计 ≥ A$300 含 GST；多张小票可合并</td></tr>
+    <tr><td>时间</td><td>离境前 60 天内购买</td></tr>
+    <tr><td>凭证</td><td>原始 tax invoice（须有商家 ABN 与含税金额），本人付款</td></tr>
+    <tr><td>商品</td><td>全新未使用，能随身带上飞机</td></tr>
+    <tr><td>退款方式</td><td>主要退到信用卡（也可澳洲账户），到账 1 周–1 个月</td></tr>
+    <tr><td>不退</td><td>服务类：机票、酒店、餐饮、门票</td></tr>
+  </table>
+  <div class="red">🔴 <b>两条最容易踩的坑</b><br>
+  ① <b>液体 / 凝胶 / 喷雾 / 超大件</b>必须先到 <b>T2 到达层的 ABF 办公室</b>验货，再随行李托运；不能直接拎着过安检，也不能放进箱子里就来办退。<br>
+  ② <b>APP 提交 ≠ 完成</b>：填完 App 拿到 QR 后，仍然<b>必须到柜台</b>给官员扫码才算递交。</div>
+  <div class="hl">💡 若同一商家凑不到 A$300，就别浪费时间排队——超市多次小额通常是凑不够的，能在<b>同一家 Chemist Warehouse / 同一家 UGG 店</b>刷到 A$300 以上的单子才值得退。</div>
+</div>
+
+<div class="mapbox">
+  <div id="map"></div>
+  <div class="map-tip">🗺 墨尔本：酒店 → T2 机场，打车约 25–35 分钟。</div>
+</div>
+
+<div class="card" id="sec-changi">
+  <h2>🇸🇬 樟宜落地（傍晚 18:00 / 18:15）</h2>
+  <div class="red">⚠️ <b>全家分落两个航站楼</b>：<br>
+  JQ007（Essie + 爸爸）→ <b>T2 18:00</b>　｜　QF035（妈妈 + 老公）→ <b>T1 18:15</b></div>
+  <div class="hl">🚝 汇合办法：取完行李走到<b>公共区（landside）</b>，坐<b>免费 Skytrain</b> T1↔T2，约 4 分钟一班，营运到 02:30（深夜时段有免费接驳巴士）。带行李也能坐。</div>
+  <ul class="tick">
+    <li>落地 → 走入境自动通道（SG Arrival Card 提前填好才顺）→ 取行李 → 过海关，约 30–45 分钟</li>
+    <li>汇合点推荐：<b>星耀樟宜 Jewel</b>（T1 到达层 L1 直连；从 T2 出发厅 L2 Row 1 旁扶梯上 L3 走天桥）——顺便看那座 40 米室内瀑布，免费</li>
+    <li>行李多可寄存：<b>Smarte Carte 24h</b>，小件 S$11 / 大件 S$16（每 24 小时）</li>
+  </ul>
+
+  <h3>👨‍🦱 老公（侯宇清）：当晚转机回北京</h3>
+  <div class="kv"><div class="k">航班</div><div class="v">CA970 · 樟宜 <b>T1 23:25</b> → 首都 T3 次日 06:00</div></div>
+  <div class="kv"><div class="k">值机</div><div class="v">需入境取行李后再值机，柜台约 20:25 开放</div></div>
+  <div class="kv"><div class="k">候机</div><div class="v">可用 T1 <b>Plaza Premium Lounge</b>（L3、C1 闸口旁、24h）——先确认卡权益剩余次数（10/8 回程还要用一次），该厅装修期约至 10/7，设施轮换可用</div></div>
+
+  <h3>🏨 其余三人：进城</h3>
+  <div class="kv"><div class="k">酒店</div><div class="v">The Quay Hotel Bugis · <b>79 Aliwal Street</b> · 14:00 后可入住</div></div>
+  <div class="kv"><div class="k">打车</div><div class="v">T1 出发 ≈ 25–30 分钟，<b>S$25–35</b>（含机场附加费）；行李多叫 GrabXL 或两台车</div></div>
+  <div class="kv"><div class="k">地铁</div><div class="v">MRT 站在 <b>T2/T3 地下（T1 没有站）</b> → Tanah Merah 换乘 → Bugis（EW12）约 40–50 分钟、S$2 左右。带爸妈行李重不推荐</div></div>
+</div>
+
+<div class="card" id="sec-customs">
+  <h2>🛃 新加坡入境 & 海关须知</h2>
+  <div class="hl">中国护照 <b>30 天免签</b>，但过关时请备好：<b>回程机票</b>（10/8 CA890）、<b>酒店订单</b>、<b>SG Arrival Card</b> 确认页。</div>
+  <table>
+    <tr><th>带什么</th><th>限额 / 规则</th></tr>
+    <tr><td>加工食品<span class="td-en">饼干·巧克力·麦片·蜂蜜</span></td><td>合计 ≤ 5kg 或 5L，<b>且总价值 ≤ S$100/人</b></td></tr>
+    <tr><td>肉类 · 海鲜</td><td>澳洲属批准来源，≤ 5kg/人</td></tr>
+    <tr><td>新鲜果蔬</td><td>手提合理量即可，不确定就申报</td></tr>
+    <tr><td>鸡蛋</td><td>≤ 30 个，澳洲在批准名单</td></tr>
+    <tr><td>酒</td><td>有免税配额（约 2L，烈酒部分受限，须境外停留满 48 小时），超量请走申报</td></tr>
+    <tr><td>烟草</td><td><b>无免税额度</b>，全部必须申报缴税</td></tr>
+  </table>
+  <ul class="tick">
+    <li class="x"><b>口香糖禁止</b>带入（药用/牙科类除外）</li>
+    <li class="x">电子烟、烟草仿制品、爆竹、濒危动植物制品（含麝香、熊胆、犀牛角的中成药）</li>
+    <li>不确定就走申报通道，申报不等于没收，藏匿才是罚款重点</li>
+  </ul>
+</div>
+
+<div class="mapbox" id="sec-map2">
+  <div id="map2"></div>
+  <div class="map-tip">🗺 樟宜 + 市区：T1 / T2 / Jewel / MRT / 酒店。点标记看细节，双指可缩放。</div>
+</div>
+
+<div class="card">
+  <h2>🎒 出门前最后核对</h2>
+  <ul class="tick">
+    <li>护照 + 打印版行程单 + 电子登机牌截图</li>
+    <li>两张酒店入住凭证（The Quay Bugis，确认号 1128150782083007 / 010）</li>
+    <li>SG Arrival Card 提交的确认信息（4 人）</li>
+    <li>TRS App 的 QR + <b>原始税单（纸质）</b> + 一支笔</li>
+    <li>转接头：新加坡用<b>英标 Type G</b>三角插，跟澳洲 I 型不一样</li>
+    <li>少量新元现金 / 提前装好 Grab App</li>
+  </ul>
+  <div class="note">✈️ <b>票面速记</b>：JQ007 MEL T2 13:00 → SIN T2 18:00（编码 XL9ZPV）｜QF035 MEL T2 13:05 → SIN T1 18:15（编码 F68D3A）｜CA970 SIN T1 23:25 → PEK T3 次日 06:00（QYEJQV）｜CA890 SIN T1 10/8 17:55 → PEK T3（QEQJV6）</div>
+</div>
+
+<div class="foot">2026 澳新旅行 · Day 13 · 10/5 墨尔本 → 新加坡<br>退税跑两处 · 两个航站楼 · 记得提前填 SG Arrival Card 🧾</div>
+
+</div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+var MEL=[
+ {n:'🏨',lat:-37.8095,lng:144.9590,e:'Ibis Melbourne',c:'酒店 · 15/21 Therry St',cls:'s0',pop:'<b>Ibis Melbourne</b><br>09:15 退房出发'},
+ {n:'✈',lat:-37.6733,lng:144.8433,e:'Melbourne Airport T2',c:'TERMINAL 2 · 10:00 抵达',cls:'key'}
+];
+var SIN=[
+ {n:'T1',lat:1.3644,lng:103.9915,e:'Changi Terminal 1',c:'QF035 落地 18:15 · 老公 CA970 也在这里',cls:'key'},
+ {n:'T2',lat:1.3589,lng:103.9896,e:'Changi Terminal 2',c:'JQ007 落地 18:00',cls:'key'},
+ {n:'💧',lat:1.3624,lng:103.9893,e:'Jewel Changi',c:'星耀樟宜 · 免费雨漩涡 · 汇合点首选',cls:'gr'},
+ {n:'🚇',lat:1.3575,lng:103.9880,e:'Changi Airport MRT (CG2)',c:'站在 T2/T3 地下，T1 乘客要过来',cls:''},
+ {n:'🚇',lat:1.3008,lng:103.8567,e:'Bugis MRT (EW12)',c:'市区下车站 · 约 40-50 分钟',cls:''},
+ {n:'🏨',lat:1.3043,lng:103.8601,e:'The Quay Hotel Bugis',c:'79 Aliwal Street · 14:00 后可入住',cls:'s0'}
+];
+function build(id,list,z,vw){
+ var m=L.map(id,{scrollWheelZoom:false}).setView(vw,z);
+ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18,attribution:'&copy; OpenStreetMap'}).addTo(m);
+ list.forEach(function(s){
+  var ic=L.divIcon({className:'',html:'<div class="pin-n '+s.cls+'"><span>'+s.n+'</span></div>',iconSize:[26,26],iconAnchor:[13,24],popupAnchor:[0,-22]});
+  L.marker([s.lat,s.lng],{icon:ic}).addTo(m).bindPopup('<b>'+s.e+'</b><br>'+s.c);
+ });
+ m.fitBounds(L.latLngBounds(list.map(function(s){return [s.lat,s.lng];})),{padding:[24,24]});
+}
+build('map',MEL,12,[-37.74,144.90]);
+build('map2',SIN,13,[1.33,103.92]);
+var nav=document.querySelectorAll('#nav a');
+nav.forEach(function(a){a.addEventListener('click',function(){nav.forEach(function(x){x.classList.remove('on')});a.classList.add('on');});});
+</script>
+</body>
+</html>
