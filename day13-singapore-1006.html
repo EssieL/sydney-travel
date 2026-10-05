@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>10/6 · 新加坡 Day 2：牛车水 + 达士岭 + 夜间野生动物园</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Helvetica Neue",sans-serif;background:#f2f4f3;color:#1e293b;line-height:1.65;padding-bottom:60px}
+.wrap{max-width:480px;margin:0 auto;background:#fff;min-height:100vh}
+.hero{background:linear-gradient(150deg,#0f766e,#134e4a);color:#fff;padding:26px 18px 20px}
+.hero .date{font-size:12px;opacity:.85;letter-spacing:1px}
+.hero h1{font-size:21px;margin:6px 0 4px;font-weight:700}
+.hero .sub{font-size:13px;opacity:.9}
+.hero .chips{margin-top:12px;display:flex;gap:6px;flex-wrap:wrap}
+.hero .chip{background:rgba(255,255,255,.16);border-radius:20px;padding:3px 10px;font-size:11.5px}
+nav{position:sticky;top:0;background:#fff;border-bottom:1px solid #e2e8f0;display:flex;z-index:500;overflow-x:auto}
+nav a{flex:1;min-width:62px;text-align:center;padding:10px 4px;font-size:12px;color:#475569;text-decoration:none;border-bottom:2.5px solid transparent}
+nav a.on{color:#0f766e;border-color:#0f766e;font-weight:600}
+.card{margin:14px 14px 0;background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:15px 15px}
+.card h2{font-size:16px;color:#0f766e;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.card h3{font-size:14px;color:#134e4a;margin:12px 0 6px}
+.kv{display:flex;font-size:13px;padding:4px 0;border-bottom:1px dashed #eef2f1}
+.kv:last-child{border-bottom:none}
+.kv .k{width:80px;color:#64748b;flex-shrink:0}
+.kv .v{flex:1;color:#1e293b}
+.warn{background:#fff7ed;border:1px solid #fed7aa;border-radius:10px;padding:10px 12px;font-size:12.5px;color:#9a3412;margin:10px 0}
+.warn b{color:#c2410c}
+.red{background:#fef2f2;border:1px solid #fecaca;border-radius:10px;padding:10px 12px;font-size:12.5px;color:#991b1b;margin:10px 0}
+.red b{color:#b91c1c}
+.hl{background:#f0fdfa;border-left:3px solid #14b8a6;padding:9px 11px;border-radius:0 8px 8px 0;font-size:12.5px;color:#134e4a;margin:9px 0}
+.step{border:1px solid #e5e7eb;border-radius:12px;padding:12px 13px;margin:10px 0}
+.step .hd{display:flex;align-items:baseline;gap:8px}
+.step .tm{background:#0f766e;color:#fff;border-radius:8px;padding:1px 8px;font-size:11.5px;font-weight:700;flex-shrink:0}
+.step .nm{font-size:14.5px;font-weight:700;color:#0f172a}
+.step .loc{font-size:11px;color:#94a3b8;margin-left:auto;text-align:right}
+.step .bd{font-size:12.8px;color:#475569;margin-top:6px}
+.step .bd b{color:#0f766e}
+.tag{display:inline-block;background:#ecfdf5;color:#047857;font-size:10.5px;border-radius:4px;padding:1px 6px;margin-right:4px}
+.tag.r{background:#fef2f2;color:#b91c1c}
+table{width:100%;border-collapse:collapse;font-size:12.5px;margin:8px 0}
+th{background:#0f766e;color:#fff;padding:6px 8px;font-weight:600;text-align:left}
+td{padding:7px 8px;border-bottom:1px solid #eef2f1;vertical-align:top}
+tr:nth-child(even) td{background:#f8fafc}
+.td-en{display:block;font-size:10.5px;color:#94a3b8}
+ul.tick{list-style:none;font-size:12.8px}
+ul.tick li{padding:5px 0 5px 22px;position:relative;border-bottom:1px dashed #eef2f1}
+ul.tick li:before{content:"✓";position:absolute;left:2px;color:#0f766e;font-weight:700}
+ul.tick li.x:before{content:"✕";color:#dc2626;font-size:13px}
+.note{background:#eef7f5;border-radius:10px;padding:10px 12px;font-size:12.3px;color:#0f5132;margin:9px 0}
+.mini{list-style:none;margin:8px 0 2px;padding:0}
+.mini li{padding:6px 10px;margin:5px 0;background:#f7faf9;border-left:3px solid #0f766e;border-radius:0 8px 8px 0;font-size:12.4px;line-height:1.65}
+.foot{text-align:center;font-size:11px;color:#94a3b8;padding:20px 0 10px}
+.mapbox{margin:14px;border-radius:14px;overflow:hidden;border:1px solid #e5e7eb}
+#map{height:320px;width:100%}
+.map-tip{font-size:11.5px;color:#64748b;padding:8px 12px;background:#f8fafc}
+.pin-n{width:26px;height:26px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:700;box-shadow:0 2px 5px rgba(0,0,0,.3);border:2px solid #fff}
+.pin-n span{transform:rotate(45deg);display:block}
+.pin-n.s0{background:#dc2626}
+.pin-n.key{background:#f59e0b}
+.pin-n.gr{background:#0f766e}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="hero">
+  <div class="date">2026-10-06 周二 · 新加坡 Day 2</div>
+  <h1>牛车水逛吃 + 夜游动物园</h1>
+  <div class="sub">白天市区暴走，晚上万礼看动物，午休蓄力是关键</div>
+  <div class="chips">
+    <span class="chip">🏛 牛车水</span>
+    <span class="chip">🌆 达士岭 50 楼</span>
+    <span class="chip">🌃 夜游 19:15</span>
+    <span class="chip">🦎 精灵秀 20:30</span>
+  </div>
+</div>
+
+<nav id="nav">
+  <a href="#sec-time" class="on">时间轴</a>
+  <a href="#sec-ticket">票与预约</a>
+  <a href="#sec-traffic">交通</a>
+  <a href="#sec-food">餐食</a>
+  <a href="#sec-map">地图</a>
+</nav>
+
+<div class="card" id="sec-time">
+  <h2>⏱ 全天时间轴</h2>
+  <div class="step"><div class="hd"><span class="tm">09:30</span><span class="nm">牛车水 Chinatown</span><span class="loc">宝塔街一带</span></div>
+    <div class="bd">佛牙寺龙华院（白塔金顶，可入内）→ 马里安曼兴都庙（新加坡最老印度庙）→ 宝塔街（华人骑楼，父母最亲切的一站）。<b>室内冷气足、走路少</b>，适合落地后第一天先热身。</div></div>
+  <div class="step"><div class="hd"><span class="tm">11:00</span><span class="nm">达士岭 50 楼空中走廊</span><span class="loc">The Pinnacle@Duxton</span></div>
+    <div class="bd">电梯直达 50 楼，俯瞰牛车水骑楼 + 丹戎巴葛摩天楼，<b>性价比全场最高 S$6</b>。<span class="tag r">现金不行</span>现场 1G 座一楼自助机登记 + 付款，<b>只收 NETS / Visa / Mastercard（不收现金）</b>，每日限 150 人；我们 11:00 早段安全。</div></div>
+  <div class="step"><div class="hd"><span class="tm">11:30</span><span class="nm">麦士威午餐</span><span class="loc">Maxwell Food Centre</span></div>
+    <div class="bd">你/爸爸排<b>天天海南鸡饭 #01-10</b>（米其林必比登）；妈妈另去海鲜档（见「餐食」）。同屋檐下各取所需、同桌吃。✅ 本日周二，了凡油鸡饭照常营业。</div></div>
+  <div class="step"><div class="hd"><span class="tm">13:00</span><span class="nm">榴莲甜品</span><span class="loc">牛车水</span></div>
+    <div class="bd"><b>99 老树</b>（1 Teo Hong Rd，有草地座位，环境好）或 <b>爷爷榴莲园</b>（19 Smith St，与了凡同街最顺路）。⚠️ 10 月初淡季、品种少；进店先问「今天有什么、偏甜还是偏苦」，别硬点猫山王；<b>只能店内吃完，不能带上地铁/酒店</b>。</div></div>
+  <div class="step"><div class="hd"><span class="tm">13:45</span><span class="nm">味香园甜品</span><span class="loc">庙街 63–67</span></div>
+    <div class="bd">1953 年手工现磨杏仁糊 / 核桃糊 / 杨枝甘露，甜度克制，长辈友好。与榴莲店连着走。</div></div>
+  <div class="step"><div class="hd"><span class="tm">14:30</span><span class="nm">★ 回酒店午休 2.5h</span><span class="loc">The Quay Bugis</span></div>
+    <div class="bd"><b>夜游当天必须蓄力</b>，这趟唯一一次长午休。从牛车水打车回武吉斯约 10 分钟。</div></div>
+  <div class="step"><div class="hd"><span class="tm">17:00</span><span class="nm">甘榜格南 Kampong Glam</span><span class="loc">酒店门口</span></div>
+    <div class="bd">苏丹回教堂（200m）→ 哈芝巷 Haji Lane（壁画、小店、Gelam Gallery 后巷）。<b>酒店就在这片，午休完下楼就是，不用打车不用赶</b>，逛累随时上楼。</div></div>
+  <div class="step"><div class="hd"><span class="tm">17:45</span><span class="nm">甘榜格南简晚餐</span><span class="loc">Bugis 一带</span></div>
+    <div class="bd">Zam Zam 牛肉 Murtabak / 羊肉黄姜饭、Hjh Maimunah 牛肉仁当 —— <b>牛羊肉最集中，妈妈吃得舒服</b>。垫一口就走，不坐正餐。</div></div>
+  <div class="step"><div class="hd"><span class="tm">18:25</span><span class="nm">出发赴万礼 Mandai</span><span class="loc">GrabXL</span></div>
+    <div class="bd"><b>18:28 闹钟</b>：车上用手机约《夜晚的精灵》20:30 场座位（开场前 2 小时开放）。武吉斯→万礼单程 30–40 分钟。</div></div>
+  <div class="step"><div class="hd"><span class="tm">19:15</span><span class="nm">★ 夜游首场入园</span><span class="loc">Night Safari</span></div>
+    <div class="bd">动物最活跃、人最少、游园车不排队。游园车约 40 min → 走 1 条步道（Leopard Trail；状态好加 Fishing Cat 渔猫步道）。</div></div>
+  <div class="step"><div class="hd"><span class="tm">20:30</span><span class="nm">《夜晚的精灵》表演</span><span class="loc">入口庭院</span></div>
+    <div class="bd">25 分钟，有座位。须提前 15 分钟到场（迟到算 no-show）。</div></div>
+  <div class="step"><div class="hd"><span class="tm">22:20</span><span class="nm">默认叫车回酒店</span><span class="loc">GrabXL</span></div>
+    <div class="bd">园内人最少、最好叫、无 surge → 约 22:40 上车，<b>23:15 回酒店</b>。详见「交通 · 回程策略」。</div></div>
+</div>
+
+<div class="card" id="sec-ticket">
+  <h2>🎫 票与预约（夜游）</h2>
+  <div class="hl">🎫 携程「新加坡城市套票」已购，<b>夜游 3 张已用 Booking Code 在万态预约成功 10/6 19:15</b>，票面 DIRECT ENTRY，<b>不可改期、不可退、不可转让</b>。电子票存手机，二维码各截一张。</div>
+  <table>
+    <tr><th>项目</th><th>要点</th></tr>
+    <tr><td>入园</td><td>19:15 首场；<b>须在 19:15 起 45 分钟内到场（最晚 20:00）</b>；手机亮码直接入园，携程原票备查，带护照原件</td></tr>
+    <tr><td>Booking Code</td><td>7080 6A05 / C9D9 6137 / CF43 2CF4（3 张）</td></tr>
+    <tr><td>《夜晚的精灵》座位</td><td>20:30 场，<b>座位开场前 2 小时（18:30）开放预约</b> → 定 18:28 闹钟抢；成功发确认邮件，提前 15 分钟到场</td></tr>
+    <tr><td>游园车</td><td>英文车已含（中文车需加价、场次更晚，已定不加）</td></tr>
+    <tr><td>票价</td><td>官网非居民成人 S$58（含 9% GST + 一次游园车）；外国游客无长者票，爸妈也全价。3 人门票约 S$174</td></tr>
+  </table>
+  <div class="red">🔴 <b>弹性出口</b>：若父母当天状态一般，你独自前往（Grab 往返、园内安全）也完全可行，父母回酒店早睡，比硬撑一晚划算，不拖垮 10/7。</div>
+</div>
+
+<div class="card" id="sec-traffic">
+  <h2>🚗 交通与回程策略</h2>
+  <div class="kv"><div class="k">去程</div><div class="v">GrabXL 武吉斯→万礼，<b>18:25 出发</b>（提前叫好），单程 30–40 min，约 S$35–50</div></div>
+  <div class="kv"><div class="k">回程</div><div class="v"><b>不提前订车</b>，现场弹性；3 人 + 行李选 6 座 GrabXL</div></div>
+  <div class="warn">⏰ <b>回程时间窗口（记住三点）</b><br>
+  ① <b>20:55</b> 20:30 场散场第一波离场潮　② <b>21:00–21:45</b> ⚠️ 全天最难叫车（两场叠加 + surge）　③ <b>22:15 之后</b> ✅ 最好叫、无加价<br>
+  → <b>默认 22:20 叫车、22:40 上车</b>；父母累就 21:10 走（避开高峰）；别卡 21:30 半吊子离园，反而撞最难叫车窗口。</div>
+  <div class="note">🚌 <b>兜底（叫不到车时永远有车回家）</b>：M2 Khatib 接驳车 园区→Khatib MRT（NS14），约 15–20 min，<b>S$2.50/人，末班 24:00</b>（只收 EZ-Link/Visa/Master/Apple Pay，不收现金）；到 Khatib 再叫 Grab 回武吉斯（约 20–25 min，S$20–30）。<br>
+  💡 叫车技巧：定位选「Mandai Wildlife EAST Transport Hub / 出租车站」；同时开 Grab + Gojek + Tada；8 分钟没接单就走出园区到主干道或先坐 M2 到 Khatib。</div>
+  <ul class="tick">
+    <li>市内移动（牛车水↔甘榜格南↔酒店）<b>多打车</b>，单程约 S$8–15，3 人分摊与地铁相当，省父母腿脚与暴晒</li>
+    <li>地铁可直接刷 Visa/Master/Apple Pay（SimplyGo），无需买 EZ-Link；进出刷同一张卡</li>
+  </ul>
+</div>
+
+<div class="card" id="sec-food">
+  <h2>🍜 餐食（妈妈忌口须知）</h2>
+  <div class="red">🔴 <b>妈妈（庞连芳）只吃牛 / 羊 / 海鲜，不吃鸡、猪肉</b>。同桌其他人随意，无需迁就。点单时问一句「有没有放猪肉 / 猪油」。</div>
+  <h3>11:30 麦士威熟食中心（妈妈方案）</h3>
+  <ul class="mini">
+    <li><b>Fish Village 渔村 #01-32</b>：港式蒸红鱼 S$30 / 蒸鲳鱼 S$28 / 蒸笋壳鱼 S$23、泰式酱带子 S$14 —— 餐厅级海鲜、食阁价，整条清蒸最对长辈胃口</li>
+    <li><b>一家潮州鱼粥·鱼汤 #01-66</b>：清汤鱼汤/鱼粥（配豆瓣酱，鲜甜不腻）；⚠️ 只做午市、周日休，本日周二正合适</li>
+    <li>你/爸爸：天天海南鸡饭 #01-10（⚠️ 油饭是鸡汤鸡油煮的，妈妈连饭也不能吃，必须另点）</li>
+  </ul>
+  <h3>17:45 甘榜格南简晚餐（妈妈最舒服）</h3>
+  <ul class="mini">
+    <li>Zam Zam：牛肉 Murtabak（印度煎饼包牛肉）</li>
+    <li>Hjh Maimunah：牛肉仁当 Rendang、羊肉黄姜饭 —— 牛羊肉集中区</li>
+  </ul>
+  <div class="note">🍬 甜品无禁忌：榴莲 ✅、味香园杏仁糊/核桃糊/杨枝甘露 ✅（糊类无肉）。松发肉骨茶（10/5 已吃过）全店无牛羊，妈妈只能点鱼片汤+海鲜煎饼。</div>
+</div>
+
+<div class="mapbox" id="sec-map">
+  <div id="map"></div>
+  <div class="map-tip">🗺 10/6 动线：牛车水 → 达士岭 → 麦士威 → 酒店(午休) → 甘榜格南 → 万礼夜游。点标记看细节，双指可缩放。</div>
+</div>
+
+<div class="foot">2026 澳新旅行 · Day 14 · 10/6 牛车水 + 夜间野生动物园<br>夜游锁 19:15 · 午休蓄力 · 回程 22:20 叫车最稳 🦎</div>
+
+</div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+var SIN=[
+ {n:'牛',lat:1.2812,lng:103.8448,e:'牛车水 Chinatown',c:'佛牙寺·兴都庙·宝塔街',cls:'s0'},
+ {n:'楼',lat:1.2773,lng:103.8390,e:'达士岭 Pinnacle@Duxton',c:'50 楼空中走廊 S$6 · 现场自助机只收银行卡',cls:'key'},
+ {n:'食',lat:1.2769,lng:103.8470,e:'麦士威熟食中心 Maxwell',c:'天天海南鸡饭 + 妈妈海鲜档',cls:''},
+ {n:'酒',lat:1.3043,lng:103.8601,e:'The Quay Hotel Bugis',c:'79 Aliwal St · 14:00 后入住 · 午休点',cls:'s0'},
+ {n:'甘',lat:1.3006,lng:103.8600,e:'甘榜格南 Kampong Glam',c:'苏丹回教堂 + 哈芝巷 · 酒店门口',cls:'gr'},
+ {n:'🦎',lat:1.4043,lng:103.7930,e:'夜间野生动物园 Night Safari',c:'万礼 Mandai · 19:15 首场 · 20:30 精灵秀',cls:'key'}
+];
+var m=L.map('map',{scrollWheelZoom:false}).setView([1.33,103.84],12);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18,attribution:'&copy; OpenStreetMap'}).addTo(m);
+SIN.forEach(function(s){
+ var ic=L.divIcon({className:'',html:'<div class="pin-n '+s.cls+'"><span>'+s.n+'</span></div>',iconSize:[26,26],iconAnchor:[13,24],popupAnchor:[0,-22]});
+ L.marker([s.lat,s.lng],{icon:ic}).addTo(m).bindPopup('<b>'+s.e+'</b><br>'+s.c);
+});
+m.fitBounds(L.latLngBounds(SIN.map(function(s){return [s.lat,s.lng];})),{padding:[24,24]});
+var nav=document.querySelectorAll('#nav a');
+nav.forEach(function(a){a.addEventListener('click',function(){nav.forEach(function(x){x.classList.remove('on')});a.classList.add('on');});});
+</script>
+</body>
+</html>

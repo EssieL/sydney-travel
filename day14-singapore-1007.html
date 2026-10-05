@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>10/7 · 新加坡 Day 3：经典地标 + 滨海湾花园（花穹·云雾林·灯光秀）</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Helvetica Neue",sans-serif;background:#f2f4f3;color:#1e293b;line-height:1.65;padding-bottom:60px}
+.wrap{max-width:480px;margin:0 auto;background:#fff;min-height:100vh}
+.hero{background:linear-gradient(150deg,#0f766e,#134e4a);color:#fff;padding:26px 18px 20px}
+.hero .date{font-size:12px;opacity:.85;letter-spacing:1px}
+.hero h1{font-size:21px;margin:6px 0 4px;font-weight:700}
+.hero .sub{font-size:13px;opacity:.9}
+.hero .chips{margin-top:12px;display:flex;gap:6px;flex-wrap:wrap}
+.hero .chip{background:rgba(255,255,255,.16);border-radius:20px;padding:3px 10px;font-size:11.5px}
+nav{position:sticky;top:0;background:#fff;border-bottom:1px solid #e2e8f0;display:flex;z-index:500;overflow-x:auto}
+nav a{flex:1;min-width:62px;text-align:center;padding:10px 4px;font-size:12px;color:#475569;text-decoration:none;border-bottom:2.5px solid transparent}
+nav a.on{color:#0f766e;border-color:#0f766e;font-weight:600}
+.card{margin:14px 14px 0;background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:15px 15px}
+.card h2{font-size:16px;color:#0f766e;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.card h3{font-size:14px;color:#134e4a;margin:12px 0 6px}
+.kv{display:flex;font-size:13px;padding:4px 0;border-bottom:1px dashed #eef2f1}
+.kv:last-child{border-bottom:none}
+.kv .k{width:80px;color:#64748b;flex-shrink:0}
+.kv .v{flex:1;color:#1e293b}
+.warn{background:#fff7ed;border:1px solid #fed7aa;border-radius:10px;padding:10px 12px;font-size:12.5px;color:#9a3412;margin:10px 0}
+.warn b{color:#c2410c}
+.red{background:#fef2f2;border:1px solid #fecaca;border-radius:10px;padding:10px 12px;font-size:12.5px;color:#991b1b;margin:10px 0}
+.red b{color:#b91c1c}
+.hl{background:#f0fdfa;border-left:3px solid #14b8a6;padding:9px 11px;border-radius:0 8px 8px 0;font-size:12.5px;color:#134e4a;margin:9px 0}
+.step{border:1px solid #e5e7eb;border-radius:12px;padding:12px 13px;margin:10px 0}
+.step .hd{display:flex;align-items:baseline;gap:8px}
+.step .tm{background:#0f766e;color:#fff;border-radius:8px;padding:1px 8px;font-size:11.5px;font-weight:700;flex-shrink:0}
+.step .nm{font-size:14.5px;font-weight:700;color:#0f172a}
+.step .loc{font-size:11px;color:#94a3b8;margin-left:auto;text-align:right}
+.step .bd{font-size:12.8px;color:#475569;margin-top:6px}
+.step .bd b{color:#0f766e}
+.tag{display:inline-block;background:#ecfdf5;color:#047857;font-size:10.5px;border-radius:4px;padding:1px 6px;margin-right:4px}
+.tag.r{background:#fef2f2;color:#b91c1c}
+table{width:100%;border-collapse:collapse;font-size:12.5px;margin:8px 0}
+th{background:#0f766e;color:#fff;padding:6px 8px;font-weight:600;text-align:left}
+td{padding:7px 8px;border-bottom:1px solid #eef2f1;vertical-align:top}
+tr:nth-child(even) td{background:#f8fafc}
+.td-en{display:block;font-size:10.5px;color:#94a3b8}
+ul.tick{list-style:none;font-size:12.8px}
+ul.tick li{padding:5px 0 5px 22px;position:relative;border-bottom:1px dashed #eef2f1}
+ul.tick li:before{content:"✓";position:absolute;left:2px;color:#0f766e;font-weight:700}
+ul.tick li.x:before{content:"✕";color:#dc2626;font-size:13px}
+.note{background:#eef7f5;border-radius:10px;padding:10px 12px;font-size:12.3px;color:#0f5132;margin:9px 0}
+.mini{list-style:none;margin:8px 0 2px;padding:0}
+.mini li{padding:6px 10px;margin:5px 0;background:#f7faf9;border-left:3px solid #0f766e;border-radius:0 8px 8px 0;font-size:12.4px;line-height:1.65}
+.foot{text-align:center;font-size:11px;color:#94a3b8;padding:20px 0 10px}
+.mapbox{margin:14px;border-radius:14px;overflow:hidden;border:1px solid #e5e7eb}
+#map{height:320px;width:100%}
+.map-tip{font-size:11.5px;color:#64748b;padding:8px 12px;background:#f8fafc}
+.pin-n{width:26px;height:26px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:700;box-shadow:0 2px 5px rgba(0,0,0,.3);border:2px solid #fff}
+.pin-n span{transform:rotate(45deg);display:block}
+.pin-n.s0{background:#dc2626}
+.pin-n.key{background:#f59e0b}
+.pin-n.gr{background:#0f766e}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="hero">
+  <div class="date">2026-10-07 周三 · 新加坡 Day 3</div>
+  <h1>经典地标 + 滨海湾花园</h1>
+  <div class="sub">鱼尾狮打卡 · 花穹云雾林 · 超级树灯光秀</div>
+  <div class="chips">
+    <span class="chip">🦁 鱼尾狮</span>
+    <span class="chip">🌳 滨海湾花园</span>
+    <span class="chip">🌸 花穹+云雾林</span>
+    <span class="chip">🌉 OCBC</span>
+    <span class="chip">✨ 灯光秀</span>
+  </div>
+</div>
+
+<nav id="nav">
+  <a href="#sec-time" class="on">时间轴</a>
+  <a href="#sec-ticket">票与预约</a>
+  <a href="#sec-traffic">交通</a>
+  <a href="#sec-food">餐食</a>
+  <a href="#sec-map">地图</a>
+</nav>
+
+<div class="card" id="sec-time">
+  <h2>⏱ 全天时间轴</h2>
+  <div class="step"><div class="hd"><span class="tm">09:00</span><span class="nm">亚坤早餐</span><span class="loc">连锁</span></div>
+    <div class="bd">咖椰吐司 + 半熟蛋 + 咖啡，最「新加坡」的国民早餐，长辈接受度高。</div></div>
+  <div class="step"><div class="hd"><span class="tm">09:30</span><span class="nm">福康宁树洞</span><span class="loc">Fort Canning</span></div>
+    <div class="bd">Fort Canning Tree Tunnel（小红书顶流机位）<b>早到人少</b>→ 公园散步。园区大但平缓，走不动可减量。</div></div>
+  <div class="step"><div class="hd"><span class="tm">10:30</span><span class="nm">旧禧街 → 赞美广场 → 圣安德烈</span><span class="loc">市中心</span></div>
+    <div class="bd">MICA 旧禧街警察局（<b>927 扇彩虹窗</b>）→ 赞美广场 CHIJMES（哥特式教堂改建）→ 圣安德烈教堂（白教堂）。三点步行可达，顺路拍照。</div></div>
+  <div class="step"><div class="hd"><span class="tm">11:30</span><span class="nm">鱼尾狮公园</span><span class="loc">Merlion Park</span></div>
+    <div class="bd">🦁 <b>必打卡</b> → 滨海艺术中心「大榴莲」。正午前到，光线好、人相对少。</div></div>
+  <div class="step"><div class="hd"><span class="tm">12:15</span><span class="nm">★ Palm Beach 午餐</span><span class="loc">One Fullerton</span></div>
+    <div class="bd"><b>辣椒蟹正餐（本次海鲜重头戏）</b>，鱼尾狮旁步行 3 分钟，不专程跑第二趟。<b>电话 +65 6336 8118 订位</b>，问 JCB S$98/2 人套餐午市适用，3 人加麦片虾 ≈ S$130–140；12:30 入座 → 14:00 结束，正好回酒店午休。</div></div>
+  <div class="step"><div class="hd"><span class="tm">14:00</span><span class="nm">★ 回酒店午休</span><span class="loc">The Quay Bugis</span></div>
+    <div class="bd">避开午后高温与雷阵雨，父母友好。收工较早，不用硬撑。</div></div>
+  <div class="step"><div class="hd"><span class="tm">16:30</span><span class="nm">★ 滨海湾花园冷室</span><span class="loc">Gardens by the Bay</span></div>
+    <div class="bd"><b>花穹 Flower Dome + 云雾林 Cloud Forest</b>（套票含，约 2h）：花穹全球最大玻璃温室（23–25℃）；云雾林 35m 室内瀑布 + 环山步道，现挂 <b>Jurassic World 恐龙展</b>，冷气足父母买账。两馆相邻一次走完。</div></div>
+  <div class="step"><div class="hd"><span class="tm">18:30</span><span class="nm">★ OCBC 空中走廊</span><span class="loc">Skyway</span></div>
+    <div class="bd">电梯登 22m、128m 长空中步道穿行擎天树之间（套票不含，另买 S$14/人）。<b>18:30–19:00 日落蓝调最佳</b>；下来在草坪坐看 19:45 灯光秀。</div></div>
+  <div class="step"><div class="hd"><span class="tm">19:15</span><span class="nm">擎天树草坪占位</span><span class="loc">Supertree Grove</span></div>
+    <div class="bd">灯光秀前 30 分钟到位，草地可坐 = 变相休息。</div></div>
+  <div class="step"><div class="hd"><span class="tm">19:45</span><span class="nm">★ 超级树灯光秀</span><span class="loc">Garden Rhapsody</span></div>
+    <div class="bd">免费，约 15 min（20:45 有第二场）。坐草坪看即可。</div></div>
+  <div class="step"><div class="hd"><span class="tm">20:10</span><span class="nm">金沙晚餐</span><span class="loc">Marina Bay Sands</span></div>
+    <div class="bd">Shoppes 内用餐省脚力；辣椒蟹已定中午吃过，这里不重复。想早回就直接撤，或看 20:45 Spectra 灯光水舞。</div></div>
+</div>
+
+<div class="card" id="sec-ticket">
+  <h2>🎫 票与预约</h2>
+  <div class="hl">🎫 <b>花穹 + 云雾林已含在携程城市套票内</b>（与 10/6 夜游同套票），票面无 Booking Code、<b>不需预约</b>，扫码直接入园。两馆须<b>同日完成、出馆不可二次入场</b>。</div>
+  <table>
+    <tr><th>项目</th><th>要点</th></tr>
+    <tr><td>花穹 / 云雾林</td><td>开放 9:00–21:00，<b>最后入场 20:00</b>；凭电子票扫码入园。✅ 10/7 两馆 + OCBC <b>全开</b>（花穹 10/6 闭馆维护，故挪到今天）</td></tr>
+    <tr><td>OCBC 空中走廊</td><td><b>套票不含，需另买</b>：非居民成人 <b>S$14</b>（无长者票，3 人 = S$42），最后入场 20:30。<span class="tag r">遇雷雨关闭</span>官网 gardensbythebay / App / 园内 The Canopy 柜台 / Klook 均可；⚠️ 维护闭馆日 10/14，我们 10/7 安全</td></tr>
+    <tr><td>Palm Beach 午餐</td><td>已排 12:15，订位电话 <b>+65 6336 8118</b>（若还没订，立即打；问 JCB S$98/2 人套餐午市适用）</td></tr>
+    <tr><td>Garden Rhapsody</td><td>户外免费，不用订，坐草坪看</td></tr>
+  </table>
+  <div class="note">🌦 <b>OCBC 退路</b>：若当天雷雨临时关闭，改去 Supertree Observatory（S$14）或直接放弃、专心看免费灯光秀——不亏。</div>
+</div>
+
+<div class="card" id="sec-traffic">
+  <h2>🚗 交通</h2>
+  <ul class="tick">
+    <li>上午市中心四连（福康宁 → MICA → 赞美广场 → 圣安德烈 → 鱼尾狮）彼此步行 5–15 分钟，<b>打车/步行混合</b>即可，父母累了随时叫车</li>
+    <li>鱼尾狮 → Palm Beach（One Fullerton）步行 3 分钟，不挪车</li>
+    <li>午休后赴滨海湾花园：酒店打车约 15 分钟；或 Bugis MRT 坐 1–2 站到 Bayfront</li>
+    <li>滨海湾花园 → 金沙 Shoppes 步行连廊可达（约 10–15 分钟），晚餐不另叫车</li>
+    <li>地铁直接刷 Visa/Master/Apple Pay（SimplyGo），进出同一张卡；3 人短途打车摊下来与地铁相当</li>
+  </ul>
+</div>
+
+<div class="card" id="sec-food">
+  <h2>🍜 餐食（妈妈忌口须知）</h2>
+  <div class="red">🔴 <b>妈妈（庞连芳）只吃牛 / 羊 / 海鲜，不吃鸡、猪肉</b>。同桌其他人随意。</div>
+  <ul class="mini">
+    <li><b>12:15 Palm Beach Seafood</b>：辣椒蟹、麦片虾、清蒸鱼她全能吃，海鲜重头戏最稳的一顿</li>
+    <li><b>20:10 金沙 Shoppes 晚餐</b>：给她点叻沙或海鲜类；若想吃娘惹，Candlenut（米其林一星）也在金沙区</li>
+    <li>早餐亚坤（咖椰吐司/蛋/咖啡）、甜品无禁忌</li>
+  </ul>
+  <div class="note">🦀 辣椒蟹已在<b>今天中午</b>吃（应用户要求排进鱼尾狮当天）；晚餐不必重复螃蟹，改海鲜/娘惹/叻沙，省一次夜间奔波。</div>
+</div>
+
+<div class="mapbox" id="sec-map">
+  <div id="map"></div>
+  <div class="map-tip">🗺 10/7 动线：福康宁 → MICA/赞美广场 → 鱼尾狮 → Palm Beach → 滨海湾花园(花穹/云雾林/OCBC) → 金沙。点标记看细节，双指可缩放。</div>
+</div>
+
+<div class="foot">2026 澳新旅行 · Day 15 · 10/7 经典地标 + 滨海湾花园<br>花穹云雾林同日走 · OCBC 18:30 日落 · 灯光秀 19:45 ✨</div>
+
+</div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+var SIN=[
+ {n:'福',lat:1.2935,lng:103.8460,e:'福康宁 Tree Tunnel',c:'Fort Canning · 早到人少',cls:'gr'},
+ {n:'窗',lat:1.2940,lng:103.8510,e:'旧禧街 MICA',c:'927 扇彩虹窗',cls:''},
+ {n:'教',lat:1.2943,lng:103.8535,e:'圣安德烈教堂',c:'白教堂 · 赞美广场 CHIJMES 旁',cls:''},
+ {n:'🦁',lat:1.2868,lng:103.8545,e:'鱼尾狮公园 Merlion',c:'必打卡 · 旁即 Palm Beach',cls:'s0'},
+ {n:'蟹',lat:1.2893,lng:103.8528,e:'Palm Beach Seafood',c:'One Fullerton · 辣椒蟹正餐 12:15',cls:'key'},
+ {n:'🌳',lat:1.2816,lng:103.8636,e:'滨海湾花园 Gardens by the Bay',c:'花穹 + 云雾林 + OCBC 空中走廊',cls:'gr'},
+ {n:'金',lat:1.2834,lng:103.8607,e:'金沙 Marina Bay Sands',c:'Shoppes 晚餐 · Spectra 灯光水舞',cls:'key'},
+ {n:'酒',lat:1.3043,lng:103.8601,e:'The Quay Hotel Bugis',c:'79 Aliwal St · 午休点',cls:'s0'}
+];
+var m=L.map('map',{scrollWheelZoom:false}).setView([1.29,103.855],13);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18,attribution:'&copy; OpenStreetMap'}).addTo(m);
+SIN.forEach(function(s){
+ var ic=L.divIcon({className:'',html:'<div class="pin-n '+s.cls+'"><span>'+s.n+'</span></div>',iconSize:[26,26],iconAnchor:[13,24],popupAnchor:[0,-22]});
+ L.marker([s.lat,s.lng],{icon:ic}).addTo(m).bindPopup('<b>'+s.e+'</b><br>'+s.c);
+});
+m.fitBounds(L.latLngBounds(SIN.map(function(s){return [s.lat,s.lng];})),{padding:[24,24]});
+var nav=document.querySelectorAll('#nav a');
+nav.forEach(function(a){a.addEventListener('click',function(){nav.forEach(function(x){x.classList.remove('on')});a.classList.add('on');});});
+</script>
+</body>
+</html>
